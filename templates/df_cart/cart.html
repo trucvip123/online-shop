@@ -120,22 +120,25 @@
             $('.total_count1').text(total_count);
         }
     function go_order() {
-        s = '';
+        let s = ''; // Use 'let' for block scope
         $(':checked:not(#check_all)').each(function () {
-             id = $(this).parents('.cart_list_td').attr('id');
-
-             s = s +'cart_id='+id + '&'
-
+            let id = $(this).parents('.cart_list_td').attr('id'); // Use 'let' for block scope
+    
+            // Check if id is defined
+            if (id) {
+                s += 'cart_id=' + id + '&'; // Append only if id is defined
+            }
         });
-
-
-
-        s=s.substring(0,s.length-1);
-		
-		{#                        alert(s);#}
-        location.href = '/order?'+s ;
-
+    
+        // Remove the trailing '&' if there are valid cart IDs
+        if (s.length > 0) {
+            s = s.substring(0, s.length - 1);
+            location.href = '/order?' + s; // Redirect only if there are valid IDs
+        } else {
+            alert('No items selected for checkout.');
         }
+    }
+        
 </script>
 {% endblock head %}
 
