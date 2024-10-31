@@ -1,0 +1,169 @@
+{% extends 'base_foot.html' %}
+<!--This is the file for designing the header and the search bar-->
+{% block body %}
+
+    <div class="header_con">
+		<div class="header">
+			<div class="welcome fl">Be prepared. Be successful. Be spirited.</div>
+			<div class="fr">
+{#                check if login#}
+                {% if request.session.user_name|default:'' != '' %}
+
+
+{#                    class="login_info fl"#}
+				<div class="login_btn fl">Welcome: <em>{{ request.session.user_name }}</em>
+                    <span>|</span>
+                    <em><a href="{% url "df_user:logout" %}">log out</a></em>
+				</div>
+                {% else %}
+				<div class="login_btn fl">
+					<a href="{% url "df_user:login" %}">Login</a>
+					<span>|</span>
+					<a href="{% url "df_user:register" %}">Signup</a>
+				</div>
+                {% endif %}
+				<div class="user_link fl">
+					<span>|</span>
+					<a href="{% url "df_user:info" %}">My account</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+    <div class="search_bar clearfix">
+		<a href="/" class="logo fl"><img style="max-width:100%;overflow:hidden;" img src="/static/images/logo.png"></a>
+        {% comment %}{% if page_name == 1 %}
+            <div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;{{ title }}</div>
+        {% endif %}{% endcomment %}
+		<div class="search_con fl">
+             <script>
+                $(function () {
+                    $('.input_btn').click(function () {
+                        q = $('.input_text').val();
+                        if(q==""){
+                        alert("Please input what you want to search");
+                        }
+                        else{
+                            location.href = '{% url "df_goods:ordinary_search" %}?q='+q+'&page=1'
+                        }
+                    })
+                })
+
+            </script>
+			<input type="text" class="input_text fl" name="q" placeholder="Search...">
+			<input type="button" class="input_btn fr" name="" value="Search">
+		</div>
+
+        {% if guest_cart == 1 %}
+            <div class="guest_cart fr">
+                <a href="{% url "df_cart:cart" %}" class="cart_name fl">Cart</a>
+                <div class="goods_count fl" id="show_count">{{ cart_num }}</div>
+            </div>
+        {% endif %}
+	</div>
+
+<!--    small_cart-->
+	<div class="small_cart">
+		<div class="close">
+			<span class="close_icon"> <img style = 'width:13px;height:13px'  src="/static/images/close.png"></span>
+		</div>
+		<div class="statement">
+			<p>Item has been successfully added to cart!</p>
+
+			<p>There are <span id="num">{{cart_num}}</span> items in the cart.</p>
+		</div>
+		<div class="option">
+			<button class="continue">Continue</button>
+			<a href="{% url "df_cart:cart" %}">View Chart</a>
+		</div>
+
+	</div>
+	<div class="cart_mask"> </div>
+
+<style>
+	/* small_cart */
+	.small_cart{
+		width: 540px;
+		height: 400px;
+		background-color: white;
+		position: fixed;
+		top:50%;
+		left: 50%;
+		margin-left: -250px;
+		margin-top: -200px;
+		display:none;
+		z-index: 1000;
+	}
+	.close{
+		width: 100%;
+		height: 40px;
+		background: white;
+	}
+	.close span{
+		display: block;
+		width:20px;
+		height: 20px;
+		background: white;
+		float: right;
+		text-align: center;
+		line-height: 20px;
+		margin-top: 10px;
+		margin-right: 10px;
+		cursor: pointer;
+	}
+	.statement{
+		margin-top: 100px;
+		text-align: center;
+	}
+	.statement p{
+		margin-bottom: 10px;
+	}
+	.option{
+		margin-left: 140px;
+		margin-top: 70px;
+	}
+	.option a{
+		display: block;
+		width: 140px;
+		height: 40px;
+		float: left;
+		line-height: 40px;
+		text-align: center;
+	}
+	.continue{
+		display: block;
+		width: 140px;
+		height: 40px;
+		float: left;
+		line-height: 40px;
+		text-align: center;
+		border: 1px solid black;
+		color: black;
+		margin-right: 20px;
+		background: white;
+		cursor: pointer;
+		font-size:12pt;
+	}
+	.option a:last-child {
+		height: 40px;
+		background: black;
+		color: white;
+		font-size: 12pt;
+	}
+	.cart_mask{width:100%;height:100%;position:fixed;left:0;top:0;background-color:#000;opacity:0.3;z-index:999;display: none}
+
+
+
+	/*end small_cart */
+</style>
+
+
+{% block content %}
+{% endblock content %}
+{% block center_body %}
+
+{% endblock center_body %}
+
+
+{% endblock body %}
