@@ -1,6 +1,13 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect, reverse
+from django.shortcuts import (
+    render,
+    redirect,
+    get_object_or_404,
+    HttpResponseRedirect,
+    reverse,
+)
 from django.core.paginator import Paginator
 from django.http import JsonResponse
+from django.contrib.auth.decorators import user_passes_test
 
 from hashlib import sha1
 
@@ -8,6 +15,7 @@ from .models import GoodsBrowser
 from . import user_decorator
 from .models import UserInfo
 from df_order.models import OrderInfo
+from .models import GoodsInfo
 
 
 ## This function is used to redirect the user to the resigter page.
@@ -314,3 +322,48 @@ def site_handle(request):
         else:
             return redirect("df_user/user_center_site.html")
     return render(request, "df_user/user_center_site.html", {"success": 1})
+
+
+@user_decorator.login
+def product(request):
+    return render(request, "df_user/user_center_product.html")
+
+
+# Define a decorator to check if the user is an admin
+def admin_required(user):
+    return user.is_authenticated and user.is_staff
+
+
+# @user_passes_test(admin_required)
+def add_edit_product(request, product_id=None):
+    # Check if editing an existing product
+    if product_id:
+        product = get_object_or_404(GoodsInfo, id=product_id)
+    else:
+        product = None
+
+    if request.method == "POST":
+        # Get product data from the form
+        name = request.POST.get("name")
+        price = request.POST.get("price")
+        description = request.POST.get("description")
+
+        if product:
+            # Update existing product
+            product.name = name
+            product.price = price
+            product.description = description
+            product.save()
+        else:
+            # Create a new product
+            GoodsInfo.objects.create(name=name, price=price, description=description)
+
+        return redirect(
+            "df_user:info"
+        )  # Redirect to user info page or another page after save
+
+    context = {
+        "title": "Add/Edit Product",
+        "product": product,  # Pass product data if editing
+    }
+    return render(request, "df_user/user_center_product.html", context)
