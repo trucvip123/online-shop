@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from df_goods.models import GoodsInfo
 
+
 class UserInfo(models.Model):
     uname = models.CharField(max_length=20, unique=True, verbose_name="Username")
     upwd = models.CharField(max_length=40, verbose_name="Password", blank=False)
@@ -11,8 +12,12 @@ class UserInfo(models.Model):
     ufullname = models.CharField(max_length=30, default="", verbose_name="Full Name")
     uyoubian = models.CharField(max_length=6, default="", verbose_name="Zip Code")
     uphone = models.CharField(max_length=11, default="", verbose_name="Phone Number")
-    uanswer = models.CharField(max_length=30, default="", verbose_name="Security Answer")
-    uquestion = models.CharField(max_length=40, default="", verbose_name="Security Question")
+    uanswer = models.CharField(
+        max_length=30, default="", verbose_name="Security Answer"
+    )
+    uquestion = models.CharField(
+        max_length=40, default="", verbose_name="Security Question"
+    )
 
     class Meta:
         verbose_name = "User_Info"
@@ -24,8 +29,12 @@ class UserInfo(models.Model):
 
 class GoodsBrowser(models.Model):
     user = models.ForeignKey(UserInfo, on_delete=models.CASCADE, verbose_name="User")
-    good = models.ForeignKey(GoodsInfo, on_delete=models.CASCADE, verbose_name="Product")
-    browser_time = models.DateTimeField(default=timezone.now, verbose_name="Browse Time")
+    good = models.ForeignKey(
+        GoodsInfo, on_delete=models.CASCADE, verbose_name="Product"
+    )
+    browser_time = models.DateTimeField(
+        default=timezone.now, verbose_name="Browse Time"
+    )
 
     class Meta:
         verbose_name = "Browsing History"

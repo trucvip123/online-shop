@@ -23,6 +23,13 @@ urlpatterns = [
     url(r"^forget_Password/$", forget_password, name="forget_password"),
     url(r"^forget_password/$", find_password, name="find_password"),
     url(r"^find_password/$", reset_handle, name="reset_handle"),
-    url(r"^add_edit_product/$", add_edit_product, name="add_edit_product"),
-    url(r"^product/$", product, name="product")
+    url(r"^add_product/$", add_product, name="add_product"),
+    url(r"^add_product_handle/$", add_product_handle, name="add_product_handle"),
+    url(r"^edit_product/$", edit_product, name="edit_product"),
+    url(r"^edit_product_handle/$", edit_product_handle, name="edit_product_handle"),
+    url(
+        r"^get_product_details_by_id/$",
+        get_product_details_by_id,
+        name="get_product_details_by_id",
+    ),
 ]

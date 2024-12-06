@@ -67,7 +67,3 @@ To run the project:
 ```
 python manage.py runserver
 ```
-
-#### Citation and Credit
-
-This project is adapted by and inspired from a [daily fresh project](https://github.com/Konic-NLP/daily_fresh_demo).

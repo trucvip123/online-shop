@@ -15,7 +15,8 @@ from .models import GoodsBrowser
 from . import user_decorator
 from .models import UserInfo
 from df_order.models import OrderInfo
-from .models import GoodsInfo
+from df_goods.models import GoodsInfo, TypeInfo
+from decimal import Decimal
 
 
 ## This function is used to redirect the user to the resigter page.
@@ -255,7 +256,6 @@ def reset_handle(request):
 def find_password(request):
     uname = request.POST.get("user_name")
     users = UserInfo.objects.filter(uname=uname)
-    print(len(users))
     if (
         len(users) == 1
     ):  ## If the user exists, the user will be redirected to the reset page.
@@ -325,8 +325,21 @@ def site_handle(request):
 
 
 @user_decorator.login
-def product(request):
-    return render(request, "df_user/user_center_product.html")
+def add_product(request):
+    context = {
+        "title": "Add Product",
+        "types": TypeInfo.objects.all(),
+    }
+    return render(request, "df_user/user_center_add_product.html", context)
+
+
+@user_decorator.login
+def edit_product(request):
+    context = {
+        "title": "Edit Product",
+        "types": TypeInfo.objects.all(),
+    }
+    return render(request, "df_user/user_center_edit_product.html", context)
 
 
 # Define a decorator to check if the user is an admin
@@ -335,7 +348,7 @@ def admin_required(user):
 
 
 # @user_passes_test(admin_required)
-def add_edit_product(request, product_id=None):
+def add_product_handle(request, product_id=None):
     # Check if editing an existing product
     if product_id:
         product = get_object_or_404(GoodsInfo, id=product_id)
@@ -344,26 +357,89 @@ def add_edit_product(request, product_id=None):
 
     if request.method == "POST":
         # Get product data from the form
-        name = request.POST.get("name")
+        name = request.POST.get("product_name")
         price = request.POST.get("price")
         description = request.POST.get("description")
+        type_id = request.POST.get("product_type")  # Get selected type ID from form
+
+        # Fetch the TypeInfo instance based on type_id
+        category = get_object_or_404(TypeInfo, id=type_id)
+        price_decimal = Decimal(price)
+
+        # Create a new product
+        print("Create new product...")
+        GoodsInfo.objects.create(
+            gtitle=name,
+            gprice=price_decimal,
+            gcontent=description,
+            gtype=category,
+            gpic=request.FILES.get("image", None),
+        )
+
+        return render(request, "df_user/user_center_add_product.html", {"success": 1})
+
+    context = {
+        "title": "Add Product",
+        "product": product,  # Pass product data if editing
+        "types": TypeInfo.objects.all(),
+    }
+    return render(request, "df_user/user_center_add_product.html", context)
+
+
+# @user_passes_test(admin_required)
+def edit_product_handle(request):
+    product_id = request.GET.get("product_id")
+    print("product_id:", product_id)
+
+    # Check if editing an existing product
+    if product_id:
+        product = get_object_or_404(GoodsInfo, id=product_id)
+    else:
+        product = None
+
+    if request.method == "POST":
+        # Get product data from the form
+        name = request.POST.get("product_name")
+        price = request.POST.get("price")
+        description = request.POST.get("description")
+        category = request.POST.get("product_type")  # Get selected type ID from form
+        image_path = request.FILES.get("image", None)
+
+        price_decimal = Decimal(price)
 
         if product:
             # Update existing product
-            product.name = name
-            product.price = price
-            product.description = description
+            product.gtitle = name
+            product.gprice = price_decimal
+            product.gcontent = description
+            product.gpic = image_path
             product.save()
-        else:
-            # Create a new product
-            GoodsInfo.objects.create(name=name, price=price, description=description)
 
-        return redirect(
-            "df_user:info"
-        )  # Redirect to user info page or another page after save
+        return render(request, "df_user/user_center_edit_product.html", {"success": 1})
 
     context = {
-        "title": "Add/Edit Product",
+        "title": "Add Product",
         "product": product,  # Pass product data if editing
+        "types": TypeInfo.objects.all(),
     }
-    return render(request, "df_user/user_center_product.html", context)
+    return render(request, "df_user/user_center_edit_product.html", context)
+
+
+def get_product_details_by_id(request):
+    product_id = request.GET.get("product_id")
+    print("product_id:", product_id)
+    try:
+        product = GoodsInfo.objects.get(pk=int(product_id))
+        data = {
+            "product_name": product.gtitle,
+            "product_type": product.gtype.ttitle,
+            "price": str(product.gprice),
+            "description": product.gcontent,
+            "stock": product.gkucun,
+            "image_url": product.gpic.url if product.gpic else "",
+        }
+        print("data:", data)
+    except GoodsInfo.DoesNotExist:
+        data = {"error": "Product not found"}
+
+    return JsonResponse(data)

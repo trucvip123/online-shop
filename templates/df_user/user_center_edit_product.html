@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block center_body %}
+<script type="text/javascript">
+    {% if success %}
+        alert("Product saved successfully!");
+        window.location.href = "{% url 'df_user:edit_product' %}";
+    {% endif %}
+
+    function fetchProductDetails() {
+        var productId = document.getElementById('product_id').value;
+        if (productId) {
+            var xhr = new XMLHttpRequest();
+            var form = document.getElementById('editProductForm');
+
+            if (productId) {
+                // Update form action with product_id parameter
+                form.action = '{% url "df_user:edit_product_handle" %}?product_id=' + productId;
+            }
+            
+            xhr.open('GET', '{% url "df_user:get_product_details_by_id" %}?product_id=' + encodeURIComponent(productId), true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (!response.error) {
+                        document.getElementById('product_name').value = response.product_name;
+                        document.getElementById('product_type').value = response.product_type;
+                        document.getElementById('price').value = response.price;
+                        document.getElementById('description').value = response.description;
+                        document.getElementById('stock').value = response.stock;
+
+                        // Show image preview if available
+                        if (response.image_url) {
+                            var imagePreview = document.getElementById('image_preview');
+                            imagePreview.src = response.image_url;
+                            imagePreview.style.display = 'block';
+                        } else {
+                            document.getElementById('image_preview').style.display = 'none';
+                        }
+                    } else {
+                        alert(response.error);
+                    }
+                }
+            };
+            xhr.send();
+        }
+    }
+</script>
+
+<div class="main_con clearfix">
+    <div class="left_menu_con clearfix">
+        <h3>User Center</h3>
+        <ul>
+            <li><a href="{% url "df_user:info" %}">· Personal Information</a></li>
+            <li><a href="/user/order/1">· Order History</a></li>
+            <li><a href="{% url "df_user:site" %}">· Change the Password</a></li>
+            <li><a href="{% url "df_user:add_product" %}">· Add Products</a></li>
+            <li><a href="{% url "df_user:edit_product" %}" class="active">· Edit Products</a></li>
+        </ul>
+    </div>
+    <div class="right_content clearfix">
+        <h3 class="common_title2">Edit Product</h3>
+		<div class="site_con">
+            <form id="editProductForm" action='{% url "df_user:edit_product_handle" %}'  method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form_group">
+                    <label>Product ID:</label>
+                    <input type="number" id="product_id" name="product_id" required onblur="fetchProductDetails()">
+                </div>
+                
+                <div class="form_group">
+                    <label>Product Name:</label>
+                    <input type="text" id="product_name" name="product_name" value="{{ product.gtitle|default:'' }}">
+                </div>
+
+                <div class="form_group">
+                    <label>Product Type:</label>
+                    <input type=text id=product_type name=product_type value={{ product.gtype.ttitle|default:'' }}  >
+                </div>
+
+                <div class="form_group">
+                    <label>Price:</label>
+                    <input type=number id=price name=price step=0.01 value={{ product.gprice|default:'' }}  >
+                </div>
+                
+                <div class="form_group">
+                    <label>Description:</label>
+                    <input type="text" id="description" name="description" value="{{ product.gcontent|default:'' }}" required readonly>
+                </div>
+                
+                <div class="form_group">
+                    <label>Stock Quantity:</label>
+                    <input type=number id=stock name=stock value={{ product.gkucun|default:'' }}  > 
+                </div>
+                
+                <div class="form_group">
+                    <label>Product Image:</label>
+                    <img id=image_preview src="" alt="" style=max-width:100px;max-height:100px;display:none; />
+                    <input type=file name=image accept=image/* onchange=document.getElementById('image_preview').style.display='none';document.getElementById('image_preview').src='' />
+                </div>
+                
+                <div class="form_group">
+                </div>
+                <div class="form_group">
+                </div>
+
+                <input type="submit" value="Save Product" class="info_submit">
+            </form>
+
+            <!-- JavaScript function to update form action -->
+            <script type="text/javascript">
+                function updateFormAction() {
+                    var productId = document.getElementById('product_id').value;
+                    var form = document.getElementById('editProductForm');
+                    if (productId) {
+                        // Update form action with product_id parameter
+                        form.action = '{% url "df_user:edit_product_handle" %}?product_id=' + productId;
+                    }
+                }
+            </script>
+
+        </div>
+    </div>
+</div>
+
+{% endblock center_body %}

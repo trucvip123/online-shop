@@ -30,7 +30,7 @@ class GoodsInfo(models.Model):
     )  # img
     # gpic = models.ImageField(upload_to="df_goods/image/%Y/%m", verbose_name="img path", default="image/default.png")
     gprice = models.DecimalField(
-        max_digits=5, decimal_places=2, verbose_name="goods_price"
+        max_digits=10, decimal_places=2, verbose_name="goods_price"
     )
     gunit = models.CharField(max_length=20, default="500g", verbose_name="unit_weight")
     gclick = models.IntegerField(verbose_name="click_count", default=0, null=False)
