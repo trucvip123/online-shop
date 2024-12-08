@@ -1,9 +1,8 @@
+from df_user import user_decorator
 from django.http import JsonResponse
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import redirect, render, reverse
 
 from .models import *
-from df_user import user_decorator
-
 
 # edit the cart by adding , reducing and deleting
 

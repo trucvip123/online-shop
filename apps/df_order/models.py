@@ -1,7 +1,6 @@
-from django.db import models
-
 from df_goods.models import GoodsInfo
 from df_user.models import UserInfo
+from django.db import models
 
 # one model for record the whole order and the other record the information for each items in the order
 

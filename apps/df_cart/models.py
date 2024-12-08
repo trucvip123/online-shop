@@ -1,7 +1,6 @@
-from django.db import models
-
-from df_user.models import UserInfo
 from df_goods.models import GoodsInfo
+from df_user.models import UserInfo
+from django.db import models
 
 # using foreign key to link the items in the cart to the user and the items
 

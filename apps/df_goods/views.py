@@ -1,10 +1,10 @@
-from django.core.paginator import Paginator
-from django.shortcuts import render
-from django.contrib.auth.decorators import user_passes_test
-
-from .models import GoodsInfo, TypeInfo
 from df_cart.models import CartInfo
 from df_user.models import GoodsBrowser
+from django.contrib.auth.decorators import user_passes_test
+from django.core.paginator import Paginator
+from django.shortcuts import render
+
+from .models import GoodsInfo, TypeInfo
 
 
 # the products to display on the main page

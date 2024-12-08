@@ -1,39 +1,35 @@
 {% extends 'base.html' %}
 
 {% block center_body %}
+<div class="body-home">
 	<div class="center_con clearfix">
-
 		<div class="slide fl">
 			<ul class="slide_pics">
 				<li><img src="/static/images/slide.jpg" alt="slide"></li>
 				<li><img src="/static/images/slide02.jpg" alt="slide"></li>
 				<li><img src="/static/images/slide03.jpg" alt="slide"></li>
 				<li><img src="/static/images/slide04.jpg" alt="slide"></li>
-                <li><img src="/static/images/slide05.jpg" alt="slide"></li>
+				<li><img src="/static/images/slide05.jpg" alt="slide"></li>
 			</ul>
 			<div class="prev"></div>
 			<div class="next"></div>
 			<ul class="points"></ul>
 		</div>
-
-
 	</div>
 
 	<div class="list_model">
 		<div class="list_title clearfix">
 			<h3 class="fl" id="model01">New Arrival</h3>
 		</div>
-
 		<div class="goods_con clearfix">
 			<ul class="goods_list fl">
-
-                {% for goods in type0 %}
-                <li>
-                    <h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
-                    <a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
-                    <div class="prize"> $ {{ goods.gprice }} </div>
-                </li>
-                {% endfor %}
+				{% for goods in type0 %}
+				<li>
+					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
+					<a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
+					<div class="prize"> $ {{ goods.gprice }} </div>
+				</li>
+				{% endfor %}
 			</ul>
 		</div>
 	</div>
@@ -46,18 +42,18 @@
 
 		<div class="goods_con clearfix">
 			<ul class="goods_list fl">
-                {% for goods in type100 %}
-                <li>
-                    <h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
-                    <a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
-                    <div class="prize"> $ {{ goods.gprice }} </div>
-                </li>
-                {% endfor %}
+				{% for goods in type100 %}
+				<li>
+					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
+					<a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
+					<div class="prize"> $ {{ goods.gprice }} </div>
+				</li>
+				{% endfor %}
 			</ul>
 		</div>
 	</div>
 
-    <div class="list_model">
+	<div class="list_model">
 		<div class="list_title clearfix">
 			<h3 class="fl" id="model03">Man</h3>
 
@@ -66,19 +62,19 @@
 
 		<div class="goods_con clearfix">
 			<ul class="goods_list fl">
-                {% for goods in type41 %}
-                <li>
-                    <h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
-                    <a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
-                    <div class="prize"> $ {{ goods.gprice }} </div>
-                </li>
-                {% endfor %}
+				{% for goods in type41 %}
+				<li>
+					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
+					<a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
+					<div class="prize"> $ {{ goods.gprice }} </div>
+				</li>
+				{% endfor %}
 			</ul>
 		</div>
 
 	</div>
 
-    <div class="list_model">
+	<div class="list_model">
 		<div class="list_title clearfix">
 			<h3 class="fl" id="model03">Woman</h3>
 
@@ -87,13 +83,13 @@
 
 		<div class="goods_con clearfix">
 			<ul class="goods_list fl">
-                {% for goods in type51 %}
-                <li>
-                    <h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
-                    <a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
-                    <div class="prize"> $ {{ goods.gprice }} </div>
-                </li>
-                {% endfor %}
+				{% for goods in type51 %}
+				<li>
+					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
+					<a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
+					<div class="prize"> $ {{ goods.gprice }} </div>
+				</li>
+				{% endfor %}
 			</ul>
 		</div>
 
@@ -108,13 +104,13 @@
 
 		<div class="goods_con clearfix">
 			<ul class="goods_list fl">
-                {% for goods in type21 %}
-                <li>
-                    <h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
-                    <a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
-                    <div class="prize"> $ {{ goods.gprice }} </div>
-                </li>
-                {% endfor %}
+				{% for goods in type21 %}
+				<li>
+					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
+					<a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
+					<div class="prize"> $ {{ goods.gprice }} </div>
+				</li>
+				{% endfor %}
 			</ul>
 		</div>
 
@@ -128,36 +124,33 @@
 
 		<div class="goods_con clearfix">
 			<ul class="goods_list fl">
-                {% for goods in type31 %}
-                <li>
-                    <h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
-                    <a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
-                    <div class="prize"> $ {{ goods.gprice }} </div>
-                </li>
-                {% endfor %}
+				{% for goods in type31 %}
+				<li>
+					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
+					<a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
+					<div class="prize"> $ {{ goods.gprice }} </div>
+				</li>
+				{% endfor %}
 			</ul>
 		</div>
-
-
 	</div>
+</div>
 
+<script type="text/javascript" src="/static/js/slide.js"></script>
+<script type="text/javascript">
+	BCSlideshow('focuspic');
+	var oFruit = document.getElementById('fruit_more');
+	var oShownum = document.getElementById('show_count');
 
-	<script type="text/javascript" src="/static/js/slide.js"></script>
-    <script type="text/javascript">
-        BCSlideshow('focuspic');
-        var oFruit = document.getElementById('fruit_more');
-        var oShownum = document.getElementById('show_count');
+	var hasorder = localStorage.getItem('order_finish');
 
-        var hasorder = localStorage.getItem('order_finish');
+	if (hasorder) {
+		oShownum.innerHTML = '2';
+	}
 
-        if(hasorder)
-        {
-        oShownum.innerHTML = '2';
-        }
-
-        oFruit.onclick = function(){
-        window.location.href = 'list.html';
-        }
-    </script>
+	oFruit.onclick = function () {
+		window.location.href = 'list.html';
+	}
+</script>
 
 {% endblock center_body %}

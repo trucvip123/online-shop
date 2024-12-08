@@ -1,6 +1,6 @@
+from df_goods.models import GoodsInfo
 from django.db import models
 from django.utils import timezone
-from df_goods.models import GoodsInfo
 
 
 class UserInfo(models.Model):

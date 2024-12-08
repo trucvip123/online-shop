@@ -1,6 +1,7 @@
 # superuser: root 123123...
 from django.contrib import admin
-from .models import TypeInfo, GoodsInfo
+
+from .models import GoodsInfo, TypeInfo
 
 
 class TypeInfoAdmin(admin.ModelAdmin):

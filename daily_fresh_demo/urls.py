@@ -1,11 +1,11 @@
+from django.conf.urls import include, url
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url, include
 from django.views.static import serve
 
-from apps import df_goods, df_user, df_cart, df_order
-from .settings import MEDIA_ROOT
+from apps import df_cart, df_goods, df_order, df_user
 
+from .settings import MEDIA_ROOT
 
 urlpatterns = [
     path("admin/", admin.site.urls),

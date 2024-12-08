@@ -1,7 +1,7 @@
 # this file define the display and operation on the backstage management system
 from django.contrib import admin
 
-from .models import UserInfo, GoodsBrowser
+from .models import GoodsBrowser, UserInfo
 
 
 class UserInfoAdmin(admin.ModelAdmin):

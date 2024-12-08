@@ -1,22 +1,17 @@
-from django.shortcuts import (
-    render,
-    redirect,
-    get_object_or_404,
-    HttpResponseRedirect,
-    reverse,
-)
-from django.core.paginator import Paginator
-from django.http import JsonResponse
-from django.contrib.auth.decorators import user_passes_test
-
+from decimal import Decimal
 from hashlib import sha1
 
-from .models import GoodsBrowser
-from . import user_decorator
-from .models import UserInfo
-from df_order.models import OrderInfo
+from df_cart.models import CartInfo
 from df_goods.models import GoodsInfo, TypeInfo
-from decimal import Decimal
+from df_order.models import OrderInfo
+from django.contrib.auth.decorators import user_passes_test
+from django.core.paginator import Paginator
+from django.http import JsonResponse
+from django.shortcuts import (HttpResponseRedirect, get_object_or_404,
+                              redirect, render, reverse)
+
+from . import user_decorator
+from .models import GoodsBrowser, UserInfo
 
 
 ## This function is used to redirect the user to the resigter page.
@@ -386,6 +381,13 @@ def add_product_handle(request, product_id=None):
     return render(request, "df_user/user_center_add_product.html", context)
 
 
+def cart_count(request):
+    if "user_id" in request.session:
+        return CartInfo.objects.filter(user_id=request.session["user_id"]).count
+    else:
+        return 0
+
+
 # @user_passes_test(admin_required)
 def edit_product_handle(request):
     product_id = request.GET.get("product_id")
@@ -415,7 +417,18 @@ def edit_product_handle(request):
             product.gpic = image_path
             product.save()
 
-        return render(request, "df_user/user_center_edit_product.html", {"success": 1})
+            goods = GoodsInfo.objects.get(pk=int(product_id))
+            news = goods.gtype.goodsinfo_set.order_by("-id")[0:2]
+
+            context = {
+                "title": goods.gtype.ttitle,
+                "guest_cart": 1,
+                "cart_num": cart_count(request),
+                "goods": goods,
+                "news": news,
+                "id": product_id,
+            }
+        return render(request, "df_goods/detail.html", context)
 
     context = {
         "title": "Add Product",
