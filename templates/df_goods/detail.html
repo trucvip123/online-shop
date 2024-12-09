@@ -85,9 +85,9 @@
     <div class="goods_detail_pic fl">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                {% for image in goods.gpic %}
+                {% for image in goods.images.all %}
                 <div class="swiper-slide">
-                    <img src="{{ MEDIA_URL }}{{ image }}" alt="{{ goods.gtitle }}" class="img-fluid rounded"
+                    <img src="{{ MEDIA_URL }}{{ image.image_path }}" alt="{{ goods.gtitle }}" class="img-fluid rounded"
                         loading="lazy">
                 </div>
                 {% endfor %}

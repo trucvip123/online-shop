@@ -6,6 +6,28 @@
         alert("Product saved successfully!");
         window.location.href = "{% url 'df_user:add_product' %}";
     {% endif %}
+    {% if error %}
+        alert("{{ error }}");
+    {% endif %}
+
+    function addNewType() {
+        var newType = document.querySelector('input[name="new_product_type"]').value;
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = "{% url 'df_user:add_new_type' %}";
+        var csrfToken = document.createElement('input');
+        csrfToken.type = 'hidden';
+        csrfToken.name = 'csrfmiddlewaretoken';
+        csrfToken.value = '{{ csrf_token }}';
+        form.appendChild(csrfToken);
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'new_product_type';
+        input.value = newType;
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+    }
 </script>
 
 <div class="main_con clearfix">
@@ -32,11 +54,15 @@
                 
                 <div class="form_group">
                     <label for="product_type">Product Type:</label>
-                    <select id="product_type" name="product_type">
+                    <select class="product_type" id="product_type" name="product_type">
                       {% for type in types %}
                           <option value="{{ type.id }}" {% if product and type.id == product.gtype.id %}selected{% endif %}>{{ type.ttitle }}</option>
                       {% endfor %}
                     </select>
+
+                    <label for="new_product_type"> New Product Type:</label>
+                    <input class="input_new_type" type="text" name="new_product_type" placeholder="Enter new product type">
+                    <button class="button_new_type" type="button" onclick="addNewType()">Add Type</button>
                 </div>
 
                 <div class="form_group">
@@ -46,7 +72,7 @@
                 
                 <div class="form_group">
                     <label>Description:</label>
-                    <textarea name="description" required>{{ product.description|default:'' }}</textarea>
+                    <textarea class="description" name="description" required>{{ product.description|default:'' }}</textarea>
                 </div>
                 
                 <div class="form_group">
@@ -56,7 +82,7 @@
                 
                 <div class="form_group">
                     <label>Product Image:</label>
-                    <input type="file" name="image">
+                    <input type="file" name="image" multiple>
                 </div>
                 
                 <input type="submit" value="Save Product" class="info_submit">

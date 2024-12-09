@@ -32,4 +32,5 @@ urlpatterns = [
         get_product_details_by_id,
         name="get_product_details_by_id",
     ),
+    url(r"^add_new_type/$", add_new_type, name="add_new_type"),
 ]

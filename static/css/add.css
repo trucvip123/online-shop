@@ -1,0 +1,21 @@
+.description {
+	width: 300px;
+	height: 40px;
+	margin-top: 5px;
+}
+
+.product_type {
+	float:left;
+	margin-top: 10px 
+}
+
+.input_new_type {
+    width: 200px !important;
+    margin-top: 5px !important;
+}
+
+.button_new_type {
+    margin-left: 5px;
+    margin-top: 5px;
+    height: 42px;
+}

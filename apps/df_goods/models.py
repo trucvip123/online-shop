@@ -50,6 +50,15 @@ class GoodsInfo(models.Model):
         return self.gtitle
 
 
+class ProductImage(models.Model):
+    product = models.ForeignKey(GoodsInfo, related_name='images', on_delete=models.CASCADE)
+    image_path = models.ImageField(
+        verbose_name="goods_pic",
+        upload_to="df_goods/images/%Y/%m",
+        null=True,
+        blank=True,
+    )
+    
 # this is a Proxy pattern, which  is a proxy of the goodsinfo, the proxy change the order way of the original models while not impact the original models,  the client can extract  model
 # can extract information from goosinfo via proxy while cannot change the goodsinfo
 

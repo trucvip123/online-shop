@@ -2,13 +2,14 @@ from decimal import Decimal
 from hashlib import sha1
 
 from df_cart.models import CartInfo
-from df_goods.models import GoodsInfo, TypeInfo
+from df_goods.models import GoodsInfo, ProductImage, TypeInfo
 from df_order.models import OrderInfo
 from django.contrib.auth.decorators import user_passes_test
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.shortcuts import (HttpResponseRedirect, get_object_or_404,
                               redirect, render, reverse)
+from django.core.files.storage import FileSystemStorage
 
 from . import user_decorator
 from .models import GoodsBrowser, UserInfo
@@ -343,13 +344,7 @@ def admin_required(user):
 
 
 # @user_passes_test(admin_required)
-def add_product_handle(request, product_id=None):
-    # Check if editing an existing product
-    if product_id:
-        product = get_object_or_404(GoodsInfo, id=product_id)
-    else:
-        product = None
-
+def add_product_handle(request):
     if request.method == "POST":
         # Get product data from the form
         name = request.POST.get("product_name")
@@ -361,24 +356,42 @@ def add_product_handle(request, product_id=None):
         category = get_object_or_404(TypeInfo, id=type_id)
         price_decimal = Decimal(price)
 
+        # Check if a product with the same title already exists
+        if GoodsInfo.objects.filter(gtitle=name).exists():
+            return render(request, "df_user/user_center_add_product.html", {
+                "title": "Add Product",
+                "types": TypeInfo.objects.all(),
+                "error": "A product with this title already exists."
+            })
+
         # Create a new product
-        print("Create new product...")
-        GoodsInfo.objects.create(
+        product = GoodsInfo.objects.create(
             gtitle=name,
             gprice=price_decimal,
             gcontent=description,
             gtype=category,
-            gpic=request.FILES.get("image", None),
         )
+        # Handle multiple images
+        images = request.FILES.getlist("image")
+        print("images:", images)
 
+        for i, image in enumerate(images):
+            fs = FileSystemStorage()
+            print(image.name, image)
+            filename = fs.save(image.name, image)
+            ProductImage.objects.create(product=product, image_path=images[i])
+
+        goods = GoodsInfo.objects.get(gtitle=name)
+        news = goods.gtype.goodsinfo_set.order_by("-id")[0:2]
+
+        context = {
+            "goods": goods,
+            "news": news,
+        }
+        # return render(request, "df_goods/detail.html", context)
         return render(request, "df_user/user_center_add_product.html", {"success": 1})
 
-    context = {
-        "title": "Add Product",
-        "product": product,  # Pass product data if editing
-        "types": TypeInfo.objects.all(),
-    }
-    return render(request, "df_user/user_center_add_product.html", context)
+    return render(request, "df_user/user_center_add_product.html")
 
 
 def cart_count(request):
@@ -428,7 +441,7 @@ def edit_product_handle(request):
                 "news": news,
                 "id": product_id,
             }
-        return render(request, "df_goods/detail.html", context)
+            return render(request, "df_goods/detail.html", context)
 
     context = {
         "title": "Add Product",
@@ -456,3 +469,12 @@ def get_product_details_by_id(request):
         data = {"error": "Product not found"}
 
     return JsonResponse(data)
+
+
+def add_new_type(request):
+    if request.method == 'POST':
+        new_type = request.POST.get('new_product_type')
+        if new_type:
+            TypeInfo.objects.create(ttitle=new_type)
+            return redirect('df_user:add_product')
+    return redirect('df_user:add_product')
