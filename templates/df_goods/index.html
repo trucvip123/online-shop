@@ -26,7 +26,14 @@
 				{% for goods in type0 %}
 				<li>
 					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
-					<a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
+					<a href="/{{ goods.id }}/">
+						{% if goods.images.all %}
+						<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
+							class="img-fluid rounded">
+						{% else %}
+						<img src="{{ MEDIA_URL }}default_image.jpg" alt="Default Img">
+						{% endif %}
+					</a>
 					<div class="prize"> $ {{ goods.gprice }} </div>
 				</li>
 				{% endfor %}
@@ -45,7 +52,14 @@
 				{% for goods in type100 %}
 				<li>
 					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
-					<a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
+					<a href="/{{ goods.id }}/">
+						{% if goods.images.all %}
+						<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
+							class="img-fluid rounded">
+						{% else %}
+						<img src="{{ MEDIA_URL }}default_image.jpg" alt="Default Img">
+						{% endif %}
+					</a>
 					<div class="prize"> $ {{ goods.gprice }} </div>
 				</li>
 				{% endfor %}
@@ -65,7 +79,14 @@
 				{% for goods in type41 %}
 				<li>
 					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
-					<a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
+					<a href="/{{ goods.id }}/">
+						{% if goods.images.all %}
+						<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
+							class="img-fluid rounded">
+						{% else %}
+						<img src="{{ MEDIA_URL }}default_image.jpg" alt="Default Img">
+						{% endif %}
+					</a>
 					<div class="prize"> $ {{ goods.gprice }} </div>
 				</li>
 				{% endfor %}
@@ -86,7 +107,14 @@
 				{% for goods in type51 %}
 				<li>
 					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
-					<a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
+					<a href="/{{ goods.id }}/">
+						{% if goods.images.all %}
+						<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
+							class="img-fluid rounded">
+						{% else %}
+						<img src="{{ MEDIA_URL }}default_image.jpg" alt="Default Img">
+						{% endif %}
+					</a>
 					<div class="prize"> $ {{ goods.gprice }} </div>
 				</li>
 				{% endfor %}
@@ -107,7 +135,14 @@
 				{% for goods in type21 %}
 				<li>
 					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
-					<a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
+					<a href="/{{ goods.id }}/">
+						{% if goods.images.all %}
+						<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
+							class="img-fluid rounded">
+						{% else %}
+						<img src="{{ MEDIA_URL }}default_image.jpg" alt="Default Img">
+						{% endif %}
+					</a>
 					<div class="prize"> $ {{ goods.gprice }} </div>
 				</li>
 				{% endfor %}
@@ -127,7 +162,14 @@
 				{% for goods in type31 %}
 				<li>
 					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
-					<a href="/{{ goods.id }}/"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
+					<a href="/{{ goods.id }}/">
+						{% if goods.images.all %}
+						<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
+							class="img-fluid rounded">
+						{% else %}
+						<img src="{{ MEDIA_URL }}default_image.jpg" alt="Default Img">
+						{% endif %}
+					</a>
 					<div class="prize"> $ {{ goods.gprice }} </div>
 				</li>
 				{% endfor %}

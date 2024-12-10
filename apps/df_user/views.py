@@ -7,8 +7,13 @@ from df_order.models import OrderInfo
 from django.contrib.auth.decorators import user_passes_test
 from django.core.paginator import Paginator
 from django.http import JsonResponse
-from django.shortcuts import (HttpResponseRedirect, get_object_or_404,
-                              redirect, render, reverse)
+from django.shortcuts import (
+    HttpResponseRedirect,
+    get_object_or_404,
+    redirect,
+    render,
+    reverse,
+)
 from django.core.files.storage import FileSystemStorage
 
 from . import user_decorator
@@ -358,11 +363,15 @@ def add_product_handle(request):
 
         # Check if a product with the same title already exists
         if GoodsInfo.objects.filter(gtitle=name).exists():
-            return render(request, "df_user/user_center_add_product.html", {
-                "title": "Add Product",
-                "types": TypeInfo.objects.all(),
-                "error": "A product with this title already exists."
-            })
+            return render(
+                request,
+                "df_user/user_center_add_product.html",
+                {
+                    "title": "Add Product",
+                    "types": TypeInfo.objects.all(),
+                    "error": "A product with this title already exists.",
+                },
+            )
 
         # Create a new product
         product = GoodsInfo.objects.create(
@@ -418,7 +427,7 @@ def edit_product_handle(request):
         price = request.POST.get("price")
         description = request.POST.get("description")
         category = request.POST.get("product_type")  # Get selected type ID from form
-        image_path = request.FILES.get("image", None)
+        # image_path = request.FILES.get("image", None)
 
         price_decimal = Decimal(price)
 
@@ -427,8 +436,15 @@ def edit_product_handle(request):
             product.gtitle = name
             product.gprice = price_decimal
             product.gcontent = description
-            product.gpic = image_path
+            # product.gpic = image_path
             product.save()
+
+            # Handle multiple images
+            images = request.FILES.getlist("image")
+            for i, image in enumerate(images):
+                fs = FileSystemStorage()
+                fs.save(image.name, image)
+                ProductImage.objects.create(product=product, image_path=images[i])
 
             goods = GoodsInfo.objects.get(pk=int(product_id))
             news = goods.gtype.goodsinfo_set.order_by("-id")[0:2]
@@ -472,9 +488,9 @@ def get_product_details_by_id(request):
 
 
 def add_new_type(request):
-    if request.method == 'POST':
-        new_type = request.POST.get('new_product_type')
+    if request.method == "POST":
+        new_type = request.POST.get("new_product_type")
         if new_type:
             TypeInfo.objects.create(ttitle=new_type)
-            return redirect('df_user:add_product')
-    return redirect('df_user:add_product')
+            return redirect("df_user:add_product")
+    return redirect("df_user:add_product")

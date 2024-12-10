@@ -10,56 +10,46 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 <script type="text/javascript">
-    { #by binding js events, the total price of products increases as the number of products increases# }
     function plus() {
-        num = parseFloat($('.num_show').val());
-        kucun = parseFloat($('.goods_kucun').html());
-        if (num <= kucun) {
+        let num = parseFloat($('.num_show').val());
+        let kucun = parseFloat($('.goods_kucun').html());
+        if (num < kucun) {
             $('.num_show').val(num + 1);
             $('.num_show').blur();
         }
     }
 
     function minus() {
-        num = parseFloat($('.num_show').val());
+        let num = parseFloat($('.num_show').val());
         if (num > 1) {
             $('.num_show').val(num - 1);
             $('.num_show').blur();
-        }
-        else {
-            { #number of items cannot be less than 1# }
         }
     }
 
     $(function () {
         $('.num_show').blur(function () {
-
-            num = parseInt($('.num_show').val());
-
-            if (num <= 1)
-                num = 1;
-
-            kucun = parseInt($('.goods_kucun').text());
-
-            if (num >= kucun)
-                num = kucun;
-
-            price = parseFloat($('#gprice').text());
-            total = num * price;
+            let num = parseInt($('.num_show').val());
+            if (num < 1) num = 1;
+            let kucun = parseInt($('.goods_kucun').text());
+            if (num > kucun) num = kucun;
+            let price = parseFloat($('#gprice').text());
+            let total = num * price;
             $('.num_show').val(num);
             $('#gtotal').text(total.toFixed(2) + '$');
-
         });
     });
 
     document.addEventListener('DOMContentLoaded', () => {
         const swiper = new Swiper('.swiper-container', {
-            loop: true, // Enable looping
+            loop: true,
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
@@ -69,15 +59,12 @@
                 clickable: true,
             },
             autoplay: {
-                delay: 3000, // Automatically slide every 3 seconds
+                delay: 3000,
                 disableOnInteraction: false,
             },
-            slidesPerView: 1, // Show one slide at a time
-            spaceBetween: 10, // Add space between slides
         });
-    })
+    });
 </script>
-
 {% endblock head %}
 
 {% block center_content %}
@@ -87,8 +74,8 @@
             <div class="swiper-wrapper">
                 {% for image in goods.images.all %}
                 <div class="swiper-slide">
-                    <img src="{{ MEDIA_URL }}{{ image.image_path }}" alt="{{ goods.gtitle }}" class="img-fluid rounded"
-                        loading="lazy">
+                    <img src="{{ MEDIA_URL }}{{ image.image_path }}" alt="{{ goods.gtitle }}"
+                        class="img-fluid rounded swiper-image" loading="lazy">
                 </div>
                 {% endfor %}
             </div>
@@ -120,12 +107,12 @@
             {% if request.session.user_name|default:'' != '' %}
             <a href="javascript:;" class="buy_btn" id="buy_now">Buy Now</a>
             {% else %}
-            <a href="{% url " df_user:login" %}" class="buy_btn">Buy Now</a>
+            <a href='{% url "df_user:login" %}' class="buy_btn">Buy Now</a>
             {% endif %}
             {% if request.session.user_name|default:'' != '' %}
             <a href="javascript:;" class="add_cart" id="add_cart">Add to Cart</a>
             {% else %}
-            <a href="{% url " df_user:login" %}" class="add_cart" id="add_cart">Add to Cart</a>
+            <a href='{% url "df_user:login" %}' class="add_cart" id="add_cart">Add to Cart</a>
             {% endif %}
         </div>
     </div>
@@ -134,11 +121,18 @@
 <div class="main_wrap clearfix">
     <div class="l_wrap fl clearfix">
         <div class="new_goods">
-            <h3></h3>
+            <h3>New Products</h3>
             <ul>
                 {% for goods in news %}
                 <li>
-                    <a href="/{{ goods.id }}"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
+                    <a href="/{{ goods.id }}/">
+                        {% if goods.images.all %}
+                        <img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
+                            class="img-fluid rounded">
+                        {% else %}
+                        <img src="{{ MEDIA_URL }}default_image.jpg" alt="Default Img">
+                        {% endif %}
+                    </a>
                     <h4><a href="#">{{ goods.gtitle }}</a></h4>
                     <div class="prize">${{ goods.gprice }}</div>
                 </li>
@@ -158,35 +152,28 @@
                 <dd>{{ goods.gcontent|safe }}</dd>
             </dl>
         </div>
-
     </div>
 </div>
 
 <div class="add_jump"></div>
-
 <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-
         $(".buy_btn").click(function () {
             num = parseInt($('.num_show').val());
             $.get('/cart/add{{ goods.id }}_' + num + '/', function (data) {
                 $('#show_count').text(data.count);
             });
             location.href = "/cart/";
-
         });
 
         $('#add_cart').click(function () {
-
             var $add_x = $('#add_cart').offset().top;
             var $add_y = $('#add_cart').offset().left;
-
             var $to_x = $('#show_count').offset().top;
             var $to_y = $('#show_count').offset().left;
 
             $(".add_jump").css({ 'left': $add_y + 80, 'top': $add_x + 10, 'display': 'block' });
-
 
             { #check if login or not# }
             if ($('.login_btn').text().indexOf('Login') >= 0) {
