@@ -2,44 +2,45 @@
 <!--This is the file for designing the header and the search bar-->
 
 {% block head %}
-	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="/static/js/slide.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/static/js/slide.js"></script>
 {% endblock head %}
 
 {% block body %}
-    <div class="search_bar clearfix">
+<div class="search_bar_bg">
+	<div class="search_bar clearfix">
 		<a href="/" class="logo fl">
 			<img style="max-width:100%;overflow:hidden;" img src="/static/images/logo.png">
 		</a>
-        {% comment %}{% if page_name == 1 %}
-            <div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;{{ title }}</div>
-        {% endif %}{% endcomment %}
+		{% comment %}{% if page_name == 1 %}
+		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;{{ title }}</div>
+		{% endif %}{% endcomment %}
 		<div class="search_con fl">
-            <script>
-                $(function () {
-                    $('.input_btn').click(function () {
-                        q = $('.input_text').val();
-                        if(q==""){
-                        alert("Please input what you want to search");
-                        }
-                        else{
-                            location.href = '{% url "df_goods:ordinary_search" %}?q='+q+'&page=1'
-                        }
-                    })
-                })
-            </script>
+			<script>
+				$(function () {
+					$('.input_btn').click(function () {
+						q = $('.input_text').val();
+						if (q == "") {
+							alert("Please input what you want to search");
+						}
+						else {
+							location.href = '{% url "df_goods:ordinary_search" %}?q=' + q + '&page=1'
+						}
+					})
+				})
+			</script>
 			<input type="text" class="input_text fl" name="q" placeholder="What are you looking for...">
 			<input type="button" class="input_btn fr" name="" value="Search">
 		</div>
 
 		{% if guest_cart == 1 %}
 		<div class="guest_cart fr">
-			<a href="{% url "df_cart:cart" %}" class="cart_name fl">
+			<a href='{% url "df_cart:cart" %}' class="cart_name fl">
 				<i class="fa fa-shopping-cart" style="font-size:20px; margin-right: 10px;"></i>Cart
 			</a>
 			<div class="goods_count fl" id="show_count">{{ cart_num }}</div>
@@ -48,34 +49,34 @@
 
 		{# Check if logged in #}
 		{% if request.session.user_name|default:'' != '' %}
-		<div class="login_btn fl">Welcome: <em>{{ request.session.user_name }}</em> 
+		<div class="login_btn fl">Welcome: <em>{{ request.session.user_name }}</em>
 			<span>|</span>
-			<em><a href="{% url "df_user:logout" %}" class="logout_text">Log out</a></em>
+			<em><a href='{% url "df_user:logout" %}' class="logout_text">Log out</a></em>
 		</div>
 		{% else %}
 		<div class="login_btn fl">
-			<a href="{% url "df_user:login" %}" class="login_text">
+			<a href='{% url "df_user:login" %}' class="login_text">
 				<i class="fa fa-sign-in"></i> Login
-			</a> 
-			<a href="{% url "df_user:register" %}" class="register_text">
+			</a>
+			<a href='{% url "df_user:register" %}' class="register_text">
 				<i class="fa fa-user-plus"></i> Signup
 			</a>
 		</div>
 		{% endif %}
-		
+
 		<div class="user_link fl">
-			<a href="{% url "df_user:info" %}" class="user_info">
+			<a href='{% url "df_user:info" %}'' class="user_info">
 				<i class="fa fa-user"></i> My account
 			</a>
 		</div>
 	</div>
-
+</div>
 
 
 <!--    small_cart-->
-	<div class="small_cart">
-		<div class="close">
-			<span class="close_icon"> <img style = 'width:13px;height:13px'  src="/static/images/close.png"></span>
+<div class="small_cart">
+	<div class="close">
+		<span class="close_icon"> <img style=' width:13px;height:13px' src="/static/images/close.png"></span>
 		</div>
 		<div class="statement">
 			<p>Item has been successfully added to cart!</p>
@@ -84,88 +85,99 @@
 		</div>
 		<div class="option">
 			<button class="continue">Continue</button>
-			<a href="{% url "df_cart:cart" %}">View Chart</a>
-		</div>
-
+			<a href='{% url "df_cart:cart" %}''>View Chart</a>
 	</div>
-	<div class="cart_mask"> </div>
+
+</div>
+<div class="cart_mask"> </div>
 
 
-	<nav class="navbar navbar-expand-lg">
-		<div class="container-fluid">
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" href="/list7_1_1/">
-							<img src="https://cdn-icons-png.flaticon.com/128/1171/1171672.png" alt="washing machine icon" style="width:24px;height:24px;"> Decorative lights
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/list8_1_1/">
-							<img src="https://cdn-icons-png.flaticon.com/128/4352/4352975.png" alt="washing machine icon" style="width:24px;height:24px;"> Refrigerator
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/list7_1_1/">
-							<img src="https://cdn-icons-png.flaticon.com/128/2586/2586488.png" alt="washing machine icon" style="width:24px;height:24px;"> Phone
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/list7_1_1/">
-							<img src="https://cdn-icons-png.flaticon.com/128/2645/2645163.png" alt="washing machine icon" style="width:24px;height:24px;"> Laptop
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/list7_1_1/">
-							<img src="https://cdn-icons-png.flaticon.com/128/6976/6976927.png" alt="washing machine icon" style="width:24px;height:24px;"> Television
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/list7_1_1/">
-							<img src="https://cdn-icons-png.flaticon.com/128/2482/2482604.png" alt="washing machine icon" style="width:24px;height:24px;"> Water heater
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/list7_1_1/">
-							<img src="https://cdn-icons-png.flaticon.com/128/16048/16048685.png" alt="washing machine icon" style="width:24px;height:24px;"> Water filter
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/list7_1_1/">
-							<img src="https://cdn-icons-png.flaticon.com/128/698/698703.png" alt="washing machine icon" style="width:24px;height:24px;"> Washing machine
-						</a>
-					</li>						
-				</ul>
-			</div>
+<nav class="navbar navbar-expand-lg">
+	<div class="container-fluid">
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="/list7_1_1/">
+						<img src="https://cdn-icons-png.flaticon.com/128/1171/1171672.png" alt="washing machine icon"
+							style="width:24px;height:24px;"> Decorative lights
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/list8_1_1/">
+						<img src="https://cdn-icons-png.flaticon.com/128/4352/4352975.png" alt="washing machine icon"
+							style="width:24px;height:24px;"> Refrigerator
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/list7_1_1/">
+						<img src="https://cdn-icons-png.flaticon.com/128/2586/2586488.png" alt="washing machine icon"
+							style="width:24px;height:24px;"> Phone
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/list7_1_1/">
+						<img src="https://cdn-icons-png.flaticon.com/128/2645/2645163.png" alt="washing machine icon"
+							style="width:24px;height:24px;"> Laptop
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/list7_1_1/">
+						<img src="https://cdn-icons-png.flaticon.com/128/6976/6976927.png" alt="washing machine icon"
+							style="width:24px;height:24px;"> Television
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/list7_1_1/">
+						<img src="https://cdn-icons-png.flaticon.com/128/2482/2482604.png" alt="washing machine icon"
+							style="width:24px;height:24px;"> Water heater
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/list7_1_1/">
+						<img src="https://cdn-icons-png.flaticon.com/128/16048/16048685.png" alt="washing machine icon"
+							style="width:24px;height:24px;"> Water filter
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/list7_1_1/">
+						<img src="https://cdn-icons-png.flaticon.com/128/698/698703.png" alt="washing machine icon"
+							style="width:24px;height:24px;"> Washing machine
+					</a>
+				</li>
+			</ul>
 		</div>
-	</nav>
+	</div>
+</nav>
 
 
 <style>
 	/* small_cart */
-	.small_cart{
+	.small_cart {
 		width: 540px;
 		height: 400px;
 		background-color: white;
 		position: fixed;
-		top:50%;
+		top: 50%;
 		left: 50%;
 		margin-left: -250px;
 		margin-top: -200px;
-		display:none;
+		display: none;
 		z-index: 1000;
 	}
-	.close{
+
+	.close {
 		width: 100%;
 		height: 40px;
 		background: white;
 	}
-	.close span{
+
+	.close span {
 		display: block;
-		width:20px;
+		width: 20px;
 		height: 20px;
 		background: white;
 		float: right;
@@ -175,18 +187,22 @@
 		margin-right: 10px;
 		cursor: pointer;
 	}
-	.statement{
+
+	.statement {
 		margin-top: 100px;
 		text-align: center;
 	}
-	.statement p{
+
+	.statement p {
 		margin-bottom: 10px;
 	}
-	.option{
+
+	.option {
 		margin-left: 140px;
 		margin-top: 70px;
 	}
-	.option a{
+
+	.option a {
 		display: block;
 		width: 140px;
 		height: 40px;
@@ -194,7 +210,8 @@
 		line-height: 40px;
 		text-align: center;
 	}
-	.continue{
+
+	.continue {
 		display: block;
 		width: 140px;
 		height: 40px;
@@ -206,15 +223,27 @@
 		margin-right: 20px;
 		background: white;
 		cursor: pointer;
-		font-size:12pt;
+		font-size: 12pt;
 	}
+
 	.option a:last-child {
 		height: 40px;
 		background: black;
 		color: white;
 		font-size: 12pt;
 	}
-	.cart_mask{width:100%;height:100%;position:fixed;left:0;top:0;background-color:#000;opacity:0.3;z-index:999;display: none}
+
+	.cart_mask {
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		left: 0;
+		top: 0;
+		background-color: #000;
+		opacity: 0.3;
+		z-index: 999;
+		display: none
+	}
 
 
 

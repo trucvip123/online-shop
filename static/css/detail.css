@@ -101,28 +101,30 @@
 }
 
 .swiper-container .swiper-button-next {
-    margin: -120px 370px;
+    margin: 0 370px;
     background-color: #494848;
     color: white;
     width: 30px;
     height: 55px;
     right: auto !important;
+    top: 370px;
 }
 
 .swiper-container .swiper-button-prev:after,  .swiper-container .swiper-button-next:after{
     zoom:0.6
 }
 .swiper-container .swiper-button-prev {
-    margin: -120px 0;
     background-color: #494848;
     color: white;
     width: 30px;
     height: 55px;
     left: auto !important;
+    top: 390px;
 }
 
 .swiper-container .swiper-pagination {
-    margin: 375px -410px;
+    top: 570px;
+    left: -410px;
 }
 
 .new_goods {
