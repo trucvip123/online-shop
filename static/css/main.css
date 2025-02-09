@@ -67,11 +67,12 @@ html,body{height:100%}
 .search_con .input_text {
     height: 35px;
     border: 0;
-    margin: 0 0 0 35px;
+    margin: 0px -1px 0px 34px;
     outline: none;
     font-size: 12px;
     color: #000;
     font-family: 'Times New Roman';
+	border-radius: 0;
 }
 
 .search_con .input_btn {
@@ -182,6 +183,7 @@ html,body{height:100%}
 	font-size: 14px;
 	border-radius: 8px;
 	text-align: center;
+	text-decoration: none;
 }
 
 .navbar .nav-link:hover {
@@ -299,21 +301,23 @@ html,body{height:100%}
 
 .goods_list {
     width: 1160px;
-    height: 600px;
+    height: 640px;
     border-bottom: 1px solid #ededed;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
 	justify-content: center;
-	padding: 0;
+	padding: 7px;
 }
 
 .goods_list li {
-    height: 299px;
-    width: 180px;
+    height: 300px;
+    width: 170px;
     border: 1px solid #ededed;
     float: left;
     transition: all 0.3s ease; /* Smooth transition */
+	margin: 0 4px;
+	border-radius: 8px;
 }
 
 .goods_list li:hover {
