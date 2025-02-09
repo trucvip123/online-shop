@@ -9,6 +9,7 @@
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/static/js/slide.js"></script>
+<!-- <script type="text/javascript" src="/static/js/good_list.js"></script> -->
 {% endblock head %}
 
 {% block body %}
@@ -17,6 +18,356 @@
 		<a href="/" class="logo fl">
 			<img style="max-width:100%;overflow:hidden;" img src="/static/images/logo.png">
 		</a>
+
+		<!-- Dropdown Button -->
+		<div class="dropdown fl">
+			<button class="dropbtn"><i class="fa fa-bars fa-lg"></i> Danh mục</button>
+			<div class="dropdown-content">
+				<!-- Service 1 with Submenu -->
+				<div class="dropdown-submenu">
+					<a href="#">Điện tử, điện máy </a>
+					<div class="dropdown-content-submenu">
+						<a href="/tivi_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/b2/94/b29491c0fa65ea5a6c08856cc17b15a0.png">
+							</figure>
+							Tivi
+						</a>
+						<a href="/tu-lanh_1_1">
+							<figure>
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/fe/04/fe04b1635dc68b0ec71d9982b1dc8960.png">
+							</figure>
+							Tủ lạnh
+						</a>
+						<a href="/may-lanh_1_1">
+							<figure>
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/82/ab/82ab6158a6b5e938c11e9ebf1d05aae3.png">
+							</figure>							
+							Máy lạnh
+						</a>
+						<a href="/may-giat_1_1">
+							<figure>
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/36/c9/36c96df469724206fb6f36b4fc519e65.png">
+							</figure>							
+							Máy giặt
+						</a>
+						<a href="/may-nuoc-nong_1_1">
+							<figure>
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/7b/dd/7bdde1faea75f04d58001102d43d1191.png">
+							</figure>								
+							Máy nước nóng
+						</a>
+					</div>
+				</div>
+				<div class="dropdown-submenu">
+					<a href="#">Điện gia dụng</a>
+					<div class="dropdown-content-submenu">
+						<a href="/may-loc-nuoc_1_1">
+							<figure>
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/3c/2f/3c2f82dd62f6a3f7d1237500b771b10e.png">
+							</figure>
+							Máy lọc nước
+						</a>
+						<a href="/bep-tu_1_1">
+							<figure>
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/4e/c1/4ec14a3426db052a386892dc70e0adaa.png">
+							</figure>							
+							Bếp từ
+						</a>
+						<a href="/bep-hong-ngoai_1_1">
+							<figure>
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/5b/2e/5b2eb5fe7ccf790fccd65c1ff6771613.png">
+							</figure>								
+							Bếp hồng ngoại
+						</a>
+						<a href="/noi-com-dien_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/d5/1e/d51e5201e53a26de69a15ffc06bddbf3.png"> 
+							</figure> 
+							Nồi cơm điện
+						</a>
+						<a href="/noi-chien-khong-dau_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/42/bd/42bd2773f3df315ae77d4467e9617f5c.png"> 
+							</figure> 
+							Nồi chiên không dầu
+						</a>
+						<a href="/may-ep-trai-cay_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/7c/b0/7cb0aa7b446b5d319a7cb646df143faa.png"> 
+							</figure> 
+							Máy ép trái cây
+						</a>
+						<a href="/may-xay-sinh-to_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/4d/cb/4dcb40b32d0b0927b4adead56253989a.png"> 
+							</figure> 
+							Máy xay sinh tố
+						</a>
+						<a href="/may-lam-sua-hat_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/22/a9/22a9f17911009780799dab55504790af.png"> 
+							</figure> 
+							Máy làm sữa hạt
+						</a>
+						<a href="/lo-vi-song_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/87/fa/87fa2e3e71f3ebae400ee8271d0af4b9.png"> 
+							</figure> 
+							Lò vi sóng
+						</a>
+						<a href="/quạt_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/f3/27/f32743eb951ae3ba8cd51983e948ba9f.png"> 
+							</figure> 
+							Quạt
+						</a>
+						<a href="/quat-dieu-hoa_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/43/03/430374ebb8aa83838d66a5e6733d3697.png"> 
+							</figure> 
+							Quạt điều hòa
+						</a>
+						<a href="/bep-ga_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/70/61/706115bd03c5836eb0715cfca5b37d6f.png"> 
+							</figure> 
+							Bếp ga
+						</a>
+						<a href="/ban-ui_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/d5/32/d5329550ce2706b73258bce839b12eb4.png"> 
+							</figure> 
+							Bàn ủi
+						</a>
+						<a href="/may-hut-mui_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/6c/34/6c34c1cecf1a2b27731f81ec1181ab52.png"> 
+							</figure> 
+							Máy hút mùi
+						</a>
+						<a href="/lau-dien_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/f2/c8/f2c82cee61fa43c32fb154f70d8eb27e.png"> 
+							</figure> 
+							Lẩu điện
+						</a>
+						<a href="/am-sieu-toc_1_1">
+							<figure> <img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/36/03/3603bc57ccf6667f07ab44125d8a49f3.png"> 
+							</figure> 
+							Ấm siêu tốc
+						</a>
+						<a href="/binh-thuy-dien_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/99/d1/99d15f01884999613fbd2f8f134c20dc.png"> 
+							</figure> 
+							Bình thủy điện
+						</a>
+						<a href="/may-say-toc_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/a4/37/a437d951d130069466a258c6f6d0e508.png"> 
+							</figure> 
+							Máy sấy tóc
+						</a>
+						<a href="/noi-ap-suat_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/de/b3/deb38369dcf239b4c0be7c3c3788a31c.png"> 
+							</figure> 
+							Nồi áp suất
+						</a>
+						<a href="/may-vat-cam_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/a6/bb/a6bb930a7cacca52dace17f1256f595d.png"> 
+							</figure>
+							Máy vắt cam
+						</a>
+						<a href="/may-xay-thit_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/d5/d8/d5d865c4d36c95389a024beb150b3113.png"> 
+							</figure> 
+							Máy xay thịt
+						</a>
+						<a href="/may-danh-trung_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/c1/eb/c1eb2671e64d0235d01b08ad339c0366.png"> 
+							</figure>
+							Máy đánh trứng
+						</a>
+						<a href="/may-khuyech-tan_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQenAHR7Wr3_0EX5kVSNnXQ5QL_hbMESpCq0g&s"> 
+							</figure>
+							Máy khuếch tán
+						</a>
+						<a href="den-dien-den-sac_1_1">
+							<figure> 
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/3d/25/3d255ec99d878d979434831b67fa690f.png"> 
+							</figure>
+							Đèn điện, đèn sạc
+						</a>
+					</div>
+				</div>
+				<div class="dropdown-submenu">
+					<a href="#">Điện tử, Viễn thông</a>
+					<div class="dropdown-content-submenu">
+						<a href="/dien-thoai_1_1" class="">
+							<figure>
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/ed/ed/eded909b8116724d0e407ef0d87f936b.png">
+							</figure>
+							Điện thoại
+						</a>
+						<a href="/laptop_1_1" class="">
+							<figure>
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/6d/a3/6da36387eabd2db057b0a216f8499c24.png">
+							</figure>
+							Laptop
+						</a>
+						<a href="/man-hinh-may-tinh_1_1" class="">
+							<figure>
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/d9/d6/d9d66b8f5d369c170156583a12047ab1.png">
+							</figure>
+							Màn hình
+						</a>
+						<a href="/may-in_1_1" class="">
+							<figure>
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/a8/27/a8277b78329ee83d3cc7793525eb82a9.png">
+							</figure>
+							Máy in
+						</a>
+					</div>
+				</div>
+				<div class="dropdown-submenu">
+					<a href="#">Đồ gia dụng</a>
+					<div class="dropdown-content-submenu">
+						<a href="/bo-lau-nha_1_1" class="">
+							<figure>
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/ca/06/ca066fcf5b8f661a7a481b9ae7c73a57.png">
+							</figure>
+							Bộ lau nhà
+						</a>
+						<a href="/chao-chong-dinh_1_1" class="">
+							<figure>
+							<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/02/6b/026bca325ed4079df24b7531aa071ea3.png">
+							</figure>
+							Chảo các loại
+						</a>
+						<a href="/binh-ly-giu-nhiet_1_1" class="">
+							<figure>
+							<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/04/5b/045b6f67d09d1c457d24004c2f08a4fb.png">
+							</figure>
+							Bình, ly giữ nhiệt
+						</a>
+						<a href="/keo_1_1" class="">
+							<figure>
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/27/2d/272dade33449f6fe43ff02509736f510.png">
+							</figure>
+							Kéo
+						</a>
+						<a href="/vot-muoi_1_1" class="">
+							<figure>
+							<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/8f/27/8f27d980b2b9de572b005ded89cbbcdd.png">
+							</figure>
+							Vợt muỗi
+						</a>
+					</div>
+				</div>
+				<div class="dropdown-submenu">
+					<a href="#">Phụ kiện</a>
+					<div class="dropdown-content-submenu">
+						<a href="/sac-dtdd_1_1" class="">
+							<figure>
+								<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/14/ef/14ef943ddd310f099b81bd6cb3213453.png">
+							</figure>
+							Sạc dự phòng
+						</a>
+						<a href="/sac-cap_1_1" class="">
+							<figure>
+							<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/79/51/79516f78cdd4c969f329d18eb9679fb1.png">
+							</figure>
+							Sạc, cáp
+						</a>
+						<a href="/the-nho-dien-thoai_1_1" class="">
+							<figure>
+							<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/9c/a8/9ca8ba52667e6aebe612249a70a8c5b5.png">
+							</figure>
+							Thẻ nhớ
+						</a>
+						<a href="/chuot-may-tinh_1_1" class="">
+							<figure>
+							<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/51/b9/51b92f308f9f0c5ea9445d8e7c1a742d.png">
+							</figure>
+							Chuột máy tính
+						</a>
+						<a href="/thiet-bi-mang_1_1" class="">
+							<figure>
+							<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/d2/c6/d2c60607d00e472baf5da0122557a83e.png">
+							</figure>
+							Thiết bị mạng
+						</a>
+						<a href="/camera-giam-sat_1_1" class="">
+							<figure>
+							<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/94/b3/94b32f8318f20f4a4d8d9c687692a070.png">
+							</figure>
+							Camera
+						</a>
+						<a href="/cap-hdmi-cap-tivi_1_1" class="">
+							<figure>
+							<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/81/70/817025f1af510a67b06c487c84ad00e9.png">
+							</figure>
+							Cáp HDMI, cáp tivi
+						</a>
+						<a href="/khung-treo-tivi_1_1" class="">
+							<figure>
+							<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/65/f4/65f40f73b54cbe7e301bb35b0c6c90ca.png">
+							</figure>
+							Khung treo tivi
+						</a>
+						<a href="/gia-do-may-giat_1_1" class="">
+							<figure>
+							<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/36/b1/36b1736e14109e9d899c940ec19a0b97.png">
+							</figure>
+							Giá đỡ máy giặt, máy lọc nước
+						</a>
+					</div>
+				</div>
+				<div class="dropdown-submenu" style="order: -1;">
+					<a href="#">Sản phẩm khác</a>
+					<div class="dropdown-content-submenu">
+						<a href="/o-cam-phich-cam_1_1" class="">
+							<figure>
+							<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/19/30/1930b6bb9c6809b8d1e083a993d70376.png">
+							</figure>
+							Ổ cắm - Phích cắm
+						</a>
+						<a href="/pin_1_1" class="">
+							<figure>
+							<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/80/a7/80a798364807bbade37558badb45e4a1.png">
+							</figure>
+							Pin tiểu
+						</a>
+						<a href="/may-rua-xe_1_1" class="">
+							<figure>
+							<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/8a/9c/8a9cc41be187fe488ad8a7e967109f2f.png">
+							</figure>
+							Máy rửa xe
+						</a>
+						<a href="/may-bom-nuoc_1_1" class="">
+							<figure>
+							<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/d3/f2/d3f263e215e0f4ba8e3c89c81911a985.png">
+							</figure>
+							Máy bơm nước
+						</a>
+						<a href="/mui-khoan_1_1" class="">
+							<figure>
+							<img class="lazy-menu" alt="img menu" width="48" height="48px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/44/70/447037aafdedf4cbb3d0679103ec489c.png">
+							</figure>
+							Mũi khoan
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		{% comment %}{% if page_name == 1 %}
 		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;{{ title }}</div>
 		{% endif %}{% endcomment %}
@@ -34,14 +385,14 @@
 					})
 				})
 			</script>
-			<input type="text" class="input_text fl" name="q" placeholder="What are you looking for...">
-			<input type="button" class="input_btn fr" name="" value="Search">
+			<input type="text" class="input_text fl" name="q" placeholder="Bạn tìm gì...">
+			<input type="button" class="input_btn fr" name="" value="Tìm">
 		</div>
 
 		{% if guest_cart == 1 %}
 		<div class="guest_cart fr">
 			<a href='{% url "df_cart:cart" %}' class="cart_name fl">
-				<i class="fa fa-shopping-cart" style="font-size:20px; margin-right: 10px;"></i>Cart
+				<i class="fa fa-shopping-cart" style="font-size:20px; margin-right: 10px;"></i>Giỏ hàng
 			</a>
 			<div class="goods_count fl" id="show_count">{{ cart_num }}</div>
 		</div>
@@ -56,20 +407,22 @@
 		{% else %}
 		<div class="login_btn fl">
 			<a href='{% url "df_user:login" %}' class="login_text">
-				<i class="fa fa-sign-in"></i> Login
+				<i class="fa fa-sign-in"></i> Đăng nhập
 			</a>
 			<a href='{% url "df_user:register" %}' class="register_text">
-				<i class="fa fa-user-plus"></i> Signup
+				<i class="fa fa-user-plus"></i> Đăng ký
 			</a>
 		</div>
 		{% endif %}
 
 		<div class="user_link fl">
 			<a href='{% url "df_user:info" %}'' class="user_info">
-				<i class="fa fa-user"></i> My account
+				<i class="fa fa-user"></i> Tài khoản
 			</a>
 		</div>
 	</div>
+
+
 </div>
 
 
@@ -87,7 +440,6 @@
 			<button class="continue">Continue</button>
 			<a href='{% url "df_cart:cart" %}''>View Chart</a>
 	</div>
-
 </div>
 <div class="cart_mask"> </div>
 
@@ -102,50 +454,74 @@
 			<ul class="navbar-nav">
 				<li class="nav-item">
 					<a class="nav-link" href="/list7_1_1/">
-						<img src="https://cdn-icons-png.flaticon.com/128/1171/1171672.png" alt="washing machine icon"
-							style="width:24px;height:24px;"> Decorative lights
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/list8_1_1/">
-						<img src="https://cdn-icons-png.flaticon.com/128/4352/4352975.png" alt="washing machine icon"
-							style="width:24px;height:24px;"> Refrigerator
+						<figure> 
+							<img class="lazy-menu" alt="img menu" width="45px" height="45px" src="https://cdn-icons-png.flaticon.com/128/1171/1171672.png"> 
+						</figure>
+						Đèn trang trí
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/list7_1_1/">
-						<img src="https://cdn-icons-png.flaticon.com/128/2586/2586488.png" alt="washing machine icon"
-							style="width:24px;height:24px;"> Phone
+						<figure> 
+							<img class="lazy-menu" alt="img menu" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/36/c9/36c96df469724206fb6f36b4fc519e65.png"> 
+						</figure>
+						Máy giặt
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/list7_1_1/">
-						<img src="https://cdn-icons-png.flaticon.com/128/2645/2645163.png" alt="washing machine icon"
-							style="width:24px;height:24px;"> Laptop
+						<figure> 
+							<img class="lazy-menu" alt="img menu" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/ed/ed/eded909b8116724d0e407ef0d87f936b.png"> 
+						</figure>
+						Điện thoại
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/list7_1_1/">
-						<img src="https://cdn-icons-png.flaticon.com/128/6976/6976927.png" alt="washing machine icon"
-							style="width:24px;height:24px;"> Television
+						<figure> 
+							<img class="lazy-menu" alt="img menu" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/6d/a3/6da36387eabd2db057b0a216f8499c24.png"> 
+						</figure>
+						Laptop
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/list7_1_1/">
-						<img src="https://cdn-icons-png.flaticon.com/128/2482/2482604.png" alt="washing machine icon"
-							style="width:24px;height:24px;"> Water heater
+						<figure> 
+							<img class="lazy-menu" alt="img menu" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/b2/94/b29491c0fa65ea5a6c08856cc17b15a0.png"> 
+						</figure>
+						Tivi
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/list7_1_1/">
-						<img src="https://cdn-icons-png.flaticon.com/128/16048/16048685.png" alt="washing machine icon"
-							style="width:24px;height:24px;"> Water filter
+						<figure> 
+							<img class="lazy-menu" alt="img menu" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/7b/dd/7bdde1faea75f04d58001102d43d1191.png"> 
+						</figure>
+						Máy nước nóng
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/list7_1_1/">
-						<img src="https://cdn-icons-png.flaticon.com/128/698/698703.png" alt="washing machine icon"
-							style="width:24px;height:24px;"> Washing machine
+						<figure> 
+							<img class="lazy-menu" alt="img menu" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/3c/2f/3c2f82dd62f6a3f7d1237500b771b10e.png"> 
+						</figure>
+						Máy lọc nước
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/list7_1_1/">
+						<figure> 
+							<img class="lazy-menu" alt="img menu" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/fe/04/fe04b1635dc68b0ec71d9982b1dc8960.png"> 
+						</figure>
+						Tủ lạnh
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/list7_1_1/">
+						<figure> 
+							<img class="lazy-menu" alt="img menu" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/82/ab/82ab6158a6b5e938c11e9ebf1d05aae3.png"> 
+						</figure>
+						Máy lạnh
 					</a>
 				</li>
 			</ul>
@@ -153,109 +529,8 @@
 	</div>
 </nav>
 
-
-<style>
-	/* small_cart */
-	.small_cart {
-		width: 540px;
-		height: 400px;
-		background-color: white;
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		margin-left: -250px;
-		margin-top: -200px;
-		display: none;
-		z-index: 1000;
-	}
-
-	.close {
-		width: 100%;
-		height: 40px;
-		background: white;
-	}
-
-	.close span {
-		display: block;
-		width: 20px;
-		height: 20px;
-		background: white;
-		float: right;
-		text-align: center;
-		line-height: 20px;
-		margin-top: 10px;
-		margin-right: 10px;
-		cursor: pointer;
-	}
-
-	.statement {
-		margin-top: 100px;
-		text-align: center;
-	}
-
-	.statement p {
-		margin-bottom: 10px;
-	}
-
-	.option {
-		margin-left: 140px;
-		margin-top: 70px;
-	}
-
-	.option a {
-		display: block;
-		width: 140px;
-		height: 40px;
-		float: left;
-		line-height: 40px;
-		text-align: center;
-	}
-
-	.continue {
-		display: block;
-		width: 140px;
-		height: 40px;
-		float: left;
-		line-height: 40px;
-		text-align: center;
-		border: 1px solid black;
-		color: black;
-		margin-right: 20px;
-		background: white;
-		cursor: pointer;
-		font-size: 12pt;
-	}
-
-	.option a:last-child {
-		height: 40px;
-		background: black;
-		color: white;
-		font-size: 12pt;
-	}
-
-	.cart_mask {
-		width: 100%;
-		height: 100%;
-		position: fixed;
-		left: 0;
-		top: 0;
-		background-color: #000;
-		opacity: 0.3;
-		z-index: 999;
-		display: none
-	}
-
-
-
-	/*end small_cart */
-</style>
-
-
 {% block content %}
 {% endblock content %}
 {% block center_body %}
-
 {% endblock center_body %}
-
-
 {% endblock body %}

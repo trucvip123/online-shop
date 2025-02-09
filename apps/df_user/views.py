@@ -387,7 +387,6 @@ def add_product_handle(request):
         for i, image in enumerate(images):
             fs = FileSystemStorage()
             print(image.name, image)
-            filename = fs.save(image.name, image)
             ProductImage.objects.create(product=product, image_path=images[i])
 
         goods = GoodsInfo.objects.get(gtitle=name)

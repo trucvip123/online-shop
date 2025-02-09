@@ -58,10 +58,10 @@ def index(request):
     return render(request, "df_goods/index.html", context)
 
 
-def good_list(request, tid, pindex, sort):
+def good_list(request, category, pindex, sort):
+    print("category:", category)
     # tid：product type info  pindex：product page sort：how product display
-    typeinfo = TypeInfo.objects.get(pk=int(tid))
-
+    typeinfo = TypeInfo.objects.get(ttitle=category)
     # inquiry the current product category base on the primary key
     news = typeinfo.goodsinfo_set.order_by("-id")[0:2]
 
@@ -78,18 +78,26 @@ def good_list(request, tid, pindex, sort):
         cart_num = CartInfo.objects.filter(user_id=int(user_id)).count()
 
     if sort == "1":  # default(from the newest)
-        goods_list = GoodsInfo.objects.filter(gtype_id=int(tid)).order_by("-id")
-    elif sort == "2":  # price
-        goods_list = GoodsInfo.objects.filter(gtype_id=int(tid)).order_by("-gprice")
+        goods_list = GoodsInfo.objects.filter(gtype_id=int(typeinfo.id)).order_by("-id")
+    elif sort == "2":  # price descending
+        goods_list = GoodsInfo.objects.filter(gtype_id=int(typeinfo.id)).order_by(
+            "-gprice"
+        )
     elif sort == "3":  # hot
-        goods_list = GoodsInfo.objects.filter(gtype_id=int(tid)).order_by("-gclick")
+        goods_list = GoodsInfo.objects.filter(gtype_id=int(typeinfo.id)).order_by(
+            "-gclick"
+        )
+    elif sort == "4":  # price ascending
+        goods_list = GoodsInfo.objects.filter(gtype_id=int(typeinfo.id)).order_by(
+            "gprice"
+        )
 
     # Paginator
     paginator = Paginator(goods_list, 10)
     # return page object
     page = paginator.page(int(pindex))
     context = {
-        "title": "Product List",
+        "title": category,
         "guest_cart": guest_cart,
         "cart_num": cart_num,
         "page": page,
