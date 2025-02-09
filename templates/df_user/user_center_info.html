@@ -19,6 +19,7 @@
             <li><a href="{% url "df_user:site" %}">· Change the Password</a></li>
             <li><a href="{% url "df_user:add_product" %}">· Add Products</a></li> <!-- New button -->
             <li><a href="{% url "df_user:edit_product" %}">· Edit Products</a></li>
+            <li><a href="{% url "df_user:manage_type" %}">· Manage Category</a></li>
         </ul>
     </div>
     <div class="right_content clearfix">
@@ -53,7 +54,13 @@
             <ul class="goods_type_list clearfix">
                 {% for good in goods_list %}
                 <li>
-                    <a href="/{{ good.id }}/"><img src="{{ MEDIA_URL }}{{ good.gpic }}"></a>
+                    <a href="/{{ good.id }}/">
+                        {% if good.images.all %}
+                        <img src="{{ MEDIA_URL }}{{ good.images.all.0.image_path }}">
+                        {% else %}
+                        <img src="{{ MEDIA_URL }}default_image.jpg" alt="Default Img">
+                        {% endif %}  
+                    </a>
                     <h4><a href="/{{ good.id }}/">{{ good.gtitle }}</a></h4>
                     <div class="operate">
                         <span class="prize">${{ good.gprice }}</span>

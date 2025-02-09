@@ -14,8 +14,9 @@
     margin-top: 5px !important;
 }
 
-.button_new_type {
+.button_type {
     margin-left: 5px;
-    margin-top: 5px;
+    margin-top: 7px;
     height: 42px;
+    border-radius: 8px;
 }

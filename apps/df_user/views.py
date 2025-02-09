@@ -6,7 +6,7 @@ from df_goods.models import GoodsInfo, ProductImage, TypeInfo
 from df_order.models import OrderInfo
 from django.contrib.auth.decorators import user_passes_test
 from django.core.paginator import Paginator
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import (
     HttpResponseRedirect,
     get_object_or_404,
@@ -140,7 +140,11 @@ def logout(request):  # logout
 def info(request):  # user center
     username = request.session.get("user_name")
     user = UserInfo.objects.filter(uname=username).first()
-    browser_goods = GoodsBrowser.objects.filter(user=user).order_by("-browser_time")
+    browser_goods = (
+        GoodsBrowser.objects.filter(user=user)
+        .select_related("good")
+        .order_by("-browser_time")
+    )
     goods_list = []
     if browser_goods:
         goods_list = [browser_good.good for browser_good in browser_goods]
@@ -442,7 +446,7 @@ def edit_product_handle(request):
             images = request.FILES.getlist("image")
             for i, image in enumerate(images):
                 fs = FileSystemStorage()
-                fs.save(image.name, image)
+                # fs.save(image.name, image)
                 ProductImage.objects.create(product=product, image_path=images[i])
 
             goods = GoodsInfo.objects.get(pk=int(product_id))
@@ -490,6 +494,61 @@ def add_new_type(request):
     if request.method == "POST":
         new_type = request.POST.get("new_product_type")
         if new_type:
-            TypeInfo.objects.create(ttitle=new_type)
-            return redirect("df_user:add_product")
-    return redirect("df_user:add_product")
+            # Check if the new_type already exists in the TypeInfo table
+            if TypeInfo.objects.filter(ttitle=new_type).exists():
+                return HttpResponse("This product type already exists.")
+            else:
+                TypeInfo.objects.create(ttitle=new_type)
+                return render(
+                    request, "df_user/user_center_manage_type.html", {"success": 1}
+                )
+    return HttpResponse("Invalid request method.")
+
+
+def delete_type(request):
+    if request.method == "POST":
+        type_id = request.POST.get("product_type_delete")
+        print("type_id:", type_id)
+        if type_id:
+            try:
+                type_to_delete = TypeInfo.objects.get(id=type_id)
+                type_to_delete.delete()
+                return render(
+                    request, "df_user/user_center_manage_type.html", {"success": 1}
+                )
+            except TypeInfo.DoesNotExist:
+                return HttpResponse("The specified type does not exist.")
+    return HttpResponse("Invalid request method.")
+
+
+def edit_type(request):
+    if request.method == "POST":
+        old_type_name = request.POST.get("product_type_old")
+        new_type_name = request.POST.get("product_type_new")
+
+        if not old_type_name or not new_type_name:
+            return JsonResponse(
+                {"error": "Type ID and new type name are required."}, status=400
+            )
+
+        try:
+            type_to_edit = TypeInfo.objects.get(ttitle=old_type_name)
+            type_to_edit.ttitle = new_type_name
+            type_to_edit.save()
+            return render(
+                request, "df_user/user_center_manage_type.html", {"success": 1}
+            )
+        except TypeInfo.DoesNotExist:
+            return JsonResponse(
+                {"error": "The specified type does not exist."}, status=404
+            )
+        except Exception as e:
+            return JsonResponse(
+                {"error": f"An unexpected error occurred: {str(e)}"}, status=500
+            )
+    else:
+        return JsonResponse({"error": "Invalid request method."}, status=405)
+
+
+def manage_type(request):
+    return render(request, "df_user/user_center_manage_type.html")

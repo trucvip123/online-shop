@@ -74,11 +74,8 @@ $(function(){
 
 	});
 
-
 	function move(){
-
 		ismove = true;
-
 		if(nowli<0)
 		{
 			nowli=len-1;
@@ -105,7 +102,6 @@ $(function(){
 			return;
 		}
 
-
 		if(prevli<nowli)
 		{
 			$slides.eq(nowli).css({left:760});			
@@ -125,6 +121,5 @@ $(function(){
 			});
 			prevli=nowli;		
 		}
-
 	}
 });
