@@ -63,7 +63,7 @@ def good_list(request, category, pindex, sort):
     # tid：product type info  pindex：product page sort：how product display
     typeinfo = TypeInfo.objects.get(ttitle=category)
     # inquiry the current product category base on the primary key
-    news = typeinfo.goodsinfo_set.order_by("-id")[0:2]
+    news = typeinfo.goodsinfo_set.order_by("-id")[0:4]
 
     goods_list = []
 

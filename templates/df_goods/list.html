@@ -1,56 +1,50 @@
 {% extends 'df_goods/base.html' %}
 
 {% block center_content %}
-
 	<div class="main_wrap clearfix">
-		<div class="l_wrap fl clearfix">
-			<div class="new_goods">
-				<h3>New Arrival</h3>
-				<ul>
-                    {% for goods in news %}
-                       {#Two new arrival#}
-                        <li>
-                            <a href="/{{ goods.id }}"><img src="{{ MEDIA_URL }}{{ goods.gpic }}"></a>
-    						<h4><a href="/{{ goods.id }}">{{ goods.gtitle }}</a></h4>
-    						<div class="prize">${{ goods.gprice }}</div>
-                        </li>
-                    {% endfor %}
-				</ul>
-			</div>
-		</div>
-
 		<div class="r_wrap fr clearfix">
 			<div class="sort_bar">
-
+                <a> Sắp xếp theo: </a>
                 <a href="/list{{ typeinfo.id }}_1_1"
                    {% if sort == '1' %}
                     class="active"
                    {% endif %}
-                    >Default</a>
-                <a href="/list{{ typeinfo.id }}_1_2"
-                   {% if sort == '2' %}
-                    class="active"
-                   {% endif %}
-                    >Price</a>
+                    >Mới&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◦</a>
                 <a href="/list{{ typeinfo.id }}_1_3"
-                   {% if sort == '3' %}
-                    class="active"
-                   {% endif %}
-                    >Hot</a>
+                    {% if sort == '3' %}
+                     class="active"
+                    {% endif %}
+                     >Nổi bật&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◦</a>                    
+                <div class="dropdown">
+                    <button id="priceButton" class="dropbtn_price {% if sort == '2' or sort == '4' %}active{% endif %}">
+                        Giá {% if sort == '2' %}↓{% elif sort == '4' %}↑{% else %} {% endif %}
+                    </button>
+                    <div class="dropdown-content-price">
+                        <a href="/list{{ typeinfo.id }}_1_4"
+                            {% if sort == '4' %}
+                            class="active"
+                            {% endif %}
+                            >Giá thấp - cao
+                        </a>
+                        <a href="/list{{ typeinfo.id }}_1_2"
+                            {% if sort == '2' %}
+                            class="active"
+                            {% endif %}
+                            >Giá cao - thấp
+                        </a>
+                    </div>
+                </div>
 			</div>
 
 			<ul class="goods_type_list clearfix">
-
-
                 {%  for g in page %}
                 <li>
-					<a href="/{{ g.id }}/"><img src="{{ MEDIA_URL }}{{ g.gpic }}"></a>
+					<a href="/{{ g.id }}/"><img src="{{ MEDIA_URL }}{{ g.images.all.0.image_path }}" class="img-fluid rounded"></a>
 					<h4><a href="/{{ g.id }}/">{{ g.gtitle }}</a></h4>
 					<div class="operate">
-						<span class="prize">${{ g.gprice }}</span>
+                        <span class="prize" data-price="{{ g.gprice }}">{{ g.gprice }}</span>
 						<span class="unit">{{ g.gunit }}</span>
 						<a href="/cart/add{{ g.id }}_1/" class="add_goods" title="add to cart"></a>
-
 					</div>
 				</li>
                 {% endfor %}
@@ -69,7 +63,6 @@
                         <a href="/list{{ typeinfo.id }}_{{pindex}}_{{ sort }}">{{ pindex }}</a>
                     {% endif %}
                 {% endfor %}
-
 
                 {% if page.has_next %}
 				<a href="/list{{ typeinfo.id }}_{{ page.next_page_number }}_{{ sort }}">Next Page></a>

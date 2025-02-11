@@ -11,12 +11,13 @@
 }
 
 .goods_detail_pic {
-    max-width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    border-radius: 10px; /* Add rounded corners */
+    border-radius: 10px;
+    height: 400px;
+    width: 400px;
 }
 
 .goods_detail_pic img {
@@ -31,10 +32,11 @@
     height: auto;
     border-radius: 10px; /* Optional rounded corners */
     overflow: hidden;
+    touch-action: pan-y;
 }
 
 .swiper-slide img {
-    width: 100%;
+    width: auto;
     height: auto;
     object-fit: cover;
 }
@@ -47,33 +49,44 @@
 .goods_detail_list{
 	width:730px;height:350px;margin:24px 24px 0 0;
 }
-.goods_detail_list h3{font-size:24px;line-height:24px;color:#666;font-weight:normal;}
+
+.goods_detail_list h3{
+    font-size:20px;
+    line-height:24px;
+    color:#666;
+    font-weight:500;
+}
+
 .goods_detail_list p{color:#666;line-height:40px;}
-.prize_bar{height:72px;background-color:#8aa5a721;line-height:72px;}
+
+.prize_bar{
+    height:66px;
+    background-color:#8aa5a721;
+    line-height:66px;
+}
+
 .prize_bar .show_pirze{font-size:20px;color:#ff3e3e;padding-left:20px}
 .prize_bar .show_pirze em{font-style:normal;font-size:36px;padding-left:10px}
-.prize_bar .show_unit{padding-left:150px}
 
 .goods_num {
     height: 52px;
     margin-top: 19px;
 }
 .goods_num .num_name {
-    width: 70px;
-    height: 52px;
-    line-height: 52px;
-    font-weight: bold;
-    margin-right: 10px;
+    width: 90px;
+    height: 32px;
+    line-height: 32px;
+    color: #757575;
 }
 .goods_num .num_add {
-    width: 76px;
-    height: 50px;
+    width: 114px;
+    height: 32px;
     border: 1px solid #dddddd;
     border-radius: 3px;
+    display: flex;
 }
 .goods_num .num_add input {
-    width: 49px;
-    height: 48px;
+    width: 50px;
     text-align: center;
     line-height: 50px;
     border: 0px;
@@ -81,23 +94,40 @@
     font-size: 18px;
     color: #666;
 }
-.goods_num .num_add .add,
-.goods_num .num_add .minus {
-    width: 25px;
-    line-height: 25px;
+.goods_num .num_add .add {
+    width: 32px;
+    line-height: 32px;
     text-align: center;
     border-left: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
     color: #666;
     font-size: 14px;
     text-decoration: none;
 }
+
 .goods_num .num_add .minus {
+    width: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-right: 1px solid #ddd;
+    color: #666;
+    font-size: 14px;
+    text-decoration: none;
     border-bottom: 0px;
     text-decoration: none;
 }
 
-.total{height:35px;line-height:35px;margin-top:25px;}
+.goods_num .show_unit{
+    padding-left:20px;
+    line-height: 32px;
+    color: #757575;
+}
+
+.total{
+    height:35px;
+    line-height:35px;
+    color: #757575;
+}
+
 .total em{font-style:normal;color:#ff3e3e;font-size:18px}
 
 .operate_btn{height:40px;margin-top:35px;font-size:0;position:relative;}
@@ -161,28 +191,31 @@
     max-width: 100%;
     max-height: 100%;
     object-fit: contain; /* Ensures the image scales correctly */
+    touch-action: none;
 }
 
 .swiper-container .swiper-button-next {
     margin: 0 370px;
-    background-color: #494848;
-    color: white;
+    background: rgb(255 255 255 / 90%);
+    color: #b5b5b5;
     width: 30px;
     height: 55px;
     right: auto !important;
     top: 350px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
 .swiper-container .swiper-button-prev:after,  .swiper-container .swiper-button-next:after{
     zoom:0.6
 }
 .swiper-container .swiper-button-prev {
-    background-color: #494848;
-    color: white;
+    background: rgb(255 255 255 / 90%);
+    color: #b5b5b5;
     width: 30px;
     height: 55px;
     left: auto !important;
     top: 370px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
 .swiper-container .swiper-pagination {
@@ -206,4 +239,4 @@
 
 .option a:last-child {
     text-decoration: none;
-}
+};

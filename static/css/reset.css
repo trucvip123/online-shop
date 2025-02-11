@@ -1,5 +1,7 @@
 /* 把标签默认的间距设为0 */
-body,ul,ol,p,h1,h2,h3,h4,h5,h6,dl,dd,select,input,textarea,form{margin:0;padding:0;border-radius: 5px;}
+body,ol,p,h1,h2,h3,h4,h5,h6,dl,dd,select,input,textarea,form{margin:0;padding:0;border-radius:5px;}
+
+ul{margin:0;padding:0;}
 
 /* 让h标签文字大小继承body的文字设置 */
 h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}

@@ -1,7 +1,7 @@
 body{
 	background: url(//cdnv2.tgdd.vn/webmwg/2024/ContentMwg/images/noel/2024/tgdd/bg-dt.png) repeat !important;
 }
-html,body{height:100%}
+html,body{height:1600px}
 
 .header_con{
 	background-color:#f7f7f7;
@@ -334,7 +334,6 @@ html,body{height:100%}
 }
 
 .goods_list li h4 {
-    width: 200px;
     margin: 10px auto;
     text-align: center;
 }
@@ -380,7 +379,9 @@ html,body{height:100%}
 
 /* breadcrumb */
 .breadcrumb{
-	width:1200px;height:40px;margin:0 auto;
+	width:1200px;
+	height:40px;
+	margin:0 auto;
 }
 .breadcrumb a{
 	color: rgb(182, 182, 182);
@@ -403,24 +404,32 @@ html,body{height:100%}
 	border-radius: 10px;
 }
 
+.l_wrap{
+	width: 1202px;
+	background-color: white;
+	border-radius: 10px;
+	margin: 20px 120px;
+}
 
 /* New Product */
-
-.new_goods{
-	border:1px solid #ededed;
-	padding-bottom:10px;
-}
 
 .new_goods h3{
 	height:33px;line-height:33px;background-color:#fcfcfc;border-bottom:1px solid #ededed;font-size:14px;font-weight:normal;text-indent:10px;
 }
 
 .new_goods ul{
-	width:160px;
-	overflow:hidden;
+	display: flex;
+	text-align: center;
 }
-.new_goods li{border-bottom:1px solid #ededed;margin-bottom:-1px;}
-.new_goods li img{display:block;width:150px;height:150px;margin:10px auto;}
+.new_goods li{
+	border:1px solid #ededed;
+	margin:10px;
+	border-radius: 10px;
+}
+.new_goods li img{
+	display:block;
+	margin:10px auto;
+}
 .new_goods li h4{width:160px;margin:0 auto;}
 .new_goods li h4 a{
 	font-weight:normal;
@@ -446,7 +455,13 @@ html,body{height:100%}
 	padding-left:20px;
 	text-decoration: none;
 	color: #787878;
+	font-size: 16px;
 }
+
+.sort_bar a:hover{
+	text-decoration: none	;
+}
+
 .sort_bar .active{color:#53acff;}
 
 .dropbtn_price {
@@ -507,7 +522,10 @@ html,body{height:100%}
 	margin-bottom:10px
 }
 
-.goods_type_list li img{width:160px;height:160px;display:block;margin:10px auto;}
+.goods_type_list li img{
+	display:block;
+	margin:10px auto;
+}
 .goods_type_list li h4{width:160px;margin:0 auto;}
 .goods_type_list li h4 a{
 	font-weight:normal;
