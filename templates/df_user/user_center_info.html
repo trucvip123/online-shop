@@ -29,27 +29,28 @@
                 {% csrf_token %}
 
                 <ul class="user_info_list">
-                    <li><span>username：</span>{{ user_name }}</li>
+                    <li><span>Tên đăng nhập</span>{{ user_name }}</li>
 
-                    <li><span>full name:</span>
+                    <li><span>Tên đầy đủ</span>
                         <input type="text" name="fullname" class="contact" value="{{ user_full_name}}" id="email">
                     </li>
 
-                    <li><span>email:</span>
+                    <li><span>Email</span>
                         <input type="text" name="email" class="nam" value="{{user_email}}" id="email">
                     </li>
 
-                    <li><span>phone:</span>
+                    <li><span>Số điện thoại</span>
                         <input type="text" name="phone" class="contact" value="{{user_phone}}" id="email">
                     </li>
 
-
                     <li class="reg_sub">
-                        <input type="submit" value="Save changes">
+                        <input type="submit" value="Lưu">
                     </li>
-
+                </ul>
         </div>
+
         <h3 class="common_title2">View History</h3>
+
         <div class="has_view_list">
             <ul class="goods_type_list clearfix">
                 {% for good in goods_list %}
@@ -58,13 +59,12 @@
                         {% if good.images.all %}
                         <img src="{{ MEDIA_URL }}{{ good.images.all.0.image_path }}">
                         {% else %}
-                        <img src="{{ MEDIA_URL }}default_image.jpg" alt="Default Img">
+						<img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=" alt="Default Img">
                         {% endif %}  
                     </a>
                     <h4><a href="/{{ good.id }}/">{{ good.gtitle }}</a></h4>
                     <div class="operate">
-                        <span class="prize">${{ good.gprice }}</span>
-                        <span class="unit">{{ good.gprice }}/{{ good.gunit }}</span>
+                        <span class="prize" data-price="{{ good.gprice }}">${{ good.gprice }}</span>
                         <a href="/cart/add{{ good.id }}_1/" class="add_goods" title="add to cart"></a>
                     </div>
                 </li>

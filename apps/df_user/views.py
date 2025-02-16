@@ -160,7 +160,7 @@ def info(request):  # user center
         "user_phone": user.uphone,
         "user_name": username,
         "user_address": user.uaddress,
-        "goods_list": goods_list,
+        "goods_list": goods_list[:3],
         "explain": explain,
     }
     return render(request, "df_user/user_center_info.html", context)
@@ -471,19 +471,22 @@ def edit_product_handle(request):
 
 
 def get_product_details_by_id(request):
+    image_urls = []
     product_id = request.GET.get("product_id")
-    print("product_id:", product_id)
+
     try:
         product = GoodsInfo.objects.get(pk=int(product_id))
+        imgs = ProductImage.objects.filter(product=product)
+        if imgs.exists():
+            image_urls = ["/media/" + str(img.image_path) for img in imgs]
         data = {
             "product_name": product.gtitle,
             "product_type": product.gtype.ttitle,
             "price": str(product.gprice),
             "description": product.gcontent,
             "stock": product.gkucun,
-            "image_url": product.gpic.url if product.gpic else "",
+            "image_urls": image_urls,
         }
-        print("data:", data)
     except GoodsInfo.DoesNotExist:
         data = {"error": "Product not found"}
 

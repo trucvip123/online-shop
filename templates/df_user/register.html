@@ -176,17 +176,17 @@
                     {% csrf_token %}
 				<ul>
 					<li>
-						<label>Username:</label>
+						<label>Tên đăng nhập:</label>
 						<input type="text" name="user_name" id="user_name">
 						<span class="error_tip"></span>
 					</li>
 					<li>
-						<label>Password:</label>
+						<label>Mật khẩu:</label>
 						<input type="password" name="pwd" id="pwd">
 						<span class="error_tip"></span>
 					</li>
 					<li>
-						<label>Re-type Password:</label>
+						<label>Nhập lại mật khẩu:</label>
 						<input type="password" name="confirm_pwd" id="cpwd">
 						<span class="error_tip"></span>
 					</li>
@@ -196,17 +196,17 @@
 						<span class="error_tip"></span>
 					</li>
 					<li>
-						<label>Full Name</label>
+						<label>Tên đầy đủ</label>
 						<input type="text" name="fname" id="fname">
 						<span class="error_tip"></span>
 					</li>
 					<li>
-						<label>Phone Number:</label>
+						<label>Số điện thoại:</label>
 						<input type="text" name="pnum" id="pnum">
 						<span class="error_tip"></span>
 					</li>
 					<li class = 'suqetions'>
-						<label>Security Qestions</label>
+						<label>Câu hỏi bảo mật</label>
 						<select name ="squestion" style = "text-align: center;text-align-last: center;width: 290px;" >
 							<option name='squestion' value = "What is your pet name?",> What is your pet name?</option>
 							<option name='squestion' value = "Where was your birthplace?"> Where was your birthplace?</option>
@@ -215,8 +215,6 @@
 						<input type="text" name="sanswer" id="sanswer">
 
 					</li>
-
-
 
 					<li class="agreement">
 						<input type="checkbox" name="allow" id="allow" checked="checked">
