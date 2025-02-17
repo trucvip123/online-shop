@@ -160,7 +160,7 @@ def info(request):  # user center
         "user_phone": user.uphone,
         "user_name": username,
         "user_address": user.uaddress,
-        "goods_list": goods_list[:3],
+        "goods_list": goods_list,
         "explain": explain,
     }
     return render(request, "df_user/user_center_info.html", context)

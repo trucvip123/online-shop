@@ -3,89 +3,69 @@
 {% block center_body %}
 <script type="text/javascript">
     {% if success %}
-        alert("Product saved successfully!");
-        window.location.href = "{% url 'df_user:add_product' %}";
+    alert("Product saved successfully!");
+    window.location.href = '{% url "df_user:add_product" %}';
     {% endif %}
     {% if error %}
-        alert("{{ error }}");
+    alert("{{ error }}");
     {% endif %}
-
-    function addNewType() {
-        var newType = document.querySelector('input[name="new_product_type"]').value;
-        var form = document.createElement('form');
-        form.method = 'POST';
-        form.action = "{% url 'df_user:add_new_type' %}";
-        var csrfToken = document.createElement('input');
-        csrfToken.type = 'hidden';
-        csrfToken.name = 'csrfmiddlewaretoken';
-        csrfToken.value = '{{ csrf_token }}';
-        form.appendChild(csrfToken);
-        var input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'new_product_type';
-        input.value = newType;
-        form.appendChild(input);
-        document.body.appendChild(form);
-        form.submit();
-    }
 </script>
 
 <div class="main_con clearfix">
     <div class="left_menu_con clearfix">
         <h3>User Center</h3>
         <ul>
-            <li><a href="{% url "df_user:info" %}">· Personal Information</a></li>
+            <li><a href='{% url "df_user:info" %}'>· Personal Information</a></li>
             <li><a href="/user/order/1">· Order History</a></li>
-            <li><a href="{% url "df_user:site" %}">· Change the Password</a></li>
-            <li><a href="{% url "df_user:add_product" %}" class="active">· Add Products</a></li>
-            <li><a href="{% url "df_user:edit_product" %}">· Edit Products</a></li>
-            <li><a href="{% url "df_user:manage_type" %}">· Manage Category</a></li>
+            <li><a href='{% url "df_user:site" %}'>· Change the Password</a></li>
+            <li><a href='{% url "df_user:add_product" %}' class="active">· Add Products</a></li>
+            <li><a href='{% url "df_user:edit_product" %}'>· Edit Products</a></li>
+            <li><a href='{% url "df_user:manage_type" %}'>· Manage Category</a></li>
         </ul>
     </div>
     <div class="right_content clearfix">
         <h3 class="common_title2">Add Product</h3>
-		<div class="site_con">
-            <form action="{% url "df_user:add_product_handle" %}" method="post" enctype="multipart/form-data">
+        <div class="site_con">
+            <form action=' {% url "df_user:add_product_handle" %}' method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                
+
                 <div class="form_group">
                     <label>Product Name:</label>
                     <input type="text" name="product_name" value="{{ product.product_name|default:'' }}" required>
                 </div>
-                
+
                 <div class="form_group">
                     <label for="product_type">Product Type:</label>
                     <select class="product_type" id="product_type" name="product_type">
-                      {% for type in types %}
-                          <option value="{{ type.id }}" {% if product and type.id == product.gtype.id %}selected{% endif %}>{{ type.ttitle }}</option>
-                      {% endfor %}
+                        {% for type in types %}
+                            <option value="{{ type.id }}" {% if product and product.gtype.id == type.id %}selected{% endif %}>
+                                {{ type.ttitle }}
+                            </option>
+                        {% endfor %}
                     </select>
-
-                    <label for="new_product_type"> New Type:</label>
-                    <input class="input_new_type" type="text" name="new_product_type" placeholder="Enter new product type">
-                    <button class="button_new_type" type="button" onclick="addNewType()">Add Type</button>
                 </div>
 
                 <div class="form_group">
                     <label>Price:</label>
                     <input type="number" name="price" step="0.01" value="{{ product.price|default:'' }}" required>
                 </div>
-                
+
                 <div class="form_group">
                     <label>Description:</label>
-                    <textarea class="description" name="description" required>{{ product.description|default:'' }}</textarea>
+                    <textarea class="description" name="description"
+                        required>{{ product.description|default:'' }}</textarea>
                 </div>
-                
+
                 <div class="form_group">
                     <label>Stock Quantity:</label>
                     <input type="number" name="stock" value="{{ product.stock|default:'' }}" required>
                 </div>
-                
+
                 <div class="form_group">
                     <label>Product Image:</label>
                     <input type="file" name="image" multiple>
                 </div>
-                
+
                 <input type="submit" value="Save Product" class="info_submit">
             </form>
         </div>

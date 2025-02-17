@@ -1,12 +1,13 @@
 .description {
-	width: 300px;
+	width: 500px;
 	height: 40px;
 	margin-top: 5px;
 }
 
 .product_type {
 	float:left;
-	margin-top: 10px 
+	margin-top: 10px;
+    height: 35px;
 }
 
 .input_new_type {

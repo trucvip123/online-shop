@@ -7,12 +7,12 @@
 	<div class="left_menu_con clearfix">
 		<h3>User Center</h3>
 		<ul>
-			<li><a href="{% url "df_user:info" %}">· Personal Information</a></li>
-			<li><a href="{% url "df_user:order" 1 %}" class="active">· Order History</a></li>
-			<li><a href="{% url "df_user:site" %}">· Change the Password</a></li>
-            <li><a href="{% url "df_user:add_product" %}">· Add Products</a></li> <!-- New button -->
-            <li><a href="{% url "df_user:edit_product" %}">· Edit Products</a></li>
-			<li><a href="{% url "df_user:manage_type" %}">· Manage Category</a></li>
+			<li><a href='{% url "df_user:info" %}'>· Personal Information</a></li>
+			<li><a href='{% url "df_user:order" 1 %}' class="active">· Order History</a></li>
+			<li><a href='{% url "df_user:site" %}'>· Change the Password</a></li>
+			<li><a href='{% url "df_user:add_product" %}'>· Add Products</a></li> <!-- New button -->
+			<li><a href='{% url "df_user:edit_product" %}'>· Edit Products</a></li>
+			<li><a href='{% url "df_user:manage_type" %}'>· Manage Category</a></li>
 
 		</ul>
 	</div>
@@ -31,14 +31,18 @@
 					<td width="55%">
 						{% for order_detail in orderinfo.orderdetailinfo_set.all %}
 						<ul class="order_goods_list clearfix">
-							<li class="col01"><img src="{{ MEDIA_URL }}{{ order_detail.goods.gpic }}"></li>
-                                    <li class="col02">{{ order_detail.goods.gtitle }}<em class="good_price">{{ order_detail.goods.gprice }}</em>$ /<em>{{ order_detail.goods.gunit }}</em></li>
-							<li class="col03">{{ order_detail.count }} order</li>
-							<li class="col04">$ {{ order_detail.goods.gprice }}</li>
+							<li class="col01">
+								<img src="{{ MEDIA_URL }}{{ order_detail.goods.gpic }}"
+									alt="{{ order_detail.goods.gtitle }}"
+									onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
+							</li>
+							<li class="col02">{{ order_detail.goods.gtitle }}</li>
+							<li class="col03">{{ order_detail.count }}</li>
+							<li class="col04">{{ order_detail.goods.gprice }}₫</li>
 						</ul>
 						{% endfor %}
 					</td>
-					<td width="15%">$ {{ orderinfo.ototal }}</td>
+					<td width="15%">{{ orderinfo.ototal }}₫</td>
 					<td width="15%">PAID</td>
 					<td width="15%"><a href="#" class="oper_btn">Track Package</a></td>
 				</tr>
@@ -49,19 +53,19 @@
 
 		<div class="pagenation">
 			{% if page.has_previous %}
-			<a href="{% url "df_user:order" page.previous_page_number %}">上一页</a>
+			<a href='{% url "df_user:order" page.previous_page_number %}'>上一页</a>
 			{% endif %}
 
 			{% for index in paginator.page_range %}
 			{% if index == page.number %}
-			<a href="{% url "df_user:order" index %}" class="active">{{ index }}</a>
+			<a href=' {% url "df_user:order" index %}' class="active">{{ index }}</a>
 			{% else %}
-			<a href="{% url "df_user:order" index %}">{{ index }}</a>
+			<a href='{% url "df_user:order" index %}'>{{ index }}</a>
 			{% endif %}
 			{% endfor %}
 
 			{% if page.has_next %}
-			<a href="{% url "df_user:order" page.next_page_number %}">Next Page></a>
+			<a href=' {% url "df_user:order" page.next_page_number %}'>Next Page></a>
 			{% endif %}
 		</div>
 	</div>

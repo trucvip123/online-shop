@@ -14,21 +14,21 @@
 
 {% block center_body %}
     <script type="text/javascript">
-        if({{ search_status }}==0){
+        if ({{ search_status }}== 0) {
             alert("Your query result is empty, recommend the following products for you");
         }
     </script>
-	<div class="breadcrumb">
-		All Category
-{#        {{ title }}#}
-{#		{% if id|default:' ' != ' ' %}#}
+    <div class="breadcrumb">
+        All Category
+        {# {{ title }}#}
+        {# {% if id|default:' ' != ' ' %}#}
         > Product Details
-{#		{% endif %}#}
-	</div>
+        {# {% endif %}#}
+    </div>
 
     <div class="main_wrap clearfix">
         <ul class="goods_type_list clearfix">
-            {%  for item in page %}
+            {% for item in page %}
             <li>
                 <a href="/{{ item.id }}/"><img src="{{ MEDIA_URL }}{{ item.gpic }}"></a>
                 <h4><a href="/{{ item.id }}/">{{ item.gtitle }}</a></h4>
@@ -36,7 +36,6 @@
                     <span class="prize">${{ item.gprice }}</span>
                     <span class="unit">{{ item.gunit }}</span>
                     <a href="/cart/add{{ item.id }}_1/" class="add_goods" title="加入购物车"></a>
-
                 </div>
             </li>
             {% endfor %}

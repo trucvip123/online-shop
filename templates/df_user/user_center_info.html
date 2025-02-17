@@ -14,18 +14,18 @@
     <div class="left_menu_con clearfix">
         <h3>User Center</h3>
         <ul>
-            <li><a href="{% url "df_user:info" %}" class="active">· Personal Information</a></li>
-            <li><a href="/user/order/1">· Order History</a></li>
-            <li><a href="{% url "df_user:site" %}">· Change the Password</a></li>
-            <li><a href="{% url "df_user:add_product" %}">· Add Products</a></li> <!-- New button -->
-            <li><a href="{% url "df_user:edit_product" %}">· Edit Products</a></li>
-            <li><a href="{% url "df_user:manage_type" %}">· Manage Category</a></li>
+            <li><a href='{% url "df_user:info" %}' class="active">· Personal Information</a></li>
+            <li><a href='/user/order/1'>· Order History</a></li>
+            <li><a href='{% url "df_user:site" %}'>· Change the Password</a></li>
+            <li><a href='{% url "df_user:add_product" %}'>· Add Products</a></li> <!-- New button -->
+            <li><a href='{% url "df_user:edit_product" %}'>· Edit Products</a></li>
+            <li><a href='{% url "df_user:manage_type" %}'>· Manage Category</a></li>
         </ul>
     </div>
     <div class="right_content clearfix">
         <div class="info_con clearfix">
             <h3 class="common_title2">Basic Information</h3>
-            <form action="{% url "df_user:info_reset" %}" id='reg_form' method="post">
+            <form action='{% url "df_user:info_reset" %}' id='reg_form' method="post">
                 {% csrf_token %}
 
                 <ul class="user_info_list">
@@ -59,8 +59,9 @@
                         {% if good.images.all %}
                         <img src="{{ MEDIA_URL }}{{ good.images.all.0.image_path }}">
                         {% else %}
-						<img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=" alt="Default Img">
-                        {% endif %}  
+                        <img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
+                            alt="Default Img">
+                        {% endif %}
                     </a>
                     <h4><a href="/{{ good.id }}/">{{ good.gtitle }}</a></h4>
                     <div class="operate">

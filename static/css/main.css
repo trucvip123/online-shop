@@ -515,6 +515,9 @@ html,body{height:1600px}
 	display: flex;
 	border:1px solid #e1e1e1;
 	padding-left: 5px;
+	height: 450px;
+	flex-direction: row;
+	flex-wrap: wrap;
 }
 
 .goods_type_list li{
@@ -524,8 +527,14 @@ html,body{height:1600px}
 .goods_type_list li img{
 	display:block;
 	margin:10px auto;
+	height: 100px;
 }
-.goods_type_list li h4{width:160px;margin:0 auto;}
+
+.goods_type_list li h4{
+	width:160px;
+	margin:0 auto;
+}
+
 .goods_type_list li h4 a{
 	font-weight:normal;
 	color:#454545;
@@ -535,6 +544,7 @@ html,body{height:1600px}
 	white-space:nowrap;
 	text-overflow:ellipsis;
 	text-decoration: none;
+	text-align: center;
 }
 
 .operate{
@@ -914,7 +924,7 @@ html,body{height:1600px}
 }
 
 .site_con .form_group label{
-	width:110px;
+	width:130px;
 	float:left;
 	text-align:left;
 	font-size:14px;
@@ -935,7 +945,7 @@ html,body{height:1600px}
 }
 
 .site_con .form_group .input_type_edit{
-	width:150px;
+	width:250px;
 	border:1px solid #ddd;
 	float:left;
 	outline:none;
@@ -960,17 +970,12 @@ html,body{height:1600px}
 	background-color: white;
 	border-radius: 8px;
 	margin: 18px;
+	overflow-x: auto;
 }
 
-/* #image_preview_container button {
-	background-color: #007bff;
-	color: white;
-	border: none;
-	padding: 10px;
-	border-radius: 5px;
-	cursor: pointer;
-	margin-bottom: 10px;
-} */
+#new_image {
+	display: none;
+}
 
 .image-wrapper {
 	position: relative;
@@ -995,20 +1000,19 @@ html,body{height:1600px}
 	height: 30px;
 }
 
-#insert {
-	color:#007bff;
-	border-radius: 8px;
-	width: 60px;
-	height: 40px;
-	font-family: 'Times New Roman';
-}
-
-#remove {
-	color:#ff0000;
-	border-radius: 8px;
-	width: 60px;
-	height: 40px;
-	font-family: 'Times New Roman';
+.image-wrapper .custom-file-button {
+	display: inline-block;
+	padding: 6px 12px;
+	cursor: pointer;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	background-image: url(https://static.xx.fbcdn.net/rsrc.php/v4/y_/r/eRj6c2mLzht.png);
+    background-position: -87px -181px;
+    background-size: auto;
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
 }
 
 .site_area{

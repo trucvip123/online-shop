@@ -6,10 +6,10 @@
 		var r = confirm("change successfully! if choose 'yes', you will go to the login page or " +
 			"stay at the main page without signing in");
 		if (r === true) {
-			window.location.href = "{% url 'df_user:login' %}";
+			window.location.href = '{% url "df_user:login" %}';
 		} else {
 
-			window.location.href = "{% url 'df_user:logout' %}";
+			window.location.href = '{% url "df_user:logout" %}';
 		}
 	}
 
@@ -19,25 +19,25 @@
 	<div class="left_menu_con clearfix">
 		<h3>User Center</h3>
 		<ul>
-			<li><a href="{% url "df_user:info" %}">· Personal Information</a></li>
-			<li><a href="{% url "df_user:order" 1 %}">· Order History</a></li>
-			<li><a href="{% url "df_user:site" %}" class="active">· Change the Password</a></li>
-            <li><a href="{% url "df_user:add_product" %}">· Add Products</a></li> <!-- New button -->
-            <li><a href="{% url "df_user:edit_product" %}">· Edit Products</a></li>
-			<li><a href="{% url "df_user:manage_type" %}">· Manage Category</a></li>
+			<li><a href='{% url "df_user:info" %}'>· Personal Information</a></li>
+			<li><a href='{% url "df_user:order" 1 %}'>· Order History</a></li>
+			<li><a href='{% url "df_user:site" %}' class="active">· Change the Password</a></li>
+			<li><a href='{% url "df_user:add_product" %}'>· Add Products</a></li> <!-- New button -->
+			<li><a href='{% url "df_user:edit_product" %}'>· Edit Products</a></li>
+			<li><a href='{% url "df_user:manage_type" %}'>· Manage Category</a></li>
 		</ul>
 	</div>
 	<div class="right_content clearfix">
 		<h3 class="common_title2">Change the Password</h3>
 		<div class="site_con">
-			<form action="{% url "df_user:site_handle" %}" method="post">
+			<form action='{% url "df_user:site_handle" %}' method="post">
 				{% csrf_token %}
 				<div class="form_group">
-					<label>new password:</label>
+					<label>New password</label>
 					<input type="password" name="pwd">
 				</div>
 				<div class="form_group">
-					<label>confirm password:</label>
+					<label>Confirm password</label>
 					<input type="password" name="confirm_pwd">
 				</div>
 				<input type="submit" name="password_reset" value="reset the password" class="info_submit">
