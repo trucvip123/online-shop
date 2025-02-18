@@ -57,7 +57,8 @@
                 <li>
                     <a href="/{{ good.id }}/">
                         {% if good.images.all %}
-                        <img src="{{ MEDIA_URL }}{{ good.images.all.0.image_path }}">
+                        <img src="{{ MEDIA_URL }}{{ good.images.all.0.image_path }}"
+                            onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
                         {% else %}
                         <img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
                             alt="Default Img">

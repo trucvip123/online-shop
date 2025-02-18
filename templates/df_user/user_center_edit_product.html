@@ -53,26 +53,8 @@
                                 wrapper.appendChild(button);
                                 imagePreviewContainer.appendChild(wrapper);
                             });
+                            addNewImageInput();
 
-                            var fileInputWrapper = document.createElement('div');
-                            fileInputWrapper.className = 'image-wrapper';
-                            var fileInput = document.createElement('input');
-                            fileInput.type = 'file';
-                            fileInput.id = 'new_image';
-                            fileInput.name = 'new_image';
-                            fileInput.multiple = true;
-                            fileInput.onchange = insertImages;
-                            // Create custom button
-                            var customButton = document.createElement('button');
-                            customButton.type = 'button';
-                            customButton.className = 'custom-file-button';
-                            customButton.onclick = function () {
-                                fileInput.click(); // Trigger the file input click event
-                            };
-
-                            fileInputWrapper.appendChild(fileInput);
-                            fileInputWrapper.appendChild(customButton);
-                            imagePreviewContainer.appendChild(fileInputWrapper);
                         } else {
                             imagePreviewContainer.innerHTML = 'No images available';
                         }
@@ -83,6 +65,29 @@
             };
             xhr.send();
         }
+    }
+
+    function addNewImageInput() {
+        var imagePreviewContainer = document.getElementById('image_preview_container');
+        var fileInputWrapper = document.createElement('div');
+        fileInputWrapper.className = 'image-wrapper';
+        var fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.id = 'new_image';
+        fileInput.name = 'new_image';
+        fileInput.multiple = true;
+        fileInput.onchange = insertImages;
+        // Create custom button
+        var customButton = document.createElement('button');
+        customButton.type = 'button';
+        customButton.className = 'custom-file-button';
+        customButton.onclick = function () {
+            fileInput.click(); // Trigger the file input click event
+        };
+
+        fileInputWrapper.appendChild(fileInput);
+        fileInputWrapper.appendChild(customButton);
+        imagePreviewContainer.appendChild(fileInputWrapper);
     }
 
     function insertImages() {
@@ -146,23 +151,24 @@
 
                 <div class="form_group">
                     <label>Product Type:</label>
-                    <input type=text id=product_type name=product_type value={{ product.gtype.ttitle|default:'' }}>
+                    <input type="text" id="product_type" name="product_type" value={{ product.gtype.ttitle|default:''
+                        }}>
                 </div>
 
                 <div class="form_group">
                     <label>Price:</label>
-                    <input type=number id=price name=price step=0.01 value={{ product.gprice|default:'' }}>
+                    <input type="number" id="price" name="price" step="0.01" value={{ product.gprice|default:'' }}>
                 </div>
 
                 <div class="form_group">
                     <label>Description:</label>
-                    <input type="text" id="description" name="description" value="{{ product.gcontent|default:'' }}"
-                        required readonly>
+                    <input type="text" id="description" name="description" value="{{ product.gcontent|default:''}}"
+                        required>
                 </div>
 
                 <div class="form_group">
                     <label>Stock Quantity:</label>
-                    <input type=number id=stock name=stock value={{ product.gkucun|default:'' }}>
+                    <input type="number" id="stock" name="stock" value={{ product.gkucun|default:'' }}>
                 </div>
 
                 <div class="form_group" id="product_images">
@@ -170,20 +176,8 @@
                     <div id="image_preview_container"></div>
                 </div>
 
-                <input type="submit" value="Save Product" class="info_submit">
+                <input type="submit" value="Submit" class="info_submit">
             </form>
-
-            <!-- JavaScript function to update form action -->
-            <script type="text/javascript">
-                function updateFormAction() {
-                    var productId = document.getElementById('product_id').value;
-                    var form = document.getElementById('editProductForm');
-                    if (productId) {
-                        // Update form action with product_id parameter
-                        form.action = '{% url "df_user:edit_product_handle" %}?product_id=' + productId;
-                    }
-                }
-            </script>
         </div>
     </div>
 </div>

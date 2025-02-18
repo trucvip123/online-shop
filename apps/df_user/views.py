@@ -1,4 +1,4 @@
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 from hashlib import sha1
 
 from df_cart.models import CartInfo
@@ -14,7 +14,6 @@ from django.shortcuts import (
     render,
     reverse,
 )
-from django.core.files.storage import FileSystemStorage
 
 from . import user_decorator
 from .models import GoodsBrowser, UserInfo
@@ -271,7 +270,7 @@ def find_password(request):
         request.session["user_id"] = users[0].id
         request.session["user_name"] = uname
         context = {
-            "title": "reset the password",
+            "title": "Reset the password",
             "username": users[0].uname,
             # 'security_question':users[0].usecurity_question,
             "security_question": users[0].uquestion,
@@ -389,8 +388,6 @@ def add_product_handle(request):
         print("images:", images)
 
         for i, image in enumerate(images):
-            fs = FileSystemStorage()
-            print(image.name, image)
             ProductImage.objects.create(product=product, image_path=images[i])
 
         goods = GoodsInfo.objects.get(gtitle=name)
@@ -415,59 +412,63 @@ def cart_count(request):
 
 # @user_passes_test(admin_required)
 def edit_product_handle(request):
-    product_id = request.GET.get("product_id")
+    print("request:", request)
+
+    if request.method != "POST":
+        return HttpResponse("Invalid request method", status=405)
+
+    # Extract and validate inputs
+    product_id = request.POST.get("product_id", "").strip()
+    name = request.POST.get("product_name", "").strip()
+    price = request.POST.get("price", "").strip()
+    description = request.POST.get("description", "").strip()
+    category = request.POST.get("product_type", "").strip()
+    stock = request.POST.get("stock", "").strip()
+
+    if not product_id.isdigit():
+        return HttpResponse("Invalid product ID", status=400)
+
     print("product_id:", product_id)
+    print("stock:", stock)
 
+    product_id = int(product_id)
     # Check if editing an existing product
-    if product_id:
-        product = get_object_or_404(GoodsInfo, id=product_id)
-    else:
-        product = None
+    product = get_object_or_404(GoodsInfo, id=product_id) if product_id else None
 
-    if request.method == "POST":
-        # Get product data from the form
-        name = request.POST.get("product_name")
-        price = request.POST.get("price")
-        description = request.POST.get("description")
-        category = request.POST.get("product_type")  # Get selected type ID from form
-        # image_path = request.FILES.get("image", None)
+    if not product:
+        return HttpResponse("Product not found", status=404)
 
+    try:
         price_decimal = Decimal(price)
+    except (InvalidOperation, TypeError):
+        return HttpResponse("Invalid price format", status=400)
 
-        if product:
-            # Update existing product
-            product.gtitle = name
-            product.gprice = price_decimal
-            product.gcontent = description
-            # product.gpic = image_path
-            product.save()
+    # Update existing product
+    product.gtitle = name
+    product.gprice = price_decimal
+    product.gcontent = description
+    product.gkucun = stock
+    product.save()
 
-            # Handle multiple images
-            images = request.FILES.getlist("image")
-            for i, image in enumerate(images):
-                fs = FileSystemStorage()
-                # fs.save(image.name, image)
-                ProductImage.objects.create(product=product, image_path=images[i])
+    # Handle multiple images
+    images = request.FILES.getlist("new_image")
+    print("request.FILES:", request.FILES)
+    print("images:", images)
+    for image in images:
+        ProductImage.objects.create(product=product, image_path=image)
 
-            goods = GoodsInfo.objects.get(pk=int(product_id))
-            news = goods.gtype.goodsinfo_set.order_by("-id")[0:2]
-
-            context = {
-                "title": goods.gtype.ttitle,
-                "guest_cart": 1,
-                "cart_num": cart_count(request),
-                "goods": goods,
-                "news": news,
-                "id": product_id,
-            }
-            return render(request, "df_goods/detail.html", context)
+    # goods = GoodsInfo.objects.get(pk=int(product_id))
+    news = product.gtype.goodsinfo_set.order_by("-id")[0:2]
 
     context = {
-        "title": "Add Product",
-        "product": product,  # Pass product data if editing
-        "types": TypeInfo.objects.all(),
+        "title": product.gtype.ttitle,
+        "guest_cart": 1,
+        "cart_num": cart_count(request),
+        "goods": product,
+        "news": news,
+        "id": product_id,
     }
-    return render(request, "df_user/user_center_edit_product.html", context)
+    return render(request, "df_goods/detail.html", context)
 
 
 def get_product_details_by_id(request):
