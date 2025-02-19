@@ -1,124 +1,18 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block center_body %}
+
 <script type="text/javascript">
-    {% if success %}
-    alert("Product saved successfully!");
-    window.location.href = '{% url 'df_user:edit_product' %}';
-    {% endif %}
-    {% if error %}
-    alert("{{ error }}");
-    {% endif %}
-
-    function fetchProductDetails() {
-        var productId = document.getElementById('product_id').value;
-        if (productId) {
-            var xhr = new XMLHttpRequest();
-            var form = document.getElementById('editProductForm');
-            if (productId) {
-                // Update form action with product_id parameter
-                form.action = '{% url "df_user:edit_product_handle" %}?product_id=' + productId;
-            }
-            xhr.open('GET', '{% url "df_user:get_product_details_by_id" %}?product_id=' + encodeURIComponent(productId), true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    if (!response.error) {
-                        document.getElementById('product_name').value = response.product_name;
-                        document.getElementById('product_type').value = response.product_type;
-                        document.getElementById('price').value = response.price;
-                        document.getElementById('description').value = response.description;
-                        document.getElementById('stock').value = response.stock;
-
-                        // Show image previews if available
-                        var imagePreviewContainer = document.getElementById('image_preview_container');
-                        imagePreviewContainer.innerHTML = ''; // Clear previous images
-
-                        if (response.image_urls && response.image_urls.length > 0) {
-                            var container = document.getElementById('image_preview_container');
-                            response.image_urls.forEach(function (imageUrl) {
-                                var wrapper = document.createElement('div');
-                                wrapper.className = 'image-wrapper';
-
-                                var img = document.createElement('img');
-                                img.src = imageUrl;
-
-                                var button = document.createElement('button');
-                                button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6zm2 3h14v13H5V9zm3 2v9h2v-9H8zm4 0v9h2v-9h-2zm4 0v9h2v-9h-2z"/></svg>';
-                                button.onclick = function () {
-                                    wrapper.remove();
-                                };
-
-                                wrapper.appendChild(img);
-                                wrapper.appendChild(button);
-                                imagePreviewContainer.appendChild(wrapper);
-                            });
-                            addNewImageInput();
-
-                        } else {
-                            imagePreviewContainer.innerHTML = 'No images available';
-                        }
-                    } else {
-                        alert(response.error);
-                    }
-                }
-            };
-            xhr.send();
-        }
-    }
-
-    function addNewImageInput() {
-        var imagePreviewContainer = document.getElementById('image_preview_container');
-        var fileInputWrapper = document.createElement('div');
-        fileInputWrapper.className = 'image-wrapper';
-        var fileInput = document.createElement('input');
-        fileInput.type = 'file';
-        fileInput.id = 'new_image';
-        fileInput.name = 'new_image';
-        fileInput.multiple = true;
-        fileInput.onchange = insertImages;
-        // Create custom button
-        var customButton = document.createElement('button');
-        customButton.type = 'button';
-        customButton.className = 'custom-file-button';
-        customButton.onclick = function () {
-            fileInput.click(); // Trigger the file input click event
-        };
-
-        fileInputWrapper.appendChild(fileInput);
-        fileInputWrapper.appendChild(customButton);
-        imagePreviewContainer.appendChild(fileInputWrapper);
-    }
-
-    function insertImages() {
-        var fileInput = document.getElementById('new_image');
-        var files = fileInput.files;
-        if (files.length > 0) {
-            Array.from(files).forEach(function (file) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    var imageUrl = e.target.result;
-                    var imagePreviewContainer = document.getElementById('image_preview_container');
-                    var wrapper = document.createElement('div');
-                    wrapper.className = 'image-wrapper';
-                    var img = document.createElement('img');
-                    img.src = imageUrl;
-                    var button = document.createElement('button');
-                    button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6zm2 3h14v13H5V9zm3 2v9h2v-9H8zm4 0v9h2v-9h-2zm4 0v9h2v-9h-2z"/></svg>';
-                    button.onclick = function () {
-                        wrapper.remove();
-                    };
-                    wrapper.appendChild(img);
-                    wrapper.appendChild(button);
-                    imagePreviewContainer.insertBefore(wrapper, fileInput.parentNode);
-                };
-                reader.readAsDataURL(file);
-            });
-            // Clear the file input after processing
-            fileInput.value = '';
-        };
-    };
+    var success = {% if success %}true{% else %} false{% endif %};
+    var error = {% if error %}"{{ error }}"{% else %} null{% endif %};
+    var successRedirectUrl = '{% url "df_user:edit_product" %}';
+    var editProductHandleUrl = '{% url "df_user:edit_product_handle" %}';
+    var getProductDetailsUrl = '{% url "df_user:get_product_details_by_id" %}';
 </script>
+<script src="{% static 'js/edit_product.js' %}"></script>
+
 
 <div class="main_con clearfix">
     <div class="left_menu_con clearfix">
@@ -138,7 +32,6 @@
             <form id="editProductForm" action='{% url "df_user:edit_product_handle" %}' method="post"
                 enctype="multipart/form-data">
                 {% csrf_token %}
-
                 <div class="form_group">
                     <label>Product ID:</label>
                     <input type="number" id="product_id" name="product_id" required onblur="fetchProductDetails()">
@@ -151,24 +44,25 @@
 
                 <div class="form_group">
                     <label>Product Type:</label>
-                    <input type="text" id="product_type" name="product_type" value={{ product.gtype.ttitle|default:''
-                        }}>
+                    <input type="text" id="product_type" name="product_type"
+                        value="{{ product.gtype.ttitle|default:''}}">
                 </div>
 
                 <div class="form_group">
                     <label>Price:</label>
-                    <input type="number" id="price" name="price" step="0.01" value={{ product.gprice|default:'' }}>
+                    <input type="number" id="price" name="price" step="0.01" value="{{ product.gprice|default:'' }}">
                 </div>
 
-                <div class="form_group">
+                <div class="form_group" id="product_description">
                     <label>Description:</label>
-                    <input type="text" id="description" name="description" value="{{ product.gcontent|default:''}}"
-                        required>
+                    <textarea id="description" name="description" rows="4" required>
+                        {{ product.gcontent|default:'' }}
+                    </textarea required>
                 </div>
 
-                <div class="form_group">
+                <div class="form_group" id="product_stock">
                     <label>Stock Quantity:</label>
-                    <input type="number" id="stock" name="stock" value={{ product.gkucun|default:'' }}>
+                    <input type="number" id="stock" name="stock" value="{{ product.gkucun|default:'' }}">
                 </div>
 
                 <div class="form_group" id="product_images">

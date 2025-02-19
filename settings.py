@@ -100,7 +100,7 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = "/media/"
 # 设置上传文件的路径
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")  # 指定根目录
+MEDIA_ROOT = os.path.join(BASE_DIR, "online-shop\media")  # 指定根目录
 
 # 富文本编辑框的使用配置
 TINYMCE_DEFAULT_CONFIG = {

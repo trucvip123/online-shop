@@ -1,3 +1,9 @@
+import os
+import base64
+from pathlib import Path
+import uuid
+import settings
+
 from decimal import Decimal, InvalidOperation
 from hashlib import sha1
 
@@ -450,12 +456,52 @@ def edit_product_handle(request):
     product.gkucun = stock
     product.save()
 
+    # Delete all existing images of the product
+    existing_images = ProductImage.objects.filter(product=product)
+
     # Handle multiple images
-    images = request.FILES.getlist("new_image")
-    print("request.FILES:", request.FILES)
-    print("images:", images)
-    for image in images:
-        ProductImage.objects.create(product=product, image_path=image)
+    image_data_list = request.POST.getlist("image_urls[]")
+
+    delete_img_ls = []
+    delete_flg = True
+    for image_db in existing_images:
+        for image_data in image_data_list:
+            if Path(image_db.image_path.name).as_posix() in image_data:
+                delete_flg = False
+                break
+        if delete_flg is True:
+            delete_img_ls.append(image_db.image_path.name)
+
+    insert_img_ls = []
+    for image_data in image_data_list:
+        if "base64" in image_data:
+            insert_img_ls.append(image_data)
+
+    for image in delete_img_ls:
+        # Delete the image file from the local directory
+        image_path = os.path.join(settings.MEDIA_ROOT, image)
+        try:
+            if os.path.exists(image_path):
+                os.remove(image_path)
+        except Exception:
+            pass
+        # Delete the image record from the database
+        ProductImage.objects.get(image_path=image).delete()
+
+    for image_data in insert_img_ls:
+        # Decode the base64 string
+        format_img, imgstr = image_data.split(";base64,")
+        ext = format_img.split("/")[-1]
+        img_data = base64.b64decode(imgstr)
+
+        # Save the image to the local directory
+        image_name = f"{uuid.uuid4()}.{ext}"
+        image_path = os.path.join("df_goods\images", image_name)
+        with open(os.path.join(settings.MEDIA_ROOT, image_path), "wb") as f:
+            f.write(img_data)
+
+        # Save the image path to the database
+        ProductImage.objects.create(product=product, image_path=image_path)
 
     # goods = GoodsInfo.objects.get(pk=int(product_id))
     news = product.gtype.goodsinfo_set.order_by("-id")[0:2]

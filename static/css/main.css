@@ -918,8 +918,19 @@ html,body{height:1600px}
 	text-indent:30px;
 }
 
+#editProductionForm {
+	display: flex;
+	flex-wrap: wrap;
+}
+
 .site_con .form_group{
 	height:40px;
+	line-height:35px;
+	margin-top:10px;
+}
+
+#product_description{
+	height:150px;
 	line-height:35px;
 	margin-top:10px;
 }
@@ -936,6 +947,16 @@ html,body{height:1600px}
 }
 
 .site_con .form_group input{
+	width:500px;
+	border:1px solid #ddd;
+	float:left;
+	outline:none;
+	margin-top:7px;
+	text-indent:10px;
+	border-radius: 8px;
+}
+
+.site_con .form_group textarea{
 	width:500px;
 	border:1px solid #ddd;
 	float:left;
@@ -968,7 +989,7 @@ html,body{height:1600px}
 
 #product_images {
 	width: 700px;
-	height: 300px;
+	height: 250px;
 }
 
 #image_preview_container {
@@ -999,7 +1020,7 @@ html,body{height:1600px}
 	max-height: 100px; /* Adjust as needed */
 	border: 1px solid #ddd;
 	border-radius: 5px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .image-wrapper button {
@@ -1016,7 +1037,7 @@ html,body{height:1600px}
 	border-radius: 10px;
 	width: 60px;
 	height: 60px;
-	background-color: #e9e9e9;
+	background-color: #d7d7d7;
 }
 
 .image-wrapper .custom-file-button {
