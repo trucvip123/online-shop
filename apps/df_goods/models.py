@@ -9,6 +9,7 @@ class TypeInfo(models.Model):
     # Product type
     isDelete = models.BooleanField(default=False)
     ttitle = models.CharField(max_length=20, verbose_name="categories")
+    ntitle = models.CharField(max_length=50, verbose_name="category_name")
 
     class Meta:
         verbose_name = "product_category"

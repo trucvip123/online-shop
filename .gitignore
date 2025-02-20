@@ -1,5 +1,7 @@
 # Images
 *.jpg
+*.jpeg
+*.png
 
 # Byte-compiled / optimized / DLL files
 *.py[cod]

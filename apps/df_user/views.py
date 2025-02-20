@@ -497,6 +497,8 @@ def edit_product_handle(request):
         # Save the image to the local directory
         image_name = f"{uuid.uuid4()}.{ext}"
         image_path = os.path.join("df_goods\images", image_name)
+        image_path = f"df_goods/images/{image_name}"
+
         with open(os.path.join(settings.MEDIA_ROOT, image_path), "wb") as f:
             f.write(img_data)
 
@@ -543,12 +545,13 @@ def get_product_details_by_id(request):
 def add_new_type(request):
     if request.method == "POST":
         new_type = request.POST.get("new_product_type")
+        new_type_name = request.POST.get("new_product_type_name")
         if new_type:
             # Check if the new_type already exists in the TypeInfo table
             if TypeInfo.objects.filter(ttitle=new_type).exists():
                 return HttpResponse("This product type already exists.")
             else:
-                TypeInfo.objects.create(ttitle=new_type)
+                TypeInfo.objects.create(ttitle=new_type, ntitle=new_type_name)
                 return render(
                     request, "df_user/user_center_manage_type.html", {"success": 1}
                 )

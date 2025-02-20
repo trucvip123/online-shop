@@ -1,30 +1,31 @@
 {% extends 'df_goods/base.html' %}
 
 {% block head %}
-<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="/static/js/slide.js"></script>
-<script type="text/javascript" src="/static/js/list.js"></script>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="/static/js/detail_product.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
-<!-- Swiper CSS -->
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
-<!-- Swiper JS -->
+<link rel="stylesheet" type="text/css" href="/static/css/detail.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
+
+<!-- Swiper-->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-<!-- PhotoSwipe CSS -->
+<!-- PhotoSwipe -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/default-skin/default-skin.min.css">
-
-<!-- PhotoSwipe JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="/static/css/detail.css">
+<script type="text/javascript">
+    var imageUrls = [
+        {% for image in goods.images.all %}
+        '{{ MEDIA_URL }}{{ image.image_path }}',
+        {% endfor %}
+    ];
+</script>
 
 <style>
     .pswp__bg {
@@ -119,7 +120,7 @@
         <p>{{ goods.gjianjie }}</p>
         <div class="prize_bar">
             <span class="show_pirze">
-                <em id="gprice" data-price="{{ goods.gprice }}">{{ goods.gprice }}₫</em>
+                <em class="prize" data-price="{{ goods.gprice }}">{{ goods.gprice }}₫</em>
             </span>
         </div>
         <div class="goods_num clearfix">
@@ -154,12 +155,11 @@
 
         <div class="tab_content">
             <dl>
-                <dd>{{ goods.gcontent|safe }}</dd>
+                <dd>{{ goods.gcontent|linebreaks }}</dd>
             </dl>
         </div>
     </div>
 </div>
-
 
 <div class="main_wrap clearfix">
     <div class="new_goods">
@@ -185,115 +185,5 @@
 </div>
 
 <div class="add_jump"></div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".buy_btn").click(function () {
-            num = parseInt($('.num_show').val());
-            $.get('/cart/add{{ goods.id }}_' + num + '/', function (data) {
-                $('#show_count').text(data.count);
-            });
-            location.href = "/cart/";
-        });
-
-        $('#add_cart').click(function () {
-            var $add_x = $('#add_cart').offset().top;
-            var $add_y = $('#add_cart').offset().left;
-            var $to_x = $('#show_count').offset().top;
-            var $to_y = $('#show_count').offset().left;
-
-            $(".add_jump").css({ 'left': $add_y + 80, 'top': $add_x + 10, 'display': 'block' });
-
-            // { #check login or not# };
-            if ($('.login_btn').text().indexOf('Login') >= 0) {
-                alert('Please login first');
-                location.href('/user/login/');
-                return;
-            }
-
-            // { #add to cart animation# }
-            $(".add_jump").stop().animate({
-                'left': $to_y + 7,
-                'top': $to_x + 7
-            },
-                "fast", function () {
-                    $(".add_jump").fadeOut('fast', function () {
-                        count = $('.num_show').val();
-                        $('#show_count').html(count);
-                    });
-                });
-
-            num = parseInt($('.num_show').val());
-            $.get('/cart/add{{ goods.id }}_' + num + '/', function (data) {
-                $('#show_count').text(data.count);
-
-            });
-        });
-
-        $('#add_cart').click(function () {
-            $(".cart_mask").css("display", "block");
-            $(".small_cart").css("display", "block");
-        });
-
-        $(".close_icon").click(function () {
-            $(".small_cart").css("display", "none");
-            $(".cart_mask").css("display", "none");
-        });
-        $(".continue").click(function () {
-            $(".small_cart").css("display", "none");
-            $(".cart_mask").css("display", "none");
-        });
-        $(".cart_mask").click(function () {
-            $(".small_cart").css("display", "none");
-            $(".cart_mask").css("display", "none");
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-        var openPhotoSwipe = function () {
-            var pswpElement = document.querySelectorAll('.pswp')[0];
-            var items = [];
-
-            // Function to load an image and return a promise
-            function loadImage(src) {
-                return new Promise((resolve, reject) => {
-                    var img = new Image();
-                    img.src = src;
-                    img.onload = function () {
-                        resolve({
-                            src: img.src,
-                            w: img.naturalWidth,
-                            h: img.naturalHeight
-                        });
-                    };
-                    img.onerror = reject;
-                });
-            }
-
-            // Array of image URLs
-            var imageUrls = [
-                {% for image in goods.images.all %}
-                '{{ MEDIA_URL }}{{ image.image_path }}',
-                {% endfor %}
-            ];
-
-            // Load all images and initialize PhotoSwipe
-            Promise.all(imageUrls.map(loadImage))
-                .then((loadedItems) => {
-                    items = loadedItems;
-                    var options = {
-                        index: 0
-                    };
-                    var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
-                    gallery.init();
-                })
-                .catch((error) => {
-                    console.error('Error loading images:', error);
-                });
-        };
-
-        document.querySelector('.swiper-wrapper').addEventListener('click', openPhotoSwipe);
-    });
-</script>
 
 {% endblock center_content %}

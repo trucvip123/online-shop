@@ -55,14 +55,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "daily_fresh_demo.wsgi.application"
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+#     },
+#     "OPTIONS": {
+#         "TIMEOUT": 20,
+#     },
+# }
+
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    },
-    "OPTIONS": {
-        "TIMEOUT": 20,
-    },
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "thanhliemdb",
+        "USER": "postgres",
+        "PASSWORD": "123",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
 }
 
 AUTH_PASSWORD_VALIDATORS = [

@@ -427,6 +427,7 @@ html,body{height:1600px}
 .new_goods li img{
 	display:block;
 	margin:10px auto;
+	height: 100px;
 }
 .new_goods li h4{width:160px;margin:0 auto;}
 .new_goods li h4 a{
@@ -967,6 +968,16 @@ html,body{height:1600px}
 }
 
 .site_con .form_group .input_type_edit{
+	width:250px;
+	border:1px solid #ddd;
+	float:left;
+	outline:none;
+	margin-top:7px;
+	text-indent:10px;
+	border-radius: 8px;
+}
+
+.site_con .form_group .input_type_add{
 	width:250px;
 	border:1px solid #ddd;
 	float:left;

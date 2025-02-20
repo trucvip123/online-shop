@@ -67,3 +67,9 @@ To run the project:
 ```
 python manage.py runserver
 ```
+
+
+### Super user:
+Username: trucnv
+Email address: trucnv99@gmail.com
+Password: lumia930

@@ -1,8 +1,10 @@
+import re
 from df_cart.models import CartInfo
 from df_user.models import GoodsBrowser
 from django.contrib.auth.decorators import user_passes_test
 from django.core.paginator import Paginator
 from django.shortcuts import render
+from django.utils.safestring import mark_safe
 
 from .models import GoodsInfo, TypeInfo
 
@@ -109,15 +111,26 @@ def good_list(request, category, pindex, sort):
     return render(request, "df_goods/list.html", context)
 
 
+def render_images(value):
+    # Regular expression to find image URLs
+    image_url_pattern = re.compile(r'(https?://\S+\.(?:jpg|jpeg|png|gif))')
+    # Replace image URLs with <img> tags
+    value = image_url_pattern.sub(r'<img src="\1" alt="Image" style="height:400px;">', value)
+    return mark_safe(value)
+
+
 def detail(request, gid):
     good_id = gid
     goods = GoodsInfo.objects.get(pk=int(good_id))
     goods.gclick = goods.gclick + 1  # clicks
     goods.save()
 
+    # Apply the render_images filter to the goods.gcontent field
+    goods.gcontent = render_images(goods.gcontent)
+
     news = goods.gtype.goodsinfo_set.order_by("-id")[0:2]
     context = {
-        "title": goods.gtype.ttitle,
+        "title": goods.gtype.ntitle,
         "guest_cart": 1,
         "cart_num": cart_count(request),
         "goods": goods,

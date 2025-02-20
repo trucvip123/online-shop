@@ -3,39 +3,49 @@
 {% block center_body %}
 <script type="text/javascript">
     {% if success %}
-    alert("Category saved successfully!");
-    window.location.href = '{% url "df_user:manage_type" %}';
+        alert("Category saved successfully!");
+        window.location.href = "{% url 'df_user:manage_type' %}";
     {% endif %}
     {% if error %}
-    alert("{{ error }}");
+        alert("{{ error }}");
     {% endif %}
 
     function addNewType() {
         var newType = document.querySelector('input[name="new_product_type"]').value;
+        var newTypeName = document.querySelector('input[name="new_product_type_name"]').value;
+
         var form = document.createElement('form');
         form.method = 'POST';
-        form.action = '{% url "df_user:add_new_type" %}';
+        form.action = "{% url 'df_user:add_new_type' %}";
         var csrfToken = document.createElement('input');
         csrfToken.type = 'hidden';
         csrfToken.name = 'csrfmiddlewaretoken';
         csrfToken.value = '{{ csrf_token }}';
         form.appendChild(csrfToken);
-        var input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'new_product_type';
-        input.value = newType;
-        form.appendChild(input);
+        
+        var newTypeInput = document.createElement('input');
+        newTypeInput.type = 'hidden';
+        newTypeInput.name = 'new_product_type';
+        newTypeInput.value = newType;
+        form.appendChild(newTypeInput);
+
+        var newTypeNameInput = document.createElement('input');
+        newTypeNameInput.type = 'hidden';
+        newTypeNameInput.name = 'new_product_type_name';
+        newTypeNameInput.value = newTypeName;
+        form.appendChild(newTypeNameInput);
+
         document.body.appendChild(form);
         form.submit();
     }
 
     function editType() {
-        var oldTypeId = document.querySelector('input[name="product_type_old"]').value;
+        var oldType = document.querySelector('input[name="product_type_old"]').value;
         var newType = document.querySelector('input[name="product_type_new"]').value;
 
         var form = document.createElement('form');
         form.method = 'POST';
-        form.action = '{% url "df_user:edit_type" %}';
+        form.action = "{% url 'df_user:edit_type' %}";
 
         var csrfToken = document.createElement('input');
         csrfToken.type = 'hidden';
@@ -46,7 +56,7 @@
         var oldTypeInput = document.createElement('input');
         oldTypeInput.type = 'hidden';
         oldTypeInput.name = 'product_type_old';
-        oldTypeInput.value = oldTypeId;
+        oldTypeInput.value = oldType;
         form.appendChild(oldTypeInput);
 
         var newTypeInput = document.createElement('input');
@@ -63,7 +73,7 @@
         var newType = document.querySelector('input[name="product_type_delete"]').value;
         var form = document.createElement('form');
         form.method = 'POST';
-        form.action = '{% url "df_user:delete_type" %}';
+        form.action = "{% url 'df_user:delete_type' %}";
         var csrfToken = document.createElement('input');
         csrfToken.type = 'hidden';
         csrfToken.name = 'csrfmiddlewaretoken';
@@ -83,23 +93,24 @@
     <div class="left_menu_con clearfix">
         <h3>User Center</h3>
         <ul>
-            <li><a href='{% url "df_user:info" %}'>· Personal Information</a></li>
+            <li><a href="{% url 'df_user:info' %}">· Personal Information</a></li>
             <li><a href="/user/order/1">· Order History</a></li>
-            <li><a href='{% url "df_user:site" %}'>· Change the Password</a></li>
-            <li><a href='{% url "df_user:add_product" %}'>· Add Products</a></li>
-            <li><a href='{% url "df_user:edit_product" %}'>· Edit Products</a></li>
-            <li><a href='{% url "df_user:manage_type" %}' class="active">· Manage Category</a></li>
+            <li><a href="{% url 'df_user:site' %}">· Change the Password</a></li>
+            <li><a href="{% url 'df_user:add_product' %}">· Add Products</a></li>
+            <li><a href="{% url 'df_user:edit_product' %}">· Edit Products</a></li>
+            <li><a href="{% url 'df_user:manage_type' %}" class="active">· Manage Category</a></li>
         </ul>
     </div>
     <div class="right_content clearfix">
         <h3 class="common_title2">Mangage categories</h3>
-        <div class="site_con">
-            <form action='{% url "df_user:add_new_type" %}' method="post" enctype="multipart/form-data">
+		<div class="site_con">
+            <form action="{% url 'df_user:add_new_type' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-
+                
                 <div class="form_group">
                     <label for="new_product_type">Add category:</label>
-                    <input class="input_type" type="text" name="new_product_type" placeholder="Enter new category">
+                    <input class="input_type_add" type="text" name="new_product_type" placeholder="Enter new category">
+                    <input class="input_type_add" type="text" name="new_product_type_name" placeholder="Enter new category name">
                     <button class="button_type" type="button" onclick="addNewType()">Submit</button>
                 </div>
 
@@ -112,8 +123,7 @@
 
                 <div class="form_group">
                     <label for="product_type_delete"> Delete category:</label>
-                    <input class="input_type" type="text" name="product_type_delete"
-                        placeholder="Enter category to delete">
+                    <input class="input_type" type="text" name="product_type_delete" placeholder="Enter category to delete">
                     <button class="button_type" type="button" onclick="deleteType()">Submit</button>
                 </div>
             </form>
