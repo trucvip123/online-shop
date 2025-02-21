@@ -21,7 +21,6 @@ class TypeInfo(models.Model):
 
 
 class GoodsInfo(models.Model):
-    id = models.BigAutoField(primary_key=True)
     isDelete = models.BooleanField(default=False)
     gtitle = models.CharField(max_length=20, verbose_name="goods_name", unique=True)
     gpic = models.ImageField(
