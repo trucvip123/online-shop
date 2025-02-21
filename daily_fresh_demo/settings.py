@@ -137,7 +137,3 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# Ensure this directory exists before running collectstatic
-if not os.path.exists(STATIC_ROOT):
-    os.makedirs(STATIC_ROOT)
