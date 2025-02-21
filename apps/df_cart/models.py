@@ -6,7 +6,7 @@ from django.db import models
 
 
 class CartInfo(models.Model):
-
+    id = models.BigAutoField(primary_key=True)
     user = models.ForeignKey(UserInfo, on_delete=models.CASCADE, verbose_name="User")
     goods = models.ForeignKey(
         GoodsInfo, on_delete=models.CASCADE, verbose_name="products"

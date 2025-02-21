@@ -7,6 +7,7 @@ from tinymce.models import HTMLField
 # record the information of the category for each products
 class TypeInfo(models.Model):
     # Product type
+    id = models.BigAutoField(primary_key=True)
     isDelete = models.BooleanField(default=False)
     ttitle = models.CharField(max_length=20, verbose_name="categories")
     ntitle = models.CharField(max_length=50, verbose_name="category_name")
@@ -20,6 +21,7 @@ class TypeInfo(models.Model):
 
 
 class GoodsInfo(models.Model):
+    id = models.BigAutoField(primary_key=True)
     isDelete = models.BooleanField(default=False)
     gtitle = models.CharField(max_length=20, verbose_name="goods_name", unique=True)
     gpic = models.ImageField(
@@ -49,6 +51,7 @@ class GoodsInfo(models.Model):
 
 
 class ProductImage(models.Model):
+    id = models.BigAutoField(primary_key=True)
     product = models.ForeignKey(
         GoodsInfo, related_name="images", on_delete=models.CASCADE
     )

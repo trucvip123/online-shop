@@ -1,7 +1,7 @@
 #!/user/bin/env python
 # -*- coding: utf-8 -*-
 # this is a command pattern and plays the role of route, the urls mapps the request from the template and send it to the specific function to operate.
-from django.conf.urls import url
+from django.urls import re_path as url
 
 from .views import *
 

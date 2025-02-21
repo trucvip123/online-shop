@@ -68,14 +68,25 @@ WSGI_APPLICATION = "daily_fresh_demo.wsgi.application"
 # }
 
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "thanhliemdb",
+#         "USER": "postgres",
+#         "PASSWORD": "123",
+#         "HOST": "localhost",
+#         "PORT": "5432",
+#     }
+# }
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "thanhliemdb",
-        "USER": "postgres",
-        "PASSWORD": "123",
-        "HOST": "localhost",
-        "PORT": "5432",
+        "NAME": "koyebdb",
+        "USER": "koyeb-adm",
+        "PASSWORD": "npg_SBTKxkYc4Hi1",
+        "HOST": "ep-autumn-lab-a1xtjr7w.ap-southeast-1.pg.koyeb.app",
+        "OPTIONS": {"sslmode": "require"},
     }
 }
 

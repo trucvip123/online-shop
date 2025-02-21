@@ -4,6 +4,7 @@ from django.utils import timezone
 
 
 class UserInfo(models.Model):
+    id = models.BigAutoField(primary_key=True)
     uname = models.CharField(max_length=20, unique=True, verbose_name="Username")
     upwd = models.CharField(max_length=40, verbose_name="Password", blank=False)
     uemail = models.EmailField(verbose_name="Email")
@@ -28,6 +29,7 @@ class UserInfo(models.Model):
 
 
 class GoodsBrowser(models.Model):
+    id = models.BigAutoField(primary_key=True)
     user = models.ForeignKey(UserInfo, on_delete=models.CASCADE, verbose_name="User")
     good = models.ForeignKey(
         GoodsInfo, on_delete=models.CASCADE, verbose_name="Product"

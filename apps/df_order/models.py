@@ -33,7 +33,7 @@ class OrderInfo(models.Model):
 
 
 class OrderDetailInfo(models.Model):
-
+    id = models.BigAutoField(primary_key=True)
     goods = models.ForeignKey(
         GoodsInfo, on_delete=models.CASCADE, verbose_name="products"
     )

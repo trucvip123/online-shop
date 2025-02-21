@@ -1,4 +1,6 @@
-Django==2.0.7
+Django
 django-tinymce==2.7.0
-Pillow==7.0.0
+Pillow
 pytz==2018.7
+psycopg2-binary
+django-tinymce
