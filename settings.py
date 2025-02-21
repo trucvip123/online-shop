@@ -1,4 +1,3 @@
-# this file defined some global setting and config for the projects
 import os
 import sys
 
@@ -22,7 +21,7 @@ INSTALLED_APPS = [
     "df_goods",
     "df_user",
     "df_order",
-    "tinymce",  # the rich text editor
+    "tinymce",
 ]
 
 MIDDLEWARE = [
@@ -48,7 +47,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "django.template.context_processors.media",  # 将media_url上传文件路径注册到模板中
+                "django.template.context_processors.media",
             ],
         },
     },
@@ -56,7 +55,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "daily_fresh_demo.wsgi.application"
 
-# Setting SQLite Database
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.sqlite3",
@@ -109,26 +107,37 @@ USE_I18N = True
 
 USE_L10N = True
 
-LANGUAGE_CODE = "en-us"  # 后台管理改为中文
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "America/Denver"  # 时区改为上海
+TIME_ZONE = "America/Denver"
 
-USE_TZ = False  # 数据库取为国际时间
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 
-STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_URL = "/staticfiles/"
+# This is where you store static files manually (DO NOT use STATIC_ROOT here)
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "static"),  # ✅ Ensure this directory exists
 ]
-MEDIA_URL = "/media/"
-# 设置上传文件的路径
-MEDIA_ROOT = os.path.join(BASE_DIR, "online-shop\media")  # 指定根目录
 
-# 富文本编辑框的使用配置
+# This is where collectstatic collects all static files for deployment
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # ✅ Separate directory
+
+
+MEDIA_URL = "/media/"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+
 TINYMCE_DEFAULT_CONFIG = {
-    "theme": "silver",
+    "theme": "advanced",
     "width": 600,
     "height": 400,
 }
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Ensure this directory exists before running collectstatic
+if not os.path.exists(STATIC_ROOT):
+    os.makedirs(STATIC_ROOT)

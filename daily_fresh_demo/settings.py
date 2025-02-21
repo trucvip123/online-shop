@@ -115,7 +115,7 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 
-STATIC_URL = "/static/"
+STATIC_URL = "/staticfiles/"
 # This is where you store static files manually (DO NOT use STATIC_ROOT here)
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),  # ✅ Ensure this directory exists

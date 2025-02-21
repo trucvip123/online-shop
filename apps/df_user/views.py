@@ -496,7 +496,6 @@ def edit_product_handle(request):
 
         # Save the image to the local directory
         image_name = f"{uuid.uuid4()}.{ext}"
-        image_path = os.path.join("df_goods\images", image_name)
         image_path = f"df_goods/images/{image_name}"
 
         with open(os.path.join(settings.MEDIA_ROOT, image_path), "wb") as f:
