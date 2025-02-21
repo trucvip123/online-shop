@@ -118,10 +118,10 @@ USE_TZ = False  # 数据库取为国际时间
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-
 MEDIA_URL = "/media/"
 # 设置上传文件的路径
 MEDIA_ROOT = os.path.join(BASE_DIR, "online-shop\media")  # 指定根目录
