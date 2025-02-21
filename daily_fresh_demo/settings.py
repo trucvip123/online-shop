@@ -116,10 +116,13 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = "/static/"
+# This is where you store static files manually (DO NOT use STATIC_ROOT here)
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "static"),  # ✅ Ensure this directory exists
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+# This is where collectstatic collects all static files for deployment
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # ✅ Separate directory
 
 
 MEDIA_URL = "/media/"
@@ -134,3 +137,7 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Ensure this directory exists before running collectstatic
+if not os.path.exists(STATIC_ROOT):
+    os.makedirs(STATIC_ROOT)
