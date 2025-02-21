@@ -1,12 +1,12 @@
 {% extends 'df_goods/base.html' %}
 
 {% block head %}
-<script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="/workspace/static/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="/static/js/detail_product.js"></script>
+<script type="text/javascript" src="/workspace/static/js/detail_product.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="/static/css/detail.css">
+<link rel="stylesheet" type="text/css" href="/workspace/static/css/detail.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
 
 <!-- Swiper-->
@@ -22,7 +22,7 @@
 <script type="text/javascript">
     var imageUrls = [
         {% for image in goods.images.all %}
-        '{{ MEDIA_URL }}{{ image.image_path }}',
+    '{{ MEDIA_URL }}{{ image.image_path }}',
         {% endfor %}
     ];
 </script>

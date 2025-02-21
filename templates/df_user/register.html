@@ -2,7 +2,7 @@
 
 
 {% block head %}
-<script type="text/javascript" src="/static/js/register.js"></script>
+<script type="text/javascript" src="/workspace/static/js/register.js"></script>
 <script type="text/javascript">
 	$(function () {
 
@@ -147,7 +147,7 @@
 {% block body %}
 <div class="register_con">
 	<div class="l_con fl">
-		<a class="reg_logo"><img src="/static/images/logo.png" width='200'></a>
+		<a class="reg_logo"><img src="/workspace/static/images/logo.png" width='200'></a>
 		<!--			<div class="reg_slogan">足不出户  ·  新鲜每一天</div>-->
 		<!--			<div class="reg_banner"></div>-->
 	</div>
@@ -158,7 +158,7 @@
 			<a href='{% url "df_user:login" %}''>Login</a>
 		</div>
 		<div class="reg_form clearfix">
-			<form action='{% url "df_user:register_handle" %}' id='reg_form' method="post">
+			<form action=' {% url "df_user:register_handle" %}' id='reg_form' method="post">
 				{% csrf_token %}
 				<ul>
 					<li>
@@ -212,7 +212,7 @@
 						<input type="submit" value="Register">
 					</li>
 				</ul>
-			</form>
+				</form>
 		</div>
 
 	</div>
