@@ -26,6 +26,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -115,7 +116,7 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 
-STATIC_URL = "/staticfiles/"
+STATIC_URL = "/static/"
 # This is where you store static files manually (DO NOT use STATIC_ROOT here)
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),  # ✅ Ensure this directory exists
@@ -123,7 +124,6 @@ STATICFILES_DIRS = [
 
 # This is where collectstatic collects all static files for deployment
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # ✅ Separate directory
-
 
 MEDIA_URL = "/media/"
 
