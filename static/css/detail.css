@@ -1,11 +1,9 @@
-
-
 /* Product Detail */
-.goods_detail_con{
-	width:1200px;
-	height:400px;
-	border:1px solid #ededed;
-	margin:0 auto 20px;
+.goods_detail_con {
+    width: 1200px;
+    height: 400px;
+    border: 1px solid #ededed;
+    margin: 0 auto 20px;
     background-color: white;
     border-radius: 10px;
 }
@@ -23,14 +21,17 @@
 .goods_detail_pic img {
     max-width: 100%;
     height: auto;
-    object-fit: cover; /* Ensures consistent aspect ratio */
+    object-fit: cover;
+    /* Ensures consistent aspect ratio */
 }
 
 .swiper-container {
     width: 100%;
-    max-width: 400px; /* Adjust according to your layout */
+    max-width: 400px;
+    /* Adjust according to your layout */
     height: auto;
-    border-radius: 10px; /* Optional rounded corners */
+    border-radius: 10px;
+    /* Optional rounded corners */
     overflow: hidden;
     touch-action: pan-y;
 }
@@ -46,38 +47,48 @@
     transition: transform 0.3s ease;
 }
 
-.goods_detail_list{
-	width:730px;height:350px;margin:24px 24px 0 0;
+.goods_detail_list {
+    width: 730px;
+    height: 350px;
+    margin: 24px 24px 0 0;
 }
 
-.goods_detail_list h3{
-    font-size:20px;
-    line-height:24px;
-    color:#666;
-    font-weight:500;
+.goods_detail_list h3 {
+    font-size: 20px;
+    line-height: 24px;
+    color: #666;
+    font-weight: 500;
 }
 
-.goods_detail_list p{color:#666;line-height:40px;}
-
-.prize_bar{
-    height:66px;
-    background-color:#8aa5a721;
-    line-height:66px;
+.goods_detail_list p {
+    color: #666;
+    line-height: 40px;
 }
 
-.prize_bar .show_pirze{font-size:20px;color:#ff3e3e;padding-left:20px}
-.prize_bar .show_pirze em{font-style:normal;font-size:36px;padding-left:10px}
+.prize_bar {
+    height: 66px;
+    background-color: #8aa5a721;
+    line-height: 66px;
+}
+
+.prize_bar .show_pirze {
+    font-size: 30px;
+    color: #ff3e3e;
+    padding-left: 20px
+}
 
 .goods_num {
     height: 52px;
     margin-top: 19px;
 }
+
 .goods_num .num_name {
     width: 90px;
     height: 32px;
     line-height: 32px;
     color: #757575;
 }
+
 .goods_num .num_add {
     width: 114px;
     height: 32px;
@@ -85,6 +96,7 @@
     border-radius: 3px;
     display: flex;
 }
+
 .goods_num .num_add input {
     width: 50px;
     text-align: center;
@@ -94,6 +106,7 @@
     font-size: 18px;
     color: #666;
 }
+
 .goods_num .num_add .add {
     width: 32px;
     line-height: 32px;
@@ -116,62 +129,101 @@
     text-decoration: none;
 }
 
-.goods_num .show_unit{
-    padding-left:20px;
+.goods_num .show_unit {
+    padding-left: 20px;
     line-height: 32px;
     color: #757575;
 }
 
-.total{
-    height:35px;
-    line-height:35px;
+.total {
+    height: 35px;
+    line-height: 35px;
     color: #757575;
 }
 
-.total em{font-style:normal;color:#ff3e3e;font-size:18px}
+.total em {
+    font-style: normal;
+    color: #ff3e3e;
+    font-size: 18px
+}
 
-.operate_btn{height:40px;margin-top:35px;font-size:0;position:relative;}
-.operate_btn .buy_btn,.operate_btn .add_cart{
-    display:inline-block;
-    width:178px;
-    height:38px;
-    border:1px solid #c40000;
-    font-size:14px;
-    color:#c40000;
-    line-height:38px;
-    text-align:center;
-    background-color:#ffeded;
+.operate_btn {
+    height: 40px;
+    margin-top: 35px;
+    font-size: 0;
+    position: relative;
+}
+
+.operate_btn .buy_btn,
+.operate_btn .add_cart {
+    display: inline-block;
+    width: 178px;
+    height: 38px;
+    border: 1px solid #c40000;
+    font-size: 14px;
+    color: #c40000;
+    line-height: 38px;
+    text-align: center;
+    background-color: #ffeded;
     text-decoration: none;
     border-radius: 3px;
 }
-.operate_btn .add_cart{background-color:#c40000;color:#fff;margin-left:10px;position:relative;z-index:10;}
 
-.add_jump{width:20px;height:20px;background-color:#c40000;position:absolute;left:268px;top:10px;border-radius:50%;z-index:9;display:none;}
-
-.detail_tab{
-	height:35px;
-	border-bottom:1px solid black
+.operate_btn .add_cart {
+    background-color: #c40000;
+    color: #fff;
+    margin-left: 10px;
+    position: relative;
+    z-index: 10;
 }
 
-.detail_tab li{height:34px;line-height:34px;padding:0 30px;font-size:14px;color:#333333;float:left;border:1px solid #e8e8e8;border-bottom:0px;cursor:pointer;background-color:#faf8f8}
-
-.detail_tab li.active{
-    border-top:6px solid black;
-    position:relative;
-    border-left:1px solid black;
-    border-right:1px solid black;
-    height:35px;
+.add_jump {
+    width: 20px;
+    height: 20px;
+    background-color: #c40000;
+    position: absolute;
+    left: 268px;
+    top: 10px;
+    border-radius: 50%;
+    z-index: 9;
+    display: none;
 }
 
-.tab_content dt{
-    margin:10px;
-    font-size:16px;
-    color:#044d39
+.detail_tab {
+    height: 35px;
+    border-bottom: 1px solid black
 }
 
-.tab_content dd{
-    line-height:24px;
-    margin:10px;
+.detail_tab li {
+    height: 34px;
+    line-height: 34px;
+    padding: 0 30px;
+    font-size: 14px;
+    color: #333333;
+    float: left;
+    border: 1px solid #e8e8e8;
+    border-bottom: 0px;
+    cursor: pointer;
+    background-color: #faf8f8
+}
+
+.detail_tab li.active {
+    border-top: 6px solid black;
+    position: relative;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    height: 35px;
+}
+
+.tab_content dt {
+    margin: 10px;
+    font-size: 16px;
+    color: #044d39
+}
+
+.tab_content dd {
+    line-height: 24px;
+    margin: 10px;
 }
 
 
@@ -190,7 +242,8 @@
 .swiper-image {
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain; /* Ensures the image scales correctly */
+    object-fit: contain;
+    /* Ensures the image scales correctly */
     touch-action: none;
 }
 
@@ -202,12 +255,14 @@
     height: 55px;
     right: auto !important;
     top: 350px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
-.swiper-container .swiper-button-prev:after,  .swiper-container .swiper-button-next:after{
-    zoom:0.6
+.swiper-container .swiper-button-prev:after,
+.swiper-container .swiper-button-next:after {
+    zoom: 0.6
 }
+
 .swiper-container .swiper-button-prev {
     background: rgb(255 255 255 / 90%);
     color: #b5b5b5;
@@ -215,7 +270,7 @@
     height: 55px;
     left: auto !important;
     top: 370px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 .swiper-container .swiper-pagination {
@@ -239,4 +294,6 @@
 
 .option a:last-child {
     text-decoration: none;
-};
+}
+
+;

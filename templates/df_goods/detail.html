@@ -23,7 +23,6 @@
 <!-- PhotoSwipe JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
-
 <link rel="stylesheet" type="text/css" href="/static/css/detail.css">
 
 <style>
@@ -43,7 +42,8 @@
                 <div class="swiper-slide">
                     <img src="{{ MEDIA_URL }}{{ image.image_path }}" alt="{{ goods.gtitle }}"
                         class="img-fluid rounded swiper-image" loading="lazy"
-                        data-zoom-image="{{ MEDIA_URL }}{{ image.image_path }}">
+                        data-zoom-image="{{ MEDIA_URL }}{{ image.image_path }}"
+                        onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
                 </div>
                 {% endfor %}
             </div>
@@ -119,7 +119,7 @@
         <p>{{ goods.gjianjie }}</p>
         <div class="prize_bar">
             <span class="show_pirze">
-                <em id="gprice" data-price="{{ goods.gprice }}">{{ goods.gprice }}₫</em>
+                <strong class="prize" id="gprice" data-price="{{ goods.gprice }}">{{ goods.gprice }}₫</strong>
             </span>
         </div>
         <div class="goods_num clearfix">
@@ -154,7 +154,7 @@
 
         <div class="tab_content">
             <dl>
-                <dd>{{ goods.gcontent|safe }}</dd>
+                <dd>{{ goods.gcontent|linebreaks }}</dd>
             </dl>
         </div>
     </div>
@@ -170,7 +170,8 @@
                 <a href="/{{ goods.id }}/">
                     {% if goods.images.all %}
                     <img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
-                        class="img-fluid rounded">
+                        class="img-fluid rounded"
+                        onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
                     {% else %}
                     <img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
                         alt="Default Img">
@@ -273,26 +274,26 @@
             // Array of image URLs
             var imageUrls = [
                 {% for image in goods.images.all %}
-                '{{ MEDIA_URL }}{{ image.image_path }}',
-                {% endfor %}
+        '{{ MEDIA_URL }}{{ image.image_path }}',
+            {% endfor %}
             ];
 
-            // Load all images and initialize PhotoSwipe
-            Promise.all(imageUrls.map(loadImage))
-                .then((loadedItems) => {
-                    items = loadedItems;
-                    var options = {
-                        index: 0
-                    };
-                    var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
-                    gallery.init();
-                })
-                .catch((error) => {
-                    console.error('Error loading images:', error);
-                });
+    // Load all images and initialize PhotoSwipe
+    Promise.all(imageUrls.map(loadImage))
+        .then((loadedItems) => {
+            items = loadedItems;
+            var options = {
+                index: 0
+            };
+            var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+            gallery.init();
+        })
+        .catch((error) => {
+            console.error('Error loading images:', error);
+        });
         };
 
-        document.querySelector('.swiper-wrapper').addEventListener('click', openPhotoSwipe);
+    document.querySelector('.swiper-wrapper').addEventListener('click', openPhotoSwipe);
     });
 </script>
 
