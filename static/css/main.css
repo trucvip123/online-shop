@@ -178,16 +178,15 @@ html,body{height:1600px}
 .navbar .nav-link {
 	color: rgb(0, 0, 0);
 	font-family: 'Times New Roman';
-	margin: 0 9px;
 	width: 115px;
 	font-size: 14px;
 	border-radius: 8px;
-	text-align: center;
-	text-decoration: none;
 }
 
 .navbar .nav-link:hover {
-	background-color: #c9c8c8
+	color: #007bff;
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
 }
 
 .navbar .collapse {
