@@ -25,17 +25,19 @@
 			<ul class="goods_list fl">
 				{% for goods in type0 %}
 				<li>
-					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
 					<a href="/{{ goods.id }}/">
-						{% if goods.images.all %}
-						<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
-							class="img-fluid rounded"
-							onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
-						{% else %}
-						<img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
-							alt="Default Img">
-						{% endif %}
+						<div class="item-img">
+							{% if goods.images.all %}
+							<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
+								class="img-fluid rounded"
+								onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
+							{% else %}
+							<img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
+								alt="Default Img">
+							{% endif %}
+						</div>
 					</a>
+					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
 					<div class="prize" data-price="{{ goods.gprice }}"> {{ goods.gprice }} </div>
 				</li>
 				{% endfor %}
@@ -52,16 +54,19 @@
 			<ul class="goods_list fl">
 				{% for goods in type100 %}
 				<li>
-					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
 					<a href="/{{ goods.id }}/">
-						{% if goods.images.all %}
-						<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
-							class="img-fluid rounded">
-						{% else %}
-						<img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
-							alt="Default Img">
-						{% endif %}
+						<div class="item-img">
+							{% if goods.images.all %}
+							<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
+								class="img-fluid rounded"
+								onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
+							{% else %}
+							<img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
+								alt="Default Img">
+							{% endif %}
+						</div>
 					</a>
+					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
 					<div class="prize" data-price="{{ goods.gprice }}"> {{ goods.gprice }} </div>
 				</li>
 				{% endfor %}
@@ -80,16 +85,19 @@
 			<ul class="goods_list fl">
 				{% for goods in type41 %}
 				<li>
-					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
 					<a href="/{{ goods.id }}/">
-						{% if goods.images.all %}
-						<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
-							class="img-fluid rounded">
-						{% else %}
-						<img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
-							alt="Default Img">
-						{% endif %}
+						<div class="item-img">
+							{% if goods.images.all %}
+							<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
+								class="img-fluid rounded"
+								onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
+							{% else %}
+							<img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
+								alt="Default Img">
+							{% endif %}
+						</div>
 					</a>
+					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
 					<div class="prize" data-price="{{ goods.gprice }}"> {{ goods.gprice }} </div>
 				</li>
 				{% endfor %}
@@ -109,73 +117,19 @@
 			<ul class="goods_list fl">
 				{% for goods in type51 %}
 				<li>
-					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
 					<a href="/{{ goods.id }}/">
-						{% if goods.images.all %}
-						<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
-							class="img-fluid rounded">
-						{% else %}
-						<img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
-							alt="Default Img">
-						{% endif %}
+						<div class="item-img">
+							{% if goods.images.all %}
+							<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
+								class="img-fluid rounded"
+								onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
+							{% else %}
+							<img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
+								alt="Default Img">
+							{% endif %}
+						</div>
 					</a>
-					<div class="prize" data-price="{{ goods.gprice }}"> {{ goods.gprice }} </div>
-				</li>
-				{% endfor %}
-			</ul>
-		</div>
-
-	</div>
-
-	<div class="list_model">
-		<div class="list_title clearfix">
-			<h3 class="fl" id="model03">Điện thoại</h3>
-
-			<a href="/list9_1_1/" class="goods_more fr">xem thêm ></a>
-		</div>
-
-		<div class="goods_con clearfix">
-			<ul class="goods_list fl">
-				{% for goods in type21 %}
-				<li>
 					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
-					<a href="/{{ goods.id }}/">
-						{% if goods.images.all %}
-						<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
-							class="img-fluid rounded">
-						{% else %}
-						<img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
-							alt="Default Img">
-						{% endif %}
-					</a>
-					<div class="prize" data-price="{{ goods.gprice }}"> {{ goods.gprice }} </div>
-				</li>
-				{% endfor %}
-			</ul>
-		</div>
-
-	</div>
-
-	<div class="list_model">
-		<div class="list_title clearfix">
-			<h3 class="fl" id="model04">Máy tính</h3>
-			<a href="/list10_1_1/" class="goods_more fr">xem thêm ></a>
-		</div>
-
-		<div class="goods_con clearfix">
-			<ul class="goods_list fl">
-				{% for goods in type31 %}
-				<li>
-					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
-					<a href="/{{ goods.id }}/">
-						{% if goods.images.all %}
-						<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
-							class="img-fluid rounded">
-						{% else %}
-						<img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
-							alt="Default Img">
-						{% endif %}
-					</a>
 					<div class="prize" data-price="{{ goods.gprice }}"> {{ goods.gprice }} </div>
 				</li>
 				{% endfor %}
