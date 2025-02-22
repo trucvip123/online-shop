@@ -12,6 +12,8 @@ from df_goods.models import GoodsInfo, ProductImage, TypeInfo
 from df_order.models import OrderInfo
 from django.contrib.auth.decorators import user_passes_test
 from django.core.paginator import Paginator
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import (
     HttpResponseRedirect,
@@ -420,8 +422,6 @@ def cart_count(request):
 
 # @user_passes_test(admin_required)
 def edit_product_handle(request):
-    print("request:", request)
-
     if request.method != "POST":
         return HttpResponse("Invalid request method", status=405)
 
@@ -436,12 +436,8 @@ def edit_product_handle(request):
     if not product_id.isdigit():
         return HttpResponse("Invalid product ID", status=400)
 
-    print("product_id:", product_id)
-    print("stock:", stock)
-
-    product_id = int(product_id)
     # Check if editing an existing product
-    product = get_object_or_404(GoodsInfo, id=product_id) if product_id else None
+    product = get_object_or_404(GoodsInfo, id=int(product_id)) if product_id else None
 
     if not product:
         return HttpResponse("Product not found", status=404)
@@ -451,7 +447,7 @@ def edit_product_handle(request):
     except (InvalidOperation, TypeError):
         return HttpResponse("Invalid price format", status=400)
 
-    # Update existing product
+    # Update product details
     product.gtitle = name
     product.gprice = price_decimal
     product.gcontent = description
@@ -460,54 +456,40 @@ def edit_product_handle(request):
 
     # Delete all existing images of the product
     existing_images = ProductImage.objects.filter(product=product)
-
     # Handle multiple images
     image_data_list = request.POST.getlist("image_urls[]")
 
-    delete_img_ls = []
-    delete_flg = True
-    for image_db in existing_images:
-        for image_data in image_data_list:
-            if Path(image_db.image_path.name).as_posix() in image_data:
-                delete_flg = False
-                break
-        if delete_flg is True:
-            delete_img_ls.append(image_db.image_path.name)
-
-    insert_img_ls = []
-    for image_data in image_data_list:
-        if "base64" in image_data:
-            insert_img_ls.append(image_data)
-
+    # Identify images to delete
+    delete_img_ls = {
+        img.image_path.name
+        for img in existing_images
+        if all(
+            Path(img.image_path.name).as_posix() not in img_data
+            for img_data in image_data_list
+        )
+    }
+    # Delete images from storage and database
     for image in delete_img_ls:
-        # Delete the image file from the local directory
-        image_path = os.path.join(settings.MEDIA_ROOT, image)
-        try:
-            if os.path.exists(image_path):
-                os.remove(image_path)
-        except Exception:
-            pass
-        # Delete the image record from the database
-        ProductImage.objects.get(image_path=image).delete()
+        if default_storage.exists(image):
+            default_storage.delete(image)  # Deletes from configured storage backend
+        ProductImage.objects.filter(image_path=image).delete()
+
+    # Handle new images
+    insert_img_ls = [img_data for img_data in image_data_list if "base64" in img_data]
 
     for image_data in insert_img_ls:
-        # Decode the base64 string
         format_img, imgstr = image_data.split(";base64,")
         ext = format_img.split("/")[-1]
         img_data = base64.b64decode(imgstr)
 
-        # Save the image to the local directory
         image_name = f"{uuid.uuid4()}.{ext}"
         image_path = f"df_goods/images/{image_name}"
-        image_full_path = os.path.join(settings.MEDIA_ROOT, image_path)
 
-        # Ensure the directory exists
-        os.makedirs(os.path.dirname(image_full_path), exist_ok=True)
-        with open(image_full_path, "wb") as f:
-            f.write(img_data)
+        # Save image using Django's storage backend
+        file_path = default_storage.save(image_path, ContentFile(img_data))
 
-        # Save the image path to the database
-        ProductImage.objects.create(product=product, image_path=image_path)
+        # Save reference in database
+        ProductImage.objects.create(product=product, image_path=file_path)
 
     # goods = GoodsInfo.objects.get(pk=int(product_id))
     news = product.gtype.goodsinfo_set.order_by("-id")[0:2]
