@@ -364,7 +364,8 @@ def add_product_handle(request):
         name = request.POST.get("product_name")
         price = request.POST.get("price")
         description = request.POST.get("description")
-        type_id = request.POST.get("product_type")  # Get selected type ID from form
+        type_id = request.POST.get("product_type")
+        stock = request.POST.get("stock")
 
         # Fetch the TypeInfo instance based on type_id
         category = get_object_or_404(TypeInfo, id=type_id)
@@ -388,6 +389,7 @@ def add_product_handle(request):
             gprice=price_decimal,
             gcontent=description,
             gtype=category,
+            stock=stock,
         )
         # Handle multiple images
         images = request.FILES.getlist("image")
@@ -497,8 +499,11 @@ def edit_product_handle(request):
         # Save the image to the local directory
         image_name = f"{uuid.uuid4()}.{ext}"
         image_path = f"df_goods/images/{image_name}"
+        image_full_path = os.path.join(settings.MEDIA_ROOT, image_path)
 
-        with open(os.path.join(settings.MEDIA_ROOT, image_path), "wb") as f:
+        # Ensure the directory exists
+        os.makedirs(os.path.dirname(image_full_path), exist_ok=True)
+        with open(image_full_path, "wb") as f:
             f.write(img_data)
 
         # Save the image path to the database
