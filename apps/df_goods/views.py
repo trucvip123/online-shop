@@ -99,7 +99,7 @@ def good_list(request, category, pindex, sort):
     # return page object
     page = paginator.page(int(pindex))
     context = {
-        "title": category,
+        "title": typeinfo.ntitle,
         "guest_cart": guest_cart,
         "cart_num": cart_num,
         "page": page,
@@ -113,9 +113,11 @@ def good_list(request, category, pindex, sort):
 
 def render_images(value):
     # Regular expression to find image URLs
-    image_url_pattern = re.compile(r'(https?://\S+\.(?:jpg|jpeg|png|gif))')
+    image_url_pattern = re.compile(r"(https?://\S+\.(?:jpg|jpeg|png|gif))")
     # Replace image URLs with <img> tags
-    value = image_url_pattern.sub(r'<img src="\1" alt="Image" style="height:400px;">', value)
+    value = image_url_pattern.sub(
+        r'<img src="\1" alt="Image" style="height:400px;">', value
+    )
     return mark_safe(value)
 
 

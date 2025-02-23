@@ -474,12 +474,6 @@ body {
 	text-align: center;
 }
 
-.goods_list li:hover {
-	color: #007bff;
-	transform: scale(1.05);
-	transition: all 0.3s ease-in-out;
-}
-
 .goods_list li h4 {
 	margin: 10px auto;
 	text-align: center;
@@ -517,7 +511,11 @@ body {
 	margin-top: 20px;
 }
 
-
+.goods_list .item-img:hover {
+	color: #007bff;
+	transform: scale(1.05);
+	transition: all 0.3s ease-in-out;
+}
 
 /* footer */
 /*
@@ -550,12 +548,11 @@ body {
 	margin-top: 10px;
 }
 
-
 /* breadcrumb */
 .breadcrumb {
 	width: 1200px;
-	height: 40px;
-	margin: 0 auto;
+	margin: 20px auto;
+	font: 14px/18px Arial, Helvetica, sans-serif !important;
 }
 
 .breadcrumb a {

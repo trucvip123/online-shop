@@ -295,12 +295,6 @@
     border-radius: 10px 10px 0 0;
 }
 
-.breadcrumb {
-    height: 20px;
-}
-
 .option a:last-child {
     text-decoration: none;
 }
-
-;

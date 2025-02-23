@@ -1,73 +1,68 @@
 {% extends 'df_goods/base.html' %}
 
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/categories.css">
+{% endblock head %}
+
 {% block center_content %}
-	<div class="main_wrap clearfix">
-		<div class="r_wrap fr clearfix">
-			<div class="sort_bar">
-                <a> Sắp xếp theo: </a>
-                <a href="/list{{ typeinfo.id }}_1_1"
-                   {% if sort == '1' %}
-                    class="active"
-                   {% endif %}
-                    >Mới&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◦</a>
-                <a href="/list{{ typeinfo.id }}_1_3"
-                    {% if sort == '3' %}
-                     class="active"
-                    {% endif %}
-                     >Nổi bật&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◦</a>                    
-                <div class="dropdown">
-                    <button id="priceButton" class="dropbtn_price {% if sort == '2' or sort == '4' %}active{% endif %}">
-                        Giá {% if sort == '2' %}↓{% elif sort == '4' %}↑{% else %} {% endif %}
-                    </button>
-                    <div class="dropdown-content-price">
-                        <a href="/list{{ typeinfo.id }}_1_4"
-                            {% if sort == '4' %}
-                            class="active"
-                            {% endif %}
-                            >Giá thấp - cao
-                        </a>
-                        <a href="/list{{ typeinfo.id }}_1_2"
-                            {% if sort == '2' %}
-                            class="active"
-                            {% endif %}
-                            >Giá cao - thấp
-                        </a>
-                    </div>
+<div class="main_wrap clearfix">
+    <div class="r_wrap fr clearfix">
+        <div class="sort_bar">
+            <a> Sắp xếp theo: </a>
+            <a href="/list{{ typeinfo.id }}_1_1" {% if sort == '1' %} class="active" {% endif %}
+                >Mới&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◦</a>
+            <a href="/list{{ typeinfo.id }}_1_3" {% if sort == '3' %} class="active" {% endif %}>Nổi
+                bật&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◦</a>
+            <div class="dropdown">
+                <button id="priceButton" class="dropbtn_price {% if sort == '2' or sort == '4' %}active{% endif %}">
+                    Giá {% if sort == '2' %}↓{% elif sort == '4' %}↑{% else %} {% endif %}
+                </button>
+                <div class="dropdown-content-price">
+                    <a href="/list{{ typeinfo.id }}_1_4" {% if sort == '4' %} class="active" {% endif %}>Giá thấp - cao
+                    </a>
+                    <a href="/list{{ typeinfo.id }}_1_2" {% if sort == '2' %} class="active" {% endif %}>Giá cao - thấp
+                    </a>
                 </div>
-			</div>
+            </div>
+        </div>
 
-			<ul class="goods_type_list clearfix">
-                {%  for g in page %}
-                <li>
-					<a href="/{{ g.id }}/"><img src="{{ MEDIA_URL }}{{ g.images.all.0.image_path }}" class="img-fluid rounded"></a>
-					<h4><a href="/{{ g.id }}/">{{ g.gtitle }}</a></h4>
-					<div class="operate">
-                        <span class="prize" data-price="{{ g.gprice }}">{{ g.gprice }}</span>
-						<a href="/cart/add{{ g.id }}_1/" class="add_goods" title="add to cart"></a>
-					</div>
-				</li>
-                {% endfor %}
-			</ul>
+        <ul class="goods_type_list clearfix">
+            {% for g in page %}
+            <li>
+                <a href="/{{ g.id }}/">
+                    <img src="{{ MEDIA_URL }}{{ g.images.all.0.image_path }}" class="img-fluid rounded"
+                        onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
+                </a>
+                <h4><a href="/{{ g.id }}/">{{ g.gtitle }}</a></h4>
+                <div class="operate">
+                    <span class="prize" data-price="{{ g.gprice }}">{{ g.gprice }}</span>
+                    <a href="/cart/add{{ g.id }}_1/" class="add_goods" title="add to cart"></a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
 
-			<div class="pagenation">
+        <div class="pagenation">
 
-                {% if page.has_previous %}
-                    <a href="/list{{ typeinfo.id }}_{{ page.previous_page_number }}_{{ sort }}">Previous page</a>
-                {% endif %}
+            {% if page.has_previous %}
+            <a href="/list{{ typeinfo.id }}_{{ page.previous_page_number }}_{{ sort }}">Previous page</a>
+            {% endif %}
 
-                {% for pindex in paginator.page_range %}
-                    {% if pindex == page.number %}
-                        <a href="/list{{ typeinfo.id }}_{{pindex}}_{{ sort }}" class="active">{{ pindex }}</a>
-                    {% else %}
-                        <a href="/list{{ typeinfo.id }}_{{pindex}}_{{ sort }}">{{ pindex }}</a>
-                    {% endif %}
-                {% endfor %}
+            {% for pindex in paginator.page_range %}
+            {% if pindex == page.number %}
+            <a href="/list{{ typeinfo.id }}_{{pindex}}_{{ sort }}" class="active">{{ pindex }}</a>
+            {% else %}
+            <a href="/list{{ typeinfo.id }}_{{pindex}}_{{ sort }}">{{ pindex }}</a>
+            {% endif %}
+            {% endfor %}
 
-                {% if page.has_next %}
-				<a href="/list{{ typeinfo.id }}_{{ page.next_page_number }}_{{ sort }}">Next Page></a>
-                {% endif %}
-			</div>
-		</div>
-	</div>
+            {% if page.has_next %}
+            <a href="/list{{ typeinfo.id }}_{{ page.next_page_number }}_{{ sort }}">Next Page></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
 
 {% endblock center_content %}
