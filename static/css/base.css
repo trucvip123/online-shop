@@ -102,6 +102,7 @@
   border: none;
   cursor: pointer;
   border-radius: 15px 15px 0 0;
+  width: 180px;
 }
 
 /* The container div - needed to position the dropdown content */
@@ -124,7 +125,7 @@
 /* Links inside the dropdown */
 .dropdown-content a {
   color: black;
-  padding: 12px 16px;
+  padding: 8px 16px;
   text-decoration: none;
   display: block;
 }
@@ -147,9 +148,6 @@
 
 /* Submenu */
 .dropdown-submenu {
-  position: relative;
-  background-color: #e3e2e2;
-  border-bottom: 1px solid silver;
   height: 40px;
 }
 

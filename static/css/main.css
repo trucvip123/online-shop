@@ -196,11 +196,17 @@ body {
 }
 
 .navbar .nav-link {
+	display: inline-block;
 	color: rgb(0, 0, 0);
 	font-family: 'Times New Roman';
-	width: 100px;
+	width: 130px;
 	font-size: 14px;
 	border-radius: 8px;
+}
+
+.navbar-scroll {
+	overflow-x: auto;
+	white-space: nowrap;
 }
 
 .navbar .nav-link:hover {

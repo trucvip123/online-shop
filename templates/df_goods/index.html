@@ -135,7 +135,16 @@
 						</div>
 					</a>
 					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
-					<strong class="prize" id="gprice" data-price="{{ goods.gprice }}">{{ goods.gprice }}₫</strong>
+					<a href="/{{ goods.id }}/">
+						{% if goods.images.all %}
+						<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
+							class="img-fluid rounded">
+						{% else %}
+						<img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
+							alt="Default Img">
+						{% endif %}
+					</a>
+					<div class="prize" data-price="{{ goods.gprice }}"> {{ goods.gprice }} </div>
 				</li>
 				{% endfor %}
 			</ul>
