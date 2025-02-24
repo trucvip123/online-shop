@@ -111,14 +111,11 @@ def good_list(request, category, pindex, sort):
     return render(request, "df_goods/list.html", context)
 
 
-def render_images(value):
-    # Regular expression to find image URLs
-    image_url_pattern = re.compile(r"(https?://\S+\.(?:jpg|jpeg|png|gif))")
-    # Replace image URLs with <img> tags
-    value = image_url_pattern.sub(
-        r'<img src="\1" alt="Image" style="height:400px;">', value
+def convert_urls_to_images(text):
+    url_pattern = re.compile(r"(https?://\S+\.(?:jpg|jpeg|png|gif))")
+    return url_pattern.sub(
+        r'<img src="\1" alt="Image" style="max-width: 100%; height: auto;">', text
     )
-    return mark_safe(value)
 
 
 def detail(request, gid):
@@ -128,11 +125,12 @@ def detail(request, gid):
     goods.save()
 
     # Apply the render_images filter to the goods.gcontent field
-    goods.gcontent = render_images(goods.gcontent)
+    goods.gcontent = convert_urls_to_images(goods.gcontent)
 
     news = goods.gtype.goodsinfo_set.order_by("-id")[0:2]
     context = {
-        "title": goods.gtype.ntitle,
+        "ttitle": goods.gtype.ttitle,
+        "ntitle": goods.gtype.ntitle,
         "guest_cart": 1,
         "cart_num": cart_count(request),
         "goods": goods,

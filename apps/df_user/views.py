@@ -1,8 +1,7 @@
-import os
 import base64
 from pathlib import Path
+import re
 import uuid
-import settings
 
 from decimal import Decimal, InvalidOperation
 from hashlib import sha1
@@ -391,24 +390,14 @@ def add_product_handle(request):
             gprice=price_decimal,
             gcontent=description,
             gtype=category,
-            stock=stock,
+            gkucun=stock,
         )
         # Handle multiple images
         images = request.FILES.getlist("image")
-        print("images:", images)
+        for image in images:
+            ProductImage.objects.create(product=product, image_path=image)
 
-        for i, image in enumerate(images):
-            ProductImage.objects.create(product=product, image_path=images[i])
-
-        goods = GoodsInfo.objects.get(gtitle=name)
-        news = goods.gtype.goodsinfo_set.order_by("-id")[0:2]
-
-        context = {
-            "goods": goods,
-            "news": news,
-        }
-        # return render(request, "df_goods/detail.html", context)
-        return render(request, "df_user/user_center_add_product.html", {"success": 1})
+        return redirect(f"/{product.pk}")
 
     return render(request, "df_user/user_center_add_product.html")
 
@@ -491,18 +480,7 @@ def edit_product_handle(request):
         # Save reference in database
         ProductImage.objects.create(product=product, image_path=file_path)
 
-    # goods = GoodsInfo.objects.get(pk=int(product_id))
-    news = product.gtype.goodsinfo_set.order_by("-id")[0:2]
-
-    context = {
-        "title": product.gtype.ttitle,
-        "guest_cart": 1,
-        "cart_num": cart_count(request),
-        "goods": product,
-        "news": news,
-        "id": product_id,
-    }
-    return render(request, "df_goods/detail.html", context)
+    return redirect(f"/{product_id}")
 
 
 def get_product_details_by_id(request):

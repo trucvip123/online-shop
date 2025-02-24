@@ -3,11 +3,11 @@
 {% block center_body %}
 <script type="text/javascript">
     {% if success %}
-        alert("Category saved successfully!");
-        window.location.href = "{% url 'df_user:manage_type' %}";
+    alert("Category saved successfully!");
+    window.location.href = "{% url 'df_user:manage_type' %}";
     {% endif %}
     {% if error %}
-        alert("{{ error }}");
+    alert("{{ error }}");
     {% endif %}
 
     function addNewType() {
@@ -22,7 +22,7 @@
         csrfToken.name = 'csrfmiddlewaretoken';
         csrfToken.value = '{{ csrf_token }}';
         form.appendChild(csrfToken);
-        
+
         var newTypeInput = document.createElement('input');
         newTypeInput.type = 'hidden';
         newTypeInput.name = 'new_product_type';
@@ -103,14 +103,14 @@
     </div>
     <div class="right_content clearfix">
         <h3 class="common_title2">Mangage categories</h3>
-		<div class="site_con">
+        <div class="site_con">
             <form action="{% url 'df_user:add_new_type' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                
                 <div class="form_group">
                     <label for="new_product_type">Add category:</label>
                     <input class="input_type_add" type="text" name="new_product_type" placeholder="Enter new category">
-                    <input class="input_type_add" type="text" name="new_product_type_name" placeholder="Enter new category name">
+                    <input class="input_type_add" type="text" name="new_product_type_name"
+                        placeholder="Enter new category name">
                     <button class="button_type" type="button" onclick="addNewType()">Submit</button>
                 </div>
 
@@ -123,7 +123,8 @@
 
                 <div class="form_group">
                     <label for="product_type_delete"> Delete category:</label>
-                    <input class="input_type" type="text" name="product_type_delete" placeholder="Enter category to delete">
+                    <input class="input_type" type="text" name="product_type_delete"
+                        placeholder="Enter category to delete">
                     <button class="button_type" type="button" onclick="deleteType()">Submit</button>
                 </div>
             </form>

@@ -1,12 +1,10 @@
 .description {
-	width: 500px;
-	height: 40px;
-	margin-top: 5px;
+    height: 150px;
 }
 
 .product_type {
-	float:left;
-	margin-top: 10px;
+    float: left;
+    margin-top: 10px;
     height: 35px;
 }
 

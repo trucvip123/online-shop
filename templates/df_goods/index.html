@@ -1,10 +1,5 @@
 {% extends 'base.html' %}
 
-{% block head %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-{% endblock head %}
-
 {% block center_body %}
 <div class="body-home">
 	<div class="center_con clearfix">
@@ -114,7 +109,6 @@
 	<div class="list_model">
 		<div class="list_title clearfix">
 			<h3 class="fl" id="model03">Máy giặt</h3>
-
 			<a href="/list12_1_1/" class="goods_more fr">xem thêm ></a>
 		</div>
 
@@ -135,15 +129,6 @@
 						</div>
 					</a>
 					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
-					<a href="/{{ goods.id }}/">
-						{% if goods.images.all %}
-						<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
-							class="img-fluid rounded">
-						{% else %}
-						<img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
-							alt="Default Img">
-						{% endif %}
-					</a>
 					<div class="prize" data-price="{{ goods.gprice }}"> {{ goods.gprice }} </div>
 				</li>
 				{% endfor %}
@@ -152,7 +137,6 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="/static/js/slide.js"></script>
 <script type="text/javascript">
 	BCSlideshow('focuspic');
 	var oFruit = document.getElementById('fruit_more');
