@@ -21,8 +21,8 @@ class GoodsBrowserAdmin(admin.ModelAdmin):
     refresh_times = [3, 5]
 
 
-admin.site.site_header = "Buff Shop backstage management"
-admin.site.site_title = "Buff Shop backstage management"
+admin.site.site_header = "Dien Thanh Liem Shop backstage management"
+admin.site.site_title = "Dien Thanh Liem Shop backstage management"
 
 admin.site.register(UserInfo, UserInfoAdmin)
 admin.site.register(GoodsBrowser, GoodsBrowserAdmin)

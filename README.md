@@ -1,4 +1,4 @@
-## Buff Shop ##
+## Điện Thanh Liêm Shop ##
 
 ### General
 
