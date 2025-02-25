@@ -51,7 +51,7 @@ body {
 }
 
 .search_bar_bg {
-	background-color: #bf0000;
+	background-color: #b1d4ff;
 	width: 100%;
 	position: relative;
 }
@@ -61,18 +61,18 @@ body {
 	margin: 0 auto;
 	display: flex;
 	justify-content: space-between;
-	background-color: #bf0000;
+	background-color: #b1d4ff;
 }
 
 .logo {
-	width: 200px;
-	height: 64px;
+	width: 275px;
+	height: 70px;
 }
 
 .search_con {
 	height: 36px;
 	border: 1px solid rgb(255, 255, 255);
-	margin: 14px 0 0 0;
+	margin-top: 19px;
 	background: url(../images/search_icon.jpg) no-repeat;
 	background-size: 35px 37px;
 	border-radius: 30px;
@@ -107,7 +107,8 @@ body {
 .guest_cart {
 	width: auto;
 	height: 40px;
-	margin-top: 14px;
+	margin-top: 19px;
+	margin-left: 25px;
 }
 
 .guest_cart .cart_name {
@@ -117,7 +118,7 @@ body {
 	align-items: center;
 	/* Center items vertically */
 	font-size: 16px;
-	color: #ffffff;
+	color: #080808;
 	text-decoration: none;
 	font-family: 'Times New Roman';
 }
@@ -128,7 +129,7 @@ body {
 	text-align: center;
 	line-height: 20px;
 	font-size: 13px;
-	color: #fff;
+	color: #080808;
 	background-color: #ff8800;
 	border-radius: 50%;
 	margin: -10px 0 0 -80px
@@ -137,7 +138,7 @@ body {
 .login_btn {
 	width: auto;
 	height: 40px;
-	margin: 14px 0px;
+	margin-top: 18px;
 	font-family: 'Times New Roman';
 	color: white;
 	font-size: 17px;
@@ -145,7 +146,7 @@ body {
 
 .login_btn .login_text {
 	font-size: 16px;
-	color: #ffffff;
+	color: #080808;
 	font-family: 'Times New Roman';
 	text-decoration: none;
 	margin: 0 30px;
@@ -155,7 +156,7 @@ body {
 .login_btn .register_text {
 	line-height: 38px;
 	font-size: 16px;
-	color: #ffffff;
+	color: #080808;
 	font-family: 'Times New Roman';
 	text-decoration: none;
 	margin: 50px 40px 0 40px;
@@ -170,7 +171,7 @@ body {
 	align-items: center;
 	/* Center items vertically */
 	font-size: 16px;
-	color: #ffffff;
+	color: #080808;
 	font-family: 'Times New Roman';
 	text-decoration: none;
 }
@@ -178,13 +179,13 @@ body {
 .user_link {
 	width: auto;
 	height: 40px;
-	margin: 14px 0 0 0;
+	margin-top: 17px;
 }
 
 .user_link .user_info {
 	line-height: 38px;
 	font-size: 16px;
-	color: #ffffff;
+	color: #080808;
 	font-family: 'Times New Roman';
 	text-decoration: none;
 }

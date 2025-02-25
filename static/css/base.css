@@ -94,10 +94,9 @@
 /* Dropdown Button */
 .dropbtn {
   font-family: 'Times New Roman';
-  margin-top: 10px;
-  background-color: #bf0000;
-  color: white;
-  padding: 13px;
+  margin-top: 27px;
+  background-color: #b1d4ff;
+  color: #080808;
   font-size: 16px;
   border: none;
   border-radius: 15px 15px 0 0;
