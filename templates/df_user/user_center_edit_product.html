@@ -50,7 +50,11 @@
 
                 <div class="form_group">
                     <label>Price:</label>
-                    <input type="number" id="price" name="price" step="0.01" value="{{ product.gprice|default:'' }}">
+                    <input class="price" type="number" id="price" name="price" step="0.01"
+                        value="{{ product.gprice|default:'' }}">
+                    <label>Price Old:</label>
+                    <input class="price" type="number" id="price_old" name="price_old" step="0.01"
+                        value="{{ product.gprice_old|default:'' }}">
                 </div>
 
                 <div class="form_group" id="product_description">

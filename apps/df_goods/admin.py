@@ -19,7 +19,6 @@ class GoodsInfoAdmin(admin.ModelAdmin):
         "gunit",
         "gclick",
         "gprice",
-        "gpic",
         "gkucun",
         "gjianjie",
     ]

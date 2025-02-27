@@ -35,6 +35,7 @@ function fetchProductDetails() {
                     document.getElementById('product_name').value = response.product_name;
                     document.getElementById('product_type').value = response.product_type;
                     document.getElementById('price').value = response.price;
+                    document.getElementById('price_old').value = response.price_old;
                     document.getElementById('description').value = response.description;
                     document.getElementById('stock').value = response.stock;
                     updateImagePreview(response.image_urls);

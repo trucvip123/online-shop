@@ -418,8 +418,8 @@ def edit_product_handle(request):
     product_id = request.POST.get("product_id", "").strip()
     name = request.POST.get("product_name", "").strip()
     price = request.POST.get("price", "").strip()
+    price_old = request.POST.get("price_old", "").strip()
     description = request.POST.get("description", "").strip()
-    category = request.POST.get("product_type", "").strip()
     stock = request.POST.get("stock", "").strip()
 
     if not product_id.isdigit():
@@ -433,12 +433,14 @@ def edit_product_handle(request):
 
     try:
         price_decimal = Decimal(price)
+        price_old_decimal = Decimal(price_old)
     except (InvalidOperation, TypeError):
         return HttpResponse("Invalid price format", status=400)
 
     # Update product details
     product.gtitle = name
     product.gprice = price_decimal
+    product.gprice_old = price_old_decimal
     product.gcontent = description
     product.gkucun = stock
     product.save()
@@ -496,6 +498,7 @@ def get_product_details_by_id(request):
             "product_name": product.gtitle,
             "product_type": product.gtype.ttitle,
             "price": str(product.gprice),
+            "price_old": str(product.gprice_old),
             "description": product.gcontent,
             "stock": product.gkucun,
             "image_urls": image_urls,

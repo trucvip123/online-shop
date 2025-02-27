@@ -15,6 +15,11 @@
 				var price = parseFloat(element.getAttribute('data-price'));
 				element.textContent = price.toLocaleString('de-DE') + '₫';
 			});
+			var oldPriceElements = document.querySelectorAll('.old-price');
+			oldPriceElements.forEach(function (element) {
+				var oldPrice = parseFloat(element.getAttribute('data-old-price'));
+				element.textContent = oldPrice.toLocaleString('de-DE') + '₫';
+			});
 		});
 	</script>
 	{% block head %}{% endblock head %}

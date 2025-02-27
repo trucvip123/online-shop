@@ -94,13 +94,14 @@
 /* Dropdown Button */
 .dropbtn {
   font-family: 'Times New Roman';
-  margin-top: 27px;
+  margin-top: 19px;
   background-color: #b1d4ff;
   color: #080808;
   font-size: 16px;
   border: none;
   border-radius: 15px 15px 0 0;
   width: 120px;
+  height: 40px;
 }
 
 /* The container div - needed to position the dropdown content */
@@ -140,8 +141,7 @@
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
-  background-color: #eb1c1c;
-
+  background-color: #ff8800;
 }
 
 /* Submenu */
@@ -157,7 +157,7 @@
   background-color: #f9f9f9;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   border-radius: 0 10px 10px 0;
-  width: 590px;
+  width: 510px;
   height: 280px;
   overflow-x: auto;
 }

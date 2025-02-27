@@ -23,14 +23,11 @@ class TypeInfo(models.Model):
 class GoodsInfo(models.Model):
     isDelete = models.BooleanField(default=False)
     gtitle = models.CharField(max_length=100, verbose_name="goods_name", unique=True)
-    gpic = models.ImageField(
-        verbose_name="goods_pic",
-        upload_to="df_goods/image/%Y/%m",
-        null=True,
-        blank=True,
-    )
     gprice = models.DecimalField(
         max_digits=10, decimal_places=0, verbose_name="goods_price"
+    )
+    gprice_old = models.DecimalField(
+        max_digits=10, decimal_places=0, verbose_name="goods_price_old", default=0
     )
     gunit = models.CharField(max_length=20, default="500g", verbose_name="unit_weight")
     gclick = models.IntegerField(verbose_name="click_count", default=0, null=False)

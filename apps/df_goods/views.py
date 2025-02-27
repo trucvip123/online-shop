@@ -4,7 +4,6 @@ from df_user.models import GoodsBrowser
 from django.contrib.auth.decorators import user_passes_test
 from django.core.paginator import Paginator
 from django.shortcuts import render
-from django.utils.safestring import mark_safe
 
 from .models import GoodsInfo, TypeInfo
 
@@ -136,6 +135,7 @@ def detail(request, gid):
         "goods": goods,
         "news": news,
         "id": good_id,
+        "discount": ((goods.gprice_old - goods.gprice) / goods.gprice_old) * 100,
     }
     response = render(request, "df_goods/detail.html", context)
 

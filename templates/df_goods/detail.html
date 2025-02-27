@@ -139,9 +139,9 @@
             <a href='{% url "df_user:login" %}' class="buy_btn">Mua ngay</a>
             {% endif %}
             {% if request.session.user_name|default:'' != '' %}
-            <a href="javascript:;" class="add_cart" id="add_cart">Thêm Vào Giỏ Hàng</a>
+            <a href="javascript:;" class="add_cart" id="add_cart">Thêm Vào Giỏ</a>
             {% else %}
-            <a href='{% url "df_user:login" %}' class="add_cart" id="add_cart">Thêm Vào Giỏ Hàng</a>
+            <a href='{% url "df_user:login" %}' class="add_cart" id="add_cart">Thêm Vào Giỏ</a>
             {% endif %}
         </div>
     </div>

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block center_body %}
+<link rel="stylesheet" type="text/css" href="/static/css/add.css">
 <script type="text/javascript">
     window.onload = function () {
         {% if success %}
@@ -40,7 +41,8 @@
                     <label for="product_type">Product Type:</label>
                     <select class="product_type" id="product_type" name="product_type">
                         {% for type in types %}
-                        <option value="{{ type.id }}" {% if product and product.gtype and product.gtype.id == type.id %}selected{% endif %}>
+                        <option value="{{ type.id }}" {% if product and product.gtype and product.gtype.id==type.id
+                            %}selected{% endif %}>
                             {{ type.ttitle }}
                         </option>
                         {% endfor %}
