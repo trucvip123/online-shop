@@ -113,7 +113,8 @@ def good_list(request, category, pindex, sort):
 def convert_urls_to_images(text):
     url_pattern = re.compile(r"(https?://\S+\.(?:jpg|jpeg|png|gif))")
     return url_pattern.sub(
-        r'<img src="\1" alt="Image" style="max-width: 100%; height: auto;">', text
+        r'<img src="\1" alt="Image" style="max-width: 100%; height: auto; margin-left: 10px; display: flex">',
+        text,
     )
 
 

@@ -25,12 +25,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
 
-<!-- Bootstrap CSS -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Bootstrap JS và các phụ thuộc -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="/static/css/detail.css">
 
@@ -149,26 +144,32 @@
 
 <div class="main_wrap clearfix">
     <div class="r_wrap fr clearfix">
-        <!-- Tabs -->
-        <ul class="nav nav-tabs" id="productTab" role="tablist">
+        <!-- Tabs Navigation -->
+        <ul class="nav nav-tabs" id="productTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab"
-                    aria-controls="description" aria-selected="true">Mô tả</a>
+                <button class="nav-link active" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs"
+                    type="button" role="tab" aria-controls="specs" aria-selected="false">
+                    Thông số kỹ thuật
+                </button>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="specifications-tab" data-bs-toggle="tab" href="#specifications" role="tab"
-                    aria-controls="specifications" aria-selected="false">Thông số kỹ thuật</a>
+                <button class="nav-link" id="description-tab" data-bs-toggle="tab" data-bs-target="#description"
+                    type="button" role="tab" aria-controls="description" aria-selected="true">
+                    Bài viết đánh giá
+                </button>
             </li>
-            <!-- Các tab khác nếu có -->
         </ul>
-        <div class="tab-content" id="productTabContent">
-            <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                <p>{{ product.description }}</p>
+
+        <!-- Tabs Content -->
+        <div class="tab-content mt-3">
+            <div class="tab-pane fade show active" id="specs" role="tabpanel" aria-labelledby="specs-tab">
+                <p>Nội dung thông số kỹ thuật.</p>
             </div>
-            <div class="tab-pane fade" id="specifications" role="tabpanel" aria-labelledby="specifications-tab">
-                <p>{{ product.specifications }}</p>
+            <div class="tab-pane fade" id="description" role="tabpanel" aria-labelledby="description-tab">
+                <dl>
+                    <dd>{{ goods.gcontent|safe|linebreaks }}</dd>
+                </dl>
             </div>
-            <!-- Nội dung các tab khác nếu có -->
         </div>
     </div>
 </div>
@@ -222,7 +223,5 @@
     })
 
 </script>
-
-
 
 {% endblock center_content %}
