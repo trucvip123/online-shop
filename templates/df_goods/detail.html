@@ -24,6 +24,14 @@
 <!-- PhotoSwipe JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap JS và các phụ thuộc -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="/static/css/detail.css">
 
 <style>
@@ -133,30 +141,34 @@
             <span class="show_unit"><span class="goods_kucun">{{ goods.gkucun }} sản phẩm có sẵn</span></span>
         </div>
         <div class="operate_btn">
-            {% if request.session.user_name|default:'' != '' %}
             <a href="javascript:;" class="buy_btn" id="buy_now">Mua ngay</a>
-            {% else %}
-            <a href='{% url "df_user:login" %}' class="buy_btn">Mua ngay</a>
-            {% endif %}
-            {% if request.session.user_name|default:'' != '' %}
             <a href="javascript:;" class="add_cart" id="add_cart">Thêm Vào Giỏ</a>
-            {% else %}
-            <a href='{% url "df_user:login" %}' class="add_cart" id="add_cart">Thêm Vào Giỏ</a>
-            {% endif %}
         </div>
     </div>
 </div>
 
 <div class="main_wrap clearfix">
     <div class="r_wrap fr clearfix">
-        <ul class="detail_tab clearfix">
-            <li class="active">Bài viết đánh giá</li>
+        <!-- Tabs -->
+        <ul class="nav nav-tabs" id="productTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab"
+                    aria-controls="description" aria-selected="true">Mô tả</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="specifications-tab" data-bs-toggle="tab" href="#specifications" role="tab"
+                    aria-controls="specifications" aria-selected="false">Thông số kỹ thuật</a>
+            </li>
+            <!-- Các tab khác nếu có -->
         </ul>
-
-        <div class="tab_content">
-            <dl>
-                <dd>{{ goods.gcontent|safe|linebreaks }}</dd>
-            </dl>
+        <div class="tab-content" id="productTabContent">
+            <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                <p>{{ product.description }}</p>
+            </div>
+            <div class="tab-pane fade" id="specifications" role="tabpanel" aria-labelledby="specifications-tab">
+                <p>{{ product.specifications }}</p>
+            </div>
+            <!-- Nội dung các tab khác nếu có -->
         </div>
     </div>
 </div>
@@ -195,6 +207,22 @@
     '{{ MEDIA_URL }}{{ image.image_path }}',
         {% endfor %}
         ];
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var triggerTabList = [].slice.call(document.querySelectorAll('#productTab a'))
+        triggerTabList.forEach(function (triggerEl) {
+            var tabTrigger = new bootstrap.Tab(triggerEl)
+
+            triggerEl.addEventListener('click', function (event) {
+                event.preventDefault()
+                tabTrigger.show()
+            })
+        })
+    })
+
 </script>
+
+
 
 {% endblock center_content %}
