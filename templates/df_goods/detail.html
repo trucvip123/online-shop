@@ -136,10 +136,10 @@
             <span class="show_unit"><span class="goods_kucun">{{ goods.gkucun }} sản phẩm có sẵn</span></span>
         </div>
         <div class="operate_btn">
-            <a href="javascript:;" class="add_cart" id="add_cart">
+            <a href="javascript:;" class="add_cart" id="add_cart" data-product-id="{{ goods.id }}">
                 <i class="fa fa-shopping-cart" style="font-size:20px; margin-right: 10px;"></i>Thêm Vào Giỏ
-                <a href="javascript:;" class="buy_btn" id="buy_now">Mua ngay</a>
             </a>
+            <a href="javascript:;" class="buy_btn" id="buy_now" data-product-id="{{ goods.id }}">Mua ngay</a>
         </div>
     </div>
 </div>
@@ -211,7 +211,7 @@
         {% endfor %}
     ];
     var productId = "{{ id }}";
-    
+
     document.addEventListener('DOMContentLoaded', function () {
         var triggerTabList = [].slice.call(document.querySelectorAll('#productTab a'))
         triggerTabList.forEach(function (triggerEl) {

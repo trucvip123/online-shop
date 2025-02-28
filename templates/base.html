@@ -10,6 +10,16 @@
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/static/js/slide.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		// Initialize show_count from local storage
+		let storedCount = localStorage.getItem('show_count');
+		if (storedCount) {
+			$('#show_count').text(storedCount);
+		}
+		else { $('#show_count').text('0'); }
+	});
+</script>
 {% endblock head %}
 
 {% block body %}
@@ -544,14 +554,12 @@
 			<input type="button" class="input_btn fr" name="" value="Tìm">
 		</div>
 
-		{% if guest_cart == 1 %}
 		<div class="guest_cart fr">
 			<a href='{% url "df_cart:cart" %}' class="cart_name fl">
 				<i class="fa fa-shopping-cart" style="font-size:20px; margin-right: 10px;"></i>Giỏ hàng
 			</a>
 			<div class="goods_count fl" id="show_count">{{ cart_num }}</div>
 		</div>
-		{% endif %}
 
 		{# Check if logged in #}
 		{% if request.session.user_name|default:'' != '' %}
@@ -578,99 +586,95 @@
 	</div>
 </div>
 
-
-<!--    small_cart-->
-<div class="small_cart">
-	<div class="close">
-		<span class="close_icon"> <img style=' width:13px;height:13px' src="/static/images/close.png"></span>
-		</div>
-		<div class="statement">
-			<p>Item has been successfully added to cart!</p>
-			<p>There are <span id="num">{{cart_num}}</span> items in the cart.</p>
-		</div>
-		<div class="option">
-			<button class="continue">Continue</button>
-			<a href='{% url "df_cart:cart" %}'>View Chart</a>
-	</div>
-</div>
-<div class="cart_mask"> </div>
-
 <nav class="navbar navbar-expand-md navbar-light bg-light">
 	<div class="container-fluid overflow-auto">
 		<a class="navbar-brand" href="#"></a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<div class="col">
 				<a class="nav-link text-center" href="/list7_1_1/">
-					<img class="lazy-menu" alt="Đèn trang trí" width="45px" height="45px" src="https://cdn-icons-png.flaticon.com/128/1171/1171672.png">
+					<img class="lazy-menu" alt="Đèn trang trí" width="45px" height="45px"
+						src="https://cdn-icons-png.flaticon.com/128/1171/1171672.png">
 					<p>Đèn trang trí</p>
 				</a>
 			</div>
 			<div class="col">
 				<a class="nav-link text-center" href="/may-giat_1_1/">
-					<img class="lazy-menu" alt="Máy giặt" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/36/c9/36c96df469724206fb6f36b4fc519e65.png">
+					<img class="lazy-menu" alt="Máy giặt" width="45px" height="45px"
+						src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/36/c9/36c96df469724206fb6f36b4fc519e65.png">
 					<p>Máy giặt</p>
 				</a>
 			</div>
 			<div class="col">
 				<a class="nav-link text-center" href="/dien-thoai_1_1/">
-					<img class="lazy-menu" alt="Điện thoại" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/ed/ed/eded909b8116724d0e407ef0d87f936b.png">
+					<img class="lazy-menu" alt="Điện thoại" width="45px" height="45px"
+						src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/ed/ed/eded909b8116724d0e407ef0d87f936b.png">
 					<p>Điện thoại</p>
 				</a>
 			</div>
 			<div class="col">
 				<a class="nav-link text-center" href="/laptop_1_1/">
-					<img class="lazy-menu" alt="Laptop" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/6d/a3/6da36387eabd2db057b0a216f8499c24.png">
+					<img class="lazy-menu" alt="Laptop" width="45px" height="45px"
+						src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/6d/a3/6da36387eabd2db057b0a216f8499c24.png">
 					<p>Laptop</p>
 				</a>
 			</div>
 			<div class="col">
 				<a class="nav-link text-center" href="/tivi_1_1/">
-					<img class="lazy-menu" alt="Tivi" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/b2/94/b29491c0fa65ea5a6c08856cc17b15a0.png">
+					<img class="lazy-menu" alt="Tivi" width="45px" height="45px"
+						src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/b2/94/b29491c0fa65ea5a6c08856cc17b15a0.png">
 					<p>Tivi</p>
 				</a>
 			</div>
 			<div class="col">
 				<a class="nav-link text-center" href="/may-nuoc-nong_1_1/">
-					<img class="lazy-menu" alt="Máy nước nóng" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/7b/dd/7bdde1faea75f04d58001102d43d1191.png">
+					<img class="lazy-menu" alt="Máy nước nóng" width="45px" height="45px"
+						src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/7b/dd/7bdde1faea75f04d58001102d43d1191.png">
 					<p>Máy nước nóng</p>
 				</a>
 			</div>
 			<div class="col">
 				<a class="nav-link text-center" href="/may-loc-nuoc_1_1/">
-					<img class="lazy-menu" alt="Máy lọc nước" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/3c/2f/3c2f82dd62f6a3f7d1237500b771b10e.png">
+					<img class="lazy-menu" alt="Máy lọc nước" width="45px" height="45px"
+						src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/3c/2f/3c2f82dd62f6a3f7d1237500b771b10e.png">
 					<p>Máy lọc nước</p>
 				</a>
 			</div>
 			<div class="col">
 				<a class="nav-link text-center" href="/tu-lanh_1_1/">
-					<img class="lazy-menu" alt="Tủ lạnh" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/fe/04/fe04b1635dc68b0ec71d9982b1dc8960.png">
+					<img class="lazy-menu" alt="Tủ lạnh" width="45px" height="45px"
+						src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/fe/04/fe04b1635dc68b0ec71d9982b1dc8960.png">
 					<p>Tủ lạnh</p>
 				</a>
 			</div>
 			<div class="col">
 				<a class="nav-link text-center" href="/may-lanh_1_1/">
-					<img class="lazy-menu" alt="Máy lạnh" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/82/ab/82ab6158a6b5e938c11e9ebf1d05aae3.png">
+					<img class="lazy-menu" alt="Máy lạnh" width="45px" height="45px"
+						src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/82/ab/82ab6158a6b5e938c11e9ebf1d05aae3.png">
 					<p>Máy lạnh</p>
 				</a>
 			</div>
 			<div class="col">
 				<a class="nav-link text-center" href="/noi_com_dien_1_1/">
-					<img class="lazy-menu" alt="Nồi cơm điện" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/d5/1e/d51e5201e53a26de69a15ffc06bddbf3.png">
+					<img class="lazy-menu" alt="Nồi cơm điện" width="45px" height="45px"
+						src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/d5/1e/d51e5201e53a26de69a15ffc06bddbf3.png">
 					<p>Nồi cơm điện</p>
 				</a>
 			</div>
 			<div class="col">
 				<a class="nav-link text-center" href="/noi_chien_khong_dau_1_1/">
-					<img class="lazy-menu" alt="Nồi cơm điện" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/42/bd/42bd2773f3df315ae77d4467e9617f5c.png">
+					<img class="lazy-menu" alt="Nồi cơm điện" width="45px" height="45px"
+						src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/42/bd/42bd2773f3df315ae77d4467e9617f5c.png">
 					<p>Nồi chiên không dầu</p>
 				</a>
 			</div>
 			<div class="col">
 				<a class="nav-link text-center" href="/May_ep_trai_cay_1_1/">
-					<img class="lazy-menu" alt="Nồi cơm điện" width="45px" height="45px" src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/7c/b0/7cb0aa7b446b5d319a7cb646df143faa.png">
+					<img class="lazy-menu" alt="Nồi cơm điện" width="45px" height="45px"
+						src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/7c/b0/7cb0aa7b446b5d319a7cb646df143faa.png">
 					<p>Máy ép trái cây</p>
 				</a>
 			</div>

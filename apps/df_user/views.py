@@ -21,6 +21,7 @@ from django.shortcuts import (
     render,
     reverse,
 )
+from django.db.models import Sum
 
 from . import user_decorator
 from .models import GoodsBrowser, UserInfo
@@ -406,7 +407,9 @@ def add_product_handle(request):
 
 def cart_count(request):
     if "user_id" in request.session:
-        return CartInfo.objects.filter(user_id=request.session["user_id"]).count
+        return CartInfo.objects.filter(user_id=request.session["user_id"]).aggregate(
+            Sum("count")
+        )["count__sum"]
     else:
         return 0
 

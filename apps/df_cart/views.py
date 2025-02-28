@@ -1,34 +1,27 @@
 from df_user import user_decorator
 from django.http import JsonResponse
 from django.shortcuts import redirect, render, reverse
+from django.db.models import Sum
 
 from .models import *
 
-# edit the cart by adding , reducing and deleting
-
 
 @user_decorator.login
-## The method decorator pattern is applied here.
-## The method is wrapped by the login function to ensure that the user is logged in
-## If the user is not logged in, the user will be redirected to the login page
-## This method is used to display the shopping cart
 def user_cart(request):
     uid = request.session["user_id"]
     carts = CartInfo.objects.filter(user_id=uid)
-    context = {"title": "Shopping Cart", "page_name": 1, "carts": carts}
     if request.headers.get("x-requested-with") == "XMLHttpRequest":
-        count = CartInfo.objects.filter(user_id=request.session["user_id"]).count()
+        count = CartInfo.objects.filter(user_id=request.session["user_id"]).aggregate(
+            Sum("count")
+        )["count__sum"]
         # How many items the current user purchased
         return JsonResponse({"count": count})
     else:
+        context = {"title": "Shopping Cart", "page_name": 1, "carts": carts}
         return render(request, "df_cart/cart.html", context)
 
 
 @user_decorator.login
-## The method decorator pattern is applied here.
-## The method is wrapped by the login function to ensure that the user is logged in
-## If the user is not logged in, the user will be redirected to the login page
-## This method is used to add items to the shopping cart
 def add(request, gid, count):
     uid = request.session["user_id"]
     gid, count = int(gid), int(count)
@@ -45,19 +38,18 @@ def add(request, gid, count):
         cart.count = count
     cart.save()
 
+    count = CartInfo.objects.filter(user_id=uid).aggregate(Sum("count"))["count__sum"]
+    print(f"count in add: {count}")
     if request.headers.get("x-requested-with") == "XMLHttpRequest":
-        count = CartInfo.objects.filter(user_id=request.session["user_id"]).count()
-
         return JsonResponse({"count": count})
     else:
-        return redirect(reverse("df_cart:cart"))
+        context = {
+            "cart_num": count,
+        }
+        return render(request, "df_cart/cart.html", context)
 
 
 @user_decorator.login
-## The method decorator pattern is applied here.
-## The method is wrapped by the login function to ensure that the user is logged in
-## If the user is not logged in, the user will be redirected to the login page
-## This method is used to modify the quantity of the shopping cart
 def edit(request, cart_id, count):
     data = {}
     try:
@@ -71,10 +63,6 @@ def edit(request, cart_id, count):
 
 
 @user_decorator.login
-## The method decorator pattern is applied here.
-## The method is wrapped by the login function to ensure that the user is logged in
-## If the user is not logged in, the user will be redirected to the login page
-## This method is used to delete the items in the shopping cart
 def delete(request, cart_id):
     data = {}
     try:

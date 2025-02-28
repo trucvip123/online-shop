@@ -4,6 +4,7 @@ from df_user.models import GoodsBrowser
 from django.contrib.auth.decorators import user_passes_test
 from django.core.paginator import Paginator
 from django.shortcuts import render
+from django.db.models import Sum
 
 from .models import GoodsInfo, TypeInfo
 
@@ -28,7 +29,9 @@ def index(request):
     # if request.session.has_key('user_id'):
     if "user_id" in request.session:
         user_id = request.session["user_id"]
-        cart_num = CartInfo.objects.filter(user_id=int(user_id)).count()
+        cart_num = CartInfo.objects.filter(user_id=int(user_id)).aggregate(
+            Sum("count")
+        )["count__sum"]
 
     context = {
         "title": "HOME",
@@ -59,7 +62,9 @@ def good_list(request, category, pindex, sort):
         user_id = None
     if user_id:
         guest_cart = 1
-        cart_num = CartInfo.objects.filter(user_id=int(user_id)).count()
+        cart_num = CartInfo.objects.filter(user_id=int(user_id)).aggregate(
+            Sum("count")
+        )["count__sum"]
 
     if sort == "1":  # default(from the newest)
         goods_list = GoodsInfo.objects.filter(gtype_id=int(typeinfo.id)).order_by("-id")
@@ -149,7 +154,10 @@ def detail(request, gid):
 
 def cart_count(request):
     if "user_id" in request.session:
-        return CartInfo.objects.filter(user_id=request.session["user_id"]).count
+        cart_num = CartInfo.objects.filter(
+            user_id=request.session["user_id"]
+        ).aggregate(Sum("count"))["count__sum"]
+        return cart_num
     else:
         return 0
 
@@ -171,7 +179,10 @@ def ordinary_search(request):
 
     if user_id:
         guest_cart = 1
-        cart_num = CartInfo.objects.filter(user_id=int(user_id)).count()
+        cart_num = CartInfo.objects.filter(user_id=int(user_id)).aggregate(
+            Sum("count")
+        )["count__sum"]
+        print("cart_num:", cart_num)
 
     goods_list = GoodsInfo.objects.filter(
         Q(gtitle__icontains=search_keywords)
