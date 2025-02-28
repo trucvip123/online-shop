@@ -364,6 +364,7 @@ def add_product_handle(request):
         # Get product data from the form
         name = request.POST.get("product_name")
         price = request.POST.get("price")
+        price_old = request.POST.get("price_old")
         description = request.POST.get("description")
         type_id = request.POST.get("product_type")
         stock = request.POST.get("stock")
@@ -388,6 +389,7 @@ def add_product_handle(request):
         product = GoodsInfo.objects.create(
             gtitle=name,
             gprice=price_decimal,
+            gprice_old=price_old,
             gcontent=description,
             gtype=category,
             gkucun=stock,

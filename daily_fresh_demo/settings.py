@@ -1,5 +1,11 @@
 import os
 import sys
+from dotenv import load_dotenv
+from urllib.parse import urlparse
+
+
+load_dotenv()
+tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BASE_DIR, "apps"))
@@ -81,11 +87,11 @@ WSGI_APPLICATION = "daily_fresh_demo.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "koyebdb",
-        "USER": "koyeb-adm",
-        "PASSWORD": "npg_SBTKxkYc4Hi1",
-        "HOST": "ep-autumn-lab-a1xtjr7w.ap-southeast-1.pg.koyeb.app",
-        "OPTIONS": {"sslmode": "require"},
+        "NAME": tmpPostgres.path.replace("/", ""),
+        "USER": tmpPostgres.username,
+        "PASSWORD": tmpPostgres.password,
+        "HOST": tmpPostgres.hostname,
+        "PORT": 5432,
     }
 }
 

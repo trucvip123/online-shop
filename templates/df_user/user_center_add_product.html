@@ -41,9 +41,8 @@
                     <label for="product_type">Product Type:</label>
                     <select class="product_type" id="product_type" name="product_type">
                         {% for type in types %}
-                        <option value="{{ type.id }}" {% if product and product.gtype and product.gtype.id==type.id
-                            %}selected{% endif %}>
-                            {{ type.ttitle }}
+                        <option value="{{ type.id }}" {% if product and product.gtype and product.gtype.id == type.id%}selected{% endif %}>
+                            {{ type.ntitle }}
                         </option>
                         {% endfor %}
                     </select>
@@ -51,7 +50,11 @@
 
                 <div class="form_group">
                     <label>Price:</label>
-                    <input type="number" name="price" step="0.01" value="{{ product.price|default:'' }}" required>
+                    <input class="price" type="number" id="price" name="price" step="0.01"
+                        value="{{ product.gprice|default:'' }}">
+                    <label>Price Old:</label>
+                    <input class="price" type="number" id="price_old" name="price_old" step="0.01"
+                        value="{{ product.gprice_old|default:'' }}">
                 </div>
 
                 <div class="form_group" id="product_description">

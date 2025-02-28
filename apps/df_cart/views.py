@@ -16,7 +16,7 @@ def user_cart(request):
     uid = request.session["user_id"]
     carts = CartInfo.objects.filter(user_id=uid)
     context = {"title": "Shopping Cart", "page_name": 1, "carts": carts}
-    if request.is_ajax():
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
         count = CartInfo.objects.filter(user_id=request.session["user_id"]).count()
         # How many items the current user purchased
         return JsonResponse({"count": count})
@@ -32,6 +32,7 @@ def user_cart(request):
 def add(request, gid, count):
     uid = request.session["user_id"]
     gid, count = int(gid), int(count)
+    print(f"uid: {uid}, gid: {gid}, count: {count},")
     # Check if there is already this product in the shopping cart, if so, increase the quantity, if not, add it
     carts = CartInfo.objects.filter(user_id=uid, goods_id=gid)
     if len(carts) >= 1:
@@ -44,7 +45,7 @@ def add(request, gid, count):
         cart.count = count
     cart.save()
 
-    if request.is_ajax():
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
         count = CartInfo.objects.filter(user_id=request.session["user_id"]).count()
 
         return JsonResponse({"count": count})

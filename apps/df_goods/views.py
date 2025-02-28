@@ -14,21 +14,14 @@ def index(request):
     typelist = TypeInfo.objects.all()
     goodsinfo = GoodsInfo.objects.all()
 
-    type = goodsinfo.order_by("-id")[:8]
-    type0 = typelist[0].goodsinfo_set.order_by("-id")[0:8]  # according to new arrival
-    type01 = typelist[0].goodsinfo_set.order_by("-gclick")[0:8]  # according to clicks
-    type1 = typelist[1].goodsinfo_set.order_by("-id")[0:8]
-    type11 = typelist[1].goodsinfo_set.order_by("-gclick")[0:8]
-    type2 = typelist[2].goodsinfo_set.order_by("-id")[0:8]
-    type21 = typelist[2].goodsinfo_set.order_by("-gclick")[0:8]
-    type3 = typelist[3].goodsinfo_set.order_by("-id")[0:8]
-    type31 = typelist[3].goodsinfo_set.order_by("-gclick")[0:8]
-    type4 = typelist[4].goodsinfo_set.order_by("-id")[0:8]
-    type41 = typelist[4].goodsinfo_set.order_by("-gclick")[0:8]
-    type5 = typelist[5].goodsinfo_set.order_by("-id")[0:8]
-    type51 = typelist[5].goodsinfo_set.order_by("-gclick")[0:8]
-
-    type100 = goodsinfo.order_by("-gclick")[:8]
+    type = type0 = type41 = type51 = type100 = []
+    if typelist:
+        type = goodsinfo.order_by("-id")[:8]
+        type0 = typelist[0].goodsinfo_set.order_by("-id")[
+            0:8
+        ]  # according to new arrival
+        type41 = typelist[1].goodsinfo_set.order_by("-gclick")[0:8]
+        type100 = goodsinfo.order_by("-gclick")[:8]
 
     cart_num = 0
     # check if login
@@ -42,17 +35,7 @@ def index(request):
         "cart_num": cart_num,
         "guest_cart": 1,
         "type0": type,
-        "type01": type01,
-        "type1": type1,
-        "type11": type11,
-        "type2": type2,
-        "type21": type21,
-        "type3": type3,
-        "type31": type31,
-        "type4": type4,
         "type41": type41,
-        "type5": type5,
-        "type51": type51,
         "type100": type100,
     }
 

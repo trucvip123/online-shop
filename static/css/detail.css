@@ -150,8 +150,7 @@
     position: relative;
 }
 
-.operate_btn .buy_btn,
-.operate_btn .add_cart {
+.operate_btn .buy_btn {
     display: inline-block;
     width: 190px;
     height: 50px;
@@ -161,13 +160,19 @@
     background-color: #fc7600;
     text-decoration: none;
     border-radius: 8px;
-    font: 15px/50px Arial, Helvetica, sans-serif
+    font: 15px/50px Arial, Helvetica, sans-serif;
+    margin-left: 10px;
 }
 
 .operate_btn .add_cart {
-    margin-left: 10px;
-    position: relative;
-    z-index: 10;
+    display: inline-block;
+    width: 190px;
+    height: 50px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    font: 15px/50px Arial, Helvetica, sans-serif;
+    border: 1px solid #000afc;
 }
 
 

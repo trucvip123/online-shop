@@ -136,8 +136,10 @@
             <span class="show_unit"><span class="goods_kucun">{{ goods.gkucun }} sản phẩm có sẵn</span></span>
         </div>
         <div class="operate_btn">
-            <a href="javascript:;" class="buy_btn" id="buy_now">Mua ngay</a>
-            <a href="javascript:;" class="add_cart" id="add_cart">Thêm Vào Giỏ</a>
+            <a href="javascript:;" class="add_cart" id="add_cart">
+                <i class="fa fa-shopping-cart" style="font-size:20px; margin-right: 10px;"></i>Thêm Vào Giỏ
+                <a href="javascript:;" class="buy_btn" id="buy_now">Mua ngay</a>
+            </a>
         </div>
     </div>
 </div>
@@ -205,16 +207,15 @@
     // Array of image URLs
     var imageUrls = [
         {% for image in goods.images.all %}
-    '{{ MEDIA_URL }}{{ image.image_path }}',
+            '{{ MEDIA_URL }}{{ image.image_path }}',
         {% endfor %}
-        ];
-
-
+    ];
+    var productId = "{{ id }}";
+    
     document.addEventListener('DOMContentLoaded', function () {
         var triggerTabList = [].slice.call(document.querySelectorAll('#productTab a'))
         triggerTabList.forEach(function (triggerEl) {
             var tabTrigger = new bootstrap.Tab(triggerEl)
-
             triggerEl.addEventListener('click', function (event) {
                 event.preventDefault()
                 tabTrigger.show()
