@@ -26,11 +26,13 @@
 <div class="search_bar_bg">
 	<div class="search_bar clearfix">
 		<a href="/" class="logo fl">
-			<img style="max-width:100%;overflow:hidden;" img src="/static/images/logo.png">
+			<img img src="/static/images/logo.png">
 		</a>
 		<!-- Dropdown Button -->
 		<div class="dropdown fl">
-			<button class="dropbtn"><i class="fa fa-bars fa-lg"></i> Danh mục</button>
+			<button class="dropbtn"><i class="fa fa-bars fa-lg"></i>
+				<p>Danh mục</p>
+			</button>
 			<div class="dropdown-content">
 				<!-- Service 1 with Submenu -->
 				<div class="dropdown-submenu">
@@ -555,7 +557,8 @@
 
 		<div class="guest_cart fr">
 			<a href='{% url "df_cart:cart" %}' class="cart_name fl">
-				<i class="fa fa-shopping-cart" style="font-size:20px; margin-right: 10px;"></i>Giỏ hàng
+				<i class="fa fa-shopping-cart"></i>
+				<p>Giỏ hàng</p>
 			</a>
 			<div class="goods_count fl" id="show_count">{{ cart_num }}</div>
 		</div>
