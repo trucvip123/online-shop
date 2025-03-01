@@ -34,7 +34,7 @@ def index(request):
         )["count__sum"]
 
     context = {
-        "title": "HOME",
+        "title": "Mua bán điện tử, điện lạnh, điện gia dụng",
         "cart_num": cart_num,
         "guest_cart": 1,
         "type0": type,
