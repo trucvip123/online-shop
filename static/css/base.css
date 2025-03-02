@@ -569,6 +569,7 @@
 
   .navbar .nav-link {
     width: 75px;
+    white-space: normal;
   }
 
   .dropdown-content {

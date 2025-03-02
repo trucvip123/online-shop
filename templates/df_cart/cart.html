@@ -57,8 +57,6 @@
             cart_id = $(this).parents('.cart_list_td').attr('id');
             $.get('/cart/edit' + cart_id + '_' + count + '/', function (data) {
                 if (data.count == 0) {
-
-                    {#                    alert('ok');# }
                     total();
                 }
                 else {
@@ -73,10 +71,7 @@
 
         if (del) {
             $.get('/cart/delete' + cart_id + '/', function (data) {
-                {#                    alert(data.ok);# }
                 if (data.ok == 1) {
-
-
                     $('ul').remove('#' + cart_id);
                     total();
                 }
@@ -142,7 +137,10 @@
 {% for cart in carts %}
 <ul class="cart_list_td clearfix" id="{{ cart.id }}">
     <li class="col01"><input type="checkbox" name="" id="check_goods" checked="checked"></li>
-    <li class="col02"><img src="{{ MEDIA_URL }}{{ cart.goods.gpic }}"></li>
+    <li class="col02">
+        <img src="{{ MEDIA_URL }}{{ cart.goods.images.all.0.image_path }}" class="img-fluid rounded"
+            onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
+    </li>
     <li class="col03">{{ cart.goods.gtitle }}<br><em>${{ cart.goods.gprice }}</em><br><em>In Stock：<span
                 id="goods_kucun">{{ cart.goods.gkucun }}</span></em></li>
     {# <li class="col04">{{ cart.goods.gunit }}</li>#}

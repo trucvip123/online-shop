@@ -10,14 +10,19 @@ from .models import *
 def user_cart(request):
     uid = request.session["user_id"]
     carts = CartInfo.objects.filter(user_id=uid)
+    count = CartInfo.objects.filter(user_id=request.session["user_id"]).aggregate(
+        Sum("count")
+    )["count__sum"]
     if request.headers.get("x-requested-with") == "XMLHttpRequest":
-        count = CartInfo.objects.filter(user_id=request.session["user_id"]).aggregate(
-            Sum("count")
-        )["count__sum"]
         # How many items the current user purchased
-        return JsonResponse({"count": count})
+        return JsonResponse({"count": count, "cart_num": count})
     else:
-        context = {"title": "Shopping Cart", "page_name": 1, "carts": carts}
+        context = {
+            "title": "Shopping Cart",
+            "page_name": 1,
+            "carts": carts,
+            "cart_num": count,
+        }
         return render(request, "df_cart/cart.html", context)
 
 
