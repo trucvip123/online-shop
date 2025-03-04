@@ -1,13 +1,91 @@
 {% extends 'base.html' %}
 
 {% block center_body %}
-
+<link rel="stylesheet" type="text/css" href="/static/css/user_info.css">
 <script type="text/javascript">
-    if ({{ success }}== 1) {
+    document.addEventListener('DOMContentLoaded', function () {
+        let success = parseInt("{{ success|default:'0' }}", 10);
+        if (success === 1) {
+            alert("Cập nhật thông tin cá nhân thành công");
+        }
 
+        // Fetch provinces
+        fetch('https://open.oapi.vn/location/provinces')
+            .then(response => response.json())
+            .then(data => {
+                const provinceSelect = document.getElementById('province');
+                provinceSelect.innerHTML = '<option value="">Chọn Tỉnh</option>'; // Default option
+                data.data.forEach(province => {
+                    const option = document.createElement('option');
+                    option.value = province.id;
+                    option.textContent = province.name;
+                    provinceSelect.appendChild(option);
+                });
 
-        alert("modify successfully")
-    }
+                // Giữ lại tỉnh đã chọn trước đó
+                provinceSelect.addEventListener('change', function () {
+                    let selectedOption = provinceSelect.options[provinceSelect.selectedIndex];
+                    document.getElementById('province_name').value = selectedOption.textContent;
+                    fetchDistricts(this.value);
+                });
+            })
+            .catch(error => console.error('Lỗi khi lấy danh sách tỉnh:', error));
+
+        // Xử lý khi chọn tỉnh
+        document.getElementById('province').addEventListener('change', function () {
+            fetchDistricts(this.value);
+        });
+
+        function fetchDistricts(provinceId) {
+            if (!provinceId) return;
+            fetch(`https://open.oapi.vn/location/districts/${provinceId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const districtSelect = document.getElementById('district');
+                    districtSelect.innerHTML = '<option value="">Chọn Huyện</option>';
+                    data.data.forEach(district => {
+                        const option = document.createElement('option');
+                        option.value = district.id;
+                        option.textContent = district.name;
+                        districtSelect.appendChild(option);
+                    });
+
+                    districtSelect.addEventListener('change', function () {
+                        let selectedOption = districtSelect.options[districtSelect.selectedIndex];
+                        document.getElementById('district_name').value = selectedOption.textContent;
+                        fetchCommunes(this.value);
+                    });
+                })
+                .catch(error => console.error('Lỗi khi lấy danh sách huyện:', error));
+        }
+
+        // Xử lý khi chọn huyện
+        document.getElementById('district').addEventListener('change', function () {
+            fetchCommunes(this.value);
+        });
+
+        function fetchCommunes(districtId) {
+            if (!districtId) return;
+            fetch(`https://open.oapi.vn/location/wards/${districtId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const communeSelect = document.getElementById('commune');
+                    communeSelect.innerHTML = '<option value="">Chọn Xã</option>';
+                    data.data.forEach(commune => {
+                        const option = document.createElement('option');
+                        option.value = commune.id;
+                        option.textContent = commune.name;
+                        communeSelect.appendChild(option);
+                    });
+
+                    communeSelect.addEventListener('change', function () {
+                        let selectedOption = communeSelect.options[communeSelect.selectedIndex];
+                        document.getElementById('commune_name').value = selectedOption.textContent;
+                    });
+                })
+                .catch(error => console.error('Lỗi khi lấy danh sách xã:', error));
+        }
+    });
 </script>
 
 <div class="main_con clearfix">
@@ -24,31 +102,44 @@
     </div>
     <div class="right_content clearfix">
         <div class="info_con clearfix">
-            <h3 class="common_title2">Basic Information</h3>
+            <h3 class="common_title2">THÔNG TIN CÁ NHÂN</h3>
             <form action='{% url "df_user:info_reset" %}' id='reg_form' method="post">
                 {% csrf_token %}
-
                 <ul class="user_info_list">
                     <li><span>Tên đăng nhập</span>{{ user_name }}</li>
-
                     <li><span>Tên đầy đủ</span>
-                        <input type="text" name="fullname" class="contact" value="{{ user_full_name}}" id="email">
+                        <input type="text" name="fullname" class="contact" value="{{ user_full_name}}">
                     </li>
-
-                    <li><span>Email</span>
-                        <input type="text" name="email" class="nam" value="{{user_email}}" id="email">
-                    </li>
-
                     <li><span>Số điện thoại</span>
-                        <input type="text" name="phone" class="contact" value="{{user_phone}}" id="email">
+                        <input type="text" name="phone" class="contact" value="{{user_phone}}">
                     </li>
-
+                    <li><span>Tỉnh</span>
+                        <select name="province" id="province" class="contact" required>
+                            <option value="">Chọn Tỉnh</option>
+                        </select>
+                    </li>
+                    <input type="hidden" id="province_name" name="province_name">
+                    <li><span>Huyện</span>
+                        <select name="district" id="district" class="contact" required>
+                            <option value="">Chọn Huyện</option>
+                        </select>
+                    </li>
+                    <input type="hidden" id="district_name" name="district_name">
+                    <li><span>Xã</span>
+                        <select name="commune" id="commune" class="contact" required>
+                            <option value="">Chọn Xã</option>
+                        </select>
+                    </li>
+                    <input type="hidden" id="commune_name" name="commune_name">
+                    <li><span>Địa chỉ</span>
+                        <input type="text" name="address" class="contact" required>
+                    </li>
                     <li class="reg_sub">
                         <input type="submit" value="Lưu">
                     </li>
                 </ul>
+            </form>
         </div>
-
         <h3 class="common_title2">View History</h3>
 
         <div class="has_view_list">

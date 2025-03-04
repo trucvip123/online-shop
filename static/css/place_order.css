@@ -1,0 +1,69 @@
+/* General styles */
+.common_list_con {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.common_list_con dl {
+    margin-left: 0;
+}
+
+.common_list_con dt {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.common_list_con li {
+    list-style-type: none;
+    margin-bottom: 15px;
+}
+
+.common_list_con label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.common_list_con input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.common_list_con .reg_sub {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.common_list_con .reg_sub input[type="submit"],
+.common_list_con .reg_sub button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.common_list_con .reg_sub input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+}
+
+.common_list_con .reg_sub button {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Hover effects */
+.common_list_con .reg_sub input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.common_list_con .reg_sub button:hover {
+    background-color: #5a6268;
+}

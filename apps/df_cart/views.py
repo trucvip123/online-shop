@@ -13,6 +13,8 @@ def user_cart(request):
     count = CartInfo.objects.filter(user_id=request.session["user_id"]).aggregate(
         Sum("count")
     )["count__sum"]
+    if not count:
+        count = 0
     if request.headers.get("x-requested-with") == "XMLHttpRequest":
         # How many items the current user purchased
         return JsonResponse({"count": count, "cart_num": count})
@@ -30,7 +32,6 @@ def user_cart(request):
 def add(request, gid, count):
     uid = request.session["user_id"]
     gid, count = int(gid), int(count)
-    print(f"uid: {uid}, gid: {gid}, count: {count},")
     # Check if there is already this product in the shopping cart, if so, increase the quantity, if not, add it
     carts = CartInfo.objects.filter(user_id=uid, goods_id=gid)
     if len(carts) >= 1:
@@ -44,7 +45,6 @@ def add(request, gid, count):
     cart.save()
 
     count = CartInfo.objects.filter(user_id=uid).aggregate(Sum("count"))["count__sum"]
-    print(f"count in add: {count}")
     if request.headers.get("x-requested-with") == "XMLHttpRequest":
         return JsonResponse({"count": count})
     else:

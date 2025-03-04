@@ -9,7 +9,6 @@
 		var error_name = false;
 		var error_password = false;
 		var error_check_password = false;
-		var error_email = false;
 		var error_check = false;
 
 
@@ -25,10 +24,6 @@
 			check_cpwd();
 		});
 
-		$('#email').blur(function () {
-			check_email();
-		});
-
 		$('#allow').click(function () {
 			if ($(this).is(':checked')) {
 				error_check = false;
@@ -40,7 +35,6 @@
 				$(this).siblings('span').show();
 			}
 		});
-
 
 		function check_user_name() {
 			var len = $('#user_name').val().length;
@@ -93,21 +87,6 @@
 
 		}
 
-		function check_email() {
-			var re = /^[a-z0-9][\w\.\-]*@[a-z0-9\-]+(\.[a-z]{2,5}){1,2}$/;
-
-			if (re.test($('#email').val())) {
-				$('#email').next().hide();
-				error_email = false;
-			}
-			else {
-				$('#email').next().html('The email you entered is not in the correct format');
-				$('#email').next().show();
-				error_email = true;
-			}
-
-		}
-
 		function check_pnum() {
 			var re = /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/;
 
@@ -129,10 +108,9 @@
 			check_user_name();
 			check_pwd();
 			check_cpwd();
-			check_email();
 			check_pnum();
 
-			if (error_name == false && error_password == false && error_check_password == false && error_email == false && error_pnum == false && error_check == false) {
+			if (error_name == false && error_password == false && error_check_password == false && error_pnum == false && error_check == false) {
 				return true;
 			}
 			else {
@@ -174,11 +152,6 @@
 					<li>
 						<label>Nhập lại mật khẩu:</label>
 						<input type="password" name="confirm_pwd" id="cpwd">
-						<span class="error_tip"></span>
-					</li>
-					<li>
-						<label>Email:</label>
-						<input type="text" name="email" id="email">
 						<span class="error_tip"></span>
 					</li>
 					<li>

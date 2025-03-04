@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/cart.css">
+
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
@@ -28,12 +30,21 @@
         });
 
         $('.add').click(function () {
-            txt = $(this).next();
-            txt.val(parseFloat(txt.val()) + 1).blur();
+            let txt = $(this).siblings('.num_show');
+            let newValue = parseFloat(txt.val()) + 1;
+            txt.val(newValue).blur();
+            console.log("Added: New value is " + newValue);
         });
+
         $('.minus').click(function () {
-            txt = $(this).prev();
-            txt.val(parseFloat(txt.val()) - 1).blur()
+            let txt = $(this).siblings('.num_show');
+            let newValue = parseFloat(txt.val()) - 1;
+            if (newValue < 1) {
+                alert('The number cannot be less than 1');
+                newValue = 1;
+            }
+            txt.val(newValue).blur();
+            console.log("Subtracted: New value is " + newValue);
         });
 
         $('.num_show').blur(function () {
@@ -60,7 +71,6 @@
                     total();
                 }
                 else {
-
                     $(this).val(data.count)
                 }
             })
@@ -68,7 +78,6 @@
     });
     function cart_del(cart_id) {
         del = confirm('Delete Confirmed');
-
         if (del) {
             $.get('/cart/delete' + cart_id + '/', function (data) {
                 if (data.ok == 1) {
@@ -84,28 +93,21 @@
 
         $('.col07').each(
             function () {
-
-
                 count = $(this).prev().find('input').val();
-
                 price = $(this).prev().prev().text();
-
                 total0 = parseFloat(count) * parseFloat(price);
-
-                $(this).text(total0.toFixed(2));
-
+                $(this).text(total0.toLocaleString('de-DE') + 'đ');
                 total1 += total0;
                 total_count++;
             });
 
-        $('.total').text(total1.toFixed(2));
+        $('.total').text(total1.toLocaleString('de-DE') + 'đ');
         $('.total_count1').text(total_count);
     }
     function go_order() {
         let s = ''; // Use 'let' for block scope
         $(':checked:not(#check_all)').each(function () {
             let id = $(this).parents('.cart_list_td').attr('id'); // Use 'let' for block scope
-
             // Check if id is defined
             if (id) {
                 s += 'cart_id=' + id + '&'; // Append only if id is defined
@@ -124,14 +126,13 @@
 {% endblock head %}
 
 {% block center_body %}
-<div class="total_count"> All Products<em>{{ carts|length }}</em>items</div>
+<div class="total_count"> Giỏ Hàng</div>
 <ul class="cart_list_th clearfix">
-    <li class="col01">Product Name</li>
-    {# <li class="col02">Product Unit</li>#}
-    <li class="col02">Unit Price</li>
-    <li class="col03">Qty</li>
-    <li class="col04">Total Price</li>
-    <li class="col05">Delete</li>
+    <li class="col01">Sản phẩm</li>
+    <li class="col02">Đơn giá</li>
+    <li class="col03">Số lượng</li>
+    <li class="col04">Số tiền</li>
+    <li class="col05_action">Thao tác</li>
 </ul>
 
 {% for cart in carts %}
@@ -139,29 +140,35 @@
     <li class="col01"><input type="checkbox" name="" id="check_goods" checked="checked"></li>
     <li class="col02">
         <img src="{{ MEDIA_URL }}{{ cart.goods.images.all.0.image_path }}" class="img-fluid rounded"
+            alt="{{ cart.goods.gtitle }}"
             onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
     </li>
-    <li class="col03">{{ cart.goods.gtitle }}<br><em>${{ cart.goods.gprice }}</em><br><em>In Stock：<span
-                id="goods_kucun">{{ cart.goods.gkucun }}</span></em></li>
+    <li class="col03">{{ cart.goods.gtitle }}</li>
     {# <li class="col04">{{ cart.goods.gunit }}</li>#}
-    <li class="col05">{{ cart.goods.gprice }}</li>
+    <li class="col05" data-price="{{ cart.goods.gprice }}">{{ cart.goods.gprice }}</li>
+    <li class="col05_tmp">{{ cart.goods.gprice }}</li>
     <li class="col06">
         <div class="num_add">
-            <a href="javascript:;" class="add fl">+</a>
-            <input type="text" class="num_show fl" value="{{ cart.count }}" kucun="{{ cart.goods.gkucun }}">
             <a href="javascript:;" class="minus fl">-</a>
+            <input type="text" name="num_show" class="num_show fl" value="{{ cart.count }}"
+                kucun="{{ cart.goods.gkucun }}">
+            <a href="javascript:;" class="add fl">+</a>
         </div>
     </li>
     <li class="col07"></li>
-    <li class="col08"><a href="javascript:cart_del({{ cart.id }});">Delete</a></li>
+    <li class="col08"><a href="javascript:cart_del({{ cart.id }});">Xóa</a></li>
 </ul>
 {% endfor %}
 
 <ul class="settlements">
     <li class="col01"><input type="checkbox" name="" checked="" id="check_all" href="javascript:;"></li>
-    <li class="col02">Select All</li>
-    <li class="col03">Total：<span>$</span><em id="total" class='total'></em><br><b class="total_count1"></b>items</li>
-    <li class="col04"><a href="javascript:go_order()">Check Out</a></li>
+    <li class="col02">Chọn Tất Cả (<em>{{ carts|length }}</em>)</li>
+    <li class="col03">
+        Tổng thanh toán (<b class="total_count1"></b>Sản phẩm)
+        <span></span>
+        <em id="total" class='total' total-price=""></em>
+    </li>
+    <li class="col04"><a href="javascript:go_order()">Mua hàng</a></li>
 </ul>
 
 {% endblock center_body %}

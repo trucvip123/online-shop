@@ -59,7 +59,6 @@ def register_handle(request):
     UserInfo.objects.create(
         uname=username,
         upwd=encrypted_pwd,
-        uemail=email,
         ufullname=fname,
         uphone=phone,
         uquestion=squestion,
@@ -163,7 +162,6 @@ def info(request):  # user center
         "title": "User Center",
         "page_name": 1,
         "user_full_name": user.ufullname,
-        "user_email": user.uemail,
         "user_phone": user.uphone,
         "user_name": username,
         "user_address": user.uaddress,
@@ -173,45 +171,64 @@ def info(request):  # user center
     return render(request, "df_user/user_center_info.html", context)
 
 
-## The method decorator is applied here.
-## If the user is not logged in, the user will be redirected to the login page.
-## this function is to redirect user to the user center reset information page.
-
-
 @user_decorator.login
 def info_reset(request):
     user_name = request.session.get("user_name")
+
+    # Kiểm tra user có tồn tại không
     user = UserInfo.objects.filter(uname=user_name)
-    user_full_name = request.POST.get("fullname")
-    user_email = request.POST.get("email")
-    user_phone = request.POST.get("phone")
-    browser_goods = GoodsBrowser.objects.filter(user__in=user).order_by("-browser_time")
-    goods_list = []
-    if browser_goods:
-        goods_list = [browser_good.good for browser_good in browser_goods]
-        explain = "Recently views"
-    else:
-        explain = "Relevant views"
+    if not user.exists():
+        return render(
+            request,
+            "df_user/user_center_info.html",
+            {
+                "title": "change the information",
+                "error": "User not found.",
+            },
+        )
+
+    # Lấy thông tin từ request (có giá trị mặc định tránh lỗi)
+    user_full_name = request.POST.get("fullname", "").strip()
+    user_phone = request.POST.get("phone", "").strip()
+    user_province = request.POST.get("province_name", "").strip()
+    user_district = request.POST.get("district_name", "").strip()
+    user_commune = request.POST.get("commune_name", "").strip()
+    user_address = request.POST.get("address", "").strip()
+
+    # Cập nhật thông tin user
     user.update(
         ufullname=user_full_name,
-        # upwd=encrypted_pwd,
-        uemail=user_email,
         uphone=user_phone,
-        # uaddress=user_address,
+        uprovince=user_province,
+        udistrict=user_district,
+        ucommune=user_commune,
+        uaddress_detail=user_address,
     )
-    user = UserInfo.objects.filter(uname=user_name).first()
+
+    # Lấy lại user sau khi update
+    user = user.first()
+
+    # Lấy lịch sử duyệt hàng
+    browser_goods = GoodsBrowser.objects.filter(user=user).order_by("-browser_time")
+    goods_list = (
+        [browser_good.good for browser_good in browser_goods]
+        if browser_goods.exists()
+        else []
+    )
+    explain = "Recently views" if goods_list else "Relevant views"
+
     context = {
         "title": "change the information",
         "success": 1,
         "script": "alert",
         "page_name": 1,
         "user_full_name": user.ufullname,
-        "user_email": user.uemail,
         "user_phone": user.uphone,
-        "user_name": user_name,
+        "user_name": user.uname,
         "goods_list": goods_list,
         "explain": explain,
     }
+
     return render(request, "df_user/user_center_info.html", context)
 
 

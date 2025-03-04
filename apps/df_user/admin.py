@@ -5,7 +5,7 @@ from .models import GoodsBrowser, UserInfo
 
 
 class UserInfoAdmin(admin.ModelAdmin):
-    list_display = ["uname", "uemail", "ufullname", "uaddress", "uyoubian", "uphone"]
+    list_display = ["uname", "ufullname", "uaddress", "uyoubian", "uphone"]
     list_per_page = 5
     list_filter = ["uname", "uyoubian"]
     search_fields = ["uname", "uyoubian"]

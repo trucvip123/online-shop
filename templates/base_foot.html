@@ -20,6 +20,11 @@
 				var oldPrice = parseFloat(element.getAttribute('data-old-price'));
 				element.textContent = oldPrice.toLocaleString('de-DE') + '₫';
 			});
+			var PriceElements = document.querySelectorAll('.col05');
+			PriceElements.forEach(function (element) {
+				var oldPrice = parseFloat(element.getAttribute('data-price'));
+				element.textContent = oldPrice.toLocaleString('de-DE') + '₫';
+			});
 		});
 	</script>
 	{% block head %}{% endblock head %}

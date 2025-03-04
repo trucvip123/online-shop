@@ -7,7 +7,6 @@ class UserInfo(models.Model):
     id = models.BigAutoField(primary_key=True)
     uname = models.CharField(max_length=20, unique=True, verbose_name="Username")
     upwd = models.CharField(max_length=40, verbose_name="Password", blank=False)
-    uemail = models.EmailField(verbose_name="Email")
     ushou = models.CharField(max_length=20, default="", verbose_name="Shipping Address")
     uaddress = models.CharField(max_length=100, default="", verbose_name="Address")
     ufullname = models.CharField(max_length=30, default="", verbose_name="Full Name")
@@ -19,7 +18,12 @@ class UserInfo(models.Model):
     uquestion = models.CharField(
         max_length=40, default="", verbose_name="Security Question"
     )
-
+    uprovince = models.CharField(max_length=20, default="", verbose_name="Province")
+    udistrict = models.CharField(max_length=20, default="", verbose_name="District")
+    ucommune = models.CharField(max_length=20, default="", verbose_name="Commune")
+    uaddress_detail = models.CharField(
+        max_length=100, default="", verbose_name="Address Detail"
+    )
     class Meta:
         verbose_name = "User_Info"
         verbose_name_plural = verbose_name
