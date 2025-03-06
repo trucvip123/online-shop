@@ -21,7 +21,7 @@
 }
 
 .search_bar_bg {
-  background-color: #b1d4ff;
+  background-color: #ffd500;
   width: 100%;
   position: relative;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
@@ -33,13 +33,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #b1d4ff;
+  background-color: #ffd500;
   width: 1200px;
 }
 
 .logo {
   width: 275px;
-  height: 70px;
+  height: 73px;
 }
 
 .logo img {
@@ -366,7 +366,7 @@
 .dropbtn {
   font-family: 'Times New Roman';
   margin-top: 19px;
-  background-color: #b1d4ff;
+  background-color: #ffd500;
   color: #080808;
   font-size: 16px;
   border: none;

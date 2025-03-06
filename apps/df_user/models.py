@@ -18,12 +18,7 @@ class UserInfo(models.Model):
     uquestion = models.CharField(
         max_length=40, default="", verbose_name="Security Question"
     )
-    uprovince = models.CharField(max_length=20, default="", verbose_name="Province")
-    udistrict = models.CharField(max_length=20, default="", verbose_name="District")
-    ucommune = models.CharField(max_length=20, default="", verbose_name="Commune")
-    uaddress_detail = models.CharField(
-        max_length=100, default="", verbose_name="Address Detail"
-    )
+
     class Meta:
         verbose_name = "User_Info"
         verbose_name_plural = verbose_name
@@ -48,3 +43,17 @@ class GoodsBrowser(models.Model):
 
     def __str__(self):
         return f"{self.user.uname} viewed {self.good.gtitle}"
+
+
+class UserAddress(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(
+        UserInfo, related_name="user_address", on_delete=models.CASCADE
+    )
+    uprovince = models.CharField(max_length=20, default="", verbose_name="Province")
+    udistrict = models.CharField(max_length=20, default="", verbose_name="District")
+    ucommune = models.CharField(max_length=20, default="", verbose_name="Commune")
+    uaddress_detail = models.CharField(
+        max_length=100, default="", verbose_name="Address Detail"
+    )
+    default_address_flg = models.BooleanField(default=False)

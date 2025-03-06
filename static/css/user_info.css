@@ -1,7 +1,32 @@
-.user_info_list {
+.profile_main {
+    font: 14px/18px Helvetica, Arial, "DejaVu Sans", "Liberation Sans", sans-serif;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.profile_main .profile-info {
+    display: flex;
+}
+
+.profile_main .profile-info a {
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.profile_main form {
+    display: flex;
+    flex-direction: column;
     background-color: #f9f9f9;
+}
+
+.user_info_list {
     margin: 10px 0 15px;
-    padding: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .user_info_list li {
@@ -12,7 +37,6 @@
 }
 
 .user_info_list li span {
-    width: 115px;
     float: left;
     text-align: left;
     color: #737373;
@@ -32,16 +56,56 @@
     height: 30px;
 }
 
-.user_info_list .reg_sub {
-    margin: 10px 0 0 115px;
+.user_info_list li .usename {
+    margin: auto;
 }
 
-.user_info_list .reg_sub input {
+.user_info_list li .fullname {
+    margin: auto;
+}
+
+.user_info_list li .phone {
+    margin: auto;
+}
+
+.reg_sub {
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.reg_sub a {
+    text-decoration-line: none;
+    margin-right: 40px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    width: 50%;
+    max-width: 20px;
+    text-align: center;
+    justify-items: center;
+    font: 14px / 18px Helvetica, Arial, "DejaVu Sans", "Liberation Sans", sans-serif;
+}
+
+.reg_sub input {
     border-radius: 3px;
     padding-left: 5px;
     width: 60px;
-    background-color: #bf0000;
+    background-color: #4a90e2;
     color: white;
+    height: 35px;
+    padding: 0;
+    border-color: snow;
+}
+
+.reg_sub .confirm {
+    background-color: #5ea8ff;
+    color: white;
+}
+
+.reg_sub .cancel {
+    border: 1px solid #469bff
 }
 
 .info_con {
@@ -56,4 +120,201 @@
 .info_r {
     width: 360px;
     float: right;
+}
+
+.address-general {
+    background-color: white;
+}
+
+.address-area {
+    background-color: white;
+    font: 14px/18px Helvetica, Arial, "DejaVu Sans", "Liberation Sans", sans-serif;
+    padding: 0 20px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.address-area select,
+.address-area input {
+    height: 40px;
+    padding: 5px;
+}
+
+.address-area .address-info a {
+    text-decoration: none;
+    display: flex;
+}
+
+.address-info .address-detail-element {
+    margin: 20px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.address-info .address-detail {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.address-detail em {
+    display: inline-block;
+    padding: 0 10px;
+    font-style: normal;
+    background-color: #f99406;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 2px;
+    width: fit-content;
+}
+
+.address-detail i {
+    margin: 2px 5px 0 0;
+}
+
+.address-detail .address-detail-operate {
+    display: flex;
+    gap: 20px;
+}
+
+.add-icon {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.add-icon i {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    margin-right: 5px;
+}
+
+.add-icon span {
+    margin-left: 5px;
+}
+
+.check-default {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.check-default input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.check-default label {
+    font-size: 14px;
+    margin: 10px 5px 6px;
+}
+
+/* Overlay for the popup */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Popup styling */
+.popup-insert {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-width: 600px;
+    width: 100%;
+}
+
+/* General form styling */
+#insert_address_form {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Styling for the address list */
+.insert_user_address {
+    list-style-type: none;
+    padding: 0;
+}
+
+.insert_user_address div {
+    margin-bottom: 15px;
+}
+
+.insert_user_address span {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.insert_user_address select,
+.insert_user_address input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Styling for the default address checkbox */
+.check-default {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.check-default input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Styling for the buttons */
+.insertAddress-btn {
+    display: flex;
+    justify-content: center;
+    gap: 20px
+}
+
+.insertAddress-btn a,
+.insertAddress-btn input {
+    padding: 10px 20px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    transition: background-color 0.3s;
+}
+
+.insertAddress-btn a:hover,
+.insertAddress-btn input:hover {
+    background-color: #0056b3;
+}
+
+.insertAddress-btn .cancel {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.insertAddress-btn .cancel:hover {
+    background-color: #c82333;
 }
