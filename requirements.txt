@@ -6,3 +6,4 @@ django-tinymce
 gunicorn
 whitenoise
 python-dotenv
+mysqlclient
