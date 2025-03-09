@@ -18,6 +18,7 @@ urlpatterns = [
     url(r"^site/$", site, name="site"),
     url(r"^info_reset/$", info_reset, name="info_reset"),
     url(r"^insert_user_address/$", insert_user_address, name="insert_user_address"),
+    url(r"^edit_user_address/$", edit_user_address, name="edit_user_address"),
     url(r"^site_handle/$", site_handle, name="site_handle"),
     # url(r'^place_order/$', views.place_order),
     url(r"^logout/$", logout, name="logout"),

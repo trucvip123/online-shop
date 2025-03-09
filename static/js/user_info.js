@@ -35,116 +35,101 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('popup').style.display = 'none';
     });
 
+    document.getElementById('cancel-edit-address').addEventListener('click', function () {
+        document.getElementById('popup-overlay').style.display = 'none';
+        document.getElementById('edit-popup').style.display = 'none';
+    });
+
     // Address edit buttons
     const addressEditButtons = document.querySelectorAll("#address-edit");
-    const addressPopup = document.getElementById("popup");
+    const addressPopup = document.getElementById("edit-popup");
     const overlay = document.getElementById("popup-overlay");
 
     addressEditButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            // Get address details from the clicked address
+        button.addEventListener("click", async function () {
             const addressContainer = this.closest(".address-detail");
             const addressText = addressContainer.querySelector(".address-detail-info p").textContent;
 
-            // Extract address components (assuming format "Detail, Commune, District, Province")
-            const parts = addressText.split(",").map(part => part.trim()); // Loại bỏ khoảng trắng
-            const length = parts.length;
-            
-            if (length >= 4) {
-                document.querySelector("[name='province']").value = parts.at(-1) || "";
-                document.querySelector("[name='district']").value = parts.at(-2) || "";
-                document.querySelector("[name='commune']").value = parts.at(-3) || "";
-                document.querySelector("[name='address']").value = parts.slice(0, -3).join(", ") || "";
-            }
-            
+            // Tách các phần của địa chỉ
+            const parts = addressText.split(",").map(part => part.trim());
+            if (parts.length < 4) return;
 
-            // Show the popup
+            const [detail, commune, district, province] = [
+                parts.slice(0, -3).join(", "),
+                parts.at(-3),
+                parts.at(-2),
+                parts.at(-1)
+            ];
+
+            document.querySelector("[name='address']").value = detail;
+            document.getElementById('edit_province_name').value = province;
+            document.getElementById('edit_district_name').value = district;
+            document.getElementById('edit_commune_name').value = commune;
+
+            try {
+                // Lấy danh sách tỉnh, huyện, xã từ API
+                const provinces = await fetchProvinces();
+                const selectedProvince = provinces.find(p => p.name === province);
+                if (selectedProvince) {
+                    document.getElementById('edit_province').value = selectedProvince.id;
+                    await fetchDistricts(selectedProvince.id, district, commune);
+                }
+            } catch (error) {
+                console.error("Lỗi khi lấy dữ liệu địa chỉ:", error);
+            }
+
+            // Hiển thị popup
             addressPopup.style.display = "block";
             overlay.style.display = "block";
         });
     });
 
-    // Close popup on cancel
-    document.getElementById("cancel-address").addEventListener("click", function () {
-        addressPopup.style.display = "none";
-        overlay.style.display = "none";
-    });
-
-
-    // Fetch provinces
-    fetch('https://open.oapi.vn/location/provinces')
-        .then(response => response.json())
-        .then(data => {
-            const provinceSelect = document.getElementById('province');
-            provinceSelect.innerHTML = '<option value="">Chọn Tỉnh</option>'; // Default option
-            data.data.forEach(province => {
-                const option = document.createElement('option');
-                option.value = province.id;
-                option.textContent = province.name;
-                provinceSelect.appendChild(option);
-            });
-
-            // Giữ lại tỉnh đã chọn trước đó
-            provinceSelect.addEventListener('change', function () {
-                let selectedOption = provinceSelect.options[provinceSelect.selectedIndex];
-                document.getElementById('province_name').value = selectedOption.textContent;
-                fetchDistricts(this.value);
-            });
-        })
-        .catch(error => console.error('Lỗi khi lấy danh sách tỉnh:', error));
-
-    // Xử lý khi chọn tỉnh
-    document.getElementById('province').addEventListener('change', function () {
-        fetchDistricts(this.value);
-    });
-
-    function fetchDistricts(provinceId) {
-        if (!provinceId) return;
-        fetch(`https://open.oapi.vn/location/districts/${provinceId}`)
-            .then(response => response.json())
-            .then(data => {
-                const districtSelect = document.getElementById('district');
-                districtSelect.innerHTML = '<option value="">Chọn Huyện</option>';
-                data.data.forEach(district => {
-                    const option = document.createElement('option');
-                    option.value = district.id;
-                    option.textContent = district.name;
-                    districtSelect.appendChild(option);
-                });
-
-                districtSelect.addEventListener('change', function () {
-                    let selectedOption = districtSelect.options[districtSelect.selectedIndex];
-                    document.getElementById('district_name').value = selectedOption.textContent;
-                    fetchCommunes(this.value);
-                });
-            })
-            .catch(error => console.error('Lỗi khi lấy danh sách huyện:', error));
+    async function fetchProvinces() {
+        const response = await fetch('https://open.oapi.vn/location/provinces');
+        const data = await response.json();
+        return data.data || [];
     }
 
-    // Xử lý khi chọn huyện
-    document.getElementById('district').addEventListener('change', function () {
-        fetchCommunes(this.value);
-    });
+    async function fetchDistricts(provinceId, selectedDistrict, selectedCommune) {
+        if (!provinceId) return;
+        const response = await fetch(`https://open.oapi.vn/location/districts/${provinceId}`);
+        const data = await response.json();
+        const districts = data.data || [];
 
-    function fetchCommunes(districtId) {
+        const districtSelect = document.getElementById('edit_district');
+        districtSelect.innerHTML = '<option value="">Chọn Huyện</option>';
+        districts.forEach(district => {
+            const option = document.createElement('option');
+            option.value = district.id;
+            option.textContent = district.name;
+            districtSelect.appendChild(option);
+        });
+
+        const selectedDistrictObj = districts.find(d => d.name === selectedDistrict);
+        if (selectedDistrictObj) {
+            districtSelect.value = selectedDistrictObj.id;
+            await fetchCommunes(selectedDistrictObj.id, selectedCommune);
+        }
+    }
+
+    async function fetchCommunes(districtId, selectedCommune) {
         if (!districtId) return;
-        fetch(`https://open.oapi.vn/location/wards/${districtId}`)
-            .then(response => response.json())
-            .then(data => {
-                const communeSelect = document.getElementById('commune');
-                communeSelect.innerHTML = '<option value="">Chọn Xã</option>';
-                data.data.forEach(commune => {
-                    const option = document.createElement('option');
-                    option.value = commune.id;
-                    option.textContent = commune.name;
-                    communeSelect.appendChild(option);
-                });
+        const response = await fetch(`https://open.oapi.vn/location/wards/${districtId}`);
+        const data = await response.json();
+        const communes = data.data || [];
 
-                communeSelect.addEventListener('change', function () {
-                    let selectedOption = communeSelect.options[communeSelect.selectedIndex];
-                    document.getElementById('commune_name').value = selectedOption.textContent;
-                });
-            })
-            .catch(error => console.error('Lỗi khi lấy danh sách xã:', error));
+        const communeSelect = document.getElementById('edit_commune');
+        communeSelect.innerHTML = '<option value="">Chọn Xã</option>';
+        communes.forEach(commune => {
+            const option = document.createElement('option');
+            option.value = commune.id;
+            option.textContent = commune.name;
+            communeSelect.appendChild(option);
+        });
+
+        const selectedCommuneObj = communes.find(c => c.name === selectedCommune);
+        if (selectedCommuneObj) {
+            communeSelect.value = selectedCommuneObj.id;
+        }
     }
 });

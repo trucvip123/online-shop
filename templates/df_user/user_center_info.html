@@ -39,7 +39,7 @@
                         </li>
                     </ul>
                     <ul class="reg_sub">
-                        <a href="javascript::" id="cancel-edit"> Hủy </a>
+                        <a href="javascript:void(0);" id="cancel-edit"> Hủy </a>
                         <input type="submit" value="Lưu">
                     </ul>
                 </form>
@@ -49,6 +49,7 @@
             <div class="address-general">
                 <div class="address-area">
                     <div class="address-info">
+                        {% if address_list %}
                         {% if address_list|length > 0 %}
                         {% for address in address_list %}
                         <div class="address-detail-element">
@@ -65,7 +66,7 @@
                                         <i class="fa fa-edit"></i>
                                         <span> Sửa </span>
                                     </a>
-                                    {% if address.default_address_flg != 1 %}
+                                    {% if not address.default_address_flg %}
                                     <a href="javascript:void(0);" id="address-delete">
                                         <i class="fa fa-trash-alt"></i>
                                         <span> Xóa </span>
@@ -76,7 +77,8 @@
                         </div>
                         {% endfor %}
                         {% endif %}
-                        <a href="javascript::" id="address-insert" class="add-icon">
+                        {% endif %}
+                        <a href="javascript:void(0);" id="address-insert" class="add-icon">
                             <i class="fa fa-add"></i>
                             <span> Thêm địa chỉ nhận hàng</span>
                         </a>
@@ -119,7 +121,48 @@
                             </ul>
                             <ul class="insertAddress-btn">
                                 <input type="submit" class="confirm" id="confirm-address" value="Xác nhận">
-                                <a href="javascript::" class="cancel" id="cancel-address"> Hủy </a>
+                                <a href="javascript:void(0);" class="cancel" id="cancel-address"> Hủy </a>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="popup-edit" id="edit-popup">
+                        <form action='{% url "df_user:edit_user_address" %}' id='edit_address_form' method="post">
+                            {% csrf_token %}
+                            <ul class="edit_user_address">
+                                <div>
+                                    <span>Tỉnh/ Thành phố: </span>
+                                    <select name="province" id="edit_province" class="contact" required>
+                                        <option value="">Chọn Tỉnh</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" id="edit_province_name" name="province_name">
+                                <div>
+                                    <span>Quận/ Huyện: </span>
+                                    <select name="district" id="edit_district" class="contact" required>
+                                        <option value="">Chọn Huyện</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" id="edit_district_name" name="district_name">
+                                <div>
+                                    <span>Phường/ Xã: </span>
+                                    <select name="commune" id="edit_commune" class="contact" required>
+                                        <option value="">Chọn Xã</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" id="edit_commune_name" name="commune_name">
+                                <div>
+                                    <span>Địa chỉ cụ thể: </span>
+                                    <input type="text" name="address" class="contact" placeholder=" Số Nhà, Tên Đường"
+                                        required>
+                                </div>
+                                <span class="check-default">
+                                    <input type="checkbox" id="edit_is_default" name="is_default">
+                                    <label for="edit_is_default">Đặt làm địa chỉ mặc định</label>
+                                </span>
+                            </ul>
+                            <ul class="updateAddress-btn">
+                                <input type="submit" class="confirm" id="confirm-edit-address" value="Xác nhận">
+                                <a href="javascript:void(0);" class="cancel" id="cancel-edit-address"> Hủy </a>
                             </ul>
                         </form>
                     </div>
@@ -130,6 +173,7 @@
 
         <div class="has_view_list">
             <ul class="goods_type_list clearfix">
+                {% if goods_list %}
                 {% for good in goods_list %}
                 <li>
                     <a href="/{{ good.id }}/">
@@ -148,6 +192,9 @@
                     </div>
                 </li>
                 {% endfor %}
+                {% else %}
+                <p>No viewed products available.</p>
+                {% endif %}
             </ul>
         </div>
     </div>

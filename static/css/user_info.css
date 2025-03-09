@@ -229,7 +229,8 @@
 }
 
 /* Popup styling */
-.popup-insert {
+.popup-insert,
+.popup-edit {
     display: none;
     position: fixed;
     top: 50%;
@@ -245,7 +246,8 @@
 }
 
 /* General form styling */
-#insert_address_form {
+#insert_address_form,
+#edit_address_form {
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;

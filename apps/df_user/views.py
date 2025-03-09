@@ -300,6 +300,57 @@ def insert_user_address(request):
     return render(request, "df_user/user_center_info.html", context)
 
 
+def edit_user_address(request):
+    user_name = request.session.get("user_name")
+
+    user = get_object_or_404(UserInfo, uname=user_name)
+
+    # Get address data from the form
+    user_province = request.POST.get("province_name", "").strip()
+    user_district = request.POST.get("district_name", "").strip()
+    user_commune = request.POST.get("commune_name", "").strip()
+    user_address = request.POST.get("address", "").strip()
+    default_address = request.POST.get("is_default", False)
+
+    # Set all existing addresses' default_address_flg to False
+    UserAddress.objects.filter(user=user).update(default_address_flg=False)
+
+    if default_address == "on":
+        default_address = True
+    # Create a new product
+    address = UserAddress.objects.create(
+        user=user,
+        uprovince=user_province,
+        udistrict=user_district,
+        ucommune=user_commune,
+        uaddress_detail=user_address,
+        default_address_flg=default_address,
+    )
+
+    # Lấy lịch sử duyệt hàng
+    browser_goods = GoodsBrowser.objects.filter(user=user).order_by("-browser_time")
+    goods_list = (
+        [browser_good.good for browser_good in browser_goods]
+        if browser_goods.exists()
+        else []
+    )
+
+    addresses = UserAddress.objects.filter(user=user)
+
+    context = {
+        "title": "change the information",
+        "success": 1,
+        "script": "alert",
+        "page_name": 1,
+        "user_full_name": user.ufullname,
+        "user_phone": user.uphone,
+        "user_name": user.uname,
+        "goods_list": goods_list,
+        "address_list": addresses,
+    }
+    return render(request, "df_user/user_center_info.html", context)
+
+
 @user_decorator.login
 def order(request, index):
     user_id = request.session["user_id"]
