@@ -37,15 +37,19 @@ def register(request):
 
 ## This function is to handel the user's resigtration.
 def register_handle(request):
-
     username = request.POST.get("user_name")
     password = request.POST.get("pwd")
     confirm_pwd = request.POST.get("confirm_pwd")
-    email = request.POST.get("email")
     fname = request.POST.get("fname")
     phone = request.POST.get("pnum")
     squestion = request.POST.get("squestion")
     sanswer = request.POST.get("sanswer")
+    user_province = request.POST.get("province_name", "").strip()
+    user_district = request.POST.get("district_name", "").strip()
+    user_commune = request.POST.get("commune_name", "").strip()
+    user_address = request.POST.get("address", "").strip()
+    default_address = request.POST.get("is_default", True)
+    print("username:", username)
 
     # Check if the two passwords are the same.
     if password != confirm_pwd:
@@ -55,8 +59,8 @@ def register_handle(request):
     s1.update(password.encode("utf8"))
     encrypted_pwd = s1.hexdigest()
 
-    # create object in the database
-    UserInfo.objects.create(
+    # Create UserInfo instance
+    user = UserInfo.objects.create(
         uname=username,
         upwd=encrypted_pwd,
         ufullname=fname,
@@ -64,6 +68,19 @@ def register_handle(request):
         uquestion=squestion,
         uanswer=sanswer,
     )
+
+    print("user_address:", user_address)
+
+    # Create UserAddress instance
+    UserAddress.objects.create(
+        user=user,
+        uprovince=user_province,
+        udistrict=user_district,
+        ucommune=user_commune,
+        uaddress_detail=user_address,
+        default_address_flg=default_address,
+    )
+
     context = {
         "title": "Sign up",
         "username": username,
@@ -158,7 +175,9 @@ def info(request):  # user center
     else:
         explain = "Relevant views"
 
-    addresses = UserAddress.objects.filter(user=user).order_by("-default_address_flg", "id")
+    addresses = UserAddress.objects.filter(user=user).order_by(
+        "-default_address_flg", "id"
+    )
 
     context = {
         "title": "User Center",
@@ -166,7 +185,6 @@ def info(request):  # user center
         "user_full_name": user.ufullname,
         "user_phone": user.uphone,
         "user_name": username,
-        "user_address": user.uaddress,
         "goods_list": goods_list,
         "explain": explain,
         "address_list": addresses,

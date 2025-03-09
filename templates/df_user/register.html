@@ -1,125 +1,7 @@
 {% extends 'base_foot.html' %}
 
-
 {% block head %}
 <script type="text/javascript" src="/static/js/register.js"></script>
-<script type="text/javascript">
-	$(function () {
-
-		var error_name = false;
-		var error_password = false;
-		var error_check_password = false;
-		var error_check = false;
-
-
-		$('#user_name').blur(function () {
-			check_user_name();
-		});
-
-		$('#pwd').blur(function () {
-			check_pwd();
-		});
-
-		$('#cpwd').blur(function () {
-			check_cpwd();
-		});
-
-		$('#allow').click(function () {
-			if ($(this).is(':checked')) {
-				error_check = false;
-				$(this).siblings('span').hide();
-			}
-			else {
-				error_check = true;
-				$(this).siblings('span').html('Please agree to the terms of service and privacy policy');
-				$(this).siblings('span').show();
-			}
-		});
-
-		function check_user_name() {
-			var len = $('#user_name').val().length;
-
-			if (len < 5 || len > 20) {
-				$('#user_name').next().html('Please enter a username of 5-20 characters');
-				$('#user_name').next().show();
-				error_name = true;
-			}
-			else {
-				$.get('{% url "df_user:register_exist" %}?uname=' + $('#user_name').val(), function (data) {
-					if (data.count >= 1) {
-						$('#user_name').next().html('Username already exists').show();
-						error_name = true;
-					} else {
-						$('#user_name').next().hide();
-						error_name = false;
-					}
-				});
-			}
-		}
-
-		function check_pwd() {
-			var len = $('#pwd').val().length;
-			if (len < 4 || len > 20) {
-				$('#pwd').next().html('Password should be at least 4 characters, maximum 20 characters');
-				$('#pwd').next().show();
-				error_password = true;
-			}
-			else {
-				$('#pwd').next().hide();
-				error_password = false;
-			}
-		}
-
-
-		function check_cpwd() {
-			var pass = $('#pwd').val();
-			var cpass = $('#cpwd').val();
-
-			if (pass != cpass) {
-				$('#cpwd').next().html('The passwords entered twice do not match');
-				$('#cpwd').next().show();
-				error_check_password = true;
-			}
-			else {
-				$('#cpwd').next().hide();
-				error_check_password = false;
-			}
-
-		}
-
-		function check_pnum() {
-			var re = /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/;
-
-			if (re.test($('#pnum').val())) {
-				$('#pnum').next().hide();
-				error_pnum = false;
-			}
-			else {
-				$('#pnum').next().html('The phone number you entered is not in the correct format');
-				$('#pnum').next().show();
-				error_pnum = true;
-			}
-
-		}
-
-
-
-		$('#reg_form').submit(function () {
-			check_user_name();
-			check_pwd();
-			check_cpwd();
-			check_pnum();
-
-			if (error_name == false && error_password == false && error_check_password == false && error_pnum == false && error_check == false) {
-				return true;
-			}
-			else {
-				return false;
-			}
-
-		});
-	});
-</script>
 {% endblock head %}
 
 {% block body %}
@@ -133,7 +15,7 @@
 	<div class="r_con fr">
 		<div class="reg_title clearfix">
 			<h1>Sign up </h1>
-			<a href='{% url "df_user:login" %}''>Login</a>
+			<a href="{% url 'df_user:login' %}">Login</a>
 		</div>
 		<div class="reg_form clearfix">
 			<form action=' {% url "df_user:register_handle" %}' id='reg_form' method="post">
@@ -141,7 +23,7 @@
 				<ul>
 					<li>
 						<label>Tên đăng nhập:</label>
-						<input type="text" name="user_name" id="user_name">
+						<input type="text" name="user_name" id="user_name" required>
 						<span class="error_tip"></span>
 					</li>
 					<li>
@@ -164,16 +46,40 @@
 						<input type="text" name="pnum" id="pnum">
 						<span class="error_tip"></span>
 					</li>
+					<div>
+						<span>Tỉnh/ Thành phố: </span>
+						<select name="province" id="province" class="contact" required>
+							<option value="">Chọn Tỉnh</option>
+						</select>
+					</div>
+					<input type="hidden" id="province_name" name="province_name">
+					<div>
+						<span>Quận/ Huyện: </span>
+						<select name="district" id="district" class="contact" required>
+							<option value="">Chọn Huyện</option>
+						</select>
+					</div>
+					<input type="hidden" id="district_name" name="district_name">
+					<div>
+						<span>Phường/ Xã: </span>
+						<select name="commune" id="commune" class="contact" required>
+							<option value="">Chọn Xã</option>
+						</select>
+					</div>
+					<input type="hidden" id="commune_name" name="commune_name">
+					<div>
+						<span>Địa chỉ cụ thể: </span>
+						<input type="text" name="address" class="contact" placeholder=" Số Nhà, Tên Đường" required>
+					</div>
 					<li class='suqetions'>
 						<label>Câu hỏi bảo mật</label>
 						<select name="squestion" style="text-align: center;text-align-last: center;width: 290px;">
-							<option name='squestion' value="What is your pet name?" ,> What is your pet name?</option>
+							<option name='squestion' value="What is your pet name?"> What is your pet name?</option>
 							<option name='squestion' value="Where was your birthplace?"> Where was your birthplace?
 							</option>
 							<option name='squestion' value="What is first car?"> What is first car? </option>
 						</select>
-						<input type="text" name="sanswer" id="sanswer">
-
+						<input type="text" name="sanswer" id="sanswer" placeholder="Enter your answer" required>
 					</li>
 
 					<li class="agreement">
@@ -185,7 +91,7 @@
 						<input type="submit" value="Register">
 					</li>
 				</ul>
-				</form>
+			</form>
 		</div>
 
 	</div>

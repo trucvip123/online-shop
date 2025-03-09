@@ -682,11 +682,13 @@ body {
 	position: relative;
 }
 
-.reg_form li {
-	height: 70px;
+.reg_form li,
+.reg_form div {
+	height: 60px;
 }
 
-.reg_form li label {
+.reg_form li label,
+.reg_form div span {
 	width: 140px;
 	height: 40px;
 	line-height: 40px;
@@ -695,7 +697,10 @@ body {
 	color: #a8a8a8
 }
 
-.reg_form li input {
+.reg_form li input,
+.reg_form li select,
+.reg_form div select,
+.reg_form div input {
 	width: 288px;
 	height: 38px;
 	border: 1px solid #e0e0e0;
