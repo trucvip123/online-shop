@@ -52,9 +52,14 @@ first, please create a virtual enviorment
 
 `virtualenv [the name for the environment]     e.g   virtualenv venv`
 
+- On linux: python3 -m venv env
+
+
 activate the virtual enviroment
 
 `source activate [the name for the virtualvenv]`
+
+- On linux: source env/bin/activate
 
 To intall all the packages:
 
