@@ -60,18 +60,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 parts.at(-2),
                 parts.at(-1)
             ];
-
-            document.querySelector("[name='address']").value = detail;
-            document.getElementById('edit_province_name').value = province;
-            document.getElementById('edit_district_name').value = district;
-            document.getElementById('edit_commune_name').value = commune;
-
+            document.querySelector("[name='address-detail']").value = detail;
             try {
-                // Lấy danh sách tỉnh, huyện, xã từ API
+                // Lấy danh sách tỉnh từ API
                 const provinces = await fetchProvinces();
+                const provinceSelect = document.getElementById('edit_province');
+                provinceSelect.innerHTML = '<option value="">Chọn Tỉnh</option>';
+                provinces.forEach(province => {
+                    const option = document.createElement('option');
+                    option.value = province.id;
+                    option.textContent = province.name;
+                    provinceSelect.appendChild(option);
+                });
+
                 const selectedProvince = provinces.find(p => p.name === province);
                 if (selectedProvince) {
-                    document.getElementById('edit_province').value = selectedProvince.id;
+                    provinceSelect.value = selectedProvince.id;
                     await fetchDistricts(selectedProvince.id, district, commune);
                 }
             } catch (error) {
@@ -131,5 +135,54 @@ document.addEventListener('DOMContentLoaded', function () {
         if (selectedCommuneObj) {
             communeSelect.value = selectedCommuneObj.id;
         }
+    }
+
+    document.querySelectorAll('#address-delete').forEach(function(button) {
+        button.addEventListener('click', function() {
+            const addressElement = this.closest('.address-detail-element');
+            const addressId = addressElement.querySelector('p').getAttribute('id');
+
+            if (confirm('Bạn có chắc chắn muốn xóa địa chỉ này?')) {
+                fetch(`/user/delete_user_address/${addressId}/`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        addressElement.remove();
+                    } else {
+                        alert('Đã xảy ra lỗi khi xóa địa chỉ.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Đã xảy ra lỗi khi xóa địa chỉ.');
+                });
+            }
+        });
+    });
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+     cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
     }
 });
