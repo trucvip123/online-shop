@@ -32,10 +32,10 @@
                     <ul class="user_info_list">
                         <li><span>Tên đăng nhập:</span>{{ user_name }}</li>
                         <li><span>Họ & Tên:</span>
-                            <input type="text" name="fullname" class="contact" value="{{ user_full_name}}">
+                            <input type="text" name="fullname" class="contact-info" value="{{ user_full_name}}">
                         </li>
                         <li><span>Số điện thoại:</span>
-                            <input type="text" name="phone" class="contact" value="{{user_phone}}">
+                            <input type="text" name="phone" class="contact-info" value="{{user_phone}}">
                         </li>
                     </ul>
                     <ul class="reg_sub">
@@ -55,8 +55,8 @@
                         <div class="address-detail-element">
                             <span class="address-detail line">
                                 <div class="address-detail-info">
-                                    <p>{{ address.uaddress_detail }}, {{ address.ucommune }}, {{ address.udistrict }},
-                                        {{ address.uprovince }}</p>
+                                    <p id="{{address.id}}">{{ address.uaddress_detail }}, {{ address.ucommune }},
+                                        {{address.udistrict }}, {{ address.uprovince }}</p>
                                     {% if address.default_address_flg %}
                                     <em>Địa chỉ mặc định</em>
                                     {% endif %}
@@ -152,8 +152,8 @@
                                 <input type="hidden" id="edit_commune_name" name="commune_name">
                                 <div>
                                     <span>Địa chỉ cụ thể: </span>
-                                    <input type="text" name="address" class="contact" placeholder=" Số Nhà, Tên Đường"
-                                        required>
+                                    <input type="text" name="address-detail" class="contact"
+                                        placeholder=" Số Nhà, Tên Đường" required>
                                 </div>
                                 <span class="check-default">
                                     <input type="checkbox" id="edit_is_default" name="is_default">

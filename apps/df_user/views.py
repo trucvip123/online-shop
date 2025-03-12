@@ -49,7 +49,6 @@ def register_handle(request):
     user_commune = request.POST.get("commune_name", "").strip()
     user_address = request.POST.get("address", "").strip()
     default_address = request.POST.get("is_default", True)
-    print("username:", username)
 
     # Check if the two passwords are the same.
     if password != confirm_pwd:
@@ -68,9 +67,6 @@ def register_handle(request):
         uquestion=squestion,
         uanswer=sanswer,
     )
-
-    print("user_address:", user_address)
-
     # Create UserAddress instance
     UserAddress.objects.create(
         user=user,
@@ -89,8 +85,6 @@ def register_handle(request):
 
 
 # verfiy whether the username exists
-
-
 def register_exist(request):
     username = request.GET.get("uname")
     count = UserInfo.objects.filter(uname=username).count()
@@ -261,11 +255,11 @@ def insert_user_address(request):
     user_address = request.POST.get("address", "").strip()
     default_address = request.POST.get("is_default", False)
 
-    # Set all existing addresses' default_address_flg to False
-    UserAddress.objects.filter(user=user).update(default_address_flg=False)
-
     if default_address == "on":
+         # Set all existing addresses' default_address_flg to False
+        UserAddress.objects.filter(user=user).update(default_address_flg=False)
         default_address = True
+
     # Create a new product
     address = UserAddress.objects.create(
         user=user,
@@ -284,8 +278,9 @@ def insert_user_address(request):
         else []
     )
 
-    addresses = UserAddress.objects.filter(user=user)
-
+    addresses = UserAddress.objects.filter(user=user).order_by(
+        "-default_address_flg", "id"
+    )
     context = {
         "title": "change the information",
         "success": 1,
@@ -298,7 +293,6 @@ def insert_user_address(request):
         "address_list": addresses,
     }
     return render(request, "df_user/user_center_info.html", context)
-
 
 def edit_user_address(request):
     user_name = request.session.get("user_name")
@@ -335,7 +329,9 @@ def edit_user_address(request):
         else []
     )
 
-    addresses = UserAddress.objects.filter(user=user)
+    addresses = UserAddress.objects.filter(user=user).order_by(
+        "-default_address_flg", "id"
+    )
 
     context = {
         "title": "change the information",
@@ -351,6 +347,15 @@ def edit_user_address(request):
     return render(request, "df_user/user_center_info.html", context)
 
 
+def delete_user_address(request, address_id):
+    print("address_id:", address_id)
+    try:
+        address = UserAddress.objects.get(pk=int(address_id))
+        address.delete()
+        return JsonResponse({'success': True})
+    except Exception:
+        return JsonResponse({'success': False, 'error': 'Address not found'})
+    
 @user_decorator.login
 def order(request, index):
     user_id = request.session["user_id"]
