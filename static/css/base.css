@@ -466,7 +466,7 @@
 
 /* Submenu Images */
 .dropdown-content-submenu img {
-  margin-right: 10px;
+  /* margin-right: 10px; */
   border-radius: 5px;
 }
 

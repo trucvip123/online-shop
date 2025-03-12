@@ -1,7 +1,6 @@
 Django
 Pillow
 pytz
-psycopg2-binary
 django-tinymce
 gunicorn
 whitenoise
