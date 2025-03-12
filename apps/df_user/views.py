@@ -348,7 +348,6 @@ def edit_user_address(request):
 
 
 def delete_user_address(request, address_id):
-    print("address_id:", address_id)
     try:
         address = UserAddress.objects.get(pk=int(address_id))
         address.delete()
@@ -671,7 +670,6 @@ def add_new_type(request):
 def delete_type(request):
     if request.method == "POST":
         type_id = request.POST.get("product_type_delete")
-        print("type_id:", type_id)
         if type_id:
             try:
                 type_to_delete = TypeInfo.objects.get(id=type_id)

@@ -73,6 +73,9 @@ To run the project:
 python manage.py runserver
 ```
 
+## Restart Gunicorn
+sudo systemctl restart gunicorn
+
 
 ### Super user:
 Username: trucnv

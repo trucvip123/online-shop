@@ -34,6 +34,7 @@ class GoodsInfo(models.Model):
     gjianjie = models.CharField(max_length=200, verbose_name="short_inro")
     gkucun = models.IntegerField(verbose_name="stock", default=0)
     gcontent = HTMLField(max_length=200, verbose_name="descriptions")
+    gparam = HTMLField(max_length=200, verbose_name="parameters")
     gtype = models.ForeignKey(
         TypeInfo, on_delete=models.CASCADE, verbose_name="category"
     )

@@ -162,7 +162,7 @@ body {
 }
 
 .goods_list li h4 {
-	margin: 20px 7px;
+	margin: 25px 7px;
 	text-align: left;
 	height: 40px;
 }
@@ -232,7 +232,7 @@ body {
 .goods_list .item-img {
 	height: 160px;
 	line-height: 160px;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 .goods_list .item-img:hover {
@@ -372,7 +372,6 @@ body {
 	display: flex;
 	border: 1px solid #e1e1e1;
 	padding-left: 5px;
-	height: 450px;
 	flex-direction: row;
 	flex-wrap: wrap;
 }
@@ -710,33 +709,10 @@ body {
 	background-color: #f8f8f8
 }
 
-.reg_form li.agreement input {
-	width: 15px;
-	height: 15px;
-	float: left;
-	margin-top: 13px
-}
-
-.reg_form li.agreement label {
-	width: 300px;
-	float: left;
-	margin-left: 10px;
-}
-
 .reg form li.select {
 	height: 50px;
 	margin-top: 20px;
 	margin-bottom: 20px;
-}
-
-.reg_form li.reg_sub input {
-	width: 360px;
-	height: 40px;
-	background-color: black;
-	font-size: 18px;
-	color: #fff;
-	font-family: 'Times New Roman';
-	cursor: pointer;
 }
 
 .reg_form li .error_tip {

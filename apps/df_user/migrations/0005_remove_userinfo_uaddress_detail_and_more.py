@@ -11,32 +11,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='userinfo',
-            name='uaddress_detail',
-        ),
-        migrations.RemoveField(
-            model_name='userinfo',
-            name='ucommune',
-        ),
-        migrations.RemoveField(
-            model_name='userinfo',
-            name='udistrict',
-        ),
-        migrations.RemoveField(
-            model_name='userinfo',
-            name='uprovince',
-        ),
-        migrations.CreateModel(
-            name='UserAddress',
-            fields=[
-                ('id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('uprovince', models.CharField(default='', max_length=20, verbose_name='Province')),
-                ('udistrict', models.CharField(default='', max_length=20, verbose_name='District')),
-                ('ucommune', models.CharField(default='', max_length=20, verbose_name='Commune')),
-                ('uaddress_detail', models.CharField(default='', max_length=100, verbose_name='Address Detail')),
-                ('default_address_flg', models.BooleanField(default=False)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='user_address', to='df_user.userinfo')),
-            ],
-        ),
     ]

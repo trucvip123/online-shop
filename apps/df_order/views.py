@@ -51,7 +51,6 @@ def order(request):
     else:
         receiver = latest.order_by("-oid")[0]
     cart_ids = request.GET.getlist("cart_id")
-    print("cart_ids:", cart_ids)
     carts = []
     total_price = 0
     for goods_id in cart_ids:

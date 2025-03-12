@@ -1,0 +1,9 @@
+.reg_form li.reg_sub .register-btn {
+	width: 360px;
+	height: 40px;
+	background-color: black;
+	font-size: 18px;
+	color: #fff;
+	font-family: 'Times New Roman';
+	cursor: pointer;
+}

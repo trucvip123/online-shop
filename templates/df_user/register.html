@@ -2,6 +2,7 @@
 
 {% block head %}
 <script type="text/javascript" src="/static/js/register.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/register.css">
 {% endblock head %}
 
 {% block body %}
@@ -73,22 +74,16 @@
 					</div>
 					<li class='suqetions'>
 						<label>Câu hỏi bảo mật</label>
-						<select name="squestion" style="text-align: center;text-align-last: center;width: 290px;">
+						<select name="squestion">
 							<option name='squestion' value="What is your pet name?"> What is your pet name?</option>
 							<option name='squestion' value="Where was your birthplace?"> Where was your birthplace?
 							</option>
 							<option name='squestion' value="What is first car?"> What is first car? </option>
 						</select>
-						<input type="text" name="sanswer" id="sanswer" placeholder="Enter your answer" required>
-					</li>
-
-					<li class="agreement">
-						<input type="checkbox" name="allow" id="allow" checked="checked">
-						<label>I agree to the Terms of Use and Privacy Policy</label>
-
+						<input type="text" name="sanswer" id="sanswer" placeholder="Nhập kết quả của bạn" required>
 					</li>
 					<li class="reg_sub">
-						<input type="submit" value="Register">
+						<input class="register-btn" type="submit" value="Register">
 					</li>
 				</ul>
 			</form>

@@ -46,7 +46,6 @@ def index(request):
 
 
 def good_list(request, category, pindex, sort):
-    print("category:", category)
     # tid：product type info  pindex：product page sort：how product display
     typeinfo = TypeInfo.objects.get(ttitle=category)
     # inquiry the current product category base on the primary key
@@ -113,7 +112,7 @@ def detail(request, gid):
     goods.save()
 
     # Apply the render_images filter to the goods.gcontent field
-    goods.gcontent = convert_urls_to_images(goods.gcontent)
+    # goods.gcontent = convert_urls_to_images(goods.gcontent)
 
     news = goods.gtype.goodsinfo_set.order_by("-id")[0:2]
     context = {
@@ -182,7 +181,6 @@ def ordinary_search(request):
         cart_num = CartInfo.objects.filter(user_id=int(user_id)).aggregate(
             Sum("count")
         )["count__sum"]
-        print("cart_num:", cart_num)
 
     goods_list = GoodsInfo.objects.filter(
         Q(gtitle__icontains=search_keywords)

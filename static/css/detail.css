@@ -183,7 +183,6 @@
 
 .r_wrap {
     width: 1200px;
-    min-height: 525px;
     background-color: white;
     border-radius: 10px;
 }
@@ -386,6 +385,4 @@
 
 .tab-content>.tab-pane {
     padding: 15px;
-    border: 1px solid #dee2e6;
-    border-top: none;
 }

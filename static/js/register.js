@@ -16,17 +16,6 @@ $(function(){
 		check_cpwd();
 	});
 
-	$('#allow').click(function() {
-		if($(this).is(':checked')) {
-			error_check = false;
-			$(this).siblings('span').hide();
-		} else {
-			error_check = true;
-			$(this).siblings('span').html('Please agree to the Terms and Conditions');
-			$(this).siblings('span').show();
-		}
-	});
-
 	function check_user_name() {
 		var len = $('#user_name').val().length;
 	

@@ -173,6 +173,10 @@
     margin: 2px 5px 0 0;
 }
 
+.address-detail .address-detail-info p {
+    margin-bottom: 0;
+}
+
 .address-detail .address-detail-operate {
     display: flex;
     gap: 20px;
@@ -403,4 +407,14 @@
     background-color: #c82333;
     text-decoration: none;
     color: white;
+}
+
+.reg_form li.reg_sub .update-info {
+    width: 360px;
+    height: 40px;
+    background-color: black;
+    font-size: 18px;
+    color: #fff;
+    font-family: 'Times New Roman';
+    cursor: pointer;
 }
