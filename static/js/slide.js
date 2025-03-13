@@ -11,7 +11,7 @@ $(function () {
         $pointsContainer = $(".points");
 
     // Initialize: Position all slides except the first
-    $slides.not(":first").css({ left: 760 });
+    $slides.not(":first").css({ left: 1200 });
 
     // Generate points for slider navigation
     for (var i = 0; i < len; i++) {
@@ -51,12 +51,12 @@ $(function () {
         if (nowli === prevli) return;
 
         ismove = true;
-        var direction = nowli > prevli ? 760 : -760;
+        var direction = nowli > prevli ? 1200 : -1200;
 
         $slides.eq(nowli).css({ left: direction * (nowli > prevli ? 1 : -1) });
 
-        $slides.eq(prevli).animate({ left: -direction }, 800, "swing");
-        $slides.eq(nowli).animate({ left: 0 }, 800, "swing", function () {
+        $slides.eq(prevli).animate({ left: -direction }, 1200, "swing");
+        $slides.eq(nowli).animate({ left: 0 }, 1200, "swing", function () {
             ismove = false;
         });
 

@@ -17,19 +17,19 @@ body {
 .slide {
 	position: relative;
 	overflow: hidden;
-	margin-left: 260px;
+	border-radius: 10px;
 }
 
 .slide .slide_pics {
 	position: relative;
 	left: 0;
 	top: 0;
-	width: 760px;
+	width: 1200;
 	height: 214px;
 }
 
 .slide .slide_pics li {
-	width: 760px;
+	width: 1200px;
 	height: 270px;
 	position: absolute;
 	left: 0;
@@ -42,7 +42,7 @@ body {
 }
 
 .points {
-	width: 87%;
+	width: 100%;
 	position: absolute;
 	top: 210px;
 	text-align: center;
