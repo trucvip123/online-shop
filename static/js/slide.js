@@ -1,125 +1,75 @@
-$(function(){
-	var $slides = $('.slide_pics li');
-	var len = $slides.length;
-	var nowli = 0;
-	var prevli = 0;
-	var $prev = $('.prev');
-	var $next = $('.next');
-	var ismove = false;
-	var timer = null;
-	$slides.not(':first').css({left:760});
-	$slides.each(function(index, el) {
-		var $li = $('<li>');
+$(function () {
+    var $slides = $(".slide_pics li"),
+        len = $slides.length,
+        nowli = 0,
+        prevli = 0,
+        ismove = false,
+        timer = null;
 
-		if(index==0)
-		{
-			$li.addClass('active');
-		}
+    var $prev = $(".prev"),
+        $next = $(".next"),
+        $pointsContainer = $(".points");
 
-		$li.appendTo($('.points'));
-	});
-	$points = $('.points li');
-	timer = setInterval(autoplay,4000);
+    // Initialize: Position all slides except the first
+    $slides.not(":first").css({ left: 760 });
 
-	$('.slide').mouseenter(function() {
-		clearInterval(timer);
-	});
+    // Generate points for slider navigation
+    for (var i = 0; i < len; i++) {
+        $("<li>").toggleClass("active", i === 0).appendTo($pointsContainer);
+    }
 
-	$('.slide').mouseleave(function() {
-		timer = setInterval(autoplay,4000);
-	});
+    var $points = $(".points li");
 
-	function autoplay(){
-		nowli++;
-		move();
-		$points.eq(nowli).addClass('active').siblings().removeClass('active');
-	}
+    // Auto-play the slider every 4 seconds
+    function startAutoplay() {
+        timer = setInterval(nextSlide, 4000);
+    }
 
-	$points.click(function(event) {
-		if(ismove)
-		{
-			return;
-		}
-		nowli = $(this).index();
+    function stopAutoplay() {
+        clearInterval(timer);
+    }
 
-		if(nowli==prevli)
-		{
-			return;
-		}
-		
-		$(this).addClass('active').siblings().removeClass('active');
-		move();
+    startAutoplay();
 
-	});
+    $(".slide").hover(stopAutoplay, startAutoplay);
 
-	$prev.click(function() {
-		if(ismove)
-		{
-			return;
-		}		
-		nowli--;
-		move();
-		$points.eq(nowli).addClass('active').siblings().removeClass('active');
+    // Next Slide
+    function nextSlide() {
+        if (ismove) return;
+        nowli = (nowli + 1) % len;
+        moveSlide();
+    }
 
-	});
-	
-	$next.click(function() {
-		if(ismove)
-		{
-			return;
-		}		
-		nowli++;
-		move();
-		$points.eq(nowli).addClass('active').siblings().removeClass('active');
+    // Previous Slide
+    function prevSlide() {
+        if (ismove) return;
+        nowli = (nowli - 1 + len) % len;
+        moveSlide();
+    }
 
-	});
+    function moveSlide() {
+        if (nowli === prevli) return;
 
-	function move(){
-		ismove = true;
-		if(nowli<0)
-		{
-			nowli=len-1;
-			prevli = 0;
-			$slides.eq(nowli).css({left:-760});
-			$slides.eq(nowli).animate({left:0},800,'easeOutExpo');
-			$slides.eq(prevli).animate({left:760},800,'easeOutExpo',function(){
-				ismove = false;
-			});
-			prevli=nowli;
-			return;
-		}
+        ismove = true;
+        var direction = nowli > prevli ? 760 : -760;
 
-		if(nowli>len-1)
-		{
-			nowli = 0;
-			prevli = len-1;
-			$slides.eq(nowli).css({left:760});
-			$slides.eq(nowli).animate({left:0},800,'easeOutExpo');
-			$slides.eq(prevli).animate({left:-760},800,'easeOutExpo',function(){
-				ismove = false;
-			});
-			prevli=nowli;
-			return;
-		}
+        $slides.eq(nowli).css({ left: direction * (nowli > prevli ? 1 : -1) });
 
-		if(prevli<nowli)
-		{
-			$slides.eq(nowli).css({left:760});			
-			$slides.eq(prevli).animate({left:-760},800,'easeOutExpo');
-			$slides.eq(nowli).animate({left:0},800,'easeOutExpo',function(){
-				ismove = false;
-			});
-			prevli=nowli;
-			
-		}
-		else
-		{			
-			$slides.eq(nowli).css({left:-760});			
-			$slides.eq(prevli).animate({left:760},800,'easeOutExpo');	
-			$slides.eq(nowli).animate({left:0},800,'easeOutExpo',function(){
-				ismove = false;
-			});
-			prevli=nowli;		
-		}
-	}
+        $slides.eq(prevli).animate({ left: -direction }, 800, "swing");
+        $slides.eq(nowli).animate({ left: 0 }, 800, "swing", function () {
+            ismove = false;
+        });
+
+        $points.eq(nowli).addClass("active").siblings().removeClass("active");
+        prevli = nowli;
+    }
+
+    $next.click(nextSlide);
+    $prev.click(prevSlide);
+
+    $points.click(function () {
+        if (ismove) return;
+        nowli = $(this).index();
+        moveSlide();
+    });
 });

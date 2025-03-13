@@ -138,20 +138,28 @@
     margin: 10px 5px;
     display: flex;
     border: 1px solid #e1e1e1;
-    padding-left: 5px;
-    height: 450px;
-    flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
+    padding-left: 0;
 }
 
 .goods_type_list li {
-    margin: 0 10px;
+    margin: 10px;
+    border: 1px solid silver;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.goods_type_list li img {
+    height: 190px;
+    line-height: 160px;
+    margin-top: 10px;
 }
 
 .goods_type_list li img {
     display: block;
     margin: 10px auto;
-    height: 100px;
+    width: 180px;
 }
 
 .goods_type_list li img:hover {
@@ -162,31 +170,26 @@
 
 .goods_type_list li h4 {
     width: 160px;
+    height: 70px;
     margin: 0 auto;
 }
 
 .goods_type_list li h4 a {
-    font-weight: normal;
     color: #454545;
-    display: block;
-    width: 160px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
     text-decoration: none;
-    text-align: center;
+    font: 14px/18px Arial, Helvetica, sans-serif;
 }
 
 .operate {
-    width: 130px;
-    margin: 10px auto;
+    margin: 10px;
     position: relative;
-    text-align: center;
 }
 
 .goods_type_list .operate .prize {
-    color: #da260e;
-    font-size: 14px;
+    color: #c40000;
+    font-size: 18px;
+    font-weight: bold;
+
 }
 
 .goods_type_list .operate .unit {
@@ -202,4 +205,10 @@
     position: absolute;
     right: 0;
     top: 3px;
+}
+
+.goods_type_list .operate .price-and-discount .discount {
+    color: #eb5757;
+    font: 14px / 18px Arial, Helvetica, sans-serif;
+    margin-left: 20px;
 }

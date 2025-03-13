@@ -5,18 +5,14 @@
 	<div class="center_con clearfix">
 		<div class="slide fl">
 			<ul class="slide_pics">
-				<li><img src="/static/images/banner/slide01.png" alt="slide"></li>
-				<li><img src="/static/images/banner/slide02.png" alt="slide"></li>
-				<li><img src="/static/images/banner/slide03.png" alt="slide"></li>
-				<li><img src="/static/images/banner/slide04.png" alt="slide"></li>
-				<li><img src="/static/images/banner/slide05.png" alt="slide"></li>
-				<li><img src="/static/images/banner/slide06.png" alt="slide"></li>
-				<li><img src="/static/images/banner/slide07.png" alt="slide"></li>
-				<li><img src="/static/images/banner/slide08.png" alt="slide"></li>
-				<li><img src="/static/images/banner/slide09.png" alt="slide"></li>
+				{% with "123456789" as numbers %}
+				{% for i in numbers %}
+				<li><img src="/static/images/banner/slide0{{ i }}.png" alt="slide" loading="lazy"></li>
+				{% endfor %}
+				{% endwith %}
 			</ul>
-			<div class="prev"></div>
-			<div class="next"></div>
+			<div class="prev" aria-label="Previous Slide"></div>
+			<div class="next" aria-label="Next Slide"></div>
 			<ul class="points"></ul>
 		</div>
 	</div>

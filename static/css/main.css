@@ -357,89 +357,23 @@ body {
 	background-color: #c2c2c2;
 }
 
-
-.goods_type_list {
-	margin: 10px 5px;
-	display: flex;
-	border: 1px solid #e1e1e1;
-	padding-left: 5px;
-	flex-direction: row;
-	flex-wrap: wrap;
-}
-
-.goods_type_list li {
-	margin: 0 10px;
-}
-
-.goods_type_list li img {
-	display: block;
-	margin: 10px auto;
-	height: 100px;
-}
-
-.goods_type_list li h4 {
-	width: 160px;
-	margin: 0 auto;
-}
-
-.goods_type_list li h4 a {
-	font-weight: normal;
-	color: #454545;
-	display: block;
-	width: 160px;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	text-decoration: none;
-	text-align: center;
-}
-
-.operate {
-	width: 130px;
-	margin: 10px auto;
-	position: relative;
-	text-align: center;
-}
-
-.goods_type_list .operate .prize {
-	color: #da260e;
-	font-size: 14px;
-}
-
-.goods_type_list .operate .unit {
-	color: #999;
-	padding-left: 5px;
-}
-
-.goods_type_list .operate .add_goods {
-	display: inline-block;
-	width: 15px;
-	height: 15px;
-	background: url(../images/shop_cart.png);
-	position: absolute;
-	right: 0;
-	top: 3px;
-}
-
-
 /* Pagination */
-
 .pagenation {
 	height: 32px;
 	text-align: center;
 	font-size: 0;
-	margin: 30px auto;
+	margin: 40px auto 10px;
 }
 
 .pagenation a {
-	display: inline-block;
 	border: 1px solid #d2d2d2;
 	background-color: #f8f6f7;
 	font-size: 12px;
-	padding: 7px 10px;
+	padding: 5px 10px;
 	color: #666;
-	margin: 5px;
+	margin: 4px;
 	text-decoration: none;
+	border-radius: 5px;
 }
 
 .pagenation .active {
