@@ -15,15 +15,11 @@ def index(request):
     typelist = TypeInfo.objects.all()
     goodsinfo = GoodsInfo.objects.all()
 
-    type = type0 = type41 = type51 = type100 = []
-    if typelist:
-        type = goodsinfo.order_by("-id")[:8]
-        type0 = typelist[0].goodsinfo_set.order_by("-id")[
-            0:8
-        ]  # according to new arrival
-        type41 = typelist[1].goodsinfo_set.order_by("-gclick")[0:8]
-        type100 = goodsinfo.order_by("-gclick")[:8]
+    newest_products = goodsinfo.order_by("-id")[:10]
 
+    den_chum_instance = TypeInfo.objects.filter(ttitle='den-chum').first()
+    den_chum_type = den_chum_instance.goodsinfo_set.order_by("-id")[:10]
+    
     cart_num = 0
     # check if login
     # if request.session.has_key('user_id'):
@@ -37,9 +33,8 @@ def index(request):
         "title": "Mua bán điện tử, điện lạnh, điện gia dụng",
         "cart_num": cart_num,
         "guest_cart": 1,
-        "type0": type,
-        "type41": type41,
-        "type100": type100,
+        "newest_products": newest_products,
+        "den_chum_type": den_chum_type,
     }
 
     return render(request, "df_goods/index.html", context)
