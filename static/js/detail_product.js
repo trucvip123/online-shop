@@ -1,7 +1,7 @@
 $(document).ready(function () {
     // Initialize show_count from local storage
     let storedCount = localStorage.getItem('show_count');
-    if (storedCount) {
+    if (storedCount != 'undefined') {
         $('#show_count').text(storedCount);
     }
     else { $('#show_count').text('0'); }
@@ -96,4 +96,45 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     };
     document.querySelector('.swiper-wrapper').addEventListener('click', openPhotoSwipe);
+});
+
+
+function plus() {
+    let num = parseFloat($('.num_show').val());
+    $('.num_show').val(num + 1);
+    $('.num_show').blur();
+}
+
+function minus() {
+    let num = parseFloat($('.num_show').val());
+    if (num > 1) {
+        $('.num_show').val(num - 1);
+        $('.num_show').blur();
+    }
+}
+
+$(function () {
+    $('.num_show').blur(function () {
+        let num = parseInt($('.num_show').val());
+        if (num < 1) num = 1;
+        $('.num_show').val(num);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const swiper = new Swiper('.swiper-container', {
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+    });
 });

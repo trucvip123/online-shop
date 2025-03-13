@@ -25,10 +25,11 @@ def index(request):
     # if request.session.has_key('user_id'):
     if "user_id" in request.session:
         user_id = request.session["user_id"]
-        cart_num = CartInfo.objects.filter(user_id=int(user_id)).aggregate(
-            Sum("count")
-        )["count__sum"]
-
+        cart_num = (
+            CartInfo.objects.filter(user_id=int(user_id)).aggregate(Sum("count"))["count__sum"]
+            or 0
+        )
+    
     context = {
         "title": "Mua bán điện tử, điện lạnh, điện gia dụng",
         "cart_num": cart_num,

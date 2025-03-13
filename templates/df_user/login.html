@@ -6,9 +6,9 @@
         name_error = false;
         pwd_error = false;
 
-        if ({{ error_name }
-    } == 1){
-        $('.user_error').html('Username Error').show();
+        if ({{ error_name }} == 1){
+            $('.user_error').html('Username Error').show();
+        }
     }
     if ({{ error_pwd }}== 1) {
         $('.pwd_error').html('Wrong Password').show();
