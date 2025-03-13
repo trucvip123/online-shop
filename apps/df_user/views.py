@@ -504,6 +504,7 @@ def add_product_handle(request):
         price = request.POST.get("price")
         price_old = request.POST.get("price_old")
         description = request.POST.get("description")
+        param = request.POST.get("parameters")
         type_id = request.POST.get("product_type")
         stock = request.POST.get("stock")
 
@@ -529,6 +530,7 @@ def add_product_handle(request):
             gprice=price_decimal,
             gprice_old=price_old,
             gcontent=description,
+            gparam=param,
             gtype=category,
             gkucun=stock,
         )
@@ -562,6 +564,7 @@ def edit_product_handle(request):
     price = request.POST.get("price", "").strip()
     price_old = request.POST.get("price_old", "").strip()
     description = request.POST.get("description", "").strip()
+    parameter = request.POST.get("parameter", "").strip()
     stock = request.POST.get("stock", "").strip()
 
     if not product_id.isdigit():
@@ -584,6 +587,7 @@ def edit_product_handle(request):
     product.gprice = price_decimal
     product.gprice_old = price_old_decimal
     product.gcontent = description
+    product.gparam = parameter
     product.gkucun = stock
     product.save()
 
@@ -641,6 +645,7 @@ def get_product_details_by_id(request):
             "product_type": product.gtype.ttitle,
             "price": str(product.gprice),
             "price_old": str(product.gprice_old),
+            "parameter": product.gparam,
             "description": product.gcontent,
             "stock": product.gkucun,
             "image_urls": image_urls,

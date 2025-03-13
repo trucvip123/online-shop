@@ -84,7 +84,6 @@ body {
 
 .list_model {
 	width: 1200px;
-	height: 700px;
 	margin: 15px auto 0;
 	background: white;
 	border-radius: 10px;
@@ -131,10 +130,6 @@ body {
 	text-decoration: none;
 }
 
-.goods_con {
-	height: 500px;
-}
-
 .goods_banner {
 	width: 200px;
 	height: 300px;
@@ -142,7 +137,6 @@ body {
 
 .goods_list {
 	width: 1160px;
-	height: 640px;
 	border-bottom: 1px solid #ededed;
 	display: flex;
 	flex-wrap: wrap;
@@ -156,15 +150,16 @@ body {
 	width: 190px;
 	border: 1px solid #ededed;
 	float: left;
-	margin: 1px 4px;
+	margin: 5px 4px;
 	border-radius: 8px;
 	text-align: center;
 }
 
 .goods_list li h4 {
-	margin: 25px 7px;
 	text-align: left;
 	height: 40px;
+	margin-top: 40px;
+	margin-left: 5px;
 }
 
 .goods_list li h4 a {
@@ -188,6 +183,7 @@ body {
 .goods_list li .price-info {
 	text-align: left;
 	margin-left: 7px;
+	margin-top: 20px;
 }
 
 .goods_list li .prize {
@@ -1053,7 +1049,6 @@ body {
 
 .main_con {
 	width: 1200px;
-	height: 800px;
 	margin: 0 auto;
 	background: url(../images/left_bg.jpg);
 	border-radius: 8px;
@@ -1118,7 +1113,6 @@ body {
 	background-color: #f9f9f9;
 	padding: 10px 0;
 	margin-bottom: 20px;
-	height: 760px;
 }
 
 .site_con dt {
@@ -1145,7 +1139,8 @@ body {
 	margin-top: 10px;
 }
 
-#product_description {
+#product_description,
+#product_parameter {
 	height: 150px;
 	line-height: 35px;
 	margin-top: 10px;
@@ -1179,7 +1174,6 @@ body {
 	float: left;
 	outline: none;
 	margin-top: 7px;
-	text-indent: 10px;
 	border-radius: 8px;
 }
 

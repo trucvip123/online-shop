@@ -56,7 +56,12 @@
                     <input class="price" type="number" id="price_old" name="price_old" step="0.01"
                         value="{{ product.gprice_old|default:'' }}">
                 </div>
-
+                <div class="form_group" id="product_parameter">
+                    <label>Parameters:</label>
+                    <textarea id="parameter" name="parameter" rows="4" required>
+                        {{ product.gparam|default:'' }}
+                    </textarea required>
+                </div>
                 <div class="form_group" id="product_description">
                     <label>Description:</label>
                     <textarea id="description" name="description" rows="4" required>
