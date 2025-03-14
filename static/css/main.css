@@ -286,33 +286,6 @@ body {
 	padding: 0 5px;
 }
 
-
-
-
-
-
-/* Product Sort */
-.sort_bar {
-	height: 30px;
-	border-bottom: 1px solid silver;
-	margin: 4px;
-}
-
-.sort_bar a {
-	padding-left: 20px;
-	text-decoration: none;
-	color: #787878;
-	font-size: 16px;
-}
-
-.sort_bar a:hover {
-	text-decoration: none;
-}
-
-.sort_bar .active {
-	color: #53acff;
-}
-
 .dropbtn_price {
 	padding: 2px;
 	font-size: 16px;

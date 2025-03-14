@@ -1,129 +1,148 @@
 {% extends 'df_goods/base.html' %}
 
 {% block head %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/categories.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/categories.css">
 
-    <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function () {
-            const discounts = document.querySelectorAll('.discount');
-            discounts.forEach(function (discount) {
-                const oldPrice = parseFloat(discount.getAttribute('data-old-price'));
-                const newPrice = parseFloat(discount.getAttribute('data-new-price'));
-                if (oldPrice && newPrice) {
-                    const discountPercentage = ((oldPrice - newPrice) / oldPrice) * 100;
-                    discount.textContent = '-' + discountPercentage.toFixed(2) + '%';
-                }
-            });
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        const discounts = document.querySelectorAll('.discount');
+        discounts.forEach(function (discount) {
+            const oldPrice = parseFloat(discount.getAttribute('data-old-price'));
+            const newPrice = parseFloat(discount.getAttribute('data-new-price'));
+            if (oldPrice && newPrice) {
+                const discountPercentage = ((oldPrice - newPrice) / oldPrice) * 100;
+                discount.textContent = '-' + discountPercentage.toFixed(2) + '%';
+            }
         });
-    </script>
+    });
+</script>
 {% endblock head %}.lst-quicklink img
 
 {% block center_content %}
-    <div class="main_wrap clearfix">
-        <div class="r_wrap fr clearfix">
-            <div class="box-quicklink  block-scroll-main ">
-                <div class="lst-quicklink">
-                    <a href="/may-lanh_1_1" data-index="1" class="box-quicklink__item bd-radius quicklink-logo" style="display: flex;">
-                        <img src="/static/images/all_icon.png" width="30" alt="icon" class="no-text" lazyloaded="">
-                    <span class="box-quicklink__item-span"></span>
-                    </a>
-                    <a href="/may-lanh_1_1/panasonic" data-index="1" class="box-quicklink__item bd-radius quicklink-logo" style="display: flex;">
-                        <i class="quick-link-icon"></i>
-                        <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/7b/fe/7bfefb3ef979c2a3a4ed10ee8afaec7f.png" width="30" alt="icon" class="no-text" lazyloaded="">
-                    <span class="box-quicklink__item-span"></span>
-                    </a>
-                    <a href="/may-lanh_1_1/daikin" data-index="1" class="box-quicklink__item bd-radius quicklink-logo" style="display: flex;">
-                        <i class="quick-link-icon"></i>
-                        <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/2f/53/2f53a117d367a1180788ae6ed2ddec12.png" width="30" alt="icon" class="no-text" lazyloaded="">
-                    <span class="box-quicklink__item-span"></span>
-                    </a>
-                    <a href="/may-lanh_1_1/aqua" data-index="1" class="box-quicklink__item bd-radius quicklink-logo" style="display: flex;">
-                        <i class="quick-link-icon"></i>
-                        <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/77/70/7770c6499cb79088e8663b61bda39539.png" width="30" alt="icon" class="no-text" lazyloaded="">
-                    <span class="box-quicklink__item-span"></span>
-                    </a>
-                    <a href="/may-lanh_1_1/lg" data-index="1" class="box-quicklink__item bd-radius quicklink-logo" style="display: flex;">
-                        <i class="quick-link-icon"></i>
-                        <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/b2/fc/b2fc6b8befcdfe03c16d0d4dda903092.png" width="30" alt="icon" class="no-text" lazyloaded="">
-                    <span class="box-quicklink__item-span"></span>
-                    </a>
-                    <a href="/may-lanh_1_1/casper" data-index="1" class="box-quicklink__item bd-radius quicklink-logo" style="display: flex;">
-                        <i class="quick-link-icon"></i>
-                        <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/e6/4b/e64bff8ef49f4af70d2981e842933410.png" width="30" alt="icon" class="no-text" lazyloaded="">
-                    <span class="box-quicklink__item-span"></span>
-                    </a>
-                    <a href="/may-lanh_1_1/samsung" data-index="1" class="box-quicklink__item bd-radius quicklink-logo" style="display: flex;">
-                        <i class="quick-link-icon"></i>
-                        <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/89/ba/89baf2121494abea518fca0c710475c6.png" width="30" alt="icon" class="no-text" lazyloaded="">
-                    <span class="box-quicklink__item-span"></span>
-                    </a>
-                </div>
-            </div>
-            <div class="sort_bar">
-                <a> Sắp xếp theo: </a>
-                <a href="/{{ typeinfo.ttitle }}_1_1" {% if sort == '1' %}class="active"{% endif %}>
-                    Mới&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◦
+<div class="main_wrap clearfix">
+    <div class="r_wrap fr clearfix">
+        {% if typeinfo.ttitle == 'may-lanh' %}
+        <div class="box-quicklink  block-scroll-main ">
+            <div class="lst-quicklink">
+                <a href="/may-lanh_1_1" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if not selected_brand %}active{% endif %}"
+                    style="display: flex;">
+                    <img src="/static/images/all_icon.png" width="30" alt="icon" class="no-text" lazyloaded="">
                 </a>
-                <a href="/{{ typeinfo.ttitle }}_1_3" {% if sort == '3' %}class="active"{% endif %}>
-                    Nổi bật&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◦
+                <a href="/may-lanh_1_1/panasonic" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if selected_brand == 'panasonic' %}active{% endif %}"
+                    style="display: flex;">
+                    <i class="quick-link-icon"></i>
+                    <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/7b/fe/7bfefb3ef979c2a3a4ed10ee8afaec7f.png"
+                        width="30" alt="icon" class="no-text" lazyloaded="">
                 </a>
-                
-                <div class="dropdown">
-                    <button id="priceButton" class="dropbtn_price {% if sort == '2' or sort == '4' %}active{% endif %}">
-                        Giá {% if sort == '2' %}↓{% elif sort == '4' %}↑{% else %} {% endif %}
-                    </button>
-                    <div class="dropdown-content-price">
-                        <a href="/{{ typeinfo.ttitle }}_1_4" {% if sort == '4' %}class="active"{% endif %}>Giá thấp - cao</a>
-                        <a href="/{{ typeinfo.ttitle }}_1_2" {% if sort == '2' %}class="active"{% endif %}>Giá cao - thấp</a>
-                    </div>
-                </div>
-            </div>
-
-            <ul class="goods_type_list clearfix">
-                {% for g in page %}
-                    <li>
-                        <a href="/{{ g.id }}/">
-                            <div class="item-img">
-                                <img src="{{ MEDIA_URL }}{{ g.images.all.0.image_path }}" class="img-fluid rounded"
-                                     onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
-                            </div>
-                        </a>
-                        <h4><a href="/{{ g.id }}/">{{ g.gtitle }}</a></h4>
-                        <div class="operate">
-                            <span class="prize" data-price="{{ g.gprice }}">{{ g.gprice }}</span>
-                            <a href="/cart/add{{ g.id }}_1/" class="add_goods" title="add to cart"></a>
-                            <div class="price-and-discount">
-                                {% if g.gprice_old %}
-                                <label class="old-price" data-old-price="{{ g.gprice_old }}">{{ g.gprice_old
-                                    }}₫</label>
-                                <small class="discount" data-old-price="{{ g.gprice_old }}"
-                                    data-new-price="{{ g.gprice }}"></small>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-
-            <div class="pagenation">
-                {% if page.has_previous %}
-                    <a href="/{{ typeinfo.ttitle }}_{{ page.previous_page_number }}_{{ sort }}">Previous page</a>
-                {% endif %}
-                
-                {% for pindex in paginator.page_range %}
-                    {% if pindex == page.number %}
-                        <a href="/{{ typeinfo.ttitle }}_{{ pindex }}_{{ sort }}" class="active">{{ pindex }}</a>
-                    {% else %}
-                        <a href="/{{ typeinfo.ttitle }}_{{ pindex }}_{{ sort }}">{{ pindex }}</a>
-                    {% endif %}
-                {% endfor %}
-                
-                {% if page.has_next %}
-                    <a href="/{{ typeinfo.ttitle }}_{{ page.next_page_number }}_{{ sort }}">Next Page</a>
-                {% endif %}
+                <a href="/may-lanh_1_1/daikin" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if selected_brand == 'daikin' %}active{% endif %}"
+                    style="display: flex;">
+                    <i class="quick-link-icon"></i>
+                    <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/2f/53/2f53a117d367a1180788ae6ed2ddec12.png"
+                        width="30" alt="icon" class="no-text" lazyloaded="">
+                </a>
+                <a href="/may-lanh_1_1/aqua" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if selected_brand == 'aqua' %}active{% endif %}"
+                    style="display: flex;">
+                    <i class="quick-link-icon"></i>
+                    <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/77/70/7770c6499cb79088e8663b61bda39539.png"
+                        width="30" alt="icon" class="no-text" lazyloaded="">
+                </a>
+                <a href="/may-lanh_1_1/lg" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if selected_brand == 'lg' %}active{% endif %}"
+                    style="display: flex;">
+                    <i class="quick-link-icon"></i>
+                    <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/b2/fc/b2fc6b8befcdfe03c16d0d4dda903092.png"
+                        width="30" alt="icon" class="no-text" lazyloaded="">
+                </a>
+                <a href="/may-lanh_1_1/casper" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if selected_brand == 'casper' %}active{% endif %}"
+                    style="display: flex;">
+                    <i class="quick-link-icon"></i>
+                    <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/e6/4b/e64bff8ef49f4af70d2981e842933410.png"
+                        width="30" alt="icon" class="no-text" lazyloaded="">
+                    x </a>
+                <a href="/may-lanh_1_1/samsung" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if selected_brand == 'samsung' %}active{% endif %}"
+                    style="display: flex;">
+                    <i class="quick-link-icon"></i>
+                    <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/89/ba/89baf2121494abea518fca0c710475c6.png"
+                        width="30" alt="icon" class="no-text" lazyloaded="">
+                </a>
             </div>
         </div>
+        {% endif %}
+        <div class="sort_bar">
+            <a> Sắp xếp theo: </a>
+            <a href="/{{ typeinfo.ttitle }}_1_1/{{ selected_brand }}" class="{% if sort == '1' %} active {% endif %}">
+                Mới&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◦
+            </a>
+            <a href="/{{ typeinfo.ttitle }}_1_3/{{ selected_brand }}" class="{% if sort == '3' %} active {% endif %}">
+                Nổi bật&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◦
+            </a>
+
+            <div class="dropdown">
+                <button id="priceButton" class="dropbtn_price {% if sort == '2' or sort == '4' %}active{% endif %}">
+                    Giá {% if sort == '2' %}↓{% elif sort == '4' %}↑{% else %} {% endif %}
+                </button>
+                <div class="dropdown-content-price">
+                    <a href="/{{ typeinfo.ttitle }}_1_4/{{ selected_brand }}"
+                        class="{% if sort == '4' %}active{% endif %}">Giá thấp -
+                        cao</a>
+                    <a href="/{{ typeinfo.ttitle }}_1_2/{{ selected_brand }}"
+                        class="{% if sort == '2' %}active{% endif %}">Giá cao -
+                        thấp</a>
+                </div>
+            </div>
+        </div>
+
+        <ul class="goods_type_list clearfix">
+            {% for g in page %}
+            <li>
+                <a href="/{{ g.id }}/">
+                    <div class="item-img">
+                        <img src="{{ MEDIA_URL }}{{ g.images.all.0.image_path }}" class="img-fluid rounded"
+                            onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
+                    </div>
+                </a>
+                <h4><a href="/{{ g.id }}/">{{ g.gtitle }}</a></h4>
+                <div class="operate">
+                    <span class="prize" data-price="{{ g.gprice }}">{{ g.gprice }}</span>
+                    <a href="/cart/add{{ g.id }}_1/" class="add_goods" title="add to cart"></a>
+                    <div class="price-and-discount">
+                        {% if g.gprice_old %}
+                        <label class="old-price" data-old-price="{{ g.gprice_old }}">{{ g.gprice_old
+                            }}₫</label>
+                        <small class="discount" data-old-price="{{ g.gprice_old }}"
+                            data-new-price="{{ g.gprice }}"></small>
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <div class="pagenation">
+            {% if page.has_previous %}
+            <a href="/{{ typeinfo.ttitle }}_{{ page.previous_page_number }}_{{ sort }}">Previous page</a>
+            {% endif %}
+
+            {% for pindex in paginator.page_range %}
+            {% if pindex == page.number %}
+            <a href="/{{ typeinfo.ttitle }}_{{ pindex }}_{{ sort }}" class="active">{{ pindex }}</a>
+            {% else %}
+            <a href="/{{ typeinfo.ttitle }}_{{ pindex }}_{{ sort }}">{{ pindex }}</a>
+            {% endif %}
+            {% endfor %}
+
+            {% if page.has_next %}
+            <a href="/{{ typeinfo.ttitle }}_{{ page.next_page_number }}_{{ sort }}">Next Page</a>
+            {% endif %}
+        </div>
     </div>
+</div>
 {% endblock center_content %}

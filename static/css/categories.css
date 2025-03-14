@@ -47,6 +47,11 @@
     height: 30px;
 }
 
+.lst-quicklink .active {
+    border: 2px solid #a64707;
+    background-color: #f5f5f5;
+}
+
 
 /* New Product */
 .new_goods h3 {

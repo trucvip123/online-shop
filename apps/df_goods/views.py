@@ -20,6 +20,9 @@ def index(request):
     den_chum_instance = TypeInfo.objects.filter(ttitle='den-chum').first()
     den_chum_type = den_chum_instance.goodsinfo_set.order_by("-id")[:10]
     
+    may_lanh_instance = TypeInfo.objects.filter(ttitle='may-lanh').first()
+    may_lanh_type = may_lanh_instance.goodsinfo_set.order_by("-id")[:10]
+    
     cart_num = 0
     # check if login
     # if request.session.has_key('user_id'):
@@ -36,6 +39,7 @@ def index(request):
         "guest_cart": 1,
         "newest_products": newest_products,
         "den_chum_type": den_chum_type,
+        "may_lanh_type": may_lanh_type,
     }
 
     return render(request, "df_goods/index.html", context)
@@ -96,6 +100,7 @@ def good_list(request, category, pindex, sort, brand=None):
         "typeinfo": typeinfo,
         "sort": sort,
         "news": news,
+        "selected_brand": brand,
     }
     return render(request, "df_goods/list.html", context)
 
