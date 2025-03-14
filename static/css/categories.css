@@ -10,6 +10,44 @@
     border-radius: 10px;
 }
 
+.box-quicklink {
+    position: relative;
+    font-size: 0;
+    padding: 10px 0 10px 24px;
+    width: 100%;
+}
+
+.lst-quicklink {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+}
+
+.lst-quicklink a {
+    display: flex;
+    border-radius: 8px;
+    background-color: rgba(242, 244, 247, 1);
+    border: 1px solid rgba(242, 244, 247, 1);
+    padding: 5px;
+}
+
+.quick-link-icon {
+    background: url(//cdnv2.tgdd.vn/webmwg/2024/ContentMwg/images/category_v2/icon-quick-link.png) no-repeat 0 0;
+    width: 20px;
+    height: 20px;
+    background-size: 100%;
+    margin-right: 2px;
+    margin-top: 4px;
+}
+
+.lst-quicklink img {
+    vertical-align: middle;
+    width: auto;
+    height: 30px;
+}
+
+
 /* New Product */
 .new_goods h3 {
     height: 33px;

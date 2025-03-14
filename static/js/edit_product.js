@@ -34,6 +34,7 @@ function fetchProductDetails() {
                 if (!response.error) {
                     document.getElementById('product_name').value = response.product_name;
                     document.getElementById('product_type').value = response.product_type;
+                    document.getElementById('brand_name').value = response.brand_name;
                     document.getElementById('price').value = response.price;
                     document.getElementById('price_old').value = response.price_old;
                     document.getElementById('parameter').value = response.parameter;

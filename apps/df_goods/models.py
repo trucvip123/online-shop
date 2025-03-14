@@ -38,6 +38,7 @@ class GoodsInfo(models.Model):
     gtype = models.ForeignKey(
         TypeInfo, on_delete=models.CASCADE, verbose_name="category"
     )
+    gbrand = models.CharField(max_length=50, verbose_name="brand", default="")
 
     class Meta:
         verbose_name = "products"

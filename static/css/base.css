@@ -49,7 +49,7 @@
 .search_con {
   height: 38px;
   border: 1px solid rgb(255, 255, 255);
-  margin-top: 13px;
+  margin-top: 10px;
   background: url(../images/search_icon.jpg) no-repeat;
   background-size: 35px 37px;
   border-radius: 30px;
@@ -102,11 +102,11 @@
 
 .guest_cart .cart_name i {
   font-size: 20px;
-  margin-top: -12px;
+  margin-top: -15px;
 }
 
 .guest_cart .cart_name p {
-  margin-left: 15px;
+  margin-left: 5px;
 }
 
 .guest_cart .goods_count {
@@ -118,7 +118,7 @@
   color: #080808;
   background-color: #ff8800;
   border-radius: 50%;
-  margin: -10px 0 0 -80px
+  margin: -10px 0 0 -70px
 }
 
 .login_btn {
@@ -352,6 +352,7 @@
   z-index: 999;
   display: none
 }
+
 /*end small_cart */
 
 
@@ -466,7 +467,6 @@
 
 /* Submenu Images */
 .dropdown-content-submenu img {
-  margin-right: 10px;
   border-radius: 5px;
 }
 

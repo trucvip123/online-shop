@@ -130,7 +130,7 @@
 </div>
 
 <div class="main_wrap clearfix">
-    <div class="r_wrap fr clearfix">
+    <div class="l_wrap fl clearfix">
         <!-- Tabs Navigation -->
         <ul class="nav nav-tabs" id="productTabs" role="tablist">
             <li class="nav-item" role="presentation">
@@ -161,32 +161,32 @@
             </div>
         </div>
     </div>
-</div>
-
-
-<div class="main_wrap clearfix">
-    <div class="new_goods">
-        <h3>Sản phẩm mới</h3>
-        <ul>
-            {% for goods in news %}
-            <li>
-                <a href="/{{ goods.id }}/">
-                    {% if goods.images.all %}
-                    <img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
-                        class="img-fluid rounded"
-                        onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
-                    {% else %}
-                    <img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
-                        alt="Default Img">
-                    {% endif %}
-                </a>
-                <h4><a href="#">{{ goods.gtitle }}</a></h4>
-                <div class="prize" id="prize" data-price="{{ goods.gprice }}">${{ goods.gprice }}</div>
-            </li>
-            {% endfor %}
-        </ul>
+    <div class="r_wrap fr clearfix">
+        <div class="new_goods">
+            <h3>Sản phẩm mới</h3>
+            <ul>
+                {% for goods in news %}
+                <li>
+                    <a href="/{{ goods.id }}/">
+                        {% if goods.images.all %}
+                        <img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
+                            class="img-fluid rounded"
+                            onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
+                        {% else %}
+                        <img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
+                            alt="Default Img">
+                        {% endif %}
+                    </a>
+                    <h4><a href="#">{{ goods.gtitle }}</a></h4>
+                    <div class="prize" id="prize" data-price="{{ goods.gprice }}">${{ goods.gprice }}</div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>
+
+
 
 <div class="add_jump"></div>
 

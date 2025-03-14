@@ -38,6 +38,11 @@
                 </div>
 
                 <div class="form_group">
+                    <label>Brand:</label>
+                    <input type="text" name="brand_name" value="{{ product.brand_name|default:'' }}" required>
+                </div>
+
+                <div class="form_group">
                     <label for="product_type">Product Type:</label>
                     <select class="product_type" id="product_type" name="product_type">
                         {% for type in types %}
@@ -59,13 +64,13 @@
 
                 <div class="form_group" id="product_description">
                     <label>Parameters:</label>
-                    <textarea class="parameters" name="parameters" rows="4"
+                    <textarea class="parameters" name="parameters" rows="8"
                         required>{{ product.parameters|default:'' }}</textarea>
                 </div>
 
                 <div class="form_group" id="product_description">
                     <label>Description:</label>
-                    <textarea class="description" name="description" rows="4"
+                    <textarea class="description" name="description" rows="8"
                         required>{{ product.description|default:'' }}</textarea>
                 </div>
 

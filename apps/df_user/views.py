@@ -501,6 +501,7 @@ def add_product_handle(request):
     if request.method == "POST":
         # Get product data from the form
         name = request.POST.get("product_name")
+        brand = request.POST.get("brand_name")
         price = request.POST.get("price")
         price_old = request.POST.get("price_old")
         description = request.POST.get("description")
@@ -533,6 +534,7 @@ def add_product_handle(request):
             gparam=param,
             gtype=category,
             gkucun=stock,
+            gbrand=brand,
         )
         # Handle multiple images
         images = request.FILES.getlist("image")
@@ -561,6 +563,7 @@ def edit_product_handle(request):
     # Extract and validate inputs
     product_id = request.POST.get("product_id", "").strip()
     name = request.POST.get("product_name", "").strip()
+    brand = request.POST.get("brand_name", "").strip()
     price = request.POST.get("price", "").strip()
     price_old = request.POST.get("price_old", "").strip()
     description = request.POST.get("description", "").strip()
@@ -589,6 +592,7 @@ def edit_product_handle(request):
     product.gcontent = description
     product.gparam = parameter
     product.gkucun = stock
+    product.gbrand = brand
     product.save()
 
     # Delete all existing images of the product
@@ -643,6 +647,7 @@ def get_product_details_by_id(request):
         data = {
             "product_name": product.gtitle,
             "product_type": product.gtype.ttitle,
+            "brand_name": product.gbrand,
             "price": str(product.gprice),
             "price_old": str(product.gprice_old),
             "parameter": product.gparam,
