@@ -62,15 +62,15 @@
                         value="{{ product.gprice_old|default:'' }}">
                 </div>
 
-                <div class="form_group" id="product_description">
+                <div class="form_group" id="product_parameter">
                     <label>Parameters:</label>
-                    <textarea class="parameters" name="parameters" rows="8"
+                    <textarea class="parameters" name="parameters" rows="13"
                         required>{{ product.parameters|default:'' }}</textarea>
                 </div>
 
                 <div class="form_group" id="product_description">
                     <label>Description:</label>
-                    <textarea class="description" name="description" rows="8"
+                    <textarea class="description" name="description" rows="13"
                         required>{{ product.description|default:'' }}</textarea>
                 </div>
 

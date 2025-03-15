@@ -334,6 +334,9 @@
 .new_goods ul {
     display: flex;
     text-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-left: 0 !important;
 }
 
 .new_goods li {
@@ -388,5 +391,5 @@
 }
 
 .tab-content>.tab-pane {
-    padding: 15px;
+    padding: 0 15px;
 }

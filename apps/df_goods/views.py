@@ -122,7 +122,7 @@ def detail(request, gid):
     # Apply the render_images filter to the goods.gcontent field
     # goods.gcontent = convert_urls_to_images(goods.gcontent)
 
-    news = goods.gtype.goodsinfo_set.order_by("-id")[0:2]
+    news = goods.gtype.goodsinfo_set.order_by("-id")[0:round(len(goods.gparam)/200)]
     context = {
         "ttitle": goods.gtype.ttitle,
         "ntitle": goods.gtype.ntitle,

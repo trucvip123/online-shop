@@ -155,9 +155,7 @@
                 </dl>
             </div>
             <div class="tab-pane fade" id="description" role="tabpanel" aria-labelledby="description-tab">
-                <dl>
-                    <dd>{{ goods.gcontent|safe|linebreaks }}</dd>
-                </dl>
+                {{ goods.gcontent|safe|linebreaks }}
             </div>
         </div>
     </div>

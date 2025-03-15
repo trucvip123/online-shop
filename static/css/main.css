@@ -1041,8 +1041,14 @@ body {
 	margin-top: 10px;
 }
 
-#product_description,
+
 #product_parameter {
+	height: 250px;
+	line-height: 35px;
+	margin-top: 10px;
+}
+
+#product_description {
 	height: 150px;
 	line-height: 35px;
 	margin-top: 10px;
