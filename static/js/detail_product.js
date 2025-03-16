@@ -1,18 +1,10 @@
 $(document).ready(function () {
-    // Initialize show_count from local storage
-    let storedCount = localStorage.getItem('show_count');
-    if (storedCount != 'undefined') {
-        $('#show_count').text(storedCount);
-    }
-    else { $('#show_count').text('0'); }
-
     $(".buy_btn").on("click", function () {
         let num = parseInt($('.num_show').val(), 10);
         let productId = $(this).data('product-id');
 
         $.get(`/cart/add${productId}_${num}/`, function (data) {
             $('#show_count').text(data.count);
-            localStorage.setItem('show_count', data.count);
             location.href = "/cart/";
         }).fail(function () {
             alert('Error adding to cart. Please try again.');
@@ -46,13 +38,11 @@ $(document).ready(function () {
         }, "fast", function () {
             $(".add_jump").fadeOut('fast', function () {
                 let count = parseInt($('.num_show').val(), 10);
-                $showCount.text(count);
             });
         });
 
         $.get(`/cart/add${productId}_${num}/`, function (data) {
             $showCount.text(data.count);
-            localStorage.setItem('show_count', data.count);
         }).fail(function () {
             alert('Error adding to cart. Please try again.');
         });

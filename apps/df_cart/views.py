@@ -5,56 +5,57 @@ from django.db.models import Sum
 
 from .models import *
 
-
-@user_decorator.login
 def user_cart(request):
-    uid = request.session["user_id"]
-    carts = CartInfo.objects.filter(user_id=uid)
-    count = CartInfo.objects.filter(user_id=request.session["user_id"]).aggregate(
-        Sum("count")
-    )["count__sum"]
-    if not count:
-        count = 0
-    if request.headers.get("x-requested-with") == "XMLHttpRequest":
-        # How many items the current user purchased
-        return JsonResponse({"count": count, "cart_num": count})
-    else:
-        context = {
-            "title": "Shopping Cart",
-            "page_name": 1,
-            "carts": carts,
-            "cart_num": count,
-        }
-        return render(request, "df_cart/cart.html", context)
+    uid = request.session.get("user_id")
+
+    if uid:  # Nếu user đã đăng nhập -> lấy từ DB
+        carts = CartInfo.objects.filter(user_id=uid)
+        count = carts.aggregate(Sum("count"))["count__sum"] or 0
+    else:  # Nếu là khách -> lấy từ session
+        guest_cart = request.session.get("guest_cart", {})
+        count = sum(guest_cart.values())
+        carts = []
+
+    print("count:", count)
+    context = {
+        "title": "Shopping Cart",
+        "page_name": 1,
+        "carts": carts,
+        "cart_num": count,
+    }
+    return render(request, "df_cart/cart.html", context)
 
 
-@user_decorator.login
 def add(request, gid, count):
-    uid = request.session["user_id"]
-    gid, count = int(gid), int(count)
-    # Check if there is already this product in the shopping cart, if so, increase the quantity, if not, add it
-    carts = CartInfo.objects.filter(user_id=uid, goods_id=gid)
-    if len(carts) >= 1:
-        cart = carts[0]
-        cart.count = cart.count + count
-    else:
-        cart = CartInfo()
-        cart.user_id = uid
-        cart.goods_id = gid
-        cart.count = count
-    cart.save()
+    gid, count = gid, int(count)
+    uid = request.session.get("user_id")
 
-    count = CartInfo.objects.filter(user_id=uid).aggregate(Sum("count"))["count__sum"]
+    if uid:  # Nếu user đã đăng nhập, lưu vào DB
+        cart, created = CartInfo.objects.get_or_create(
+            user_id=uid,
+            goods_id=gid,
+            defaults={"count": count},
+        )
+        if not created:
+            cart.count += count
+            cart.save()
+
+        cart_count = CartInfo.objects.filter(user_id=uid).aggregate(Sum("count"))["count__sum"]
+    
+    else:  # Nếu là khách, lưu vào session
+        guest_cart = request.session.get("guest_cart", {})
+        guest_cart[gid] = guest_cart.get(gid, 0) + count
+        request.session["guest_cart"] = guest_cart
+        request.session.modified = True  # Bắt buộc Django lưu session ngay lập tức
+        cart_count = sum(guest_cart.values())
+
     if request.headers.get("x-requested-with") == "XMLHttpRequest":
-        return JsonResponse({"count": count})
-    else:
-        context = {
-            "cart_num": count,
-        }
-        return render(request, "df_cart/cart.html", context)
+        return JsonResponse({"count": cart_count})
+    
+    context = {"cart_num": cart_count}
+    return render(request, "df_cart/cart.html", context)
 
-
-@user_decorator.login
+# @user_decorator.login
 def edit(request, cart_id, count):
     data = {}
     try:
@@ -67,7 +68,7 @@ def edit(request, cart_id, count):
     return JsonResponse(data)
 
 
-@user_decorator.login
+# @user_decorator.login
 def delete(request, cart_id):
     data = {}
     try:

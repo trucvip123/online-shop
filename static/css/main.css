@@ -141,7 +141,7 @@ body {
 }
 
 .goods_list li {
-	height: 350px;
+	height: 370px;
 	width: 190px;
 	border: 1px solid #ededed;
 	float: left;
@@ -152,8 +152,8 @@ body {
 
 .goods_list li h4 {
 	text-align: left;
-	height: 40px;
-	margin-top: 40px;
+	height: 50px;
+	margin-top: 50px;
 	margin-left: 5px;
 }
 

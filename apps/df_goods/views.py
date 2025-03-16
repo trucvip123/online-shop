@@ -23,19 +23,9 @@ def index(request):
     may_lanh_instance = TypeInfo.objects.filter(ttitle='may-lanh').first()
     may_lanh_type = may_lanh_instance.goodsinfo_set.order_by("-id")[:10]
     
-    cart_num = 0
-    # check if login
-    # if request.session.has_key('user_id'):
-    if "user_id" in request.session:
-        user_id = request.session["user_id"]
-        cart_num = (
-            CartInfo.objects.filter(user_id=int(user_id)).aggregate(Sum("count"))["count__sum"]
-            or 0
-        )
-    
     context = {
         "title": "Mua bán điện tử, điện lạnh, điện gia dụng",
-        "cart_num": cart_num,
+        "cart_num": cart_count(request),
         "guest_cart": 1,
         "newest_products": newest_products,
         "den_chum_type": den_chum_type,
@@ -93,7 +83,7 @@ def good_list(request, category, pindex, sort, brand=None):
     context = {
         "title": typeinfo.ntitle,
         "guest_cart": guest_cart,
-        "cart_num": cart_num,
+        "cart_num": cart_count(request),
         "page": page,
         "paginator": paginator,
         "typeinfo": typeinfo,
@@ -159,13 +149,17 @@ def detail(request, gid):
 
 
 def cart_count(request):
-    if "user_id" in request.session:
-        cart_num = CartInfo.objects.filter(
-            user_id=request.session["user_id"]
-        ).aggregate(Sum("count"))["count__sum"]
-        return cart_num
-    else:
-        return 0
+    uid = request.session.get("user_id")
+
+    if uid:  # Nếu user đã đăng nhập -> lấy từ DB
+        carts = CartInfo.objects.filter(user_id=uid)
+        count = carts.aggregate(Sum("count"))["count__sum"] or 0
+    else:  # Nếu là khách -> lấy từ session
+        guest_cart = request.session.get("guest_cart", {})
+        count = sum(guest_cart.values())
+        carts = []
+    
+    return count
 
 
 # the search function

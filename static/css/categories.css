@@ -255,3 +255,11 @@
     font: 14px / 18px Arial, Helvetica, sans-serif;
     margin-left: 20px;
 }
+
+.old-price {
+    color: #666;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 17px;
+    text-decoration-line: line-through;
+}

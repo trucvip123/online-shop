@@ -91,6 +91,26 @@ def register_exist(request):
     return JsonResponse({"count": count})
 
 
+def merge_guest_cart(request):
+    user_id = request.session.get("user_id")
+    guest_uid = f"guest_{request.session.session_key}"
+
+    guest_cart_items = CartInfo.objects.filter(user_id=guest_uid)
+
+    for item in guest_cart_items:
+        cart, created = CartInfo.objects.get_or_create(
+            user_id=user_id, 
+            goods_id=item.goods_id, 
+            defaults={"count": item.count}
+        )
+        if not created:
+            cart.count += item.count
+            cart.save()
+
+        # Xóa giỏ hàng của khách vãng lai sau khi hợp nhất
+        item.delete()
+
+
 def login(request):
     uname = request.COOKIES.get("uname", "")
     context = {
@@ -103,7 +123,6 @@ def login(request):
 
 
 def login_handle(request):
-
     uname = request.POST.get("username")
     upwd = request.POST.get("pwd")
     jizhu = request.POST.get("jizhu", 0)
@@ -126,6 +145,10 @@ def login_handle(request):
                 red.set_cookie("uname", "", max_age=-1)
             request.session["user_id"] = users[0].id
             request.session["user_name"] = uname
+
+            # 🔥 Merge guest cart after login
+            merge_guest_cart(request)
+
             return red
         else:  # if the code doesn't match
             context = {
