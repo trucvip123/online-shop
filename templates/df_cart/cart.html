@@ -77,12 +77,13 @@
             })
         })
     });
-    function cart_del(cart_id) {
+    function cart_del(gid) {
         del = confirm('Delete Confirmed');
         if (del) {
-            $.get('/cart/delete' + cart_id + '/', function (data) {
+            console.log("Deleting product ID:", gid);
+            $.get('/cart/delete' + gid + '/', function (data) {
                 if (data.ok == 1) {
-                    $('ul').remove('#' + cart_id);
+                    $('ul').remove('#' + gid);
                     total();
                 }
             })
@@ -157,7 +158,7 @@
         </div>
     </li>
     <li class="col07"></li>
-    <li class="col08"><a href="javascript:cart_del({{ cart.id }});">Xóa</a></li>
+    <li class="col08"><a href="javascript:cart_del({{ cart.goods.id }});">Xóa</a></li>
 </ul>
 {% endfor %}
 

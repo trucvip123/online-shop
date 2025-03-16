@@ -82,6 +82,8 @@
 .cart_list_td .col05 {
     width: 9%;
     text-align: center;
+    font: 14px Arial;
+    margin-top: 40px;
 }
 
 .cart_list_td .col05_tmp {
@@ -98,16 +100,24 @@
 .cart_list_td .col07 {
     width: 9%;
     margin-left: 120px;
+    margin-top: 40px;
     text-align: center;
     color: #ee4d2d;
+    font: 14px / 18px Arial, Helvetica, sans-serif;
 }
 
 .cart_list_td .col08 {
-    margin-left: 120px
+    width: 9%;
+    margin-left: 80px;
+    margin-top: 40px;
+    text-align: center;
+    color: #ee4d2d;
+    font: 14px Arial, Helvetica, sans-serif;
 }
 
 .cart_list_td .col02 img {
     border: 1px solid #ddd;
+    margin: 5px;
 }
 
 .cart_list_td .col03 {
@@ -128,9 +138,8 @@
 
 .cart_list_td .col06 .num_add {
     width: 98px;
-    height: 28px;
     border: 1px solid #ddd;
-    margin: 45px auto 0;
+    margin: 35px auto;
     border-radius: 2px;
     display: flex;
 }

@@ -54,7 +54,7 @@
 						</div>
 					</div>
 					<div class="operate_btn">
-						<a href="javascript:;" class="buy_btn" id="buy_now">Mua ngay</a>
+						<a href="javascript:;" class="buy_btn" data-product-id="{{ goods.id }}">Mua ngay</a>
 					</div>
 				</li>
 				{% endfor %}
@@ -96,7 +96,7 @@
 						</div>
 					</div>
 					<div class="operate_btn">
-						<a href="javascript:;" class="buy_btn" id="buy_now">Mua ngay</a>
+						<a href="javascript:;" class="buy_btn" data-product-id="{{ goods.id }}">Mua ngay</a>
 					</div>
 				</li>
 				{% endfor %}
@@ -138,7 +138,7 @@
 						</div>
 					</div>
 					<div class="operate_btn">
-						<a href="javascript:;" class="buy_btn" id="buy_now">Mua ngay</a>
+						<a href="javascript:;" class="buy_btn" data-product-id="{{ goods.id }}">Mua ngay</a>
 					</div>
 				</li>
 				{% endfor %}
@@ -157,6 +157,25 @@
 				const discountPercentage = ((oldPrice - newPrice) / oldPrice) * 100;
 				discount.textContent = '-' + discountPercentage.toFixed(2) + '%';
 			}
+		});
+
+		$(".buy_btn").on("click", function () {
+			let num = 1; // Change this if quantity can be adjusted dynamically
+			let productId = $(this).data('product-id'); // Corrected data attribute
+
+			if (!productId) {
+				alert("Invalid product ID.");
+				return;
+			}
+
+			console.log("Adding product ID:", productId);
+
+			$.get(`/cart/add${productId}_${num}/`, function (data) {
+				$('#show_count').text(data.count);
+				location.href = "/cart/";
+			}).fail(function () {
+				alert('Error adding to cart. Please try again.');
+			});
 		});
 	});
 

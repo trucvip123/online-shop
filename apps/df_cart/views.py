@@ -2,8 +2,15 @@ from df_user import user_decorator
 from django.http import JsonResponse
 from django.shortcuts import redirect, render, reverse
 from django.db.models import Sum
+from django.shortcuts import (
+    get_object_or_404,
+)
+import logging
 
 from .models import *
+
+logger = logging.getLogger(__name__)
+
 
 def user_cart(request):
     uid = request.session.get("user_id")
@@ -98,12 +105,24 @@ def edit(request, gid, count):
 
 
 # @user_decorator.login
-def delete(request, cart_id):
-    data = {}
+def delete(request, gid):
+    data = {"ok": 0}  # Default response
     try:
-        cart = CartInfo.objects.get(pk=int(cart_id))
-        cart.delete()
-        data["ok"] = 1
-    except Exception:
-        data["ok"] = 0
+        uid = request.session.get("user_id")
+        
+        if uid:  # Logged-in user
+            cart = get_object_or_404(CartInfo, goods_id=gid, user_id=uid)
+            cart.delete()
+            data["ok"] = 1
+        else:  # Guest user
+            guest_cart = request.session.get("guest_cart", {})
+            if str(gid) in guest_cart:
+                del guest_cart[str(gid)]  # Remove item from guest cart
+                request.session["guest_cart"] = guest_cart  # Update session
+                request.session.modified = True  # Ensure session saves
+                data["ok"] = 1
+
+    except Exception as e:
+        logger.error(f"Error deleting item {gid}: {e}")
+
     return JsonResponse(data)

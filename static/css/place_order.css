@@ -1,30 +1,38 @@
 /* General styles */
 .common_list_con {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    justify-self: anchor-center;
+    border: 1px solid #dddddd;
+    border-top: 2px solid #00bc6f;
     padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-.common_list_con dl {
-    margin-left: 0;
-}
-
-.common_list_con dt {
-    font-weight: bold;
     margin-bottom: 10px;
 }
 
+.common_list_con dl {
+    margin: 20px;
+}
+
+.common_list_con dt {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px
+}
+
+.common_list_con dd input {
+    vertical-align: bottom;
+    margin-right: 10px
+}
+
 .common_list_con li {
-    list-style-type: none;
-    margin-bottom: 15px;
+    font: 13px / 18px Arial, Helvetica, sans-serif;
 }
 
 .common_list_con label {
     display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
+    font-size: 14px;
 }
 
 .common_list_con input[type="text"] {
@@ -66,4 +74,318 @@
 
 .common_list_con .reg_sub button:hover {
     background-color: #5a6268;
+}
+
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+h3.common_title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    justify-self: anchor-center;
+    border: 1px solid #dddddd;
+    border-top: 2px solid #d54040;
+    padding: 20px;
+}
+
+
+
+dl {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+dl li {
+    list-style: none;
+    font-size: 1rem;
+}
+
+.user_info_check {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.reg_sub {
+    margin-top: 15px;
+}
+
+#btn,
+#btn2 {
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#btn {
+    background-color: #007bff;
+    color: white;
+}
+
+#btn2 {
+    background-color: #28a745;
+    color: white;
+}
+
+#btn:hover {
+    background-color: #0056b3;
+}
+
+#btn2:hover {
+    background-color: #218838;
+}
+
+/* Payment Methods */
+.pay_style_con input {
+    float: left;
+    margin-right: 10px;
+}
+
+.pay_style_con label {
+    margin-left: 10px;
+}
+
+.MuiBox-root {
+    display: flex;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    justify-self: anchor-center;
+    border: 1px solid #dddddd;
+    border-top: 2px solid #d54040;
+    padding: 20px;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.MuiTypography-root {
+    margin-left: 110px;
+    font-family: Inter, sans-serif;
+    font-size: 24px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    align-items: center;
+}
+
+/* Product List */
+.goods_list_th {
+    display: flex;
+    background: #007bff;
+    color: white;
+    padding: 10px 0;
+    font-weight: bold;
+    border-radius: 5px;
+    justify-content: flex-start;
+}
+
+.goods_list_th li {
+    float: left;
+    text-align: center;
+}
+
+.goods_list_th .col01 {
+    width: 7%
+}
+
+.goods_list_th .col02 {
+    width: 42%
+}
+
+.goods_list_th .col03 {
+    margin-left: 18px;
+}
+
+.goods_list_th .col04 {
+    margin-left: 21px;
+}
+
+.goods_list_th .col05_label {
+    width: 20%
+}
+
+.goods_list_td {
+    display: flex;
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.goods_list_td .col01 {
+    display: contents;
+}
+
+.goods_list_td .col02 {
+    margin: 10px;
+}
+
+.goods_list_td .col02 img {
+    width: 63px;
+    height: 63px;
+    border: 1px solid #ddd;
+    display: block;
+    margin: 7px 0;
+    float: right;
+}
+
+.goods_list_td .col02_title {
+    display: block;
+}
+
+.goods_list_td .col02_title p {
+    width: 138px;
+}
+
+.goods_list_td .col03 {
+    margin: 7px;
+}
+
+.goods_list_td .col03_cal {
+    display: none;
+}
+
+.goods_list_td .col04 {
+    text-align: center;
+}
+
+.goods_list_td .col05 {
+    margin-left: 10px;
+}
+
+.goods_list_td .col07 {
+    width: 15%;
+    margin-left: 120px
+}
+
+.goods_list_td img {
+    max-width: 60px;
+    border-radius: 4px;
+}
+
+.goods_list_td li {
+    flex: 1;
+    text-align: left;
+}
+
+/* Checkout Section */
+.settle_con {
+    padding: 15px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.total_goods_count,
+.transit,
+.total_pay {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.total_goods_count em,
+.total_goods_count b,
+.transit b,
+.total_pay b {
+    font-size: 14px;
+    color: #ff4200;
+    padding: 0 5px;
+}
+
+.total_pay {
+    color: #d9534f;
+}
+
+.total_goods_count {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.submit_order {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.submit_order a {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.previous_site {
+    background: #6c757d;
+}
+
+#order_btn {
+    background: rgb(252 118 0 / 1);
+    font: 16px / 18px Arial, Helvetica, sans-serif
+}
+
+.previous_site:hover {
+    background: #5a6268;
+}
+
+#order_btn:hover {
+    background: rgb(255, 125, 11);
+}
+
+/* Popup Confirmation */
+.popup_con {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.mask {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .common_list_con {
+        padding: 10px;
+    }
+
+    .goods_list_th,
+    .goods_list_td {
+        flex-wrap: wrap;
+    }
+
+    .goods_list_td li {
+        flex: 50%;
+        margin-bottom: 5px;
+    }
 }

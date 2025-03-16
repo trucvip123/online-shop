@@ -18,32 +18,57 @@
         $("#btn").click(function () {
             $("#receiver, #phone, #address").attr('disabled', 'disabled');
         });
-        $('.col07').each(function () {
+        $('.col05').each(function () {
             let count = $(this).prev().text();
             let price = $(this).prev().prev().text();
-            $(this).html('$' + (parseFloat(count) * parseFloat(price)).toFixed(2));
+            $(this).html((parseFloat(count) * parseFloat(price)).toLocaleString('de-DE') + '₫');
         });
     });
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var PriceElements = document.querySelectorAll('.goods_list_td .col03');
+        PriceElements.forEach(function (element) {
+            var price = parseFloat(element.getAttribute('data-price'));
+            element.textContent = price.toLocaleString('de-DE') + '₫';
+        });
+        var PriceElements = document.querySelectorAll('.total_price');
+        PriceElements.forEach(function (element) {
+            var price = parseFloat(element.getAttribute('data-price'));
+            element.textContent = price.toLocaleString('de-DE') + '₫';
+        });
+    });
+
 </script>
 {% endblock %}
 
 {% block center_body %}
-<h3 class="common_title">Địa Chỉ Nhận Hàng</h3>
+<div class="MuiBox-root css-1eyujod">
+    <a href='{% url "df_cart:cart" %}' class="MuiBox-root1 css-turf35"><svg fill="currentColor" width="20" height="20"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path
+                d="M448 256C448 264.8 440.6 272 431.4 272H54.11l140.7 149.3c6.157 6.531 5.655 16.66-1.118 22.59C190.5 446.6 186.5 448 182.5 448c-4.505 0-9.009-1.75-12.28-5.25l-165.9-176c-5.752-6.094-5.752-15.41 0-21.5l165.9-176c6.19-6.562 16.69-7 23.45-1.094c6.773 5.938 7.275 16.06 1.118 22.59L54.11 240h377.3C440.6 240 448 247.2 448 256z">
+            </path>
+        </svg></a>
+    <h6 class="MuiTypography-root MuiTypography-subtitle1 css-q8b90y">Xác nhận đơn hàng</h6>
+</div>
 <div class="common_list_con clearfix">
+    <label>Địa Chỉ Nhận Hàng</label>
     <dl>
         <li>
-            <label>Receiver:
+            <p>Receiver:
                 <input disabled type="text" name="receiver" class="user_info_check" value="{{ user.oreceiver }}"
                     id="receiver">
-            </label>
+            </p>
         </li>
         <li>
-            <label>Address:
+            <p>Address:
                 <input disabled type="text" name="fullname" class="user_info_check" value="{{ user.oaddress }}"
                     id="address">
-            </label>
+            </p>
         </li>
-        <li><span>Phone: </span>
+        <li>
+            <p>Phone: </p>
             <input disabled type="text" name="phone" class="user_info_check" value="{{ user.ocontact }}" id="phone">
         </li>
         <li class="reg_sub">
@@ -59,55 +84,61 @@
     }
 </style>
 
-<h3 class="common_title">Payment Method</h3>
 <div class="common_list_con clearfix">
+    <label>Phương thức thanh toán</label>
     <div class="pay_style_con clearfix">
-        <input type="radio" name="pay_style" checked>
-        <label class="Credit_Card">Credit Card</label>
-        <input type="radio" name="pay_style">
-        <label class="Paypal">Paypal</label>
-        <input type="radio" name="pay_style">
-        <label class="Venmo">Venmo</label>
+        <div class="method_payment">
+            <input type="radio" name="pay_style" checked>
+            <label class="Credit_Card">Thanh toán khi nhận hàng</label>
+        </div>
+        <div class="method_payment">
+            <input type="radio" name="pay_style">
+            <label class="Paypal">Chuyển khoản ngân hàng</label>
+        </div>
     </div>
 </div>
 
-<h3 class="common_title">Product List</h3>
 <div class="common_list_con clearfix">
     <ul class="goods_list_th clearfix">
-        <li class="col01">Product Name</li>
-        <li class="col03">Unit Price</li>
-        <li class="col04">Qty</li>
-        <li class="col05">Total Price</li>
+        <li class="col01">No</li>
+        <li class="col02">Sản phẩm</li>
+        <li class="col03">Đơn giá</li>
+        <li class="col04">Số lượng</li>
+        <li class="col05_label">Số tiền</li>
     </ul>
     {% for cart in carts %}
     <ul class="goods_list_td clearfix" id="{{ cart.id }}">
         <li class="col01">{{ forloop.counter }}</li>
         <li class="col02"><img src="{{ MEDIA_URL }}{{ cart.goods.images.all.0.image_path }}"></li>
-        <li class="col03">{{ cart.goods.gtitle }}</li>
-        <li class="col05">{{ cart.goods.gprice }}</li>
-        <li class="col06">{{ cart.count }}</li>
-        <li class="col07"></li>
+        <li class="col02_title">
+            <p>{{ cart.goods.gtitle }}</p>
+        </li>
+        <li class="col03" data-price="{{ cart.goods.gprice }}">{{ cart.goods.gprice }}</li>
+        <li class="col03_cal">{{ cart.goods.gprice }}</li>
+        <li class="col04">{{ cart.count }}</li>
+        <li class="col05"></li>
     </ul>
     {% endfor %}
-</div>
-
-<h3 class="common_title">Checkout</h3>
-<div class="common_list_con clearfix">
-    <div class="settle_con">
-        <div class="total_goods_count">Total<em>{{ carts|length }}</em> product(s), subtotal: $<b>{{ total_price }}</b>
-        </div>
-        <div class="transit">Shipping: $<b>{{ trans_cost }}</b></div>
-        <div class="total_pay">Total: $<b>{{ total_trans_price }}</b></div>
+    <div class="total_goods_count">
+        Total<em>{{ carts|length }}</em> product(s), subtotal:
+        <b class="total_price" data-price="{{ total_price }}">{{ total_price }}</b>
+    </div>
+    <div class="submit_order">
+        <a href="javascript:;" id="order_btn">Đặt hàng</a>
     </div>
 </div>
 
-<div class="order_submit1 clearfix">
-    <a href='{% url "df_cart:cart" %}' class="edit_site">Previous Page</a>
-</div>
+<!-- <div class="common_list_con clearfix">
+    <div class="settle_con">
+        <div class="total_goods_count">
+            Total<em>{{ carts|length }}</em> product(s), subtotal:
+            <b class="total_price" data-price="{{ total_price }}">{{ total_price }}</b>
+        </div>
+        <div class="transit">Shipping: <b>{{ trans_cost }}</b></div>
+        <div class="total_pay">Total: <b>{{ total_trans_price }}</b></div>
+    </div>
+</div> -->
 
-<div class="order_submit clearfix">
-    <a href="javascript:;" id="order_btn">Place the Order</a>
-</div>
 
 <div class="popup_con">
     <div class="popup">
