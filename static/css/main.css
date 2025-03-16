@@ -286,6 +286,28 @@ body {
 	padding: 0 5px;
 }
 
+/* Product Sort */
+.sort_bar {
+	height: 30px;
+	border-bottom: 1px solid silver;
+	margin: 4px;
+}
+
+.sort_bar a {
+	padding-left: 20px;
+	text-decoration: none;
+	color: #787878;
+	font-size: 16px;
+}
+
+.sort_bar a:hover {
+	text-decoration: none;
+}
+
+.sort_bar .active {
+	color: #53acff;
+}
+
 .dropbtn_price {
 	padding: 2px;
 	font-size: 16px;
@@ -1041,14 +1063,8 @@ body {
 	margin-top: 10px;
 }
 
-
+#product_description,
 #product_parameter {
-	height: 250px;
-	line-height: 35px;
-	margin-top: 10px;
-}
-
-#product_description {
 	height: 150px;
 	line-height: 35px;
 	margin-top: 10px;
@@ -1083,7 +1099,6 @@ body {
 	outline: none;
 	margin-top: 7px;
 	border-radius: 8px;
-	font: 14px / 18px Arial, Helvetica, sans-serif;
 }
 
 

@@ -75,8 +75,7 @@
                 </a>
             </div>
         </div>
-        {% endif %}
-        <div class="sort_bar">
+       <div class="sort_bar">
             <a> Sắp xếp theo: </a>
             <a href="/{{ typeinfo.ttitle }}_1_1/{{ selected_brand }}" class="{% if sort == '1' %} active {% endif %}">
                 Mới&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◦
@@ -99,6 +98,31 @@
                 </div>
             </div>
         </div>
+        {% else %}
+        <div class="sort_bar">
+            <a> Sắp xếp theo: </a>
+            <a href="/{{ typeinfo.ttitle }}_1_1" class="{% if sort == '1' %} active {% endif %}">
+                Mới&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◦
+            </a>
+            <a href="/{{ typeinfo.ttitle }}_1_3" class="{% if sort == '3' %} active {% endif %}">
+                Nổi bật&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◦
+            </a>
+
+            <div class="dropdown">
+                <button id="priceButton" class="dropbtn_price {% if sort == '2' or sort == '4' %}active{% endif %}">
+                    Giá {% if sort == '2' %}↓{% elif sort == '4' %}↑{% else %} {% endif %}
+                </button>
+                <div class="dropdown-content-price">
+                    <a href="/{{ typeinfo.ttitle }}_1_4"
+                        class="{% if sort == '4' %}active{% endif %}">Giá thấp -
+                        cao</a>
+                    <a href="/{{ typeinfo.ttitle }}_1_2"
+                        class="{% if sort == '2' %}active{% endif %}">Giá cao -
+                        thấp</a>
+                </div>
+            </div>
+        </div> 
+        {% endif %}
 
         <ul class="goods_type_list clearfix">
             {% for g in page %}
