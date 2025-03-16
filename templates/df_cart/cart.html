@@ -65,13 +65,14 @@
                 return;
             }
 
-            cart_id = $(this).parents('.cart_list_td').attr('id');
-            $.get('/cart/edit' + cart_id + '_' + count + '/', function (data) {
+            gid = $(this).parents('.cart_list_td').attr('id');
+            $.get('/cart/edit_' + gid + '_' + count + '/', function (data) {
                 if (data.count == 0) {
                     total();
                 }
                 else {
                     $(this).val(data.count)
+                    total();
                 }
             })
         })
@@ -136,7 +137,7 @@
 </ul>
 
 {% for cart in carts %}
-<ul class="cart_list_td clearfix" id="{{ cart.id }}">
+<ul class="cart_list_td clearfix" id="{{ cart.goods.id }}">
     <li class="col01"><input type="checkbox" name="" id="check_goods" checked="checked"></li>
     <li class="col02">
         <img src="{{ MEDIA_URL }}{{ cart.goods.images.all.0.image_path }}" class="img-fluid rounded"

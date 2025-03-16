@@ -7,21 +7,31 @@ from .models import *
 
 def user_cart(request):
     uid = request.session.get("user_id")
+    carts = []
+    total_count = 0
 
     if uid:  # Nếu user đã đăng nhập -> lấy từ DB
         carts = CartInfo.objects.filter(user_id=uid)
-        count = carts.aggregate(Sum("count"))["count__sum"] or 0
+        total_count = carts.aggregate(Sum("count"))["count__sum"] or 0
     else:  # Nếu là khách -> lấy từ session
         guest_cart = request.session.get("guest_cart", {})
-        count = sum(guest_cart.values())
-        carts = []
+        print("guest_cart:", guest_cart)
 
-    print("count:", count)
+        # Duyệt qua từng sản phẩm trong giỏ hàng session và lấy thông tin từ DB
+        for goods_id, count in guest_cart.items():
+            try:
+                goods = GoodsInfo.objects.get(pk=goods_id)
+                carts.append({"goods": goods, "count": count})
+            except GoodsInfo.DoesNotExist:
+                pass  # Nếu sản phẩm không tồn tại, bỏ qua
+
+        total_count = sum(guest_cart.values())
+
     context = {
         "title": "Shopping Cart",
         "page_name": 1,
-        "carts": carts,
-        "cart_num": count,
+        "carts": carts,  # Bây giờ danh sách này có đầy đủ thông tin sản phẩm
+        "cart_num": total_count,
     }
     return render(request, "df_cart/cart.html", context)
 
@@ -55,17 +65,36 @@ def add(request, gid, count):
     context = {"cart_num": cart_count}
     return render(request, "df_cart/cart.html", context)
 
-# @user_decorator.login
-def edit(request, cart_id, count):
+def edit(request, gid, count):
     data = {}
+
     try:
-        cart = CartInfo.objects.get(pk=int(cart_id))
-        cart.count = int(count)
-        cart.save()
-        data["count"] = 0
-    except Exception:
+        count = int(count)
+        if count < 1:
+            return JsonResponse({"error": "Quantity must be at least 1"}, status=400)
+
+        uid = request.session.get("user_id")
+        
+        if uid:  # Logged-in user
+            cart = get_object_or_404(CartInfo, goods_id=gid, user_id=uid)
+            cart.count = count
+            cart.save()
+        else:  # Guest user
+            guest_cart = request.session.get("guest_cart", {})
+
+            if str(gid) in guest_cart:
+                guest_cart[str(gid)] = count
+                request.session["guest_cart"] = guest_cart
+            else:
+                return JsonResponse({"error": "Item not found in guest cart"}, status=404)
+
         data["count"] = count
-    return JsonResponse(data)
+        return JsonResponse(data)
+
+    except ValueError:
+        return JsonResponse({"error": "Invalid input"}, status=400)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
 
 
 # @user_decorator.login

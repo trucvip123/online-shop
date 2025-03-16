@@ -37,8 +37,8 @@
 
 .common_list_con .reg_sub {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }
 
 .common_list_con .reg_sub input[type="submit"],

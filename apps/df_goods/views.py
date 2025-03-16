@@ -31,7 +31,6 @@ def index(request):
         "den_chum_type": den_chum_type,
         "may_lanh_type": may_lanh_type,
     }
-
     return render(request, "df_goods/index.html", context)
 
 
@@ -158,7 +157,6 @@ def cart_count(request):
         guest_cart = request.session.get("guest_cart", {})
         count = sum(guest_cart.values())
         carts = []
-    
     return count
 
 
