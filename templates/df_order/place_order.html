@@ -23,6 +23,24 @@
             let price = $(this).prev().prev().text();
             $(this).html((parseFloat(count) * parseFloat(price)).toLocaleString('de-DE') + '₫');
         });
+
+        $('input[name="pay_style"]').change(function () {
+            if ($(this).next().hasClass('Paypal')) {
+                $('#qr_code').show();
+            } else {
+                $('#qr_code').hide();
+            }
+        });
+
+        $('input[name="delivery_style"]').change(function () {
+            if ($(this).next().hasClass('store')) {
+                $('.store_address').show();
+                $('.delivery_address').hide();
+            } else {
+                $('.store_address').hide();
+                $('.delivery_address').show();
+            }
+        });
     });
 
 
@@ -47,8 +65,8 @@
     <section class>
         <section>
             <div class="MuiBox-root css-1eyujod">
-                <a href='{% url "df_cart:cart" %}' class="arrow css-turf35"><svg fill="currentColor" width="20" height="20"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <a href='{% url "df_cart:cart" %}' class="arrow css-turf35"><svg fill="currentColor" width="20"
+                        height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                         <path
                             d="M448 256C448 264.8 440.6 272 431.4 272H54.11l140.7 149.3c6.157 6.531 5.655 16.66-1.118 22.59C190.5 446.6 186.5 448 182.5 448c-4.505 0-9.009-1.75-12.28-5.25l-165.9-176c-5.752-6.094-5.752-15.41 0-21.5l165.9-176c6.19-6.562 16.69-7 23.45-1.094c6.773 5.938 7.275 16.06 1.118 22.59L54.11 240h377.3C440.6 240 448 247.2 448 256z">
                         </path>
@@ -57,42 +75,64 @@
             </div>
             <div class="common_list_con clearfix">
                 <label>Hình thức nhận hàng</label>
-                <div class="method_payment">
-                    <input type="radio" name="pay_style" checked>
-                    <span class="Credit_Card">Giao hàng tận nơi</span>
-                    <input type="radio" name="pay_style">
-                    <span class="Paypal">Nhận tại cửa hàng</span>
+                <div class="method_delivery">
+                    <input type="radio" name="delivery_style" checked>
+                    <span class="customer">Giao hàng tận nơi</span>
+                    <input type="radio" name="delivery_style">
+                    <span class="store">Nhận tại cửa hàng</span>
                 </div>
-                <dl>
-                    <li>
+                <div class="store_address" style="display: none;">
+                    <div class="icon_store"><svg fill="currentColor" width="20" height="20"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                            <path
+                                d="M431.3 206.8C426.5 203.3 422.2 199.4 418.3 195C414.4 199.3 410.1 203.2 405.4 206.7C390.9 217.5 372.8 224 353.1 224C333.5 224 315.6 217.6 301.1 206.1C296.3 203.4 291.9 199.4 287.9 195C283.9 199.4 279.5 203.4 274.7 206.1C260.2 217.6 242.3 224 222.7 224C203.2 224 185.2 217.6 170.7 206.1C165.9 203.4 161.5 199.4 157.6 195C153.6 199.4 149.1 203.4 144.3 206.1C129.9 217.6 111.1 224 92.36 224C88.3 224 84.21 223.7 80.24 223.2C24.92 215.8-1.255 150.6 28.33 103.8L85.66 13.13C90.76 4.979 99.87 0 109.6 0H466.4C476.1 0 485.2 4.978 490.3 13.13L547.6 103.8C577.3 150.7 551 215.8 495.5 223.2C491.6 223.7 487.6 224 483.4 224C463.8 224 445.8 217.5 431.3 206.8H431.3zM464.4 32H111.6L55.38 120.9C36.71 150.5 55.1 187.5 84.44 191.5C87.11 191.8 89.8 192 92.36 192C108.1 192 123.6 184.8 133.8 173.6C139.9 166.9 148.5 163 157.6 163C166.6 163 175.2 166.9 181.3 173.6C191.5 184.8 206.2 192 222.7 192C239.3 192 253.1 184.8 264.2 173.6C270.2 166.9 278.9 163 287.9 163C296.1 163 305.6 166.9 311.6 173.6C321.8 184.8 336.5 191.1 353.1 191.1C369.7 191.1 384.3 184.8 394.5 173.6C400.6 166.9 409.2 163 418.2 163C427.2 163 435.9 166.8 441.9 173.5C452.2 184.8 466.1 191.1 483.4 191.1C486.1 191.1 488.7 191.8 491.4 191.5C520.9 187.5 539.3 150.5 520.6 120.9L464.4 32zM96 272V352H480V272C480 263.2 487.2 256 496 256C504.8 256 512 263.2 512 272V448C512 483.3 483.3 512 448 512H128C92.65 512 64 483.3 64 448V272C64 263.2 71.16 256 80 256C88.84 256 96 263.2 96 272zM96 448C96 465.7 110.3 480 128 480H448C465.7 480 480 465.7 480 448V384H96V448z">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="address_text" texttype="text14R">98 - 100
+                        ĐT639B, Nhơn Lộc, Thị xã An Nhơn, Tỉnh Bình Định</p>
+                </div>
+                <div class="delivery_address">
+                    <!-- <li>
                         <p>Receiver:
-                            <input disabled type="text" name="receiver" class="user_info_check" value="{{ user.oreceiver }}"
-                                id="receiver">
+                            <input disabled type="text" name="receiver" class="user_info_check"
+                                value="{{ user.oreceiver }}" id="receiver">
                         </p>
                     </li>
                     <li>
                         <p>Address:
-                            <input disabled type="text" name="fullname" class="user_info_check" value="{{ user.oaddress }}"
-                                id="address">
+                            <input disabled type="text" name="fullname" class="user_info_check"
+                                value="{{ user.oaddress }}" id="address">
                         </p>
                     </li>
                     <li>
                         <p>Phone: </p>
-                        <input disabled type="text" name="phone" class="user_info_check" value="{{ user.ocontact }}" id="phone">
-                    </li>
-                    <li class="reg_sub">
-                        <input type="submit" id='btn' value="Save changes">
-                        <button id="btn2">Change the address</button>
-                    </li>
-                </dl>
+                        <input disabled type="text" name="phone" class="user_info_check" value="{{ user.ocontact }}"
+                            id="phone">
+                    </li> -->
+
+                    <div class="contact">
+                        <select name="province" id="province" class="contact" required>
+                            <option value="">Chọn Tỉnh</option>
+                        </select>
+                        <input type="hidden" id="province_name" name="province_name">
+                        <select name="district" id="district" class="contact" required>
+                            <option value="">Chọn Huyện</option>
+                        </select>
+                        <input type="hidden" id="district_name" name="district_name">
+                        <select name="commune" id="commune" class="contact" required>
+                            <option value="">Chọn Xã</option>
+                        </select>
+                        <input type="hidden" id="commune_name" name="commune_name">
+                    </div>
+                    <div>
+                        <input type="text" name="address" class="contact" placeholder=" Số Nhà, Tên Đường" required>
+                    </div>
+                    </dl>
+
+                </div>
             </div>
-            
-            <style>
-                dl {
-                    margin-left: 210px;
-                }
-            </style>
-            
+
             <div class="common_list_con clearfix">
                 <label>Phương thức thanh toán</label>
                 <div class="pay_style_con clearfix">
@@ -105,8 +145,11 @@
                         <span class="Paypal">Chuyển khoản ngân hàng</span>
                     </div>
                 </div>
+                <div id="qr_code" style="display: none;">
+                    <img src="/static/images/qr_code.jpg" alt="QR Code for Payment">
+                </div>
             </div>
-            
+
             <div class="common_list_con clearfix">
                 <ul class="goods_list_th clearfix">
                     <li class="col01">No</li>
@@ -129,14 +172,14 @@
                 </ul>
                 {% endfor %}
                 <div class="total_goods_count">
-                    Total<em>{{ carts|length }}</em> product(s), subtotal:
+                    Tổng thanh toán (<em>{{ carts|length }}</em> Sản phẩm):
                     <b class="total_price" data-price="{{ total_price }}">{{ total_price }}</b>
                 </div>
                 <div class="submit_order">
                     <a href="javascript:;" id="order_btn">Đặt hàng</a>
                 </div>
             </div>
-            
+
             <!-- <div class="common_list_con clearfix">
                 <div class="settle_con">
                     <div class="total_goods_count">
@@ -147,8 +190,8 @@
                     <div class="total_pay">Total: <b>{{ total_trans_price }}</b></div>
                 </div>
             </div> -->
-            
-            
+
+
             <div class="popup_con">
                 <div class="popup">
                     <p>Successfully placed the order!</p>

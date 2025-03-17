@@ -30,7 +30,7 @@
 
 .common_list_con label {
     display: block;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .common_list_con input[type="text"] {
@@ -156,6 +156,65 @@ dl li {
     background-color: #218838;
 }
 
+/* Delivery Methods */
+.store_address {
+    background-color: rgb(247, 248, 249);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.icon_store {
+    display: flex;
+    width: 32px;
+    height: 32px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    background-color: rgb(229, 232, 234);
+    border-radius: 6px;
+}
+
+.address_text {
+    margin: 0px 0px 0px 12px;
+    font-family: Inter, sans-serif;
+    color: rgb(38, 41, 46);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    word-break: break-word;
+    display: -webkit-box !important;
+}
+
+.delivery_address {
+    padding: 12px;
+    border-radius: 8px;
+    background-color: rgb(247, 248, 249);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 12px;
+}
+
+.contact {
+    display: flex;
+    gap: 10px;
+}
+
+.contact select {
+    height: 25px;
+    width: 120px;
+}
+
 /* Payment Methods */
 .pay_style_con {
     display: flex;
@@ -164,14 +223,15 @@ dl li {
 
 .pay_style_con input {
     float: left;
-    margin: 1px 10px;
+    margin-right: 10px;
 }
 
 .pay_style_con label {
     margin-left: 10px;
 }
 
-.method_payment {
+.method_payment,
+.method_delivery {
     margin: 6px;
     display: flex;
     align-items: center;
@@ -179,7 +239,8 @@ dl li {
     font-size: 13px;
 }
 
-.method_payment input {
+.method_payment input,
+.method_delivery input {
     margin: 0;
 }
 
@@ -432,6 +493,18 @@ dl li {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
+}
+
+/* QR Code */
+#qr_code {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#qr_code img {
+    width: 35%;
+    border: 1px solid #ddd;
+    border-radius: 15px;
 }
 
 /* Responsive Design */

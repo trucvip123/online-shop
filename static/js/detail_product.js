@@ -14,7 +14,7 @@ $(document).ready(function () {
     $(".add_cart").on("click", function () {
         let productId = $(this).data('product-id');
         let num = parseInt($('.num_show').val(), 10);
-        
+
         let $addBtn = $(this);
         let $showCount = $('#show_count');
         let $add_x = $addBtn.offset().top;
