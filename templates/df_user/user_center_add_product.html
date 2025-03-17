@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block center_body %}
-<link rel="stylesheet" type="text/css" href="/static/css/add.css">
 <script type="text/javascript">
     window.onload = function () {
         {% if success %}
@@ -64,13 +63,13 @@
 
                 <div class="form_group" id="product_parameter">
                     <label>Parameters:</label>
-                    <textarea class="parameters" name="parameters" rows="13"
+                    <textarea class="parameters" name="parameters" rows="7"
                         required>{{ product.parameters|default:'' }}</textarea>
                 </div>
 
                 <div class="form_group" id="product_description">
                     <label>Description:</label>
-                    <textarea class="description" name="description" rows="13"
+                    <textarea class="description" name="description" rows="7"
                         required>{{ product.description|default:'' }}</textarea>
                 </div>
 

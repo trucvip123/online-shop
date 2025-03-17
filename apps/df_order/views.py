@@ -9,6 +9,7 @@ from df_goods.models import GoodsInfo
 from django.db import transaction
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse, render
+from django.db.models import Sum
 
 from .models import OrderDetailInfo, OrderInfo
 
@@ -53,6 +54,8 @@ def order(request):
         for cart in cart_queryset:
             cart_items.append(cart)
             total_price += float(cart.count) * float(cart.goods.gprice)
+        total_count = cart_queryset.aggregate(Sum("count"))["count__sum"] or 0
+
     else:
         receiver = None  # Khách chưa có thông tin người nhận
         guest_cart = request.session.get("guest_cart", {})
@@ -60,6 +63,7 @@ def order(request):
             goods = GoodsInfo.objects.get(pk=goods_id)
             cart_items.append({"goods": goods, "count": count})
             total_price += float(count) * float(goods.gprice)
+        total_count = sum(guest_cart.values())
 
     total_price = round(total_price, 2)
 
@@ -80,6 +84,7 @@ def order(request):
         "total_price": total_price,
         "trans_cost": trans_cost,
         "total_trans_price": total_trans_price,
+        "cart_num": total_count,
     }
 
     return render(request, "df_order/place_order.html", context)

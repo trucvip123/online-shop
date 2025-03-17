@@ -224,6 +224,7 @@ body {
 	height: 160px;
 	line-height: 160px;
 	margin-top: 10px;
+	align-content: center;
 }
 
 .goods_list .item-img:hover {
@@ -904,91 +905,6 @@ body {
 	flex-wrap: wrap;
 }
 
-.site_con .form_group {
-	height: 40px;
-	line-height: 35px;
-	margin-top: 10px;
-}
-
-#product_description,
-#product_parameter {
-	height: 150px;
-	line-height: 35px;
-	margin-top: 10px;
-}
-
-.site_con .form_group label {
-	width: 130px;
-	float: left;
-	text-align: left;
-	font-size: 14px;
-	height: 40px;
-	line-height: 40px;
-	margin-left: 30px;
-	margin-top: 5px;
-}
-
-.site_con .form_group input {
-	width: 500px;
-	border: 1px solid #ddd;
-	float: left;
-	outline: none;
-	margin-top: 7px;
-	text-indent: 10px;
-	border-radius: 8px;
-	font-size: 20px;
-}
-
-.site_con .form_group textarea {
-	width: 500px;
-	border: 1px solid #ddd;
-	float: left;
-	outline: none;
-	margin-top: 7px;
-	border-radius: 8px;
-}
-
-
-.site_con .form_group .price {
-	width: 170px;
-	border: 1px solid #ddd;
-	float: left;
-	outline: none;
-	margin-top: 7px;
-	text-indent: 10px;
-	border-radius: 8px;
-}
-
-.site_con .form_group .input_type_edit {
-	width: 250px;
-	border: 1px solid #ddd;
-	float: left;
-	outline: none;
-	margin-top: 7px;
-	text-indent: 10px;
-	border-radius: 8px;
-}
-
-.site_con .form_group .input_type_add {
-	width: 250px;
-	border: 1px solid #ddd;
-	float: left;
-	outline: none;
-	margin-top: 7px;
-	text-indent: 10px;
-	border-radius: 8px;
-}
-
-.site_con .button_add_submit {
-	width: 70px;
-	height: 40px;
-	background-color: #37ab40;
-	border: 0px;
-	color: #fff;
-	font-family: 'Times New Roman';
-	margin: 30px 200px;
-	font-size: medium;
-}
 
 #product_images {
 	width: 700px;

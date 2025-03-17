@@ -194,12 +194,6 @@
 }
 
 .goods_type_list li img {
-    height: 190px;
-    line-height: 160px;
-    margin-top: 10px;
-}
-
-.goods_type_list li img {
     display: block;
     margin: 10px auto;
     width: 180px;
@@ -221,6 +215,11 @@
     color: #454545;
     text-decoration: none;
     font: 14px/18px Arial, Helvetica, sans-serif;
+}
+
+.item-img {
+    height: 220px;
+    align-content: center;
 }
 
 .operate {

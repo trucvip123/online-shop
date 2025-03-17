@@ -43,108 +43,120 @@
 {% endblock %}
 
 {% block center_body %}
-<div class="MuiBox-root css-1eyujod">
-    <a href='{% url "df_cart:cart" %}' class="MuiBox-root1 css-turf35"><svg fill="currentColor" width="20" height="20"
-            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-            <path
-                d="M448 256C448 264.8 440.6 272 431.4 272H54.11l140.7 149.3c6.157 6.531 5.655 16.66-1.118 22.59C190.5 446.6 186.5 448 182.5 448c-4.505 0-9.009-1.75-12.28-5.25l-165.9-176c-5.752-6.094-5.752-15.41 0-21.5l165.9-176c6.19-6.562 16.69-7 23.45-1.094c6.773 5.938 7.275 16.06 1.118 22.59L54.11 240h377.3C440.6 240 448 247.2 448 256z">
-            </path>
-        </svg></a>
-    <h6 class="MuiTypography-root MuiTypography-subtitle1 css-q8b90y">Xác nhận đơn hàng</h6>
-</div>
-<div class="common_list_con clearfix">
-    <label>Địa Chỉ Nhận Hàng</label>
-    <dl>
-        <li>
-            <p>Receiver:
-                <input disabled type="text" name="receiver" class="user_info_check" value="{{ user.oreceiver }}"
-                    id="receiver">
-            </p>
-        </li>
-        <li>
-            <p>Address:
-                <input disabled type="text" name="fullname" class="user_info_check" value="{{ user.oaddress }}"
-                    id="address">
-            </p>
-        </li>
-        <li>
-            <p>Phone: </p>
-            <input disabled type="text" name="phone" class="user_info_check" value="{{ user.ocontact }}" id="phone">
-        </li>
-        <li class="reg_sub">
-            <input type="submit" id='btn' value="Save changes">
-            <button id="btn2">Change the address</button>
-        </li>
-    </dl>
-</div>
-
-<style>
-    dl {
-        margin-left: 210px;
-    }
-</style>
-
-<div class="common_list_con clearfix">
-    <label>Phương thức thanh toán</label>
-    <div class="pay_style_con clearfix">
-        <div class="method_payment">
-            <input type="radio" name="pay_style" checked>
-            <label class="Credit_Card">Thanh toán khi nhận hàng</label>
-        </div>
-        <div class="method_payment">
-            <input type="radio" name="pay_style">
-            <label class="Paypal">Chuyển khoản ngân hàng</label>
-        </div>
-    </div>
-</div>
-
-<div class="common_list_con clearfix">
-    <ul class="goods_list_th clearfix">
-        <li class="col01">No</li>
-        <li class="col02">Sản phẩm</li>
-        <li class="col03">Đơn giá</li>
-        <li class="col04">Số lượng</li>
-        <li class="col05_label">Số tiền</li>
-    </ul>
-    {% for cart in carts %}
-    <ul class="goods_list_td clearfix" id="{{ cart.id }}">
-        <li class="col01">{{ forloop.counter }}</li>
-        <li class="col02"><img src="{{ MEDIA_URL }}{{ cart.goods.images.all.0.image_path }}"></li>
-        <li class="col02_title">
-            <p>{{ cart.goods.gtitle }}</p>
-        </li>
-        <li class="col03" data-price="{{ cart.goods.gprice }}">{{ cart.goods.gprice }}</li>
-        <li class="col03_cal">{{ cart.goods.gprice }}</li>
-        <li class="col04">{{ cart.count }}</li>
-        <li class="col05"></li>
-    </ul>
-    {% endfor %}
-    <div class="total_goods_count">
-        Total<em>{{ carts|length }}</em> product(s), subtotal:
-        <b class="total_price" data-price="{{ total_price }}">{{ total_price }}</b>
-    </div>
-    <div class="submit_order">
-        <a href="javascript:;" id="order_btn">Đặt hàng</a>
-    </div>
-</div>
-
-<!-- <div class="common_list_con clearfix">
-    <div class="settle_con">
-        <div class="total_goods_count">
-            Total<em>{{ carts|length }}</em> product(s), subtotal:
-            <b class="total_price" data-price="{{ total_price }}">{{ total_price }}</b>
-        </div>
-        <div class="transit">Shipping: <b>{{ trans_cost }}</b></div>
-        <div class="total_pay">Total: <b>{{ total_trans_price }}</b></div>
-    </div>
-</div> -->
-
-
-<div class="popup_con">
-    <div class="popup">
-        <p>Successfully placed the order!</p>
-    </div>
-    <div class="mask"></div>
+<div id="app">
+    <section class>
+        <section>
+            <div class="MuiBox-root css-1eyujod">
+                <a href='{% url "df_cart:cart" %}' class="arrow css-turf35"><svg fill="currentColor" width="20" height="20"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path
+                            d="M448 256C448 264.8 440.6 272 431.4 272H54.11l140.7 149.3c6.157 6.531 5.655 16.66-1.118 22.59C190.5 446.6 186.5 448 182.5 448c-4.505 0-9.009-1.75-12.28-5.25l-165.9-176c-5.752-6.094-5.752-15.41 0-21.5l165.9-176c6.19-6.562 16.69-7 23.45-1.094c6.773 5.938 7.275 16.06 1.118 22.59L54.11 240h377.3C440.6 240 448 247.2 448 256z">
+                        </path>
+                    </svg></a>
+                <h6 class="MuiTypography-root MuiTypography-subtitle1 css-q8b90y">Xác nhận đơn hàng</h6>
+            </div>
+            <div class="common_list_con clearfix">
+                <label>Hình thức nhận hàng</label>
+                <div class="method_payment">
+                    <input type="radio" name="pay_style" checked>
+                    <span class="Credit_Card">Giao hàng tận nơi</span>
+                    <input type="radio" name="pay_style">
+                    <span class="Paypal">Nhận tại cửa hàng</span>
+                </div>
+                <dl>
+                    <li>
+                        <p>Receiver:
+                            <input disabled type="text" name="receiver" class="user_info_check" value="{{ user.oreceiver }}"
+                                id="receiver">
+                        </p>
+                    </li>
+                    <li>
+                        <p>Address:
+                            <input disabled type="text" name="fullname" class="user_info_check" value="{{ user.oaddress }}"
+                                id="address">
+                        </p>
+                    </li>
+                    <li>
+                        <p>Phone: </p>
+                        <input disabled type="text" name="phone" class="user_info_check" value="{{ user.ocontact }}" id="phone">
+                    </li>
+                    <li class="reg_sub">
+                        <input type="submit" id='btn' value="Save changes">
+                        <button id="btn2">Change the address</button>
+                    </li>
+                </dl>
+            </div>
+            
+            <style>
+                dl {
+                    margin-left: 210px;
+                }
+            </style>
+            
+            <div class="common_list_con clearfix">
+                <label>Phương thức thanh toán</label>
+                <div class="pay_style_con clearfix">
+                    <div class="method_payment">
+                        <input type="radio" name="pay_style" checked>
+                        <span class="Credit_Card">Thanh toán khi nhận hàng</span>
+                    </div>
+                    <div class="method_payment">
+                        <input type="radio" name="pay_style">
+                        <span class="Paypal">Chuyển khoản ngân hàng</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="common_list_con clearfix">
+                <ul class="goods_list_th clearfix">
+                    <li class="col01">No</li>
+                    <li class="col02">Sản phẩm</li>
+                    <li class="col03">Đơn giá</li>
+                    <li class="col04">Số lượng</li>
+                    <li class="col05_label">Số tiền</li>
+                </ul>
+                {% for cart in carts %}
+                <ul class="goods_list_td clearfix" id="{{ cart.id }}">
+                    <li class="col01">{{ forloop.counter }}</li>
+                    <li class="col02"><img src="{{ MEDIA_URL }}{{ cart.goods.images.all.0.image_path }}"></li>
+                    <li class="col02_title">
+                        <p>{{ cart.goods.gtitle }}</p>
+                    </li>
+                    <li class="col03" data-price="{{ cart.goods.gprice }}">{{ cart.goods.gprice }}</li>
+                    <li class="col03_cal">{{ cart.goods.gprice }}</li>
+                    <li class="col04">{{ cart.count }}</li>
+                    <li class="col05"></li>
+                </ul>
+                {% endfor %}
+                <div class="total_goods_count">
+                    Total<em>{{ carts|length }}</em> product(s), subtotal:
+                    <b class="total_price" data-price="{{ total_price }}">{{ total_price }}</b>
+                </div>
+                <div class="submit_order">
+                    <a href="javascript:;" id="order_btn">Đặt hàng</a>
+                </div>
+            </div>
+            
+            <!-- <div class="common_list_con clearfix">
+                <div class="settle_con">
+                    <div class="total_goods_count">
+                        Total<em>{{ carts|length }}</em> product(s), subtotal:
+                        <b class="total_price" data-price="{{ total_price }}">{{ total_price }}</b>
+                    </div>
+                    <div class="transit">Shipping: <b>{{ trans_cost }}</b></div>
+                    <div class="total_pay">Total: <b>{{ total_trans_price }}</b></div>
+                </div>
+            </div> -->
+            
+            
+            <div class="popup_con">
+                <div class="popup">
+                    <p>Successfully placed the order!</p>
+                </div>
+                <div class="mask"></div>
+            </div>
+        </section>
+    </section>
 </div>
 
 <script type="text/javascript">

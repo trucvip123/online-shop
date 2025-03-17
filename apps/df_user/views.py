@@ -93,22 +93,21 @@ def register_exist(request):
 
 def merge_guest_cart(request):
     user_id = request.session.get("user_id")
-    guest_uid = f"guest_{request.session.session_key}"
+    guest_cart = request.session.get("guest_cart", {})
 
-    guest_cart_items = CartInfo.objects.filter(user_id=guest_uid)
-
-    for item in guest_cart_items:
+    for goods_id, count in guest_cart.items():
         cart, created = CartInfo.objects.get_or_create(
             user_id=user_id, 
-            goods_id=item.goods_id, 
-            defaults={"count": item.count}
+            goods_id=goods_id, 
+            defaults={"count": count}
         )
         if not created:
-            cart.count += item.count
+            cart.count += count
             cart.save()
 
-        # Xóa giỏ hàng của khách vãng lai sau khi hợp nhất
-        item.delete()
+    # Xóa giỏ hàng của khách vãng lai sau khi hợp nhất
+    request.session.pop("guest_cart", None)
+    request.session.modified = True
 
 
 def login(request):
@@ -196,6 +195,14 @@ def info(request):  # user center
         "-default_address_flg", "id"
     )
 
+    uid = request.session.get("user_id")
+    if uid:  # Nếu user đã đăng nhập -> lấy từ DB
+        carts = CartInfo.objects.filter(user_id=uid)
+        total_count = carts.aggregate(Sum("count"))["count__sum"] or 0
+    else:  # Nếu là khách -> lấy từ session
+        guest_cart = request.session.get("guest_cart", {})
+        total_count = sum(guest_cart.values())
+
     context = {
         "title": "User Center",
         "page_name": 1,
@@ -205,6 +212,7 @@ def info(request):  # user center
         "goods_list": goods_list,
         "explain": explain,
         "address_list": addresses,
+        "cart_num": total_count,
     }
 
     return render(request, "df_user/user_center_info.html", context)

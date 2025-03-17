@@ -110,6 +110,10 @@
             <span class="show_pirze">
                 <strong class="prize" id="gprice" data-price="{{ goods.gprice }}">{{ goods.gprice }}₫</strong>
             </span>
+            {% if goods.gprice_old %}
+            <label class="old-price" data-old-price="{{ goods.gprice_old }}">{{ goods.gprice_old}}₫</label>
+            <small class="discount" data-old-price="{{ goods.gprice_old }}" data-new-price="{{ goods.gprice }}"></small>
+            {% endif %}
         </div>
         <div class="goods_num clearfix">
             <div class="num_name fl">Số lượng：</div>
@@ -206,7 +210,18 @@
                 tabTrigger.show()
             })
         })
+        const discounts = document.querySelectorAll('.discount');
+        discounts.forEach(function (discount) {
+            const oldPrice = parseFloat(discount.getAttribute('data-old-price'));
+            const newPrice = parseFloat(discount.getAttribute('data-new-price'));
+            console.log(oldPrice, newPrice);
+            if (oldPrice && newPrice) {
+                const discountPercentage = ((oldPrice - newPrice) / oldPrice) * 100;
+                discount.textContent = '-' + discountPercentage.toFixed(2) + '%';
+            }
+        });
     })
+
 </script>
 
 {% endblock center_content %}

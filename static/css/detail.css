@@ -69,9 +69,20 @@
 }
 
 .prize_bar .show_pirze {
-    font-size: 30px;
+    font-size: 22px;
     color: #ff3e3e;
     padding-left: 20px
+}
+
+.prize_bar .old-price {
+    color: #666;
+    font-size: 16px;
+    text-decoration-line: line-through;
+}
+
+.prize_bar .discount {
+    color: #d92d20;
+    font-size: 16px;
 }
 
 .goods_num {

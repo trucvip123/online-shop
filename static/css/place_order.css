@@ -3,8 +3,6 @@
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 50%;
-    justify-self: anchor-center;
     border: 1px solid #dddddd;
     border-top: 2px solid #00bc6f;
     padding: 20px;
@@ -32,7 +30,7 @@
 
 .common_list_con label {
     display: block;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .common_list_con input[type="text"] {
@@ -82,6 +80,14 @@ body {
     background-color: #f8f9fa;
     margin: 0;
     padding: 0;
+}
+
+#app section {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    min-width: 0;
 }
 
 h3.common_title {
@@ -151,13 +157,30 @@ dl li {
 }
 
 /* Payment Methods */
+.pay_style_con {
+    display: flex;
+    flex-direction: column;
+}
+
 .pay_style_con input {
     float: left;
-    margin-right: 10px;
+    margin: 1px 10px;
 }
 
 .pay_style_con label {
     margin-left: 10px;
+}
+
+.method_payment {
+    margin: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+}
+
+.method_payment input {
+    margin: 0;
 }
 
 .MuiBox-root {
@@ -165,17 +188,23 @@ dl li {
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 50%;
-    justify-self: anchor-center;
     border: 1px solid #dddddd;
     border-top: 2px solid #d54040;
     padding: 20px;
-    justify-content: flex-start;
     margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.arrow {
+    position: absolute;
+    left: 12px;
+    display: flex;
+    cursor: pointer;
 }
 
 .MuiTypography-root {
-    margin-left: 110px;
     font-family: Inter, sans-serif;
     font-size: 24px;
     line-height: 24px;
@@ -283,6 +312,38 @@ dl li {
 .goods_list_td li {
     flex: 1;
     text-align: left;
+}
+
+.goods_list_th li,
+.goods_list_td li {
+    flex: none;
+    text-align: center;
+}
+
+.goods_list_th .col01,
+.goods_list_td .col01 {
+    width: 16%;
+}
+
+.goods_list_th .col02,
+.goods_list_td .col02_title {
+    width: 31%;
+    text-align: left;
+}
+
+.goods_list_th .col03,
+.goods_list_td .col03 {
+    width: 15%;
+}
+
+.goods_list_th .col04,
+.goods_list_td .col04 {
+    width: 15%;
+}
+
+.goods_list_th .col05_label,
+.goods_list_td .col05 {
+    width: 20%;
 }
 
 /* Checkout Section */
