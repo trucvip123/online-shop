@@ -470,6 +470,10 @@
   border-radius: 5px;
 }
 
+.navbar-collapse .d-flex {
+  margin-right: 10px;
+}
+
 /* Responsive */
 @media (max-width: 390px) {
   .list_model {
@@ -562,6 +566,7 @@
     flex-wrap: nowrap;
     /* Keep all items in one row */
   }
+
 
   .navbar-nav {
     flex-wrap: nowrap;

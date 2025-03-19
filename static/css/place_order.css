@@ -39,6 +39,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    font-size: 14px;
 }
 
 .common_list_con .reg_sub {
@@ -72,6 +73,13 @@
 
 .common_list_con .reg_sub button:hover {
     background-color: #5a6268;
+}
+
+.receiver_info {
+    display: flex;
+    gap: 20px;
+    margin: 0px;
+    ;
 }
 
 /* General Styles */
@@ -211,7 +219,7 @@ dl li {
 }
 
 .contact select {
-    height: 25px;
+    height: 30px;
     width: 120px;
 }
 
@@ -439,6 +447,10 @@ dl li {
     text-align: right;
     margin-top: 10px;
 }
+
+/* .total_price_cal {
+    display: none;
+} */
 
 .submit_order {
     text-align: center;

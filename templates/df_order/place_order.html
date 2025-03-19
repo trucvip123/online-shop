@@ -9,15 +9,8 @@
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
-<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-        $("#btn2").click(function () {
-            $("#receiver, #phone, #address").removeAttr('disabled');
-        });
-        $("#btn").click(function () {
-            $("#receiver, #phone, #address").attr('disabled', 'disabled');
-        });
         $('.col05').each(function () {
             let count = $(this).prev().text();
             let price = $(this).prev().prev().text();
@@ -42,8 +35,6 @@
             }
         });
     });
-
-
     document.addEventListener("DOMContentLoaded", function () {
         var PriceElements = document.querySelectorAll('.goods_list_td .col03');
         PriceElements.forEach(function (element) {
@@ -72,6 +63,15 @@
                         </path>
                     </svg></a>
                 <h6 class="MuiTypography-root MuiTypography-subtitle1 css-q8b90y">Xác nhận đơn hàng</h6>
+            </div>
+            <div class="common_list_con clearfix">
+                <label>Thông tin người nhận</label>
+                <div class="receiver_info">
+                    <input type="text" name="receiver" class="user_info_check" value="{{ user.oreceiver }}"
+                        id="receiver" placeholder="Họ và tên" required>
+                    <input type="text" name="phone" class="user_info_check" value="{{ user.ocontact }}" id="phone"
+                        placeholder="Số điện thoại" required>
+                </div>
             </div>
             <div class="common_list_con clearfix">
                 <label>Hình thức nhận hàng</label>
@@ -129,7 +129,6 @@
                         <input type="text" name="address" class="contact" placeholder=" Số Nhà, Tên Đường" required>
                     </div>
                     </dl>
-
                 </div>
             </div>
 
@@ -172,8 +171,9 @@
                 </ul>
                 {% endfor %}
                 <div class="total_goods_count">
-                    Tổng thanh toán (<em>{{ carts|length }}</em> Sản phẩm):
+                    Tổng thanh toán (<em>{{ carts|length }}</em>) Sản phẩm:
                     <b class="total_price" data-price="{{ total_price }}">{{ total_price }}</b>
+                    <b class="total_price_cal">{{ total_price }}</b>
                 </div>
                 <div class="submit_order">
                     <a href="javascript:;" id="order_btn">Đặt hàng</a>
@@ -204,53 +204,66 @@
 
 <script type="text/javascript">
     $('#order_btn').click(function () {
-        let number = 0;
-        $('.user_info_check').each(function () {
-            if ($(this).val() == '') {
-                number = 1;
+        let province = $("#province_name").val();
+        let district = $("#district_name").val();
+        let commune = $("#commune_name").val();
+        let address = $("input[name='address']").val().trim();
+
+        // Check if the selected delivery_style has the 'customer' class
+        let selectedDelivery = $("input[name='delivery_style']:checked");
+        let isCustomerDelivery = selectedDelivery.hasClass("customer");
+
+        // Validate only if delivery_style has class 'customer'
+        if (isCustomerDelivery && (!province || !district || !commune || !address)) {
+            alert("Vui lòng nhập đầy đủ thông tin địa chỉ trước khi đặt hàng!");
+            return;
+        }
+
+        let receiver = $("#receiver").val();
+        let full_address = address + ', ' + commune + ', ' + district + ', ' + province;
+        let contact = $("#phone").val();
+        let cartids = '';
+
+        // Validate that receiver fields are not empty
+        if (!receiver || !contact) {
+            alert("Vui lòng nhập đầy đủ thông tin người nhận trước khi đặt hàng!");
+            return;
+        }
+
+        let totalPrice = $('.total_price_cal').val();
+
+        $('.goods_list_td').each(function () {
+            cartids += $(this).attr('id') + ',';
+        });
+
+        cartids = cartids.slice(0, -1);
+
+        let data = {
+            'cart_ids': cartids,
+            'total': totalPrice,
+            'address': full_address,
+            'receiver': receiver,
+            'contact': contact,
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        };
+
+        console.log("data:", data);
+
+        $.post('/order/push/', data, function (response) {
+            if (response.ok == 1) {
+                localStorage.setItem('order_finish', 2);
+                $('.popup_con').fadeIn('fast', function () {
+                    setTimeout(function () {
+                        $('.popup_con').fadeOut('fast', function () {
+                            window.location.href = '{% url "df_user:order" 1 %}';
+                        });
+                    }, 1000);
+                });
+            } else {
+                alert('Place the order failed');
             }
         });
-        if (number == 1) {
-            alert('Please input the correct address');
-            window.location.href = '{% url "df_user:site" %}';
-        } else {
-            let receiver = $("#receiver").val();
-            let address = $("#address").val();
-            let contact = $("#phone").val();
-            let cartids = '';
-
-            $('.goods_list_td').each(function () {
-                cartids += $(this).attr('id') + ',';
-            });
-
-            cartids = cartids.slice(0, -1);
-
-            let data = {
-                'cart_ids': cartids,
-                'total': {{ total_trans_price }
-        },
-        'address': address,
-            'receiver': receiver,
-                'contact': contact,
-                    'csrfmiddlewaretoken': '{{ csrf_token }}'
-    };
-
-    $.post('/order/push/', data, function (response) {
-        if (response.ok == 1) {
-            localStorage.setItem('order_finish', 2);
-            $('.popup_con').fadeIn('fast', function () {
-                setTimeout(function () {
-                    $('.popup_con').fadeOut('fast', function () {
-                        window.location.href = '{% url "df_user:order" 1 %}';
-                    });
-                }, 1000);
-            });
-        } else {
-            alert('Place the order failed');
-        }
     });
-    }
-});
 </script>
 
 {% endblock center_body %}
