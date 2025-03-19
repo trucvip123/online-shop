@@ -23,6 +23,12 @@ def index(request):
     may_lanh_instance = TypeInfo.objects.filter(ttitle='may-lanh').first()
     may_lanh_type = may_lanh_instance.goodsinfo_set.order_by("-id")[:10]
     
+    quat_dieu_hoa_instance = TypeInfo.objects.filter(ttitle='quat-dieu-hoa').first()
+    quat_dieu_hoa_type = quat_dieu_hoa_instance.goodsinfo_set.order_by("-id")[:10]
+
+    noi_chien_khong_dau_instance = TypeInfo.objects.filter(ttitle='noi-chien-khong-dau').first()
+    noi_chien_khong_dau_type = noi_chien_khong_dau_instance.goodsinfo_set.order_by("-id")[:10]
+
     context = {
         "title": "Mua bán điện tử, điện lạnh, điện gia dụng",
         "cart_num": cart_count(request),
@@ -30,6 +36,8 @@ def index(request):
         "newest_products": newest_products,
         "den_chum_type": den_chum_type,
         "may_lanh_type": may_lanh_type,
+        "quat_dieu_hoa_type": quat_dieu_hoa_type,
+        "noi_chien_khong_dau_type": noi_chien_khong_dau_type,
     }
     return render(request, "df_goods/index.html", context)
 

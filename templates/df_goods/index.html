@@ -145,6 +145,89 @@
 			</ul>
 		</div>
 	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model02">Quạt điều hoà</h3>
+		</div>
+		<div class="goods_con clearfix">
+			<ul class="goods_list fl">
+				{% for goods in quat_dieu_hoa_type %}
+				<li>
+					<a href="/{{ goods.id }}/">
+						<div class="item-img">
+							{% if goods.images.all %}
+							<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
+								class="img-fluid rounded"
+								onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
+							{% else %}
+							<img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
+								alt="Default Img">
+							{% endif %}
+						</div>
+					</a>
+					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
+					<div class="price-info">
+						<strong class="prize" id="gprice" data-price="{{ goods.gprice }}">{{ goods.gprice }}₫</strong>
+						<div class="price-and-discount">
+							{% if goods.gprice_old %}
+							<label class="old-price" data-old-price="{{ goods.gprice_old }}">{{ goods.gprice_old
+								}}₫</label>
+							<small class="discount" data-old-price="{{ goods.gprice_old }}"
+								data-new-price="{{ goods.gprice }}"></small>
+							{% endif %}
+						</div>
+					</div>
+					<div class="operate_btn">
+						<a href="javascript:;" class="buy_btn" data-product-id="{{ goods.id }}">Mua ngay</a>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model02">Nồi chiên không dầu</h3>
+		</div>
+		<div class="goods_con clearfix">
+			<ul class="goods_list fl">
+				{% for goods in noi_chien_khong_dau_type %}
+				<li>
+					<a href="/{{ goods.id }}/">
+						<div class="item-img">
+							{% if goods.images.all %}
+							<img src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}" alt="{{ goods.gtitle }}"
+								class="img-fluid rounded"
+								onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
+							{% else %}
+							<img src="https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo="
+								alt="Default Img">
+							{% endif %}
+						</div>
+					</a>
+					<h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
+					<div class="price-info">
+						<strong class="prize" id="gprice" data-price="{{ goods.gprice }}">{{ goods.gprice }}₫</strong>
+						<div class="price-and-discount">
+							{% if goods.gprice_old %}
+							<label class="old-price" data-old-price="{{ goods.gprice_old }}">{{ goods.gprice_old
+								}}₫</label>
+							<small class="discount" data-old-price="{{ goods.gprice_old }}"
+								data-new-price="{{ goods.gprice }}"></small>
+							{% endif %}
+						</div>
+					</div>
+					<div class="operate_btn">
+						<a href="javascript:;" class="buy_btn" data-product-id="{{ goods.id }}">Mua ngay</a>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+
 </div>
 
 <script type="text/javascript">
