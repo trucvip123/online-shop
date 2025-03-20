@@ -1,10 +1,10 @@
 .main_wrap {
-    width: 1200px;
+    width: 100%;
     margin: 0 auto 20px;
 }
 
 .r_wrap {
-    width: 1200px;
+    width: 100%;
     min-height: 525px;
     background-color: white;
     border-radius: 10px;
@@ -195,7 +195,6 @@
 
 .goods_type_list li img {
     display: block;
-    margin: 10px auto;
     width: 180px;
 }
 

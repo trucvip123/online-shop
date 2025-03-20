@@ -1,22 +1,25 @@
 body {
+	display: flex;
+    flex-direction: column;
 	background: url(//cdnv2.tgdd.vn/webmwg/2024/ContentMwg/images/noel/2024/tgdd/bg-dt.png) repeat !important;
 }
 
 html,
 body {
 	height: 100%;
-	margin: 0;
-	padding: 0;
+	justify-self: center;
+	width: 1200px
 }
 
 .center_con {
-	width: 1200px;
+	/* width: 1200px; */
 	margin: 5px auto 0 auto;
 	background-color: currentcolor;
 	border-radius: 10px;
 }
 
 .slide {
+	width: 100%;
 	position: relative;
 	overflow: hidden;
 	border-radius: 10px;
@@ -26,12 +29,11 @@ body {
 	position: relative;
 	left: 0;
 	top: 0;
-	width: 1200;
-	height: 214px;
+	height: 230px;
 }
 
 .slide .slide_pics li {
-	width: 1200px;
+	/* width: 1200px; */
 	height: 270px;
 	position: absolute;
 	left: 0;
@@ -80,7 +82,7 @@ body {
 /* Product list */
 
 .list_model {
-	width: 1200px;
+	/* width: 1200px; */
 	margin: 15px auto 0;
 	background: white;
 	border-radius: 10px;
@@ -133,7 +135,6 @@ body {
 }
 
 .goods_list {
-	width: 1160px;
 	border-bottom: 1px solid #ededed;
 	display: flex;
 	flex-wrap: wrap;
@@ -266,24 +267,24 @@ body {
 	margin-top: 10px;
 }
 
-/* breadcrumb */
-.breadcrumb {
-	width: 1200px;
-	margin: 20px auto;
-	font: 14px/18px Arial, Helvetica, sans-serif !important;
+/* path */
+.path {
+	margin: 10px;
+    font: 14px / 18px Arial, Helvetica, sans-serif !important;
+    text-decoration: none;
 }
 
-.breadcrumb a {
+.path a {
 	color: rgb(182, 182, 182);
 	text-decoration: none;
 	margin-right: 5px;
 }
 
-.breadcrumb a:hover {
+.path a:hover {
 	color: #ff8800
 }
 
-.breadcrumb span {
+.path span {
 	line-height: 40px;
 	color: #666;
 	padding: 0 5px;
@@ -725,7 +726,7 @@ body {
 
 
 .order_list_table {
-	width: 1200px;
+	/* width: 1200px; */
 	border-collapse: collapse;
 	border-spacing: 0px;
 	border: 1px solid #ddd;
@@ -822,7 +823,7 @@ body {
 
 
 .main_con {
-	width: 1200px;
+	/* width: 1200px; */
 	margin: 0 auto;
 	background: url(../images/left_bg.jpg);
 	border-radius: 8px;
@@ -990,6 +991,6 @@ body {
 .topnav {
 	background-color: #333;
 	overflow: hidden;
-	width: 1200px;
+	/* width: 1200px; */
 	margin-left: 201px;
 }

@@ -1,21 +1,8 @@
-html,
-body {
-    height: 100%;
-    margin: 0;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-}
-
 .footer {
     background: #242424;
     color: white;
     padding: 20px;
     text-align: center;
-    margin-top: auto;
-    /* Push the footer to the bottom */
     width: 100%;
 }
 
