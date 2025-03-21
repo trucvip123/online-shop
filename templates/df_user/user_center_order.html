@@ -2,6 +2,7 @@
 {% extends 'base.html' %}
 
 {% block center_body %}
+<link rel="stylesheet" type="text/css" href="/static/css/order_history.css">
 
 <div class="main_con clearfix">
 	<div class="left_menu_con clearfix">
@@ -17,41 +18,40 @@
 		</ul>
 	</div>
 	<div class="right_content clearfix">
-		<h3 class="common_title2">Order History</h3>
+		<h3 class="common_title2 order-history-title">Order History</h3>
 		{% for orderinfo in page %}
-		<ul class="order_list_th w978 clearfix">
-			<li class="col01">{{ orderinfo.odate|date }}</li>
-			<li class="col02">ORDER #：{{ orderinfo.oid }}</li>
-			<li class="col02 stress">ORDER PLACED</li>
+		<ul class="order_list_th w978 clearfix order-header">
+			<li class="col01 order-date">{{ orderinfo.odate|date }}</li>
+			<li class="col02 order-id">ORDER #：{{ orderinfo.oid }}</li>
+			<li class="col02 stress order-status">ORDER PLACED</li>
 		</ul>
 
-		<table class="order_list_table w980">
+		<table class="order_list_table w980 order-table">
 			<tbody>
 				<tr>
-					<td width="55%">
+					<td width="55%" class="order-items">
 						{% for order_detail in orderinfo.orderdetailinfo_set.all %}
-						<ul class="order_goods_list clearfix">
-							<li class="col01">
-								<img src="{{ MEDIA_URL }}{{ order_detail.goods.gpic }}"
+						<ul class="order_goods_list clearfix order-item">
+							<li class="col01 item-image">
+								<img src="{{ MEDIA_URL }}{{ order_detail.goods.images.all.0.image_path }}"
 									alt="{{ order_detail.goods.gtitle }}"
 									onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
 							</li>
-							<li class="col02">{{ order_detail.goods.gtitle }}</li>
-							<li class="col03">{{ order_detail.count }}</li>
-							<li class="col04">{{ order_detail.goods.gprice }}₫</li>
+							<li class="col02 item-title">{{ order_detail.goods.gtitle }}</li>
+							<li class="col03 item-quantity">{{ order_detail.count }}</li>
+							<li class="col04 item-price">{{ order_detail.goods.gprice }}₫</li>
 						</ul>
 						{% endfor %}
 					</td>
-					<td width="15%">{{ orderinfo.ototal }}₫</td>
-					<td width="15%">PAID</td>
-					<td width="15%"><a href="#" class="oper_btn">Track Package</a></td>
+					<td width="15%" class="order-total">{{ orderinfo.ototal }}₫</td>
+					<td width="15%" class="order-payment-status">PAID</td>
+					<td width="15%" class="order-actions"><a href="#" class="oper_btn track-package-btn">Track Package</a></td>
 				</tr>
 			</tbody>
 		</table>
 		{% endfor %}
 
-
-		<div class="pagenation">
+		<div class="pagenation pagination-container">
 			{% if page.has_previous %}
 			<a href='{% url "df_user:order" page.previous_page_number %}'>上一页</a>
 			{% endif %}

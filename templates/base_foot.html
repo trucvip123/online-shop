@@ -1,4 +1,24 @@
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Cửa hàng Điện Thanh Liêm - Chuyên cung cấp thiết bị điện chất lượng tại Bình Định.">
+	<meta name="keywords" content="Điện Thanh Liêm, thiết bị điện, điện gia dụng, Bình Định">
+	<meta name="author" content="TrucNV">
+	<meta charset="utf-8">
+	<meta name="robots" content="index, follow">
+	<meta name="googlebot" content="index, follow">
+	<meta http-equiv="content-language" content="vi">
+	<meta name="og:locale" content="vi_VN">
+	<meta property="og:title" content="Điện Thanh Liêm - Cửa hàng thiết bị điện tại Bình Định">
+	<meta property="og:description" content="Chuyên cung cấp thiết bị điện chất lượng tại Bình Định.">
+	<meta property="og:image" content="/static/images/favicon/apple-touch-icon.png">
+	<meta property="og:url" content="https://dienthanhliem.vn">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Điện Thanh Liêm">
+	<meta name="twitter:description" content="Chuyên cung cấp thiết bị điện chất lượng tại Bình Định.">
+	<meta name="twitter:image" content="/static/images/favicon/apple-touch-icon.png">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	
 	<title> Điện Thanh Liêm | {{ title }} </title>
 	<link rel="icon" type="image/png" href="/static/images/favicon/favicon-96x96.png" sizes="96x96" />
 	<link rel="icon" type="image/svg+xml" href="/static/images/favicon/favicon.svg" />
@@ -12,24 +32,18 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/change_pw.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/footer.css">
 
-	<script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
-	<script type="text/javascript" src="/static/js/register.js"></script>
+	<script type="text/javascript" src="/static/js/jquery-1.12.4.min.js" defer></script>
+	<script type="text/javascript" src="/static/js/register.js" defer></script>
 	<script type="text/javascript">
 		document.addEventListener("DOMContentLoaded", function () {
-			var priceElements = document.querySelectorAll('.prize');
-			priceElements.forEach(function (element) {
-				var price = parseFloat(element.getAttribute('data-price'));
-				element.textContent = price.toLocaleString('de-DE') + '₫';
-			});
-			var oldPriceElements = document.querySelectorAll('.old-price');
-			oldPriceElements.forEach(function (element) {
-				var oldPrice = parseFloat(element.getAttribute('data-old-price'));
-				element.textContent = oldPrice.toLocaleString('de-DE') + '₫';
-			});
-			var PriceElements = document.querySelectorAll('.col05');
-			PriceElements.forEach(function (element) {
-				var oldPrice = parseFloat(element.getAttribute('data-price'));
-				element.textContent = oldPrice.toLocaleString('de-DE') + '₫';
+			document.querySelectorAll('.prize, .old-price, .col05').forEach(function (element) {
+				var priceAttr = element.getAttribute('data-price') || element.getAttribute('data-old-price');
+				if (priceAttr !== null) {
+					var price = parseFloat(priceAttr);
+					if (!isNaN(price)) {
+						element.textContent = price.toLocaleString('de-DE') + '₫';
+					}
+				}
 			});
 		});
 	</script>
@@ -60,11 +74,7 @@
 							<p>Điện Thanh Liêm</p>
 						</a>
 						<a rel="nofollow" target="_blank" class="imgzalo">
-							<img class="lazy lazyloaded"
-								data-original="https://cdnv2.tgdd.vn/webmwg/2024/ContentMwg/images/icon_zalo.png"
-								data-src="https://cdnv2.tgdd.vn/webmwg/2024/ContentMwg/images/icon_zalo.png" alt="zalo"
-								width="18" height="18" loading="lazy"
-								src="https://cdnv2.tgdd.vn/webmwg/2024/ContentMwg/images/icon_zalo.png">
+							<img src="https://cdnv2.tgdd.vn/webmwg/2024/ContentMwg/images/icon_zalo.png" alt="zalo" width="18" height="18" loading="lazy">
 							<p>0334 676 226</p>
 						</a>
 					</div>

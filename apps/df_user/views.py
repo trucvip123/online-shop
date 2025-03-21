@@ -385,19 +385,28 @@ def delete_user_address(request, address_id):
         return JsonResponse({'success': True})
     except Exception:
         return JsonResponse({'success': False, 'error': 'Address not found'})
-    
-@user_decorator.login
+
+
 def order(request, index):
     user_id = request.session["user_id"]
     orders_list = OrderInfo.objects.filter(user_id=int(user_id)).order_by("-odate")
     paginator = Paginator(orders_list, 2)
     page = paginator.page(int(index))
+
+    if user_id:
+        carts = CartInfo.objects.filter(user_id=user_id)
+        total_count = carts.aggregate(Sum("count"))["count__sum"] or 0
+    else:
+        guest_cart = request.session.get("guest_cart", {})
+        total_count = sum(guest_cart.values())
+
     context = {
+        "title": "User Center",
         "paginator": paginator,
         "page": page,
-        # 'orders_list':orders_list,
-        "title": "User Center",
         "page_name": 1,
+        "cart_num": total_count,
+
     }
     return render(request, "df_user/user_center_order.html", context)
 

@@ -1,4 +1,9 @@
-/* General styles */
+#app {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
 .common_list_con {
     background: #fff;
     border-radius: 8px;
@@ -426,7 +431,7 @@ dl li {
 .total_goods_count,
 .transit,
 .total_pay {
-    font-size: 1.2rem;
+    font-size: 13px;
     font-weight: bold;
 }
 
@@ -448,9 +453,9 @@ dl li {
     margin-top: 10px;
 }
 
-/* .total_price_cal {
+.total_price_cal {
     display: none;
-} */
+}
 
 .submit_order {
     text-align: center;
@@ -484,7 +489,7 @@ dl li {
 }
 
 /* Popup Confirmation */
-.popup_con {
+/* .popup_con {
     display: none;
     position: fixed;
     top: 50%;
@@ -505,7 +510,7 @@ dl li {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-}
+} */
 
 /* QR Code */
 #qr_code {
@@ -518,6 +523,102 @@ dl li {
     border: 1px solid #ddd;
     border-radius: 15px;
 }
+/* Overlay (nền mờ) */
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+}
+
+/* Popup container */
+.popup_con {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    display: none;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Header */
+.popup_header {
+    background: #28a745; /* Màu xanh thành công */
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.popup_header h2 {
+    font-size: 20px;
+}
+
+/* Nội dung */
+.popup_body {
+    padding: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Footer */
+.popup_footer {
+    text-align: center;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+}
+
+/* Nút đóng */
+.close_popup {
+    background: #274c6c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    width: 30%;
+}
+
+.close_popup:hover {
+    background: #091edd;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -55%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -55%);
+    }
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

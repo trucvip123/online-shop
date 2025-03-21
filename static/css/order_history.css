@@ -1,0 +1,90 @@
+.order-history-title {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.order-header {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.order-header .order-date,
+.order-header .order-id,
+.order-header .order-status {
+    font-weight: bold;
+}
+
+.order-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.order-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.order-items .order-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-left: 0;
+}
+
+.order-item .item-image img {
+    height: 50px;
+    border-radius: 5px;
+}
+
+.order-item .item-title {
+    flex: 1;
+    padding-left: 10px;
+    font-size: 1em;
+}
+
+.order-item .item-quantity,
+.order-item .item-price {
+    text-align: center;
+}
+
+.track-package-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.track-package-btn:hover {
+    background-color: #0056b3;
+}
+
+.pagination-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination-container a {
+    margin: 0 5px;
+    padding: 5px 10px;
+    color: #007bff;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.pagination-container a.active {
+    background-color: #60706a;
+    color: #fff;
+}
+
+.pagination-container a:hover {
+    background-color: #74808d;
+    color: #fff;
+}

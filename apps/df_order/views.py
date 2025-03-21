@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
 from decimal import Decimal
+import logging
 
 from df_cart.models import CartInfo
 from df_user import user_decorator
@@ -8,10 +9,12 @@ from df_user.models import UserInfo
 from df_goods.models import GoodsInfo
 from django.db import transaction
 from django.http import JsonResponse
-from django.shortcuts import HttpResponse, render
+from django.shortcuts import HttpResponse, render, get_object_or_404
 from django.db.models import Sum
 
 from .models import OrderDetailInfo, OrderInfo
+
+logger = logging.getLogger(__name__)
 
 
 class Strategy(ABC):
@@ -53,7 +56,7 @@ def order(request):
         cart_queryset = CartInfo.objects.filter(user_id=user_id)
         for cart in cart_queryset:
             cart_items.append(cart)
-            total_price += float(cart.count) * float(cart.goods.gprice)
+            total_price += int(cart.count) * int(cart.goods.gprice)
         total_count = cart_queryset.aggregate(Sum("count"))["count__sum"] or 0
 
     else:
@@ -62,7 +65,7 @@ def order(request):
         for goods_id, count in guest_cart.items():
             goods = GoodsInfo.objects.get(pk=goods_id)
             cart_items.append({"goods": goods, "count": count})
-            total_price += float(count) * float(goods.gprice)
+            total_price += int(count) * int(goods.gprice)
         total_count = sum(guest_cart.values())
 
     total_price = round(total_price, 2)
@@ -87,35 +90,47 @@ def order(request):
         "cart_num": total_count,
     }
 
+    print("context: ", context)
+
     return render(request, "df_order/place_order.html", context)
 
 
-# @user_decorator.login
-@transaction.atomic()
-@transaction.atomic()
+@transaction.atomic
 def order_handle(request):
-    tran_id = transaction.savepoint()
-    user_id = request.session.get("user_id")  # Có thể None nếu là khách
-    address = request.POST.get("address")
-    receiver = request.POST.get("receiver")
-    phone = request.POST.get("contact")
-    data = {}
+    user_id = request.session.get("user_id")  # Can be None if guest
+    address = request.POST.get("address", "").strip()
+    receiver = request.POST.get("receiver", "").strip()
+    phone = request.POST.get("contact", "").strip()
+    total_str = request.POST.get("total", "0").strip()
+
+    print(f"User ID: {user_id}, Address: {address}, Receiver: {receiver}, Phone: {phone}, Total: {total_str}")
 
     try:
-        order_info = OrderInfo()
-        now = datetime.now()
-        order_info.oid = "%s%d" % (now.strftime("%Y%m%d%H%M%S"), user_id or 0)  # Nếu là khách thì dùng 0
-        order_info.odate = now
-        order_info.ototal = Decimal(request.POST.get("total"))
-        order_info.oaddress = address
-        order_info.ocontact = phone
-        order_info.oreceiver = receiver
+        total = Decimal(total_str)
+    except Exception:
+        return JsonResponse({"error": "Invalid total amount"}, status=400)
 
-        if user_id:
-            order_info.user_id = int(user_id)  # Nếu có user_id thì gán vào
+    print("total: ", total)
+    data = {}
+
+    if user_id:
+        user = UserInfo.objects.get(id=user_id)
+    else:
+        user = None
+        
+    try:
+        order_info = OrderInfo(
+            oid=f"{datetime.now().strftime('%Y%m%d%H%M%S')}{user_id or 0}",
+            odate=datetime.now(),
+            ototal=total,
+            oaddress=address,
+            ocontact=phone,
+            oreceiver=receiver,
+            user=user
+        )
         order_info.save()
 
-        # Xử lý giỏ hàng: Nếu user đăng nhập, lấy từ CartInfo; nếu không, lấy từ session
+        # Get cart items
         if user_id:
             cart_items = CartInfo.objects.filter(user_id=user_id)
         else:
@@ -128,39 +143,37 @@ def order_handle(request):
                 count = cart.count
             else:
                 goods_id, count = item
-                goods = Goods.objects.get(pk=goods_id)
+                goods = get_object_or_404(GoodsInfo, pk=goods_id)
 
-            if count <= goods.gkucun:
-                goods.gkucun -= count
-                goods.save()
+            if count > goods.gkucun:
+                return HttpResponse("Out of Stock", status=400)
 
-                order_detail = OrderDetailInfo(
-                    order=order_info,
-                    goods=goods,
-                    price=goods.gprice,
-                    count=count,
-                )
-                order_detail.save()
+            # Reduce stock and save
+            goods.gkucun -= count
+            goods.save()
 
-                if user_id:
-                    cart.delete()
-            else:
-                transaction.savepoint_rollback(tran_id)
-                return HttpResponse("Out of Stock")
+            # Create order detail
+            OrderDetailInfo.objects.create(
+                order=order_info,
+                goods=goods,
+                price=goods.gprice,
+                count=count,
+            )
 
+            if user_id:
+                cart.delete()
+
+        # Clear guest cart
         if not user_id:
-            request.session["guest_cart"] = {}  # Xóa giỏ hàng trong session sau khi đặt hàng
-
-        data["ok"] = 1
-        transaction.savepoint_commit(tran_id)
+            request.session["guest_cart"] = {}
+            data["ok"] = 0
+        else:
+            data["ok"] = 1
+        return JsonResponse(data)
 
     except Exception as e:
-        print("Order failed:", e)
-        transaction.savepoint_rollback(tran_id)
-
-    return JsonResponse(data)
-
-
+        logger.error(f"Order failed: {e}", exc_info=True)
+        return JsonResponse({"error": "Order processing failed"}, status=500)
 
 @user_decorator.login
 def pay(request):

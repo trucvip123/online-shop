@@ -236,13 +236,7 @@ body {
 	transition: all 0.3s ease-in-out;
 }
 
-/* footer */
-/*
-.footer{
-	border-top:0px solid black;
-	margin:30px 0;
-}
-*/
+
 
 .foot_link {
 	text-align: center;
@@ -269,7 +263,7 @@ body {
 
 /* path */
 .path {
-	margin: 10px;
+	margin-top: 20px;
     font: 14px / 18px Arial, Helvetica, sans-serif !important;
     text-decoration: none;
 }
@@ -694,24 +688,12 @@ body {
 	text-align: center;
 }
 
-
-
 .settle_con {
 	margin: 10px
 }
 
-
-
-.order_list_th {
-	width: 1198px;
-	border: 1px solid #ddd;
-	background-color: #f7f7f7;
-	margin: 20px auto 0;
-}
-
 .order_list_th li {
 	float: left;
-	height: 30px;
 	line-height: 30px
 }
 
@@ -724,44 +706,7 @@ body {
 	width: 30%
 }
 
-
-.order_list_table {
-	/* width: 1200px; */
-	border-collapse: collapse;
-	border-spacing: 0px;
-	border: 1px solid #ddd;
-	margin: -1px auto 0;
-}
-
-.order_list_table td {
-	border: 1px solid #ddd;
-	text-align: center;
-}
-
-.order_goods_list {
-	border-bottom: 1px solid #ddd;
-	margin-bottom: -2px;
-}
-
-.order_goods_list li {
-	float: left;
-	height: 80px;
-	line-height: 80px;
-}
-
-.order_goods_list .col01 {
-	width: 20%
-}
-
-.order_goods_list .col01 img {
-	width: 60px;
-	height: 60px;
-	border: 1px solid #ddd;
-	margin: 10px auto;
-}
-
 .order_goods_list .col02 {
-	width: 50%;
 	text-align: left;
 }
 
@@ -770,57 +715,12 @@ body {
 	margin-left: 10px
 }
 
-.order_goods_list .col03 {
-	width: 10%
-}
-
-.order_goods_list .col04 {
-	width: 20%
-}
-
 .oper_btn {
 	display: inline-block;
 	border: 1px solid #ddd;
 	color: #666;
 	padding: 5px 10px
 }
-
-.popup_con {
-	display: none;
-}
-
-.popup {
-	width: 300px;
-	height: 150px;
-	border: 1px solid #dddddd;
-	border-top: 2px solid #00bc6f;
-	background-color: #f7f7f7;
-	position: fixed;
-	left: 50%;
-	margin-left: -150px;
-	top: 50%;
-	margin-top: -75px;
-	z-index: 1000;
-}
-
-.popup p {
-	height: 150px;
-	line-height: 150px;
-	text-align: center;
-	font-size: 18px;
-}
-
-.mask {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	left: 0;
-	top: 0;
-	background-color: #000;
-	opacity: 0.3;
-	z-index: 999;
-}
-
 
 .main_con {
 	/* width: 1200px; */
@@ -865,24 +765,6 @@ body {
 	float: right;
 	min-height: 500px;
 }
-
-.w980 {
-	width: 980px;
-}
-
-.w978 {
-	width: 978px;
-}
-
-
-.common_title2 {
-	height: 20px;
-	line-height: 20px;
-	font-size: 16px;
-	margin: 10px 0;
-}
-
-
 
 .site_con {
 	background-color: #f9f9f9;

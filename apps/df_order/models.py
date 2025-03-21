@@ -4,15 +4,14 @@ from django.db import models
 
 # one model for record the whole order and the other record the information for each items in the order
 
-
 class OrderInfo(models.Model):
     oid = models.CharField(max_length=20, primary_key=True, verbose_name="order_no")
     user = models.ForeignKey(
-        UserInfo, on_delete=models.CASCADE, verbose_name="order_users"
+        UserInfo, on_delete=models.CASCADE, verbose_name="order_users", null=True, blank=True
     )
     odate = models.DateTimeField(auto_now=True, verbose_name="order_time")
     oIsPay = models.BooleanField(default=False, verbose_name="is_pay")
-    ototal = models.DecimalField(max_digits=8, decimal_places=2, verbose_name="total")
+    ototal = models.DecimalField(max_digits=10, decimal_places=0, verbose_name="total")
     oaddress = models.CharField(
         max_length=150, default="", verbose_name="order_address"
     )
@@ -41,7 +40,7 @@ class OrderDetailInfo(models.Model):
         OrderInfo, on_delete=models.CASCADE, verbose_name="orders"
     )
     price = models.DecimalField(
-        max_digits=6, decimal_places=2, verbose_name="goods_price"
+        max_digits=10, decimal_places=0, verbose_name="goods_price"
     )
     count = models.IntegerField(verbose_name="goods_count")
 
