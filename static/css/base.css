@@ -250,7 +250,7 @@
 /* small_cart */
 .small_cart {
   width: 540px;
-  height: 400px;
+  height: 385px;
   background-color: white;
   position: fixed;
   top: 50%;
@@ -457,32 +457,47 @@
 }
 
 /* Responsive */
-@media (max-width: 390px) {
+@media (max-width: 400px) {
+  html, body {
+    width: 385px;
+    
+  }
+
   .list_model {
-    width: 390px;
+    width: 385px;
+  }
+
+  .search_bar_bg {
+    align-self: center;
+    display: flex;
+    width: 385px;
   }
 
   .search_bar {
-    flex-direction: row;
     display: flex;
+    justify-content: space-evenly;
+    width: 385px;
     flex-wrap: wrap;
-    justify-content: left;
-    width: 390px;
   }
 
   .search_bar .logo {
     margin: 0 70px 0 75px;
   }
 
+  .dropdown {
+    width: 30px;
+  }
+
   .dropbtn {
-    width: 50px;
-    height: 50px;
+    height: 45px;
+    width: 42px;
   }
 
   .dropbtn i {
-    font-size: 30px;
+    font-size: 25px;
     margin-left: 4px;
     margin-top: 20px;
+    margin-right: 0px;
   }
 
   .dropbtn p {
@@ -504,7 +519,7 @@
   }
 
   .guest_cart .goods_count {
-    margin: -10px 5px 0 -15px
+    margin: -40px 0px 0 25px
   }
 
   .login_btn {
@@ -534,6 +549,11 @@
     margin-left: 10px;
   }
 
+  .navbar {
+    width: 385px;
+    margin-bottom: 10px !important;
+  }
+
   .navbar-collapse {
     display: flex !important;
     /* Ensure navbar stays visible */
@@ -544,7 +564,6 @@
     flex-wrap: nowrap;
     /* Keep all items in one row */
   }
-
 
   .navbar-nav {
     flex-wrap: nowrap;
@@ -562,7 +581,6 @@
 
   .dropdown-content a {
     padding: 5px;
-
   }
 
   .dropdown-submenu {
@@ -579,4 +597,7 @@
     width: 75px;
   }
 
+  .d-flex p {
+    margin-bottom: 0;
+  }
 }
