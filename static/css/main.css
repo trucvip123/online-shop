@@ -144,7 +144,7 @@ body {
 }
 
 .goods_list li {
-	height: 370px;
+	height: 400px;
 	width: 190px;
 	border: 1px solid #ededed;
 	float: left;
@@ -156,7 +156,7 @@ body {
 .goods_list li h4 {
 	text-align: left;
 	height: 50px;
-	margin-top: 50px;
+	margin-top: 70px;
 	margin-left: 5px;
 }
 
@@ -284,71 +284,6 @@ body {
 	padding: 0 5px;
 }
 
-/* Product Sort */
-.sort_bar {
-	height: 30px;
-	border-bottom: 1px solid silver;
-	margin: 4px;
-}
-
-.sort_bar a {
-	padding-left: 20px;
-	text-decoration: none;
-	color: #787878;
-	font-size: 16px;
-}
-
-.sort_bar a:hover {
-	text-decoration: none;
-}
-
-.sort_bar .active {
-	color: #53acff;
-}
-
-.dropbtn_price {
-	padding: 2px;
-	font-size: 16px;
-	border: none;
-	background: white;
-	padding: 0 22px;
-	color: #787878;
-}
-
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content-price {
-	display: none;
-	position: absolute;
-	background-color: #f9f9f9;
-	width: 130px;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-	z-index: 1;
-	border-radius: 8px;
-}
-
-/* Links inside the dropdown */
-.dropdown-content-price a {
-	padding: 10px 12px;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content-price a:hover {
-	background-color: #f1f1f1
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content-price {
-	display: block;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-	background-color: #c2c2c2;
-}
 
 /* Pagination */
 .pagenation {

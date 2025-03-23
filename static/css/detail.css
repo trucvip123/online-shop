@@ -404,3 +404,65 @@
 .tab-content>.tab-pane {
     padding: 0 15px;
 }
+
+.tab-content>.tab-pane img {
+    width: 100% !important;
+    height: auto !important;
+}
+
+
+/* Responsive */
+@media (max-width: 400px) {
+    .goods_detail_con {
+        display: block;
+        padding: 5px;
+    }
+    
+    .goods_detail_pic {
+        width: 100%;
+    }
+    
+    .goods_num {
+        font-size: 14px;
+        justify-content: center;
+    }
+
+    .goods_num .num_add {
+        justify-content: space-around;
+    }
+
+    .goods_num .num_add input {
+        border: 1px solid #dddddd;
+        border-radius: 0px;
+    }
+
+    .operate_btn {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .main_wrap {
+        display: block;
+    }
+
+    .l_wrap {
+        width: 100%;
+    }
+
+    .r_wrap {
+        width: auto;
+    }
+
+    .goods_detail_list {
+        padding: 5px;
+    }
+
+    .search_con {
+        display: flex;
+    }
+
+    .fr {
+        float: none;
+    }
+}

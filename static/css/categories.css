@@ -261,3 +261,19 @@
     line-height: 17px;
     text-decoration-line: line-through;
 }
+
+/* Responsive */
+@media (max-width: 400px) {
+    .goods_type_list {
+        margin: 0;
+    }
+    
+    .goods_type_list li {
+        margin: 1px;
+        padding: 0;
+    }
+
+    .sort_bar a {
+        padding-left: 5px;
+    }
+}

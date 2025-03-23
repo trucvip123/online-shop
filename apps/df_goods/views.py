@@ -1,3 +1,4 @@
+import math
 import re
 from df_cart.models import CartInfo
 from df_user.models import GoodsBrowser
@@ -108,6 +109,9 @@ def convert_urls_to_images(text):
         text,
     )
 
+def round_up_to_even(number):
+    rounded = math.ceil(number)  # Làm tròn lên
+    return rounded if rounded % 2 == 0 else rounded + 1 
 
 def detail(request, gid):
     good_id = gid
@@ -118,7 +122,7 @@ def detail(request, gid):
     # Apply the render_images filter to the goods.gcontent field
     # goods.gcontent = convert_urls_to_images(goods.gcontent)
 
-    news = goods.gtype.goodsinfo_set.order_by("-id")[0:round(len(goods.gparam)/200)]
+    news = goods.gtype.goodsinfo_set.order_by("-id")[0:round_up_to_even(len(goods.gparam)/200)]
     context = {
         "ttitle": goods.gtype.ttitle,
         "ntitle": goods.gtype.ntitle,
