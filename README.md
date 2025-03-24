@@ -67,6 +67,6 @@ sudo systemctl restart gunicorn
 
 
 ### Super user:
-Username: trucnv
-Email address: trucnv99@gmail.com
+Username: trucvip123
+Email address: 
 Password: lumia930

@@ -1,21 +1,15 @@
 from django.contrib import admin
-
-from .models import OrderDetailInfo, OrderInfo
-
+from .models import OrderInfo, OrderDetailInfo
 
 @admin.register(OrderInfo)
 class OrderInfoAdmin(admin.ModelAdmin):
-
-    list_display = ["oid", "user", "odate", "ototal", "oaddress"]
-    list_per_page = 5
-    list_filter = ["user", "odate", "oaddress"]
-    search_fields = ["user__uname"]
-    ordering = ["-odate"]
-
+    list_display = ('oid', 'user', 'odate', 'oIsPay', 'ototal', 'oIsDelivery')
+    search_fields = ('oid', 'user__uname')
+    list_filter = ('oIsPay', 'oIsDelivery')
+    ordering = ('-odate',)
 
 @admin.register(OrderDetailInfo)
 class OrderDetailInfoAdmin(admin.ModelAdmin):
-
-    list_display = ["goods", "order", "price", "count"]
-    list_per_page = 5
-    list_filter = ["goods"]
+    list_display = ('order', 'goods', 'price', 'count')
+    search_fields = ('order__oid', 'goods__gtitle')
+    list_filter = ('order__oIsPay',)

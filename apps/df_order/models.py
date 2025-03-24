@@ -28,8 +28,8 @@ class OrderInfo(models.Model):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-
-        return "{0}在的订单{1}".format(self.user.uname, self.odate)
+        user_name = self.user.uname if self.user else "Anonymous"
+        return "{0}在的订单{1}".format(user_name, self.odate)
 
 
 class OrderDetailInfo(models.Model):
