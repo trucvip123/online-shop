@@ -30,6 +30,11 @@
 			<tbody>
 				<tr>
 					<td width="55%" class="order-items">
+						<ul class="goods_list_th clearfix">
+							<li class="col02">Sản phẩm</li>
+							<li class="col04">Số lượng</li>
+							<li class="col03">Đơn giá</li>
+						</ul>
 						{% for order_detail in orderinfo.orderdetailinfo_set.all %}
 						<ul class="order_goods_list clearfix order-item">
 							<li class="col01 item-image">
@@ -39,13 +44,36 @@
 							</li>
 							<li class="col02 item-title">{{ order_detail.goods.gtitle }}</li>
 							<li class="col03 item-quantity">{{ order_detail.count }}</li>
-							<li class="col04 item-price">{{ order_detail.goods.gprice }}₫</li>
+							<li class="col04 item-price" data-price>{{ order_detail.goods.gprice }}₫</li>
 						</ul>
 						{% endfor %}
 					</td>
-					<td width="15%" class="order-total">{{ orderinfo.ototal }}₫</td>
-					<td width="15%" class="order-payment-status">PAID</td>
-					<td width="15%" class="order-actions"><a href="#" class="oper_btn track-package-btn">Track Package</a></td>
+					<td width="15%" class="order-total">
+						<ul class="goods_list_th clearfix">
+							<li class="col05_label">Thành tiền</li>
+						</ul>
+						<p>{{ orderinfo.ototal }}₫</p>
+					</td>
+					<td width="15%" class="order-payment-status">
+						<ul class="goods_list_th clearfix">
+							<li class="col06_label">Thanh toán</li>
+						</ul>
+						{% if orderinfo.oIsPay %}
+						<p>Đã thanh toán</p>
+						{% else %}
+						<p>Chưa thanh toán</p>
+						{% endif %}
+					</td>
+					<td width="15%" class="delivery-status">
+						<ul class="goods_list_th clearfix">
+							<li class="col06_label">Vận chuyển</li>
+						</ul>
+						{% if orderinfo.oIsDelivery %}
+						<p>Đã giao hàng</p>
+						{% else %}
+						<p>Chưa giao hàng</p>
+						{% endif %}
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -82,6 +110,18 @@
 		)
 	}
 	)
+
+	document.addEventListener("DOMContentLoaded", function () {
+		document.querySelectorAll('.item-price, .old-price, .col05').forEach(function (element) {
+			var priceAttr = element.getAttribute('data-price') || element.getAttribute('data-old-price');
+			if (priceAttr !== null) {
+				var price = parseFloat(priceAttr);
+				if (!isNaN(price)) {
+					element.textContent = price.toLocaleString('de-DE') + '₫';
+				}
+			}
+		});
+	});
 
 </script>
 

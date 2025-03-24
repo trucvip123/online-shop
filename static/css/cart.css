@@ -1,5 +1,4 @@
 .total_count {
-    /* /* width: 1200px; */ */
     margin: 0 auto;
     height: 40px;
     line-height: 40px;
@@ -14,12 +13,13 @@
 }
 
 .cart_list_th {
-    width: 1198px;
+    width: 100%;
     border: 1px solid #ddd;
     background-color: white;
     margin: 0 auto;
     border-radius: 8px 8px 0 0;
     color: #888;
+    font: 12px / 15px Arial, Helvetica, sans-serif
 }
 
 .cart_list_th li {
@@ -41,7 +41,7 @@
 }
 
 .cart_list_th .col04 {
-    width: 11%;
+    width: 10%;
 }
 
 .cart_list_th .col05,
@@ -54,7 +54,7 @@
 }
 
 .cart_list_td {
-    width: 1198px;
+    width: 100%;
     border: 1px solid #ddd;
     background-color: white;
     margin: 0 auto;
@@ -69,6 +69,7 @@
 
 .cart_list_td .col01 {
     width: 3%;
+    text-align-last: center;
 }
 
 .cart_list_td .col02 {
@@ -172,11 +173,9 @@
 }
 
 .settlements {
-    width: 1198px;
-    height: 60px;
+    width: 100%;
     border: 1px solid #ddd;
     background-color: white;
-    margin: -1px auto 0;
     border-radius: 0 0 8px 8px;
 }
 

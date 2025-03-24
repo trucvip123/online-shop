@@ -1,17 +1,6 @@
 ## Điện Thanh Liêm Shop ##
 
-### General
-
-This repo contains our final project for the CSCI5448.
-
-Group memebers: Sijia Ge, Xiaosong Wang, Zhiyong Wang
-
-Based on `python 3.6`  and `Django 2.0`
-
-
-
 ### Documentations
-
 
 **Demonstration Video:** [link](https://drive.google.com/file/d/1ye77Qocw_qQ2avx6V66eVjA9k1hriTxF/view?usp=sharing)
 

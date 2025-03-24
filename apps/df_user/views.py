@@ -386,12 +386,14 @@ def delete_user_address(request, address_id):
     except Exception:
         return JsonResponse({'success': False, 'error': 'Address not found'})
 
-
+@user_decorator.login
 def order(request, index):
     user_id = request.session["user_id"]
     orders_list = OrderInfo.objects.filter(user_id=int(user_id)).order_by("-odate")
     paginator = Paginator(orders_list, 2)
     page = paginator.page(int(index))
+
+    print("orders_list:", orders_list)
 
     if user_id:
         carts = CartInfo.objects.filter(user_id=user_id)

@@ -21,6 +21,7 @@ class OrderInfo(models.Model):
     ocontact = models.CharField(
         max_length=11, default="", verbose_name="receiver_phone"
     )
+    oIsDelivery = models.BooleanField(default=False, verbose_name="is_delivery")
 
     class Meta:
         verbose_name = "Orders"

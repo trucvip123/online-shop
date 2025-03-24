@@ -1,3 +1,7 @@
+.order_list_table {
+    font: 14px / 18px Arial, Helvetica, sans-serif;
+}
+
 .order-history-title {
     font-size: 1.5em;
     color: #333;
@@ -30,6 +34,30 @@
     text-align: center;
 }
 
+.goods_list_th {
+    display: flex;
+    background: #007bff;
+    color: white;
+    padding: 10px 0;
+    font-weight: bold;
+    border-radius: 5px;
+    justify-content: center;
+    gap: 16px;
+}
+
+.goods_list_th .col02 {
+    flex: 3;
+    padding-left: 10px;
+}
+
+.order-total, .order-payment-status, .delivery-status{
+    vertical-align: top;
+}
+
+.order-total p, .order-payment-status p, .delivery-status p {
+    margin-top: 25px;
+} 
+
 .order-items .order-item {
     display: flex;
     align-items: center;
@@ -43,14 +71,21 @@
 }
 
 .order-item .item-title {
-    flex: 1;
+    flex: 3;
     padding-left: 10px;
     font-size: 1em;
 }
 
 .order-item .item-quantity,
-.order-item .item-price {
+.order-item {
     text-align: center;
+    flex: 1;
+    border-bottom-style: groove;
+}
+
+.item-price {
+    text-align: -webkit-right;
+    flex: 1;
 }
 
 .track-package-btn {
