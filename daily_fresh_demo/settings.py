@@ -127,7 +127,7 @@ USE_L10N = True
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "America/Denver"
+TIME_ZONE = "Asia/Ho_Chi_Minh"
 
 USE_TZ = False
 

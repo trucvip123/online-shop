@@ -29,7 +29,7 @@ class OrderInfo(models.Model):
 
     def __str__(self):
         user_name = self.user.uname if self.user else "Anonymous"
-        return "{0}在的订单{1}".format(user_name, self.odate)
+        return "{0} in order {1}".format(user_name, self.odate)
 
 
 class OrderDetailInfo(models.Model):

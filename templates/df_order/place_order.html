@@ -92,24 +92,6 @@
                         ĐT639B, Nhơn Lộc, Thị xã An Nhơn, Tỉnh Bình Định</p>
                 </div>
                 <div class="delivery_address">
-                    <!-- <li>
-                        <p>Receiver:
-                            <input disabled type="text" name="receiver" class="user_info_check"
-                                value="{{ user.oreceiver }}" id="receiver">
-                        </p>
-                    </li>
-                    <li>
-                        <p>Address:
-                            <input disabled type="text" name="fullname" class="user_info_check"
-                                value="{{ user.oaddress }}" id="address">
-                        </p>
-                    </li>
-                    <li>
-                        <p>Phone: </p>
-                        <input disabled type="text" name="phone" class="user_info_check" value="{{ user.ocontact }}"
-                            id="phone">
-                    </li> -->
-
                     <div class="contact">
                         <select name="province" id="province" class="contact" required>
                             <option value="">Chọn Tỉnh</option>
@@ -210,32 +192,38 @@
 
 <script type="text/javascript">
     $('#order_btn').click(function () {
-        let province = $("#province_name").val();
-        let district = $("#district_name").val();
-        let commune = $("#commune_name").val();
+        let province = $("#province option:selected").text().trim();
+        let district = $("#district option:selected").text().trim();
+        let commune = $("#commune option:selected").text().trim();
         let address = $("input[name='address']").val().trim();
 
-        // Check if the selected delivery_style has the 'customer' class
-        let selectedDelivery = $("input[name='delivery_style']:checked");
-        let isCustomerDelivery = selectedDelivery.hasClass("customer");
+        let deliveryStyle = $("input[name='delivery_style']:checked").next().attr('class');
 
-        // Validate only if delivery_style has class 'customer'
-        if (isCustomerDelivery && (!province || !district || !commune || !address)) {
-            alert("Vui lòng nhập đầy đủ thông tin địa chỉ trước khi đặt hàng!");
-            return;
+        if (deliveryStyle === 'customer') {
+            if (!province || province === "Chọn Tỉnh" || 
+                !district || district === "Chọn Huyện" || 
+                !commune || commune === "Chọn Xã" || 
+                !address) {
+                alert("Vui lòng nhập đầy đủ thông tin địa chỉ trước khi đặt hàng!");
+                return;
+            }
+        } else if (deliveryStyle === 'store') {
+            province = 'Bình Định';
+            district = 'An Nhơn';
+            commune = 'Nhơn Lộc';
+            address = '98 - 100 ĐT639B';
         }
 
-        let receiver = $("#receiver").val();
-        let full_address = address + ', ' + commune + ', ' + district + ', ' + province;
-        let contact = $("#phone").val();
-        let cartids = '';
+        let receiver = $("#receiver").val().trim();
+        let contact = $("#phone").val().trim();
 
-        // Validate that receiver fields are not empty
         if (!receiver || !contact) {
             alert("Vui lòng nhập đầy đủ thông tin người nhận trước khi đặt hàng!");
             return;
         }
 
+        let full_address = `${address}, ${commune}, ${district}, ${province}`;
+        let cartids = '';
         let totalPrice = $('.total_price_cal').text().trim();
 
         $('.goods_list_td').each(function () {
@@ -277,8 +265,7 @@
                         });
                     }, 3000);
                 });
-            }
-            else {
+            } else {
                 alert('Place the order failed');
             }
         });
