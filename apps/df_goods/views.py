@@ -204,7 +204,7 @@ def ordinary_search(request):
         search_status = 0
         goods_list = GoodsInfo.objects.all().order_by("gclick")[:4]
     # paginator function to split the page when the products are too many
-    paginator = Paginator(goods_list, 4)
+    paginator = Paginator(goods_list, 12)
     page = paginator.page(int(pindex))
 
     context = {

@@ -569,19 +569,28 @@
 		<div class="search_con fl">
 			<script>
 				$(function () {
+					$('.input_text').on('keypress', function (e) {
+						if (e.which === 13) { // Check if "Enter" key is pressed
+							executeSearch();
+						}
+					});
+
 					$('.input_btn').click(function () {
-						q = $('.input_text').val();
-						if (q == "") {
+						executeSearch();
+					});
+
+					function executeSearch() {
+						const q = $('.input_text').val().trim();
+						if (q === "") {
 							alert("Please input what you want to search");
+						} else {
+							location.href = '{% url "df_goods:ordinary_search" %}?q=' + encodeURIComponent(q) + '&page=1';
 						}
-						else {
-							location.href = '{% url "df_goods:ordinary_search" %}?q=' + q + '&page=1'
-						}
-					})
-				})
+					}
+				});
 			</script>
 			<input type="text" class="input_text fl" name="q" placeholder="Bạn tìm gì...">
-			<input type="button" class="input_btn fr" name="" value="Tìm">
+			<button type="button" class="input_btn fr">Tìm</button>
 		</div>
 
 		<div class="guest_cart fr">
@@ -667,6 +676,13 @@
 					<img class="lazy-menu" alt="Laptop" width="45px" height="45px"
 						src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/94/b3/94b32f8318f20f4a4d8d9c687692a070.png">
 					<p>Camera</p>
+				</a>
+			</div>
+			<div class="d-flex flex-wrap justify-content-center align-items-center">
+				<a class="nav-link text-center" href="/noi-com-dien_1_1/">
+					<img class="lazy-menu" alt="Tivi" width="45px" height="45px"
+						src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/d5/1e/d51e5201e53a26de69a15ffc06bddbf3.png">
+					<p>Nồi cơm diện</p>
 				</a>
 			</div>
 			<div class="d-flex flex-wrap justify-content-center align-items-center">

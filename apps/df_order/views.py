@@ -2,6 +2,9 @@ from abc import ABC, abstractmethod
 from datetime import datetime
 from decimal import Decimal
 import logging
+import os
+
+import requests
 
 from df_cart.models import CartInfo
 from df_user import user_decorator
@@ -95,6 +98,28 @@ def order(request):
     return render(request, "df_order/place_order.html", context)
 
 
+def send_order_to_telegram(order):
+    TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
+    CHAT_ID = os.getenv("CHAT_ID", "")
+    
+    message = f"""
+    🛒 **New Order Received!**  
+    📦 Order ID: {order.oid}  
+    👤 Customer: {order.user.uname}  
+    📍 Address: {order.oaddress}  
+    📞 Phone: {order.ocontact}  
+    💰 Total: {order.ototal}  
+    ✅ Paid: {"Yes" if order.oIsPay else "No"}  
+    🚚 Delivery: {"Yes" if order.oIsDelivery else "No"}
+    """
+    
+    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+    payload = {"chat_id": CHAT_ID, "text": message, "parse_mode": "Markdown"}
+    
+    response = requests.post(url, json=payload)
+    return response.json()
+
+
 @transaction.atomic
 def order_handle(request):
     user_id = request.session.get("user_id")  # Can be None if guest
@@ -162,6 +187,9 @@ def order_handle(request):
 
             if user_id:
                 cart.delete()
+
+        # Send order to Telegram
+        send_order_to_telegram(order_info)
 
         # Clear guest cart
         if not user_id:
