@@ -19,6 +19,7 @@ class UserInfo(models.Model):
     uquestion = models.CharField(
         max_length=40, default="", verbose_name="Security Question"
     )
+    is_staff = models.BooleanField(default=False, verbose_name="Is Admin")
 
     class Meta:
         verbose_name = "User"

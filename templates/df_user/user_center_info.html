@@ -11,9 +11,11 @@
             <li><a href='{% url "df_user:info" %}' class="active">· Personal Information</a></li>
             <li><a href='/user/order/1'>· Order History</a></li>
             <li><a href='{% url "df_user:site" %}'>· Change the Password</a></li>
-            <li><a href='{% url "df_user:add_product" %}'>· Add Products</a></li> <!-- New button -->
+            {% if request.session.is_admin %}
+            <li><a href='{% url "df_user:add_product" %}'>· Add Products</a></li>
             <li><a href='{% url "df_user:edit_product" %}'>· Edit Products</a></li>
             <li><a href='{% url "df_user:manage_type" %}'>· Manage Category</a></li>
+            {% endif %}
         </ul>
     </div>
     <div class="right_content clearfix">

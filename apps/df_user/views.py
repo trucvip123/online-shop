@@ -144,6 +144,7 @@ def login_handle(request):
                 red.set_cookie("uname", "", max_age=-1)
             request.session["user_id"] = users[0].id
             request.session["user_name"] = uname
+            request.session["is_admin"] = users[0].is_staff  # Add is_admin flag
 
             # 🔥 Merge guest cart after login
             merge_guest_cart(request)
@@ -171,6 +172,7 @@ def login_handle(request):
 
 def logout(request):  # logout
     request.session.flush()  # clear all sessions
+    request.session.pop("is_admin", None)  # Remove is_admin flag
     return redirect(reverse("df_goods:index"))
 
 
@@ -538,7 +540,7 @@ def admin_required(user):
     return user.is_authenticated and user.is_staff
 
 
-# @user_passes_test(admin_required)
+@user_passes_test(admin_required)
 def add_product_handle(request):
     if request.method == "POST":
         # Get product data from the form
@@ -597,7 +599,7 @@ def cart_count(request):
         return 0
 
 
-# @user_passes_test(admin_required)
+@user_passes_test(admin_required)
 def edit_product_handle(request):
     if request.method != "POST":
         return HttpResponse("Invalid request method", status=405)

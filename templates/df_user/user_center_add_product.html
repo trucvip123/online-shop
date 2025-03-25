@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block center_body %}
+{% if request.session.is_admin %}
 <link rel="stylesheet" type="text/css" href="/static/css/add.css">
 <script type="text/javascript">
     window.onload = function () {
@@ -89,5 +90,7 @@
         </div>
     </div>
 </div>
-
+{% else %}
+<p>You do not have permission to access this page.</p>
+{% endif %}
 {% endblock center_body %}

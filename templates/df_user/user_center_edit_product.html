@@ -4,6 +4,8 @@
 
 {% block center_body %}
 
+{% if request.session.is_admin %}
+
 <script type="text/javascript">
     var success = {% if success %}true{% else %} false{% endif %};
     var error = {% if error %}"{{ error }}"{% else %} null{% endif %};
@@ -90,5 +92,9 @@
         </div>
     </div>
 </div>
+
+{% else %}
+<p>You do not have permission to access this page.</p>
+{% endif %}
 
 {% endblock center_body %}
