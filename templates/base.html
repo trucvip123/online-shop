@@ -575,10 +575,6 @@
 						}
 					});
 
-					$('.input_btn').click(function () {
-						executeSearch();
-					});
-
 					function executeSearch() {
 						const q = $('.input_text').val().trim();
 						if (q === "") {
@@ -589,8 +585,8 @@
 					}
 				});
 			</script>
+			<i class="fa fa-search" style="margin-right: 10px; color: #aaa;"></i>
 			<input type="text" class="input_text fl" name="q" placeholder="Bạn tìm gì...">
-			<button type="button" class="input_btn fr">Tìm</button>
 		</div>
 
 		<div class="guest_cart fr">

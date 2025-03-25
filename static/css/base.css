@@ -95,6 +95,13 @@
   background-color: #0056b3;
 }
 
+.search_con i.fa-search {
+  font-size: 20px; /* Increased size */
+  color: #aaa;
+  margin-right: 10px;
+  line-height: 40px; /* Align with input_text height */
+}
+
 .guest_cart {
   height: 35px;
 }
