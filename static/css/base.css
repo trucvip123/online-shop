@@ -34,7 +34,7 @@
   align-items: center;
   justify-content: space-between;
   background-color: #ffd500;
-  /* /* width: 1200px; */ */
+  flex-wrap: nowrap; /* Prevent wrapping */
 }
 
 .logo {
@@ -55,6 +55,7 @@
   padding: 5px 10px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
+  margin-right: 10px; /* Add spacing between search_con and dropdown */
 }
 
 .search_con:hover {
@@ -70,7 +71,7 @@
   color: #333;
   padding: 0 10px;
   font-family: 'Times New Roman';
-  border-radius: 30px 0 0 30px;
+  border-radius: 30px;
 }
 
 .search_con .input_text::placeholder {
@@ -366,9 +367,9 @@
 .dropdown {
   position: relative;
   display: inline-block;
+  flex-shrink: 0; /* Prevent dropdown from shrinking */
 }
 
-/* Dropdown Button */
 .dropbtn {
   font-family: 'Times New Roman';
   background-color: #ffd500;
@@ -377,46 +378,53 @@
   border: none;
   border-radius: 15px 15px 0 0;
   display: flex;
-}
-
-.dropbtn i {
-  margin-top: 19px;
-  margin-right: 10px;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  padding: 10px 15px;
+  height: 60px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  gap: 10px
 }
 
 .dropbtn p {
-  margin-top: 8px;
+  margin: 0; /* Remove default margin */
+  line-height: 1; /* Ensure proper alignment */
   display: flex;
-  justify-content: flex-start;
+  align-items: center; /* Center vertically */
 }
 
-/* Dropdown Content (Hidden by Default) */
+.dropbtn:hover {
+  background-color: #ff8800;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+  min-width: 200px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3), 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add layered shadow for depth */
   z-index: 99;
   border-radius: 0 0 0 10px;
-  padding: 0 0 13px 0;
+  padding: 10px 0;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px); /* Apply blur effect */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border for definition */
 }
 
-/* Links inside the dropdown */
 .dropdown-content a {
-  padding: 12px 16px;
+  padding: 10px 15px;
   text-decoration: none;
   color: #333;
-  transition: 0.3s ease;
-  display: block;
   font-size: 14px;
+  display: block;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-  background: #007bff;
-  color: white;
+.dropdown-submenu:hover {
+  background-color: #007bff;
+  color: #fff;
 }
 
 /* Show the dropdown menu on hover */
@@ -433,6 +441,12 @@
 .dropdown-submenu {
   height: 40px;
   border: 1px solid #d9d9d9;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.dropdown-submenu:hover {
+  background-color: #007bff; /* Highlight background on hover */
+  color: #fff; /* Change text color on hover */
 }
 
 .dropdown-content-submenu {
@@ -444,12 +458,19 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
   border-radius: 0 10px 10px 0;
   width: 510px;
-  height: 333px;
+  height: 340px;
   overflow-x: auto;
+  opacity: 0; /* Initially hidden */
+  visibility: hidden; /* Prevent interaction when hidden */
+  transform: translateX(-10px); /* Slightly offset for animation */
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease; /* Smooth fade and slide-in effect */
 }
 
 .dropdown-submenu:hover .dropdown-content-submenu {
   display: block;
+  opacity: 1; /* Fully visible on hover */
+  visibility: visible; /* Allow interaction */
+  transform: translateX(0); /* Reset offset */
 }
 
 .dropdown-submenu a:hover {
@@ -464,6 +485,12 @@
   margin: 0px;
   text-align: center;
   vertical-align: top;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.dropdown-content-submenu a:hover {
+  background-color: #007bff; /* Highlight background on hover */
+  color: #fff; /* Change text color on hover */
 }
 
 .dropdown-content-submenu a figure {
@@ -512,7 +539,6 @@
   }
 
   .dropbtn {
-    height: 45px;
     width: 42px;
   }
 
@@ -605,8 +631,8 @@
   }
 
   .dropdown-content-submenu {
-    width: 262px;
-    height: 363px;
+    width: 270px;
+    height: 420px;
   }
 
   .dropdown-content-submenu a {
