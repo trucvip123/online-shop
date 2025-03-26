@@ -102,10 +102,12 @@ def send_order_to_telegram(order):
     TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
     CHAT_ID = os.getenv("CHAT_ID", "")
     
+    username = order.user.uname if order.user else "Guest"
+    
     message = f"""
     🛒 **New Order Received!**  
     📦 Order ID: {order.oid}  
-    👤 Customer: {order.user.uname}  
+    👤 Customer: {username}  
     📍 Address: {order.oaddress}  
     📞 Phone: {order.ocontact}  
     💰 Total: {order.ototal}  
