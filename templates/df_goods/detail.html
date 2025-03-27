@@ -214,7 +214,6 @@
         discounts.forEach(function (discount) {
             const oldPrice = parseFloat(discount.getAttribute('data-old-price'));
             const newPrice = parseFloat(discount.getAttribute('data-new-price'));
-            console.log(oldPrice, newPrice);
             if (oldPrice && newPrice) {
                 const discountPercentage = ((oldPrice - newPrice) / oldPrice) * 100;
                 discount.textContent = '-' + discountPercentage.toFixed(2) + '%';

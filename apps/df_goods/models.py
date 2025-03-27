@@ -59,3 +59,7 @@ class ProductImage(models.Model):
         null=True,
         blank=True,
     )
+    order = models.PositiveIntegerField(default=0, verbose_name="Image Order")
+
+    class Meta:
+        ordering = ["order"]  # Ensures default sorting by order

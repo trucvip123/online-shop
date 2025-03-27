@@ -7,24 +7,30 @@ document.addEventListener('DOMContentLoaded', function () {
         alert(error);
     }
 
-    document.getElementById('editProductForm').onsubmit = function () {
-        const imagePreviewContainer = document.getElementById('image_preview_container');
-        const images = imagePreviewContainer.querySelectorAll('.image-wrapper img');
-        // Clear existing hidden inputs to avoid duplicates
-        const existingInputs = this.querySelectorAll('input[name="image_urls[]"]');
-        existingInputs.forEach(input => input.remove());
-        // Add hidden inputs for the reordered images
-        images.forEach(img => {
-            const hiddenInput = document.createElement('input');
-            hiddenInput.type = 'hidden';
-            hiddenInput.name = 'image_urls[]';
-            hiddenInput.value = img.src;
-            this.appendChild(hiddenInput);
-        });
+    document.getElementById('editProductForm').onsubmit = function (event) {
+        updateHiddenInputs();
     };
 
     enableDragAndDrop();
 });
+
+
+
+function updateHiddenInputs() {
+    const imagePreviewContainer = document.getElementById('image_preview_container');
+    const images = imagePreviewContainer.querySelectorAll('.image-wrapper img');
+
+    document.querySelectorAll('input[name="image_urls[]"]').forEach(input => input.remove());
+    images.forEach(img => {
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'image_urls[]';
+        hiddenInput.value = img.src;
+        console.log(hiddenInput.value);
+        document.getElementById('editProductForm').appendChild(hiddenInput);
+    });
+}
+
 
 function fetchProductDetails() {
     const productId = document.getElementById('product_id').value;
@@ -183,13 +189,21 @@ function enableDragAndDrop() {
             draggedItem.style.top = '';
             draggedItem.style.left = '';
             placeholder.remove();
+
+            // Log the list of images after drag and drop
+            const images = container.querySelectorAll('.image-wrapper img');
+            console.log("Images after Drag and Drop:");
+            images.forEach((img, index) => {
+                console.log(`Image ${index + 1}: ${img.src}`);
+            });
+
             draggedItem = null;
             placeholder = null;
         }
     });
 
     function moveDraggedItem(clientX, clientY) {
-        draggedItem.style.top = `${clientX - offsetX}px`;
-        draggedItem.style.left = `${clientY - offsetY}px`;
+        draggedItem.style.top = `${clientY - offsetY}px`;
+        draggedItem.style.left = `${clientX - offsetX}px`;
     }
 }

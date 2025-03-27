@@ -23,6 +23,8 @@ from django.shortcuts import (
 )
 from django.db.models import Sum
 
+from settings import MEDIA_URL
+
 from . import user_decorator
 from .models import GoodsBrowser, UserAddress, UserInfo
 
@@ -639,30 +641,30 @@ def edit_product_handle(request):
     product.gbrand = brand
     product.save()
 
-    # Delete all existing images of the product
-    existing_images = ProductImage.objects.filter(product=product)
-    # Handle multiple images
+    # Fetch existing images and handle image updates
+    existing_images = list(ProductImage.objects.filter(product=product).order_by('id'))
     image_data_list = request.POST.getlist("image_urls[]")
 
-    # Identify images to delete
-    delete_img_ls = {
-        img.image_path.name
-        for img in existing_images
-        if all(
-            Path(img.image_path.name).as_posix() not in img_data
-            for img_data in image_data_list
-        )
-    }
-    # Delete images from storage and database
-    for image in delete_img_ls:
-        if default_storage.exists(image):
-            default_storage.delete(image)  # Deletes from configured storage backend
-        ProductImage.objects.filter(image_path=image).delete()
+    scheme = request.scheme 
+    host = request.get_host()
+
+    # Check if positions are the same
+    existing_image_paths = [f"{scheme}://{host}{MEDIA_URL}{img.image_path.name}" for img in existing_images]
+
+    if existing_image_paths == image_data_list:
+        print("Image positions are the same. No update required.")
+        return redirect(f"/{product_id}")
+
+    # Update image order in the database
+    for index, image_path in enumerate(image_data_list):
+        if "base64" not in image_path:  # Skip new images
+            print("index:", index, "image_path:", image_path)
+            relative_image_path = image_path.replace("http://127.0.0.1:8000/media/", "")
+            ProductImage.objects.filter(product=product, image_path=relative_image_path).update(order=index)
 
     # Handle new images
     insert_img_ls = [img_data for img_data in image_data_list if "base64" in img_data]
-
-    for image_data in insert_img_ls:
+    for index, image_data in enumerate(insert_img_ls, start=len(existing_images)):
         format_img, imgstr = image_data.split(";base64,")
         ext = format_img.split("/")[-1]
         img_data = base64.b64decode(imgstr)
@@ -673,8 +675,8 @@ def edit_product_handle(request):
         # Save image using Django's storage backend
         file_path = default_storage.save(image_path, ContentFile(img_data))
 
-        # Save reference in database
-        ProductImage.objects.create(product=product, image_path=file_path)
+        # Save reference in database with the correct order
+        ProductImage.objects.create(product=product, image_path=file_path, order=index)
 
     return redirect(f"/{product_id}")
 
