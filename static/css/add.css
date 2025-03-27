@@ -36,9 +36,7 @@
 
 .site_con .form_group input {
     width: 500px;
-    border: 1px solid #ddd;
     float: left;
-    outline: none;
     margin-top: 7px;
     text-indent: 10px;
     border-radius: 8px;

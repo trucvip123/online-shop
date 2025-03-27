@@ -582,10 +582,23 @@ def add_product_handle(request):
             gkucun=stock,
             gbrand=brand,
         )
-        # Handle multiple images
-        images = request.FILES.getlist("image")
-        for image in images:
-            ProductImage.objects.create(product=product, image_path=image)
+
+        # Handle images from the image_preview_container
+        image_data_list = request.POST.getlist("image_urls[]")
+        for index, image_data in enumerate(image_data_list):
+            if "base64" in image_data:  # Handle new images
+                format_img, imgstr = image_data.split(";base64,")
+                ext = format_img.split("/")[-1]
+                img_data = base64.b64decode(imgstr)
+
+                image_name = f"{uuid.uuid4()}.{ext}"
+                image_path = f"df_goods/images/{image_name}"
+
+                # Save image using Django's storage backend
+                file_path = default_storage.save(image_path, ContentFile(img_data))
+
+                # Save reference in database with the correct order
+                ProductImage.objects.create(product=product, image_path=file_path, order=index)
 
         return redirect(f"/{product.pk}")
 

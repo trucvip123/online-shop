@@ -1,36 +1,39 @@
 document.addEventListener('DOMContentLoaded', function () {
-    if (success) {
-        alert("Product saved successfully!");
-        window.location.href = successRedirectUrl;
-    }
-    if (error) {
-        alert(error);
-    }
+    const formId = document.getElementById('editProductForm') ? 'editProductForm' : 'addProductForm';
 
-    document.getElementById('editProductForm').onsubmit = function (event) {
-        updateHiddenInputs();
+    document.getElementById(formId).onsubmit = function () {
+        updateHiddenInputs(formId);
     };
+
+    const imageInput = document.getElementById('image_input');
+    if (imageInput) {
+        imageInput.addEventListener('change', previewSelectedImages);
+    }
 
     enableDragAndDrop();
 });
 
-
-
-function updateHiddenInputs() {
+function updateHiddenInputs(formId) {
     const imagePreviewContainer = document.getElementById('image_preview_container');
     const images = imagePreviewContainer.querySelectorAll('.image-wrapper img');
 
+    // Clear existing hidden inputs
     document.querySelectorAll('input[name="image_urls[]"]').forEach(input => input.remove());
+
+    // Add hidden inputs for the reordered images
     images.forEach(img => {
         const hiddenInput = document.createElement('input');
         hiddenInput.type = 'hidden';
         hiddenInput.name = 'image_urls[]';
         hiddenInput.value = img.src;
-        console.log(hiddenInput.value);
-        document.getElementById('editProductForm').appendChild(hiddenInput);
+        document.getElementById(formId).appendChild(hiddenInput);
+    });
+
+    console.log("Updated image order submitted:");
+    images.forEach((img, index) => {
+        console.log(`Image ${index + 1}: ${img.src}`);
     });
 }
-
 
 function fetchProductDetails() {
     const productId = document.getElementById('product_id').value;
@@ -80,10 +83,13 @@ function createImageWrapper(imageUrl) {
     img.src = imageUrl;
 
     const button = document.createElement('button');
-    button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6zm2 3h14v13H5V9zm3 2v9h2v-9H8zm4 0v9h2v-9h-2zm4 0v9h2v-9h-2z"/></svg>';
-    button.onclick = function () {
-        wrapper.remove();
-    };
+    button.type = 'button'; // Ensure the button does not submit the form
+    button.className = 'remove-image-button';
+    button.innerHTML = 'Remove';
+    button.addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent any default action
+        wrapper.remove(); // Properly remove the wrapper
+    });
 
     wrapper.appendChild(img);
     wrapper.appendChild(button);
@@ -190,9 +196,9 @@ function enableDragAndDrop() {
             draggedItem.style.left = '';
             placeholder.remove();
 
-            // Log the list of images after drag and drop
+            // Log the updated order of images after drag-and-drop
             const images = container.querySelectorAll('.image-wrapper img');
-            console.log("Images after Drag and Drop:");
+            console.log("Updated image order after drag-and-drop:");
             images.forEach((img, index) => {
                 console.log(`Image ${index + 1}: ${img.src}`);
             });
@@ -206,4 +212,19 @@ function enableDragAndDrop() {
         draggedItem.style.top = `${clientY - offsetY}px`;
         draggedItem.style.left = `${clientX - offsetX}px`;
     }
+}
+
+function previewSelectedImages(event) {
+    const files = event.target.files;
+    const imagePreviewContainer = document.getElementById('image_preview_container');
+    imagePreviewContainer.innerHTML = ''; // Clear existing previews
+
+    Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const wrapper = createImageWrapper(e.target.result);
+            imagePreviewContainer.appendChild(wrapper);
+        };
+        reader.readAsDataURL(file);
+    });
 }
