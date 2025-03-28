@@ -361,7 +361,7 @@ dl li {
     margin: 7px;
 }
 
-.goods_list_td .col03_cal {
+.goods_list_td .col03_cal, .goods_list_td .col04_cal {
     display: none;
 }
 
@@ -403,11 +403,6 @@ dl li {
 .goods_list_td .col02_title {
     width: 31%;
     text-align: left;
-}
-
-.goods_list_th .col03,
-.goods_list_td .col03 {
-    width: 15%;
 }
 
 .goods_list_th .col04,
@@ -622,17 +617,43 @@ dl li {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .contact {
+        flex-direction: column;
+    }
+    
     .common_list_con {
         padding: 10px;
     }
 
-    .goods_list_th,
+    .goods_list_th {
+        display: none;
+    }
+    
     .goods_list_td {
-        flex-wrap: wrap;
+        padding: 5px;
     }
 
     .goods_list_td li {
-        flex: 50%;
+        flex: auto;
         margin-bottom: 5px;
     }
+
+    .goods_list_td .col01, .goods_list_td .col05 {
+        display: none;
+    }
+
+    .goods_list_td .col02 {
+        margin: 0;
+    }
+
+    .goods_list_td .col02_title {
+        width: 50%;
+        margin-left: 5px;
+    }
+
+    .goods_list_td .col02_title p {
+        width: auto;
+        margin-bottom: 0;
+    }
+
 }

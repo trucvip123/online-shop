@@ -123,3 +123,64 @@
     background-color: #74808d;
     color: #fff;
 }
+
+@media (max-width: 768px) {
+    .order-history-title {
+        font-size: 1.2em; /* Adjusted font size for smaller screens */
+        text-align: center; /* Centered title */
+    }
+
+    .order-header {
+        font-size: 14px; /* Reduced font size */
+        padding: 8px; /* Adjusted padding */
+        margin-bottom: 8px; /* Reduced margin */
+    }
+
+    .order-header .order-date,
+    .order-header .order-id,
+    .order-header .order-status {
+        font-size: 13px; /* Adjusted font size */
+    }
+
+    .order-table {
+        font-size: 12px; /* Reduced font size */
+    }
+
+    .order-table td {
+        padding: 5px; /* Reduced padding */
+    }
+
+    .goods_list_th {
+        flex-direction: column; /* Stack columns vertically */
+        gap: 8px; /* Adjusted gap */
+        padding: 5px; /* Reduced padding */
+    }
+
+    .order-items .order-item {
+        flex-direction: column; /* Stack items vertically */
+        align-items: flex-start; /* Align items to the start */
+        margin-bottom: 8px; /* Reduced margin */
+    }
+
+    .order-item .item-title {
+        font-size: 0.9em; /* Reduced font size */
+        padding-left: 0; /* Removed padding */
+    }
+
+    .order-item .item-image img {
+        height: 40px; /* Reduced image size */
+    }
+
+    .item-price {
+        text-align: left; /* Adjusted alignment */
+    }
+
+    .pagination-container {
+        font-size: 12px; /* Reduced font size */
+    }
+
+    .pagination-container a {
+        padding: 3px 8px; /* Adjusted padding */
+        margin: 0 3px; /* Reduced margin */
+    }
+}

@@ -82,7 +82,7 @@
 
 		<div class="pagenation pagination-container">
 			{% if page.has_previous %}
-			<a href='{% url "df_user:order" page.previous_page_number %}'>上一页</a>
+			<a href='{% url "df_user:order" page.previous_page_number %}'>Trước</a>
 			{% endif %}
 
 			{% for index in paginator.page_range %}
@@ -94,7 +94,7 @@
 			{% endfor %}
 
 			{% if page.has_next %}
-			<a href=' {% url "df_user:order" page.next_page_number %}'>Next Page></a>
+			<a href=' {% url "df_user:order" page.next_page_number %}'>Sau></a>
 			{% endif %}
 		</div>
 	</div>

@@ -177,6 +177,8 @@
     border: 1px solid #ddd;
     background-color: white;
     border-radius: 0 0 8px 8px;
+    padding: 10px; /* Added padding for better spacing */
+    font-size: 14px; /* Adjusted default font size */
 }
 
 .settlements li {
@@ -189,12 +191,10 @@
 }
 
 .settlements .col03 {
-    width: 69%;
-    height: 48px;
-    line-height: 36px;
+    width: 70%; /* Adjusted width for better alignment */
     text-align: right;
-    margin-top: 10px;
-    font-size: 14px;
+    margin-top: 5px; /* Reduced margin for compact layout */
+    font-size: 14px; /* Unified font size */
 }
 
 .settlements .col03 span {
@@ -219,23 +219,140 @@
 }
 
 .settlements .col04 {
-    width: 14%;
+    width: 20%; /* Adjusted width for better responsiveness */
     text-align: center;
     float: right;
-    margin-right: 32px;
+    margin-right: 20px; /* Unified margin */
 }
 
 .settlements .col04 a {
     display: block;
-    height: 38px;
+    height: 40px; /* Increased height for better touch targets */
     background-color: #f05d40;
     text-align: center;
-    line-height: 38px;
+    line-height: 40px; /* Adjusted line height */
     color: #fff;
-    font-size: 15px;
+    font-size: 16px; /* Increased font size for readability */
     text-decoration: none;
     border-radius: 5px;
     margin-top: 10px;
     margin-right: 20px;
     font-family: Arial;
+}
+
+@media (max-width: 768px) {
+    .cart_list_th {
+        display: none;
+    }
+
+    .cart_list_td li {
+        line-height: 0;
+    }
+
+    .cart_list_td .col07,
+    .cart_list_td .col08 {
+        display: none;
+    }
+
+    .cart_list_td {
+        display: flex;
+        padding: 5px;
+        background-color: white;
+        margin: 0 auto;
+        align-items: center;
+    }
+
+    .cart_list_td .col01 {
+        width: 5%;
+    }
+
+    .cart_list_td .col02 {
+        width: 25%;
+    }
+
+    .cart_list_td .col03 {
+        width: 25%;
+        margin-top: 0;
+        margin-left: 10px;
+        font: 12px / 18px Arial, Helvetica, sans-serif;
+    }
+
+    .cart_list_td .col05 {
+        width: 25%;
+        text-align: center;
+        font: 12px Arial;
+        margin-top: 0;
+    }
+
+    .cart_list_td .col06 {
+        text-decoration: none;
+        text-align: center;
+        margin-left: 0;
+        width: auto;
+    }
+
+    .cart_list_td .col06 .num_add {
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        display: flex;
+    }
+
+    .settlements {
+        width: 100%;
+        border: 1px solid #ddd;
+        background-color: white;
+        border-radius: 0 0 8px 8px;
+        padding: 8px; /* Reduced padding for smaller screens */
+        font: 12px / 18px Arial, Helvetica, sans-serif;
+    }
+
+    .settlements li {
+        float: left;
+        line-height: 20px;
+    }
+
+    .settlements .col01 {
+        text-align-last: center;
+    }
+
+    .settlements .col03 em {
+        color: #ee4d2d;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .settlements .col02 {
+        margin-left: 5px;
+        width: 90%;
+    }
+
+    .settlements .col03 {
+        font-size: 12px;
+        width: 65%;
+        margin-top: 0;
+        padding: 5px 0;
+    }
+
+    .settlements .col04 {
+        width: auto;
+        padding: 5px 25px;
+        float: right;
+        background-color: #f05d40;
+        border-radius: 5px;
+        margin-right: 0;
+    }
+
+    .settlements .col04 a {
+        display: contents;
+        height: 30px; /* Adjusted height for smaller screens */
+        align-items: center; /* Centered content vertically */
+        justify-content: center; /* Centered content horizontally */
+        color: #fff;
+        font-size: 12px; /* Reduced font size */
+        text-decoration: none;
+        font-family: Arial;
+        line-height: 20px;
+        margin-right: 0;
+    }
+
 }
