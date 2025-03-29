@@ -53,8 +53,15 @@
     <div class="goods_detail_pic fl">
         <div class="swiper-container">
             <div class="swiper-wrapper">
+                <div class="swiper-slide" data-type="video" data-video-url="https://www.youtube.com/embed/03ziRQ9Hkus">
+                    <i class="icondetail-videoop"></i>
+                    <img class="" title="Tủ lạnh Toshiba Inverter 460 lít Side By Side GR-RS600WI-PMV(37)-SG" alt="Tủ lạnh Toshiba Inverter 460 lít Side By Side GR-RS600WI-PMV(37)-SG" src="https://cdn.tgdd.vn/Products/Images/1943/303228/Slider/00-1020x570.jpg" width="680px" height="380px">
+                    <div class="youtube-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                </div>
                 {% for image in goods.images.all %}
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="image" data-src="{{ MEDIA_URL }}{{ image.image_path }}">
                     <img src="{{ MEDIA_URL }}{{ image.image_path }}" alt="{{ goods.gtitle }}"
                         class="img-fluid rounded swiper-image" loading="lazy"
                         data-zoom-image="{{ MEDIA_URL }}{{ image.image_path }}"
@@ -67,6 +74,21 @@
             <div class="swiper-button-prev"></div>
             <!-- Pagination -->
             <div class="swiper-pagination"></div>
+        </div>
+
+        <!-- Modal for YouTube Video -->
+        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="videoModalLabel">Video</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe id="videoIframe" width="100%" height="100%" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -230,6 +252,27 @@
                 const discountPercentage = ((oldPrice - newPrice) / oldPrice) * 100;
                 discount.textContent = '-' + discountPercentage.toFixed(2) + '%';
             }
+        });
+
+        // Add event listener for swiper-slide click
+        const swiperSlides = document.querySelectorAll('.swiper-slide[data-video-url]');
+        const videoModal = document.getElementById('videoModal');
+        const videoIframe = document.getElementById('videoIframe');
+
+        swiperSlides.forEach(function (slide) {
+            slide.addEventListener('click', function () {
+                const videoUrl = slide.getAttribute('data-video-url');
+                if (videoUrl) {
+                    videoIframe.src = videoUrl + '?autoplay=1';
+                    const modal = new bootstrap.Modal(videoModal);
+                    modal.show();
+                }
+            });
+        });
+
+        // Clear iframe src when modal is hidden
+        videoModal.addEventListener('hidden.bs.modal', function () {
+            videoIframe.src = '';
         });
     })
 

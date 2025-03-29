@@ -326,6 +326,30 @@
     transform: translateX(-50%);
 }
 
+/* YouTube Icon */
+.youtube-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: red;
+    pointer-events: none; /* Prevent interaction with the icon */
+}
+
+.youtube-icon i {
+    font-size: inherit;
+}
+
+.modal, .modal-open {
+    padding-right: 0 !important;
+}
+
+.modal-body {
+    padding: 0;
+    height: 830px; /* Ensure the modal body occupies full height */
+}
+
 /* New Product */
 .new_goods {
     border-radius: 10px;
@@ -419,6 +443,15 @@
     text-decoration: none;
 }
 
+/* Modal Styles */
+.modal-lg {
+    max-width: 100%;
+}
+
+.modal-body iframe {
+    border: none;
+}
+
 /* Responsive */
 @media (max-width: 400px) {
     .goods_detail_con {
@@ -428,6 +461,11 @@
     
     .goods_detail_pic {
         width: 100%;
+    }
+
+    .modal-body {
+        padding: 0;
+        height: 500px
     }
     
     .goods_num {

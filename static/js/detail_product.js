@@ -47,45 +47,65 @@ $(document).ready(function () {
             alert('Error adding to cart. Please try again.');
         });
     });
-});
 
+    // Handle YouTube video modal
+    $('.swiper-container').on('click', '.swiper-slide[data-video-url]', function (e) {
+        e.stopPropagation(); // Prevent triggering other click events
+        const videoUrl = $(this).data('video-url') + '?autoplay=1';
+        $('#videoIframe').attr('src', videoUrl);
+        $('#videoModal').modal('show');
+    });
 
-document.addEventListener('DOMContentLoaded', function () {
-    var openPhotoSwipe = function () {
-        var pswpElement = document.querySelectorAll('.pswp')[0];
-        var items = [];
+    // Clear the iframe when the modal is closed
+    $('#videoModal').on('hidden.bs.modal', function () {
+        $('#videoIframe').attr('src', '');
+    });
 
-        // Function to load an image and return a promise
-        function loadImage(src) {
-            return new Promise((resolve, reject) => {
-                var img = new Image();
-                img.src = src;
-                img.onload = function () {
-                    resolve({
-                        src: img.src,
-                        w: img.naturalWidth,
-                        h: img.naturalHeight
-                    });
-                };
-                img.onerror = reject;
-            });
-        }
+    const swiper = new Swiper('.swiper-container', {
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+    });
 
-        // Load all images and initialize PhotoSwipe
-        Promise.all(imageUrls.map(loadImage))
-            .then((loadedItems) => {
-                items = loadedItems;
-                var options = {
-                    index: 0
-                };
-                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
-                gallery.init();
-            })
-            .catch((error) => {
-                console.error('Error loading images:', error);
-            });
+    // Open PhotoSwipe for image slides only
+    const pswpElement = document.querySelectorAll('.pswp')[0];
+    const items = [];
+    document.querySelectorAll('.swiper-slide[data-type="image"]').forEach((slide) => {
+        items.push({
+            src: slide.getAttribute('data-src'),
+            w: 1200, // Default width
+            h: 800, // Default height
+        });
+    });
+
+    const openPhotoSwipe = function (index) {
+        const options = {
+            index: index,
+            addCaptionHTMLFn: function (item, captionEl) {
+                captionEl.children[0].innerHTML = item.title || '';
+                return true;
+            },
+        };
+        const gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+        gallery.init();
     };
-    document.querySelector('.swiper-wrapper').addEventListener('click', openPhotoSwipe);
+
+    // Add click event to image slides only
+    document.querySelectorAll('.swiper-slide[data-type="image"]').forEach((slide, index) => {
+        slide.addEventListener('click', () => {
+            openPhotoSwipe(index);
+        });
+    });
 });
 
 
@@ -108,23 +128,5 @@ $(function () {
         let num = parseInt($('.num_show').val());
         if (num < 1) num = 1;
         $('.num_show').val(num);
-    });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const swiper = new Swiper('.swiper-container', {
-        loop: true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
     });
 });
