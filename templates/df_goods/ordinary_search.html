@@ -20,10 +20,10 @@
 
             prizeElements.forEach(function (element, index) {
                 const rawPrice = parseFloat(element.textContent.trim());
-                element.textContent = rawPrice.toLocaleString('de-DE') + 'đ';
+                element.textContent = rawPrice.toLocaleString('vi-VN') + 'đ';
 
                 const rawPriceOld = parseFloat(prizeOldElements[index].textContent.trim());
-                prizeOldElements[index].textContent = rawPriceOld.toLocaleString('de-DE') + 'đ';
+                prizeOldElements[index].textContent = rawPriceOld.toLocaleString('vi-VN') + 'đ';
 
                 if (rawPriceOld > rawPrice) {
                     const discount = Math.round(((rawPriceOld - rawPrice) / rawPriceOld) * 100);

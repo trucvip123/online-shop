@@ -124,7 +124,45 @@
     color: #fff;
 }
 
+.left_menu_con {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-toggle {
+    display: none;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-list li {
+    margin-bottom: 10px;
+}
+
 @media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .menu-list {
+        display: none;
+    }
+
+    .menu-list.active {
+        display: block;
+    }
+
     .order-history-title {
         font-size: 1.2em; /* Adjusted font size for smaller screens */
         text-align: center; /* Centered title */

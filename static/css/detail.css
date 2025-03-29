@@ -410,6 +410,14 @@
     height: auto !important;
 }
 
+.tab-pane iframe {
+    width: 100% !important;
+    height: revert-layer !important;
+}
+
+.tab-content>.tab-pane a {
+    text-decoration: none;
+}
 
 /* Responsive */
 @media (max-width: 400px) {

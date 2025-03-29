@@ -98,12 +98,12 @@
                 count = $(this).prev().find('input').val();
                 price = $(this).prev().prev().text();
                 total0 = parseFloat(count) * parseFloat(price);
-                $(this).text(total0.toLocaleString('de-DE') + 'đ');
+                $(this).text(total0.toLocaleString('vi-VN') + 'đ');
                 total1 += total0;
                 total_count++;
             });
 
-        $('.total').text(total1.toLocaleString('de-DE') + 'đ');
+        $('.total').text(total1.toLocaleString('vi-VN') + 'đ');
         $('.total_count1').text(total_count);
     }
     function go_order() {

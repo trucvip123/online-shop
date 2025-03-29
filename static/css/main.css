@@ -662,15 +662,13 @@ body {
 }
 
 .left_menu_con h3 {
-	font-size: 16px;
-	line-height: 40px;
+	font-size: 20px;
 	border-bottom: 1px solid #ddd;
-	text-align: center;
+	text-align: center; 
 	margin-bottom: 10px;
 }
 
 .left_menu_con ul li {
-	line-height: 40px;
 	text-align: center;
 	font-size: 14px;
 	text-align: left;
@@ -680,6 +678,7 @@ body {
 	color: #666;
 	text-decoration: none;
 	font-weight: bold;
+	display: ruby-text;
 }
 
 .left_menu_con ul li .active {
@@ -688,7 +687,6 @@ body {
 }
 
 .right_content {
-	width: 83%;
 	float: right;
 	min-height: 730px;
 }

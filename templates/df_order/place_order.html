@@ -13,7 +13,7 @@
         $('.col05').each(function () {
             let count = $(this).prev().text();
             let price = $(this).prev().prev().text();
-            $(this).html((parseFloat(count) * parseFloat(price)).toLocaleString('de-DE') + '₫');
+            $(this).html((parseFloat(count) * parseFloat(price)).toLocaleString('vi-VN') + '₫');
         });
 
         $('input[name="pay_style"]').change(function () {
@@ -38,12 +38,12 @@
         var PriceElements = document.querySelectorAll('.goods_list_td .col03');
         PriceElements.forEach(function (element) {
             var price = parseFloat(element.getAttribute('data-price'));
-            element.textContent = price.toLocaleString('de-DE') + '₫';
+            element.textContent = price.toLocaleString('vi-VN') + '₫';
         });
         var PriceElements = document.querySelectorAll('.total_price');
         PriceElements.forEach(function (element) {
             var price = parseFloat(element.getAttribute('data-price'));
-            element.textContent = price.toLocaleString('de-DE') + '₫';
+            element.textContent = price.toLocaleString('vi-VN') + '₫';
         });
     });
 
