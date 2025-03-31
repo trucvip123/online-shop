@@ -188,7 +188,7 @@
 .navbar {
   width: 100%;
   margin: 10px 0 !important;
-  min-height: 95px !important;
+  min-height: 100px !important;
   white-space: nowrap; /* Prevent items from wrapping */
 }
 
@@ -229,6 +229,7 @@
   display: flex !important;
   white-space: nowrap; /* Prevent items from wrapping */
   flex-wrap: nowrap; /* Keep all items in one row */
+  padding: 0 !important;
 }
 
 .navbar-nav {

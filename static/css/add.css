@@ -17,7 +17,7 @@
 
 
 .site_con .form_group {
-    height: 40px;
+    height: 65px;
     line-height: 35px;
     margin-top: 10px;
 }
@@ -131,6 +131,7 @@
 
 #product_images {
     margin-top: 20px;
+    height: 250px;
 }
 
 #product_images label {
@@ -148,7 +149,6 @@
     border: 1px dashed #ccc;
     padding: 10px;
     border-radius: 8px;
-    background-color: #f9f9f9;
 }
 
 .image-wrapper {
@@ -186,6 +186,7 @@
     justify-content: center;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 12px;
 }
 
 .image-wrapper .remove-image-button:hover {
@@ -194,11 +195,46 @@
 
 .image-wrapper .inner-div {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    width: 100%;
+}
+
+
+.image-wrapper {
+	margin: auto;
+}
+
+.image-wrapper img {
+	max-height: 100px;
+	/* Adjust as needed */
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.image-wrapper button {
+	top: -8px;
+	right: -8px;
+	border: none;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+}
+
+.image-wrapper .inner-div {
+	border-radius: 10px;
+	width: 60px;
+	height: 60px;
+	background-color: #d7d7d7;
+}
+
+.image-wrapper .custom-file-button {
+	border-radius: 4px;
+	background-image: url(https://static.xx.fbcdn.net/rsrc.php/v4/y_/r/eRj6c2mLzht.png);
+	background-position: -87px -181px;
+	width: 24px;
+	height: 24px;
+	margin: 25px;
 }
 
 #new_image {
@@ -213,7 +249,6 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
-    margin-top: 10px;
 }
 
 .custom-file-button:hover {

@@ -100,7 +100,7 @@ function createImageWrapper(imageUrl) {
 function addNewImageInput() {
     const imagePreviewContainer = document.getElementById('image_preview_container');
     const fileInputWrapper = document.createElement('div');
-    fileInputWrapper.className = 'image-wrapper';
+    fileInputWrapper.className = 'image-wrapper no-drag'; // Add 'no-drag' class to prevent dragging
 
     const fileInputWrapperInner = document.createElement('div');
     fileInputWrapperInner.className = 'inner-div';
@@ -150,7 +150,9 @@ function enableDragAndDrop() {
     let offsetY = 0;
 
     container.addEventListener('pointerdown', function (e) {
-        if (e.target.closest('.image-wrapper') && !e.target.classList.contains('remove-image-button')) {
+        if (e.target.closest('.image-wrapper') && 
+            !e.target.classList.contains('remove-image-button') && 
+            !e.target.closest('.no-drag')) { // Prevent dragging for elements with 'no-drag' class
             draggedItem = e.target.closest('.image-wrapper');
             const rect = draggedItem.getBoundingClientRect();
             offsetX = e.clientX - rect.left;
@@ -176,7 +178,7 @@ function enableDragAndDrop() {
             moveDraggedItem(e.clientX, e.clientY);
 
             const target = document.elementFromPoint(e.clientX, e.clientY)?.closest('.image-wrapper');
-            if (target && target !== draggedItem && target !== placeholder) {
+            if (target && target !== draggedItem && target !== placeholder && !target.classList.contains('no-drag')) {
                 const bounding = target.getBoundingClientRect();
                 const offset = bounding.y + bounding.height / 2;
                 if (e.clientY > offset) {
