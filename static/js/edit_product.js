@@ -52,6 +52,7 @@ function fetchProductDetails() {
                     document.getElementById('parameter').value = response.parameter;
                     document.getElementById('description').value = response.description;
                     document.getElementById('stock').value = response.stock;
+                    document.getElementById('video_url').value = response.video_url;
                     updateImagePreview(response.image_urls);
                 } else {
                     alert(response.error);

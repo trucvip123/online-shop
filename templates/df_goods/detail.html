@@ -53,13 +53,17 @@
     <div class="goods_detail_pic fl">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" data-type="video" data-video-url="https://www.youtube.com/embed/03ziRQ9Hkus">
+                {% if goods.gvideo_url %}
+                <div class="swiper-slide" data-type="video" data-video-url="{{ goods.gvideo_url }}">
                     <i class="icondetail-videoop"></i>
-                    <img class="" title="Tủ lạnh Toshiba Inverter 460 lít Side By Side GR-RS600WI-PMV(37)-SG" alt="Tủ lạnh Toshiba Inverter 460 lít Side By Side GR-RS600WI-PMV(37)-SG" src="https://cdn.tgdd.vn/Products/Images/1943/303228/Slider/00-1020x570.jpg" width="680px" height="380px">
+                    <img class="" title="{{ goods.gtitle }}" alt="{{ goods.gtitle }}" 
+                        src="{{ MEDIA_URL }}{{ goods.images.all.0.image_path }}"
+                        onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
                     <div class="youtube-icon">
                         <i class="fab fa-youtube"></i>
                     </div>
                 </div>
+                {% endif %}
                 {% for image in goods.images.all %}
                 <div class="swiper-slide" data-type="image" data-src="{{ MEDIA_URL }}{{ image.image_path }}">
                     <img src="{{ MEDIA_URL }}{{ image.image_path }}" alt="{{ goods.gtitle }}"

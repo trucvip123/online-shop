@@ -185,6 +185,13 @@
   text-decoration: none;
 }
 
+.navbar {
+  width: 100%;
+  margin: 10px 0 !important;
+  min-height: 95px !important;
+  white-space: nowrap; /* Prevent items from wrapping */
+}
+
 .navbar .nav-link {
   display: inline-block;
   color: rgb(0, 0, 0);
@@ -192,6 +199,8 @@
   width: 130px;
   font-size: 14px;
   border-radius: 8px;
+  text-align: center;
+  white-space: normal; /* Allow text wrapping inside links */
 }
 
 .navbar-scroll {
@@ -215,10 +224,16 @@
   border-bottom: 2px
 }
 
-.navbar {
-  width: 100%;
-  margin: 0 auto;
-  min-height: 100px !important;
+
+.navbar-collapse {
+  display: flex !important;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent items from wrapping */
+  flex-wrap: nowrap; /* Keep all items in one row */
+}
+
+.navbar-nav {
+  flex-wrap: nowrap; /* Prevent items from breaking into new lines */
 }
 
 .navbar h1 {
@@ -599,22 +614,18 @@
   .navbar-collapse {
     display: flex !important;
     /* Ensure navbar stays visible */
-    overflow-x: auto;
-    /* Enable horizontal scrolling */
-    white-space: nowrap;
-    /* Prevent items from wrapping */
-    flex-wrap: nowrap;
-    /* Keep all items in one row */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent items from wrapping */
+    flex-wrap: nowrap; /* Keep all items in one row */
   }
 
   .navbar-nav {
-    flex-wrap: nowrap;
-    /* Prevent items from breaking into new lines */
+    flex-wrap: nowrap; /* Prevent items from breaking into new lines */
   }
 
   .navbar .nav-link {
-    width: 75px;
-    white-space: normal;
+    width: 75px; /* Adjust width for smaller screens */
+    white-space: normal; /* Allow text wrapping inside links */
   }
 
   .dropdown-content {

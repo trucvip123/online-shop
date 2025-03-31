@@ -22,7 +22,6 @@
     margin-top: 10px;
 }
 
-
 .site_con .form_group label {
     width: 130px;
     float: left;
@@ -31,7 +30,12 @@
     height: 40px;
     line-height: 40px;
     margin-left: 30px;
-    margin-top: 5px;
+}
+
+.form_group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .site_con .form_group input {
@@ -41,6 +45,21 @@
     text-indent: 10px;
     border-radius: 8px;
     font-size: 20px;
+}
+
+.form_group input[type="url"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.form_group input[type="url"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 .site_con .form_group textarea {
@@ -108,4 +127,104 @@
 
 .info_submit {
     width: 150px;
+}
+
+#product_images {
+    margin-top: 20px;
+}
+
+#product_images label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+#image_preview_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+    border: 1px dashed #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.image-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.image-wrapper .remove-image-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.image-wrapper .remove-image-button:hover {
+    background-color: #ff1a1a;
+}
+
+.image-wrapper .inner-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+#new_image {
+    display: none;
+}
+
+.custom-file-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.custom-file-button:hover {
+    background-color: #0056b3;
+}
+
+.placeholder {
+    border: 2px dashed #007bff;
+    background-color: #e6f7ff;
+    border-radius: 8px;
+    width: 120px;
+    height: 120px;
 }

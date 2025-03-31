@@ -35,7 +35,6 @@
 .swiper-slide img {
     width: auto;
     height: 370px;
-    object-fit: cover;
 }
 
 .swiper-slide img:hover {
@@ -278,10 +277,8 @@
 
 .swiper-slide {
     display: flex !important;
-    justify-content: space-around;
-    align-items: flex-end;
-    /* align-items: center;
-    height: auto !important; */
+    align-items: center;
+    justify-content: center;
 }
 
 .swiper-image {
@@ -325,6 +322,14 @@
     left: 50%;
     transform: translateX(-50%);
 }
+
+/*pswp */
+.pswp__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 
 /* YouTube Icon */
 .youtube-icon {

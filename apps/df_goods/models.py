@@ -39,6 +39,7 @@ class GoodsInfo(models.Model):
         TypeInfo, on_delete=models.CASCADE, verbose_name="category"
     )
     gbrand = models.CharField(max_length=50, verbose_name="brand", default="")
+    gvideo_url = models.URLField(max_length=500, verbose_name="video_url", blank=True, null=True)
 
     class Meta:
         verbose_name = "products"

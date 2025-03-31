@@ -554,6 +554,7 @@ def add_product_handle(request):
         param = request.POST.get("parameters")
         type_id = request.POST.get("product_type")
         stock = request.POST.get("stock")
+        video_url = request.POST.get("video_url", "").strip()  # Get video URL
 
         # Fetch the TypeInfo instance based on type_id
         category = get_object_or_404(TypeInfo, id=type_id)
@@ -581,6 +582,7 @@ def add_product_handle(request):
             gtype=category,
             gkucun=stock,
             gbrand=brand,
+            gvideo_url=video_url,  # Save video URL
         )
 
         # Handle images from the image_preview_container
@@ -628,6 +630,7 @@ def edit_product_handle(request):
     description = request.POST.get("description", "").strip()
     parameter = request.POST.get("parameter", "").strip()
     stock = request.POST.get("stock", "").strip()
+    video_url = request.POST.get("video_url", "").strip()  # Get video URL
 
     if not product_id.isdigit():
         return HttpResponse("Invalid product ID", status=400)
@@ -652,6 +655,7 @@ def edit_product_handle(request):
     product.gparam = parameter
     product.gkucun = stock
     product.gbrand = brand
+    product.gvideo_url = video_url  # Update video URL
     product.save()
 
     # Fetch existing images and handle image updates
@@ -713,6 +717,7 @@ def get_product_details_by_id(request):
             "description": product.gcontent,
             "stock": product.gkucun,
             "image_urls": image_urls,
+            "video_url": product.gvideo_url
         }
     except GoodsInfo.DoesNotExist:
         data = {"error": "Product not found"}

@@ -256,7 +256,7 @@ body {
 
 /* path */
 .path {
-	margin-top: 20px;
+	margin: 5px;
     font: 14px / 18px Arial, Helvetica, sans-serif !important;
     text-decoration: none;
 }
@@ -634,6 +634,10 @@ body {
 	width: 30%
 }
 
+.order_goods_list .col01 {
+	width: 100px;
+}
+
 .order_goods_list .col02 {
 	text-align: left;
 }
@@ -654,7 +658,6 @@ body {
 	background: url(../images/left_bg.jpg);
 	border-radius: 8px;
 	display: flex;
-	gap: 10px;
 }
 
 .left_menu_con {
@@ -689,6 +692,7 @@ body {
 .right_content {
 	float: right;
 	min-height: 730px;
+	margin-left: 50px;
 }
 
 .site_con {

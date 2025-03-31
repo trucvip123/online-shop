@@ -76,6 +76,10 @@
                     <label>Stock Quantity:</label>
                     <input type="number" id="stock" name="stock" value="{{ product.gkucun|default:'' }}">
                 </div>
+                <div class="form_group">
+                    <label>Video URL:</label>
+                    <input type="url" id="video_url" name="video_url" value="{{ product.gvideo_url|default:'' }}" placeholder="Enter YouTube video URL">
+                </div>
                 <div class="form_group" id="product_images">
                     <label>Product Image:</label>
                     <div id="image_preview_container"></div>

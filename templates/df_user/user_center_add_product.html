@@ -77,12 +77,17 @@
                 </div>
 
                 <div class="form_group">
+                    <label>Video URL:</label>
+                    <input type="url" name="video_url" value="{{ product.gvideo_url|default:'' }}" placeholder="Enter YouTube video URL">
+                </div>
+
+                <div class="form_group">
                     <label>Stock Quantity:</label>
                     <input type="number" name="stock" value="{{ product.stock|default:'' }}" required>
                 </div>
 
                 <div class="form_group" id="product_images">
-                    <label>Product Image1:</label>
+                    <label>Product Image:</label>
                     <input type="file" id="image_input" name="image" multiple>
                     <div id="image_preview_container"></div> <!-- Add drag-and-drop container -->
                 </div>
