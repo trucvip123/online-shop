@@ -227,7 +227,6 @@
 
 .navbar-collapse {
   display: flex !important;
-  overflow-x: auto; /* Enable horizontal scrolling */
   white-space: nowrap; /* Prevent items from wrapping */
   flex-wrap: nowrap; /* Keep all items in one row */
 }

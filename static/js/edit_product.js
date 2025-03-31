@@ -11,6 +11,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     enableDragAndDrop();
+
+    // Attach event listener for dynamically created "Remove" buttons
+    document.getElementById('image_preview_container').addEventListener('click', function (e) {
+        if (e.target.classList.contains('remove-image-button')) {
+            e.stopPropagation(); // Prevent interference with drag-and-drop
+            e.preventDefault(); // Prevent any default action
+            e.target.closest('.image-wrapper').remove(); // Remove the image wrapper
+        }
+    });
 });
 
 function updateHiddenInputs(formId) {
@@ -27,11 +36,6 @@ function updateHiddenInputs(formId) {
         hiddenInput.name = 'image_urls[]';
         hiddenInput.value = img.src;
         document.getElementById(formId).appendChild(hiddenInput);
-    });
-
-    console.log("Updated image order submitted:");
-    images.forEach((img, index) => {
-        console.log(`Image ${index + 1}: ${img.src}`);
     });
 }
 
@@ -86,11 +90,7 @@ function createImageWrapper(imageUrl) {
     const button = document.createElement('button');
     button.type = 'button'; // Ensure the button does not submit the form
     button.className = 'remove-image-button';
-    button.innerHTML = 'Remove';
-    button.addEventListener('click', function (e) {
-        e.preventDefault(); // Prevent any default action
-        wrapper.remove(); // Properly remove the wrapper
-    });
+    button.innerHTML = 'Xóa';
 
     wrapper.appendChild(img);
     wrapper.appendChild(button);
@@ -101,8 +101,10 @@ function addNewImageInput() {
     const imagePreviewContainer = document.getElementById('image_preview_container');
     const fileInputWrapper = document.createElement('div');
     fileInputWrapper.className = 'image-wrapper';
+
     const fileInputWrapperInner = document.createElement('div');
     fileInputWrapperInner.className = 'inner-div';
+
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
     fileInput.id = 'new_image';
@@ -114,7 +116,7 @@ function addNewImageInput() {
     customButton.type = 'button';
     customButton.className = 'custom-file-button';
     customButton.onclick = function () {
-        fileInput.click();
+        fileInput.click(); // Trigger the hidden file input
     };
 
     fileInputWrapperInner.appendChild(fileInput);
@@ -148,7 +150,7 @@ function enableDragAndDrop() {
     let offsetY = 0;
 
     container.addEventListener('pointerdown', function (e) {
-        if (e.target.closest('.image-wrapper')) {
+        if (e.target.closest('.image-wrapper') && !e.target.classList.contains('remove-image-button')) {
             draggedItem = e.target.closest('.image-wrapper');
             const rect = draggedItem.getBoundingClientRect();
             offsetX = e.clientX - rect.left;
@@ -196,13 +198,6 @@ function enableDragAndDrop() {
             draggedItem.style.top = '';
             draggedItem.style.left = '';
             placeholder.remove();
-
-            // Log the updated order of images after drag-and-drop
-            const images = container.querySelectorAll('.image-wrapper img');
-            console.log("Updated image order after drag-and-drop:");
-            images.forEach((img, index) => {
-                console.log(`Image ${index + 1}: ${img.src}`);
-            });
 
             draggedItem = null;
             placeholder = null;
