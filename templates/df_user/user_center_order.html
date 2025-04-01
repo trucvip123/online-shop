@@ -7,7 +7,6 @@
 <div class="main_con clearfix">
 	<div class="left_menu_con clearfix">
 		<h3>User Center</h3>
-		<button class="menu-toggle">Menu</button>
 		<ul class="menu-list">
 			<li><a href='{% url "df_user:info" %}'>· Personal Information</a></li>
 			<li><a href='{% url "df_user:order" 1 %}' class="active">· Order History</a></li>
@@ -20,65 +19,66 @@
 		</ul>
 	</div>
 	<div class="right_content clearfix">
-		<h3 class="common_title2 order-history-title">Order History</h3>
+		<h3 class="common_title2 order-history-title">Lịch sử mua hàng</h3>
 		{% for orderinfo in page %}
 		<ul class="order_list_th w978 clearfix order-header">
-			<li class="col01 order-date">{{ orderinfo.odate|date }}</li>
-			<li class="col02 order-id">ORDER #：{{ orderinfo.oid }}</li>
-			<li class="col02 stress order-status">ORDER PLACED</li>
+			<h3>Thông tin đơn hàng</h3>
+			<div class="order-header-title">
+				<p>{{ orderinfo.odate|date }}</p>
+				{% if orderinfo.oIsDelivery %}
+				<p class="col02 stress order-status">Đã giao hàng</p>
+				{% else %}
+				<p class="col02 stress order-status">Chưa giao hàng</p>
+				{% endif %}
+				{% if orderinfo.oIsPay %}
+				<p class="col03 stress payment-status">Đã thanh toán</p>
+				{% else %}
+				<p class="col03 stress payment-status">Chưa thanh toán</p>
+				{% endif %}
+			</div>
+			<h4>Địa chỉ giao hàng</h4>
+			<div class="order-info">
+				<div class="order-title">
+					<p>{{ orderinfo.oreceiver }}</p>
+					<p class="phone_info">{{ orderinfo.ocontact }}</p>
+				</div>
+				<div class="order-address">
+					<p>{{ orderinfo.oaddress }}</p>
+				</div>
+			</div>
+			<h5>Mã đơn hàng: {{ orderinfo.oid }}</h5>
+			<table class="order_list_table w980 order-table">
+				<tbody>
+					<tr>
+						<td width="55%" class="order-items">
+							<ul class="goods_list_th clearfix">
+								<li class="col02">Sản phẩm</li>
+								<li class="col04">Số lượng</li>
+								<li class="col03">Đơn giá</li>
+							</ul>
+							{% for order_detail in orderinfo.orderdetailinfo_set.all %}
+							<ul class="order_goods_list clearfix order-item">
+								<li class="col01 item-image">
+									<img src="{{ MEDIA_URL }}{{ order_detail.goods.images.all.0.image_path }}"
+										alt="{{ order_detail.goods.gtitle }}"
+										onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
+								</li>
+								<li class="col02 item-title">{{ order_detail.goods.gtitle }}</li>
+								<li class="col03 item-quantity">{{ order_detail.count }}</li>
+								<li class="col04 item-price" data-price="{{ order_detail.goods.gprice }}">{{ order_detail.goods.gprice }}₫</li>
+							</ul>
+							{% endfor %}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="order_total_info">
+				<p>Thành tiền: </p>
+				<p class="order_total" data-price="{{ orderinfo.ototal }}"> {{ orderinfo.ototal }}₫</p>
+			</div>
 		</ul>
 
-		<table class="order_list_table w980 order-table">
-			<tbody>
-				<tr>
-					<td width="55%" class="order-items">
-						<ul class="goods_list_th clearfix">
-							<li class="col02">Sản phẩm</li>
-							<li class="col04">Số lượng</li>
-							<li class="col03">Đơn giá</li>
-						</ul>
-						{% for order_detail in orderinfo.orderdetailinfo_set.all %}
-						<ul class="order_goods_list clearfix order-item">
-							<li class="col01 item-image">
-								<img src="{{ MEDIA_URL }}{{ order_detail.goods.images.all.0.image_path }}"
-									alt="{{ order_detail.goods.gtitle }}"
-									onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
-							</li>
-							<li class="col02 item-title">{{ order_detail.goods.gtitle }}</li>
-							<li class="col03 item-quantity">{{ order_detail.count }}</li>
-							<li class="col04 item-price" data-price>{{ order_detail.goods.gprice }}₫</li>
-						</ul>
-						{% endfor %}
-					</td>
-					<td width="15%" class="order-total">
-						<ul class="goods_list_th clearfix">
-							<li class="col05_label">Thành tiền</li>
-						</ul>
-						<p>{{ orderinfo.ototal }}₫</p>
-					</td>
-					<td width="15%" class="order-payment-status">
-						<ul class="goods_list_th clearfix">
-							<li class="col06_label">Thanh toán</li>
-						</ul>
-						{% if orderinfo.oIsPay %}
-						<p>Đã thanh toán</p>
-						{% else %}
-						<p>Chưa thanh toán</p>
-						{% endif %}
-					</td>
-					<td width="15%" class="delivery-status">
-						<ul class="goods_list_th clearfix">
-							<li class="col06_label">Vận chuyển</li>
-						</ul>
-						{% if orderinfo.oIsDelivery %}
-						<p>Đã giao hàng</p>
-						{% else %}
-						<p>Chưa giao hàng</p>
-						{% endif %}
-					</td>
-				</tr>
-			</tbody>
-		</table>
 		{% endfor %}
 
 		<div class="pagenation pagination-container">
@@ -100,16 +100,5 @@
 		</div>
 	</div>
 </div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const menuToggle = document.querySelector(".menu-toggle");
-    const menuList = document.querySelector(".menu-list");
-
-    menuToggle.addEventListener("click", function () {
-        menuList.classList.toggle("active");
-    });
-});
-</script>
 
 {% endblock center_body %}

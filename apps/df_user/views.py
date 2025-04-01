@@ -397,8 +397,6 @@ def order(request, index):
     paginator = Paginator(orders_list, 2)
     page = paginator.page(int(index))
 
-    print("orders_list:", orders_list)
-
     if user_id:
         carts = CartInfo.objects.filter(user_id=user_id)
         total_count = carts.aggregate(Sum("count"))["count__sum"] or 0

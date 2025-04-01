@@ -7,90 +7,83 @@
 
 {% block body %}
 <div class="register_con">
-	<div class="l_con fl">
-		<a class="reg_logo"><img src="/static/images/logo.png" width='200'></a>
-		<!--			<div class="reg_slogan">足不出户  ·  新鲜每一天</div>-->
-		<!--			<div class="reg_banner"></div>-->
+	<a class="reg_logo"><img src="/static/images/logo.png" width='300'></a>
+	<div class="reg_title clearfix">
+		<h1>Sign up </h1>
+		<a href="{% url 'df_user:login' %}">Login</a>
 	</div>
-
-	<div class="r_con fr">
-		<div class="reg_title clearfix">
-			<h1>Sign up </h1>
-			<a href="{% url 'df_user:login' %}">Login</a>
-		</div>
-		<div class="reg_form clearfix">
-			<form action=' {% url "df_user:register_handle" %}' id='reg_form' method="post">
-				{% csrf_token %}
-				<ul>
-					<li>
-						<label>Tên đăng nhập:</label>
-						<input type="text" name="user_name" id="user_name" required>
-						<span class="error_tip"></span>
-					</li>
-					<li>
-						<label>Mật khẩu:</label>
-						<input type="password" name="pwd" id="pwd">
-						<span class="error_tip"></span>
-					</li>
-					<li>
-						<label>Nhập lại mật khẩu:</label>
-						<input type="password" name="confirm_pwd" id="cpwd">
-						<span class="error_tip"></span>
-					</li>
-					<li>
-						<label>Tên đầy đủ</label>
-						<input type="text" name="fname" id="fname">
-						<span class="error_tip"></span>
-					</li>
-					<li>
-						<label>Số điện thoại:</label>
-						<input type="text" name="pnum" id="pnum">
-						<span class="error_tip"></span>
-					</li>
-					<div>
-						<span>Tỉnh/ Thành phố: </span>
+	<div class="reg_form clearfix">
+		<form action=' {% url "df_user:register_handle" %}' id='reg_form' method="post">
+			{% csrf_token %}
+			<ul>
+				<li>
+					<label>Tên đăng nhập:</label>
+					<input type="text" name="user_name" id="user_name" required>
+					<span class="error_tip"></span>
+				</li>
+				<li>
+					<label>Mật khẩu:</label>
+					<input type="password" name="pwd" id="pwd">
+					<span class="error_tip"></span>
+				</li>
+				<li>
+					<label>Nhập lại mật khẩu:</label>
+					<input type="password" name="confirm_pwd" id="cpwd">
+					<span class="error_tip"></span>
+				</li>
+				<li>
+					<label>Tên đầy đủ</label>
+					<input type="text" name="fname" id="fname">
+					<span class="error_tip"></span>
+				</li>
+				<li>
+					<label>Số điện thoại:</label>
+					<input type="text" name="pnum" id="pnum">
+					<span class="error_tip"></span>
+				</li>
+				<div class="location-group">
+					<div class="location-item">
+						<label for="province">Tỉnh/ Thành phố:</label>
 						<select name="province" id="province" class="contact" required>
 							<option value="">Chọn Tỉnh</option>
 						</select>
 					</div>
 					<input type="hidden" id="province_name" name="province_name">
-					<div>
-						<span>Quận/ Huyện: </span>
+					<div class="location-item">
+						<label for="district">Quận/ Huyện:</label>
 						<select name="district" id="district" class="contact" required>
 							<option value="">Chọn Huyện</option>
 						</select>
 					</div>
 					<input type="hidden" id="district_name" name="district_name">
-					<div>
-						<span>Phường/ Xã: </span>
+					<div class="location-item">
+						<label for="commune">Phường/ Xã:</label>
 						<select name="commune" id="commune" class="contact" required>
 							<option value="">Chọn Xã</option>
 						</select>
 					</div>
 					<input type="hidden" id="commune_name" name="commune_name">
-					<div>
-						<span>Địa chỉ cụ thể: </span>
-						<input type="text" name="address" class="contact" placeholder=" Số Nhà, Tên Đường" required>
-					</div>
-					<li class='suqetions'>
-						<label>Câu hỏi bảo mật</label>
-						<select name="squestion">
-							<option name='squestion' value="What is your pet name?"> What is your pet name?</option>
-							<option name='squestion' value="Where was your birthplace?"> Where was your birthplace?
-							</option>
-							<option name='squestion' value="What is first car?"> What is first car? </option>
-						</select>
-						<input type="text" name="sanswer" id="sanswer" placeholder="Nhập kết quả của bạn" required>
-					</li>
-					<li class="reg_sub">
-						<input class="register-btn" type="submit" value="Register">
-					</li>
-				</ul>
-			</form>
-		</div>
-
+				</div>
+				<li>
+					<label>Địa chỉ cụ thể: </label>
+					<input type="text" name="address" class="contact" placeholder=" Số Nhà, Tên Đường" required>
+				</li>
+				<li class='suqetions'>
+					<label>Câu hỏi bảo mật</label>
+					<select name="squestion">
+						<option name='squestion' value="What is your pet name?"> What is your pet name?</option>
+						<option name='squestion' value="Where was your birthplace?"> Where was your birthplace?
+						</option>
+						<option name='squestion' value="What is first car?"> What is first car? </option>
+					</select>
+					<input type="text" name="sanswer" id="sanswer" placeholder="Nhập kết quả của bạn" required>
+				</li>
+				<li class="reg_sub">
+					<input class="register-btn" type="submit" value="Register">
+				</li>
+			</ul>
+		</form>
 	</div>
-
 </div>
 
 {% endblock body %}

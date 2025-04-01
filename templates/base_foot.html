@@ -60,7 +60,7 @@
 	<script type="text/javascript" src="/static/js/register.js" defer></script>
 	<script type="text/javascript">
 		document.addEventListener("DOMContentLoaded", function () {
-			document.querySelectorAll('.prize, .old-price, .col05').forEach(function (element) {
+			document.querySelectorAll('.prize, .old-price, .col05, .order_total, .item-price').forEach(function (element) {
 				var priceAttr = element.getAttribute('data-price') || element.getAttribute('data-old-price');
 				if (priceAttr) {
 					var price = parseFloat(priceAttr.replace(/,/g, '')); // Loại bỏ dấu phẩy nếu có

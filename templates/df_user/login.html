@@ -7,15 +7,15 @@
         pwd_error = false;
 
         if ({{ error_name }} == 1){
-            $('.user_error').html('Username Error').show();
+            $('.user_error').html('Tên đăng nhập chưa đúng').show();
         }
     }
     if ({{ error_pwd }}== 1) {
-        $('.pwd_error').html('Wrong Password').show();
+        $('.pwd_error').html('Mật khẩu chưa đúng.').show();
     }
     $('.name_input').blur(function () {
         if ($('.name_input').val().length = 0) {
-            $('.user_error').html('Please enter your username.').show();
+            $('.user_error').html('Vui lòng nhập tên đăng nhập').show();
             name_error = false;
         } else {
             $('.user_error').hide();
@@ -24,7 +24,7 @@
     });
     $('.pass_input').blur(function () {
         if ($('.pass_input').val().length = 0) {
-            $('.pwd_error').html('Please enter your password.').show();
+            $('.pwd_error').html('Vui lòng nhập mật khẩu').show();
             pwd_error = false;
         } else {
             $('.pwd_error').hide();
@@ -36,34 +36,32 @@
 {% endblock head %}
 
 {% block body %}
-<div class="login_top clearfix">
-    <a href='{% url "df_goods:index" %}' class="login_logo"><img
-            style="max-width:100%;overflow:hidden;margin-left:185px" img src="/static/images/logo.png"> </a>
-</div>
+
 
 <div class="login_form_bg">
     <div class="login_form_wrap clearfix">
-        <div class="login_banner fl"></div>
+        <a href='{% url "df_goods:index" %}' class="login_logo"><img
+            style="max-width:100%;overflow:hidden;" img src="/static/images/logo.png"> </a>
         <div class="login_form fr">
             <div class="login_title clearfix">
-                <h1>Login</h1>
-                <a href='{% url "df_user:register" %}'>Signup</a>
+                <h1>Đăng nhập</h1>
+                <a href='{% url "df_user:register" %}'>Đăng ký</a>
             </div>
             <div class="form_input">
                 <form action='{% url "df_user:login_handle" %}' method="post">
                     {% csrf_token %}
                     <input type="text" name="username" class="name_input" value="{{ username }}"
-                        placeholder="Please enter your username">
-                    <div class="user_error">Wrong Username</div>
+                        placeholder="Vui lòng nhập tên đăng nhập">
+                    <div class="user_error">Mật khẩu chưa đúng!</div>
                     <input type="password" name="pwd" class="pass_input" value="{{ password }}"
-                        placeholder="Please enter your password">
-                    <div class="pwd_error">Wrong Password</div>
+                        placeholder="Vui lòng nhập mật khẩu">
+                    <div class="pwd_error">Mật khẩu chưa đúng!</div>
                     <div class="more_input clearfix">
                         <input type="checkbox" name="jizhu" value="1" checked="checked">
-                        <label>Save your username</label>
-                        <a href='{% url "df_user:forget_password" %}''>Forget password</a>
+                        <label>Lưu tên đăng nhập</label>
+                        <a href='{% url "df_user:forget_password" %}''>Quên mật khẩu</a>
                         </div>
-                        <input type="submit" name="" value="login" class="input_submit">
+                        <input type="submit" name="" value="Đăng nhập" class="input_submit">
                     </form>
                 </div>
             </div>
