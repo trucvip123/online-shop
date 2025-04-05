@@ -2,6 +2,11 @@ body {
 	display: flex;
     flex-direction: column;
 	background: url(//cdnv2.tgdd.vn/webmwg/2024/ContentMwg/images/noel/2024/tgdd/bg-dt.png) repeat !important;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
 }
 
 html,
@@ -138,7 +143,6 @@ body {
 }
 
 .goods_list li {
-	height: 400px;
 	width: 190px;
 	border: 1px solid #ededed;
 	float: left;
@@ -203,11 +207,14 @@ body {
 }
 
 .goods_list li .operate_btn {
-	background-color: rgba(241, 248, 254, 1);
-	border-radius: 4px;
-	padding: 3px;
-	width: 95%;
-	margin: auto;
+    background-color: rgba(241, 248, 254, 1);
+    border-radius: 5px;
+    padding: 3px;
+    width: 95%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .goods_list li .operate_btn .buy_btn {
@@ -301,81 +308,11 @@ body {
 	background-color: #fff
 }
 
-
-/* Login Page */
-
-.login_top {
-	height: 130px;
-	margin: 0 auto;
-}
-
-.login_form_bg {
-	height: inherit;
-	background-color: white
-}
-
-.no-mp {
-	margin-top: 0px;
-}
-
-.login_form_wrap {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	align-items: center;
-}
-
-.login_form {
-	padding: 20px;
-	border: 1px solid #c6c6c5;
-	background-color: #fff;
-	margin-top: 50px;
-}
-
-.login_title {
-	height: 60px;
-	border-bottom: 1px solid #e0e0e0;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
-.login_title h1 {
-	font-size: 24px;
-	font-weight: bold;
-}
-
-.login_title a {
-    text-indent: 26px;
-    float: right;
-    background: url(../images/login_logo.png) 3px 2px no-repeat;
-    background-size: 15px 15px;
-	font: 14px / 18px cursive, Helvetica, sans-serif;
-}
-
 .form_input {
 	width: 308px;
 	height: 250px;
 	margin: 20px auto;
 	position: relative;
-}
-
-.name_input,
-.pass_input {
-	width: 306px;
-	height: 36px;
-	border: 1px solid #e0e0e0;
-	outline: none;
-	font-size: 14px;
-	text-indent: 10px;
-	position: absolute;
-	left: 0;
-	top: 0
-}
-
-.pass_input {
-	top: 65px;
-	background-position: 280px -95px;
 }
 
 .user_error,
@@ -386,13 +323,12 @@ body {
 	top: 43px;
 	display: none
 }
-
+container
 .pwd_error {
 	top: 110px;
 }
 
 .more_input {
-	position: absolute;
 	left: 0;
 	top: 130px;
 	width: 100%
@@ -420,7 +356,6 @@ body {
 .input_submit {
 	width: 100%;
 	height: 40px;
-	position: absolute;
 	left: 0;
 	top: 180px;
 	background-color: black;
@@ -429,6 +364,18 @@ body {
 	border: 0px;
 	font-family: 'Times New Roman';
 	cursor: pointer;
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.input_submit:hover {
+    background: #0056b3;
 }
 
 .l_con {
@@ -734,4 +681,91 @@ body {
 	.right_content {
 		margin: 10px;
 	}
-}	
+}
+
+/* Social Login */
+.social_login {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.social_login .google_login_btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4285f4;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.social_login .google_login_btn img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.social_login .google_login_btn:hover {
+    background-color: #357ae8;
+}
+
+/* Header */
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Buttons */
+button, .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+button:hover, .btn:hover {
+    background: #0056b3;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login_form {
+        width: 90%;
+    }
+
+    .social_login .google_login_btn {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}

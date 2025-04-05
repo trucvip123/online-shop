@@ -59,7 +59,7 @@
 
 .goods_detail_list p {
     color: #666;
-    line-height: 40px;
+    margin-bottom: 0;
 }
 
 .prize_bar {
@@ -153,10 +153,6 @@
     font-style: normal;
     color: #ff3e3e;
     font-size: 18px
-}
-
-.operate_btn {
-    margin-top: 20px;
 }
 
 .operate_btn .buy_btn {
@@ -261,6 +257,15 @@
     margin: 10px;
 }
 
+.goods_attr {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    color: #333;
+}
 
 .swiper-container {
     width: 100%;

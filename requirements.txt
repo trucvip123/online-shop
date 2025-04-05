@@ -6,3 +6,4 @@ gunicorn
 whitenoise
 python-dotenv
 mysqlclient
+social-auth-app-django

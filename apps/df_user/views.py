@@ -28,6 +28,10 @@ from settings import MEDIA_URL
 from . import user_decorator
 from .models import GoodsBrowser, UserAddress, UserInfo
 
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.models import User
+from social_django.utils import psa
+
 
 ## This function is used to redirect the user to the resigter page.
 def register(request):
@@ -785,3 +789,13 @@ def edit_type(request):
 
 def manage_type(request):
     return render(request, "df_user/user_center_manage_type.html")
+
+
+@psa('social:complete')
+def google_login(request, backend):
+    user = request.backend.do_auth(request.GET.get('access_token'))
+    if user:
+        auth_login(request, user)
+        return redirect(reverse('df_goods:index'))
+    else:
+        return redirect(reverse('df_user:login'))

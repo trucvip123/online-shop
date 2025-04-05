@@ -1,0 +1,130 @@
+/* Login Page */
+.container {
+    height: inherit;
+}
+
+.login_top {
+	height: 130px;
+	margin: 0 auto;
+}
+
+.login_form_bg {
+	height: inherit;
+	background-color: white
+}
+
+.no-mp {
+	margin-top: 0px;
+}
+
+.login_form_wrap {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: center;
+}
+
+.login_form {
+	padding: 20px;
+	border: 1px solid #c6c6c5;
+	background-color: #fff;
+	margin-top: 50px;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login_title {
+	height: 60px;
+	border-bottom: 1px solid #e0e0e0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.login_title h1 {
+	font-size: 24px;
+	font-weight: bold;
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+}
+
+.login_title a {
+    text-indent: 26px;
+    float: right;
+    background: url(../images/login_logo.png) 3px 2px no-repeat;
+    background-size: 15px 15px;
+	font: 14px / 18px cursive, Helvetica, sans-serif;
+}
+
+/* Default Login Section */
+.default_login {
+	height: 180px;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.default_login form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.default_login input[type="text"],
+.default_login input[type="password"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.default_login .input_submit {
+    width: 100%;
+    max-width: 100px;
+    padding: 10px;
+    margin: 10px;;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.default_login .input_submit:hover {
+    background-color: #0056b3;
+}
+
+.default_login .more_input {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.default_login .more_input label {
+    font-size: 14px;
+    color: #666;
+}
+
+.default_login .more_input a {
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.default_login .more_input a:hover {
+    color: #0056b3;
+}

@@ -1,7 +1,7 @@
 #!/user/bin/env python
 # -*- coding: utf-8 -*-
 # this is a command pattern and plays the role of route, the urls mapps the request from the template and send it to the specific function to operate.
-from django.urls import re_path as url
+from django.urls import re_path as url, path
 
 from .views import *
 
@@ -39,4 +39,5 @@ urlpatterns = [
     url(r"^edit_type/$", edit_type, name="edit_type"),
     url(r"^delete_type/$", delete_type, name="delete_type"),
     url(r"^manage_type/$", manage_type, name="manage_type"),
+    path("google-login/", google_login, name="google_login"),
 ]

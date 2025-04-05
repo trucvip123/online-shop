@@ -15,4 +15,5 @@ urlpatterns = [
     url(r"^order/", include("df_order.urls", namespace="df_order")),
     url(r"^tinymce/", include("tinymce.urls")),
     url(r"^media/(?P<path>.*)$", serve, {"document_root": MEDIA_ROOT}),
+    path("social-auth/", include("social_django.urls", namespace="social")),
 ]

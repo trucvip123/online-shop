@@ -1,6 +1,7 @@
 {% extends 'base_foot.html' %}
 
 {% block head %}
+<link rel="stylesheet" type="text/css" href="/static/css/login.css">
 <script>
     $(function () {
         name_error = false;
@@ -36,35 +37,51 @@
 {% endblock head %}
 
 {% block body %}
+<header>
+    <h1>Welcome to Online Shop</h1>
+</header>
 
-
-<div class="login_form_bg">
-    <div class="login_form_wrap clearfix">
-        <a href='{% url "df_goods:index" %}' class="login_logo"><img
-            style="max-width:100%;overflow:hidden;" img src="/static/images/logo.png"> </a>
-        <div class="login_form fr">
-            <div class="login_title clearfix">
-                <h1>Đăng nhập</h1>
-                <a href='{% url "df_user:register" %}'>Đăng ký</a>
-            </div>
-            <div class="form_input">
-                <form action='{% url "df_user:login_handle" %}' method="post">
-                    {% csrf_token %}
-                    <input type="text" name="username" class="name_input" value="{{ username }}"
-                        placeholder="Vui lòng nhập tên đăng nhập">
-                    <div class="user_error">Mật khẩu chưa đúng!</div>
-                    <input type="password" name="pwd" class="pass_input" value="{{ password }}"
-                        placeholder="Vui lòng nhập mật khẩu">
-                    <div class="pwd_error">Mật khẩu chưa đúng!</div>
-                    <div class="more_input clearfix">
-                        <input type="checkbox" name="jizhu" value="1" checked="checked">
-                        <label>Lưu tên đăng nhập</label>
-                        <a href='{% url "df_user:forget_password" %}''>Quên mật khẩu</a>
-                        </div>
-                        <input type="submit" name="" value="Đăng nhập" class="input_submit">
-                    </form>
+<div class="container">
+    <div class="login_form_bg">
+        <div class="login_form_wrap clearfix">
+            <a href='{% url "df_goods:index" %}' class="login_logo"><img
+                style="max-width:100%;overflow:hidden;" img src="/static/images/logo.png"> </a>
+            <div class="login_form">
+                <div class="login_title clearfix">
+                    <h1>Đăng nhập</h1>
+                    <a href='{% url "df_user:register" %}'>Đăng ký</a>
+                </div>
+                <div class="form_input">
+                    <div class="default_login">
+                        <form action='{% url "df_user:login_handle" %}' method="post">
+                            {% csrf_token %}
+                            <input type="text" name="username" class="name_input" value="{{ username }}"
+                                placeholder="Vui lòng nhập tên đăng nhập">
+                            <div class="user_error">Mật khẩu chưa đúng!</div>
+                            <input type="password" name="pwd" class="pass_input" value="{{ password }}"
+                                placeholder="Vui lòng nhập mật khẩu">
+                            <div class="pwd_error">Mật khẩu chưa đúng!</div>
+                            <div class="more_input clearfix">
+                                <input type="checkbox" name="jizhu" value="1" checked="checked">
+                                <label>Lưu tên đăng nhập</label>
+                                <a href='{% url "df_user:forget_password" %}'>Quên mật khẩu</a>
+                            </div>
+                            <input type="submit" name="" value="Đăng nhập" class="input_submit">
+                        </form>
+                    </div>
+                    <div class="social_login">
+                        <a href="{% url 'social:begin' 'google-oauth2' %}" class="google_login_btn">
+                            <img src="/static/images/google_logo.png" alt="Google Logo">
+                            Login with Google
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Online Shop. All rights reserved.</p>
+</footer>
 {% endblock body %}
