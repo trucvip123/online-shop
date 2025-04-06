@@ -13,7 +13,9 @@ html,
 body {
 	height: 100%;
 	justify-self: center;
-	width: 1200px
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
 }
 
 .center_con {
@@ -84,7 +86,7 @@ body {
 
 /* Product list */
 .list_model {
-	margin: 15px auto 0;
+	margin: 10px auto 0;
 	background: white;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -139,7 +141,7 @@ body {
 	flex-wrap: wrap;
 	flex-direction: row;
 	justify-content: center;
-	padding: 7px;
+	padding: 0;
 }
 
 .goods_list li {
@@ -153,15 +155,29 @@ body {
 
 .goods_list li h4 {
 	text-align: left;
-	height: 45px;
-	margin-top: 55px;
-	margin-left: 5px;
+	height: 50px;
+	padding: 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	white-space: normal;
+	font-size: 14px;
+	line-height: 1.4;
+	margin: 0;
 }
 
 .goods_list li h4 a {
-	font: 14px/18px Arial, Helvetica, sans-serif;
-	color: #1d2939;
+	color: #333;
 	text-decoration: none;
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
 }
 
 .goods_list li h4 a:hover {
@@ -170,7 +186,7 @@ body {
 
 .goods_list li img {
 	display: block;
-	width: 180px;
+	height: 140px;
 	margin: 0 auto;
 	transition: transform 0.3s ease, opacity 0.3s ease;
 	/* Smooth transition for image */
@@ -178,8 +194,7 @@ body {
 
 .goods_list li .price-info {
 	text-align: left;
-	margin-left: 7px;
-	margin-top: 30px;
+	padding: 5px;
 }
 
 .goods_list li .prize {
@@ -211,16 +226,20 @@ body {
     border-radius: 5px;
     padding: 3px;
     width: 95%;
-    margin: auto;
+    margin: 4px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
 }
 
 .goods_list li .operate_btn .buy_btn {
 	text-decoration: none;
 	font-size: 12px;
 	font-weight: 700;
+}
+
+.operate_btn p {
+    margin: 0;
 }
 
 .goods_list .item-img {
@@ -767,5 +786,40 @@ footer p {
     .social_login .google_login_btn {
         font-size: 14px;
         padding: 8px 16px;
+    }
+}
+
+/* iPad Responsive Design */
+@media (min-width: 768px) and (max-width: 1024px) {
+    html, body {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+/* iPhone XR Responsive Design */
+@media (max-width: 414px) {
+    html, body {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+/* Responsive text overflow for different screen sizes */
+@media (max-width: 430px) {
+    .goods_list li h4 {
+        height: 40px;
+        font-size: 13px;
+        line-height: 1.3;
+        padding: 3px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .goods_list li h4 {
+        height: 45px;
+        font-size: 14px;
+        line-height: 1.4;
+        padding: 4px;
     }
 }

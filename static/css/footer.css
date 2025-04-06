@@ -83,6 +83,9 @@
     }
 
     .f-social {
+        display: flex;
+        margin-left: 0;
+        justify-content: center;
         flex-direction: row;
     }
 }

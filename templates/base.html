@@ -623,24 +623,23 @@
 		{% if request.session.user_name|default:'' != '' %}
 		<div class="login_btn fl">Welcome: <em>{{ request.session.user_name }}</em>
 			<span>|</span>
-			<em><a href='{% url "df_user:logout" %}' class="logout_text">Log out</a></em>
+			<em><a href='{% url "df_user:logout" %}' class="logout_text">Đăng xuất</a></em>
 		</div>
-		{% else %}
-		<div class="login_btn fl">
-			<a href='{% url "df_user:login" %}' class="login_text">
-				<i class="fa fa-sign-in"></i> Đăng nhập
-			</a>
-			<!-- <a href='{% url "df_user:register" %}' class="register_text">
-				<i class="fa fa-user-plus"></i> Đăng ký
-			</a> -->
-		</div>
-		{% endif %}
-
 		<div class="user_link fl">
 			<a href='{% url "df_user:info" %}'' class="user_info">
 				<i class="fa fa-user"></i> Tài khoản
 			</a>
 		</div>
+		{% else %}
+		<div class="login_btn fl">
+			<a href='{% url "df_user:login" %}' class="login_text">
+				<i class="fa fa-sign-in"></i> 
+				<p>Đăng nhập</p>
+			</a>
+		</div>
+		{% endif %}
+
+
 	</div>
 </div>
 

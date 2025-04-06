@@ -42,20 +42,24 @@
 .goods_type_list {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
   justify-content: center;
   list-style: none;
   padding: 0;
 }
 
 .goods_type_list li {
-  width: 250px;
+  width: 210px;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 10px;    
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
 }
 
 .goods_type_list li:hover {
@@ -64,17 +68,23 @@
 }
 
 .goods_type_list li img {
-  width: 100%;
-  object-fit: cover;
+  height: 135px;
 }
 
 .goods_type_list li h4 {
-  font-size: 18px;
   font-family: 'Times New Roman', serif;
-  color: #333;
-  text-align: center;
-  margin: 10px 0;
-  height: 80px;
+  text-align: left;
+  height: 45px;
+  padding: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 0;
 }
 
 .goods_type_list li .operate {

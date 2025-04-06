@@ -13,7 +13,7 @@
 .box-quicklink {
     position: relative;
     font-size: 0;
-    padding: 10px 0 10px 24px;
+    padding: 10px 0 10px 20px;
     width: 100%;
 }
 
@@ -195,7 +195,7 @@
 
 .goods_type_list li img {
     display: block;
-    width: 180px;
+    width: 170px;
 }
 
 .goods_type_list li img:hover {
@@ -206,10 +206,12 @@
 
 .goods_type_list li h4 {
     width: 160px;
-    height: 70px;
     margin: 0 auto;
     text-overflow: ellipsis;
     overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .goods_type_list li h4 a {
@@ -265,14 +267,14 @@
 }
 
 /* Responsive */
-@media (max-width: 400px) {
+@media (max-width: 430px) {
     .goods_type_list {
         margin: 0;
     }
     
     .goods_type_list li {
-        margin: 1px;
-        padding: 0;
+        margin: 5px;
+        padding: 5px;
     }
 
     .sort_bar a {
