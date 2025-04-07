@@ -621,7 +621,7 @@
 
 		{# Check if logged in #}
 		{% if request.session.user_name|default:'' != '' %}
-		<div class="login_btn fl">Welcome: <em>{{ request.session.user_name }}</em>
+		<div class="login_btn fl"><em>{{ request.session.user_name }}</em>
 			<span>|</span>
 			<em><a href='{% url "df_user:logout" %}' class="logout_text">Đăng xuất</a></em>
 		</div>

@@ -1,6 +1,38 @@
 {% extends 'df_goods/base.html' %}
 
 {% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="Khám phá bộ sưu tập {{ typeinfo.ntitle|title }} đa dạng của chúng tôi. Giá tốt nhất, chất lượng đảm bảo, giao hàng nhanh chóng toàn quốc.">
+<meta name="keywords" content="{{ typeinfo.ntitle|title }}, mua sắm trực tuyến, điện máy, thiết bị gia dụng, giá rẻ">
+
+<!-- Open Graph meta tags for social media -->
+<meta property="og:title" content="{{ typeinfo.ntitle|title }} - Cửa hàng điện máy trực tuyến">
+<meta property="og:description" content="Mua {{ typeinfo.ntitle|title }} chính hãng ✓ Giá tốt nhất ✓ Trả góp 0% ✓ Giao hàng miễn phí ✓ Bảo hành chính hãng">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:site_name" content="Cửa hàng điện máy trực tuyến">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ MEDIA_URL }}{{ image_category }}">
+<meta property="og:image:secure_url" content="{{ request.scheme }}://{{ request.get_host }}{{ MEDIA_URL }}{{ image_category }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="{{ typeinfo.ntitle|title }} - Cửa hàng điện máy trực tuyến">
+
+<!-- Twitter Card meta tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ typeinfo.ntitle|title }} - Giá tốt, chất lượng cao">
+<meta name="twitter:description" content="Mua {{ typeinfo.ntitle|title }} giá rẻ ✓ Hàng chính hãng ✓ Giao hàng toàn quốc ✓ Bảo hành dài hạn ✓ Nhiều ưu đãi hấp dẫn">
+
+<!-- Language and region -->
+<meta property="og:locale" content="vi_VN">
+<meta name="language" content="Vietnamese">
+<meta name="geo.region" content="VN">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/static/css/categories.css">
@@ -19,7 +51,7 @@
         });
     });
 </script>
-{% endblock head %}.lst-quicklink img
+{% endblock head %}
 
 {% block center_content %}
 <div class="main_wrap clearfix">
@@ -66,7 +98,7 @@
                     <i class="quick-link-icon"></i>
                     <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/e6/4b/e64bff8ef49f4af70d2981e842933410.png"
                         width="30" alt="icon" class="no-text" lazyloaded="">
-                    x </a>
+                </a>
                 <a href="/may-lanh_1_1/samsung" data-index="1"
                     class="box-quicklink__item bd-radius quicklink-logo {% if selected_brand == 'samsung' %}active{% endif %}"
                     style="display: flex;">

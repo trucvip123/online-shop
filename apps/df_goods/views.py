@@ -87,7 +87,14 @@ def good_list(request, category, pindex, sort, brand=None):
     paginator = Paginator(goods_list, 20)
     # return page object
     page = paginator.page(int(pindex))
-    
+
+    if page.object_list:
+        image_category = page.object_list[0].images.all()[0].image_path
+    else:
+        image_category = None
+
+    print("image_category:", image_category)
+
     context = {
         "title": typeinfo.ntitle,
         "guest_cart": guest_cart,
@@ -98,6 +105,7 @@ def good_list(request, category, pindex, sort, brand=None):
         "sort": sort,
         "news": news,
         "selected_brand": brand,
+        "image_category": image_category,
     }
     return render(request, "df_goods/list.html", context)
 
