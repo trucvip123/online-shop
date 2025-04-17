@@ -104,6 +104,7 @@
 .guest_cart {
   display: flex;
   align-items: center;
+  width: 8%;
 }
 
 .guest_cart .cart_name {
@@ -205,6 +206,10 @@
   border-radius: 8px;
   text-align: center;
   white-space: normal; /* Allow text wrapping inside links */
+}
+
+.navbar .nav-link p {
+  margin-bottom: 0;
 }
 
 .navbar-scroll {
@@ -701,3 +706,8 @@
   }
 }
 
+@media (max-width: 350px) {
+  .goods_list li {
+    width: 155px;
+  }
+}

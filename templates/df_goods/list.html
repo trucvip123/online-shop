@@ -1,4 +1,5 @@
 {% extends 'df_goods/base.html' %}
+{% load custom_filters %}
 
 {% block head %}
 <meta charset="UTF-8">
@@ -8,22 +9,16 @@
 <meta name="keywords" content="{{ typeinfo.ntitle|title }}, mua sắm trực tuyến, điện máy, thiết bị gia dụng, giá rẻ">
 
 <!-- Open Graph meta tags for social media -->
-<meta property="og:title" content="{{ typeinfo.ntitle|title }} - Cửa hàng điện máy trực tuyến">
+<meta property="og:title" content="{{ typeinfo.ntitle|title }} - Cửa hàng Điện Thanh Liêm">
 <meta property="og:description" content="Mua {{ typeinfo.ntitle|title }} chính hãng ✓ Giá tốt nhất ✓ Trả góp 0% ✓ Giao hàng miễn phí ✓ Bảo hành chính hãng">
-<meta property="og:type" content="website">
+<meta property="og:type" content="product">
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
-<meta property="og:site_name" content="Cửa hàng điện máy trực tuyến">
+<meta property="og:site_name" content="Cửa hàng Điện Thanh Liêm tại Bình Định">
 <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ MEDIA_URL }}{{ image_category }}">
 <meta property="og:image:secure_url" content="{{ request.scheme }}://{{ request.get_host }}{{ MEDIA_URL }}{{ image_category }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:alt" content="{{ typeinfo.ntitle|title }} - Cửa hàng điện máy trực tuyến">
-
-<!-- Twitter Card meta tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ typeinfo.ntitle|title }} - Giá tốt, chất lượng cao">
-<meta name="twitter:description" content="Mua {{ typeinfo.ntitle|title }} giá rẻ ✓ Hàng chính hãng ✓ Giao hàng toàn quốc ✓ Bảo hành dài hạn ✓ Nhiều ưu đãi hấp dẫn">
+<meta property="og:image:type" content="image/{{ image_type }}">
 
 <!-- Language and region -->
 <meta property="og:locale" content="vi_VN">

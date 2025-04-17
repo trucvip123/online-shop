@@ -5,10 +5,10 @@ from .models import GoodsInfo, TypeInfo
 
 
 class TypeInfoAdmin(admin.ModelAdmin):
-    list_display = ["id", "ttitle"]
+    list_display = ["id", "ttitle", "ntitle"]
     list_per_page = 10
-    search_fields = ["ttitle"]
-    list_display_links = ["ttitle"]
+    search_fields = ["ttitle", "ntitle"]
+    list_display_links = ["ttitle", "ntitle"]
 
 
 class GoodsInfoAdmin(admin.ModelAdmin):

@@ -88,10 +88,21 @@ def good_list(request, category, pindex, sort, brand=None):
     # return page object
     page = paginator.page(int(pindex))
 
-    if page.object_list:
-        image_category = page.object_list[0].images.all()[0].image_path
-    else:
-        image_category = None
+    image_category = None
+    if page.object_list and len(page.object_list) > 0:
+        first_product = page.object_list[0]
+        if first_product.images.all().exists():
+            image_category = first_product.images.all()[0].image_path
+
+    # Xác định image type
+    image_type = 'jpeg'  # default
+    if image_category:
+        if hasattr(image_category, 'name'):
+            ext = image_category.name.split('.')[-1].lower()
+            if ext in ['png', 'jpg', 'jpeg', 'gif', 'webp']:
+                image_type = ext
+                if ext == 'jpg':
+                    image_type = 'jpeg'
 
     print("image_category:", image_category)
 
@@ -106,6 +117,7 @@ def good_list(request, category, pindex, sort, brand=None):
         "news": news,
         "selected_brand": brand,
         "image_category": image_category,
+        "image_type": image_type,
     }
     return render(request, "df_goods/list.html", context)
 
@@ -205,6 +217,9 @@ def ordinary_search(request):
         Q(gtitle__icontains=search_keywords)
         | Q(gcontent__icontains=search_keywords)
         | Q(gjianjie__icontains=search_keywords)
+        | Q(gparam__icontains=search_keywords)
+        | Q(gbrand__icontains=search_keywords)
+        | Q(gvideo_url__icontains=search_keywords)
     ).order_by("gclick")
 
     if goods_list.count() == 0:

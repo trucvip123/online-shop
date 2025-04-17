@@ -575,6 +575,7 @@ container
 	background: url(../images/left_bg.jpg);
 	border-radius: 8px;
 	display: flex;
+	margin-top: 15px;
 }
 
 .left_menu_con {
