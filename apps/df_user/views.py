@@ -632,7 +632,7 @@ def edit_product_handle(request):
     description = request.POST.get("description", "").strip()
     parameter = request.POST.get("parameter", "").strip()
     stock = request.POST.get("stock", "").strip()
-    video_url = request.POST.get("video_url", "").strip()  # Get video URL
+    video_url = request.POST.get("video_url", "").strip()
 
     if not product_id.isdigit():
         return HttpResponse("Invalid product ID", status=400)
@@ -657,7 +657,7 @@ def edit_product_handle(request):
     product.gparam = parameter
     product.gkucun = stock
     product.gbrand = brand
-    product.gvideo_url = video_url  # Update video URL
+    product.gvideo_url = video_url
     product.save()
 
     # Fetch existing images and handle image updates
@@ -667,18 +667,27 @@ def edit_product_handle(request):
     scheme = request.scheme 
     host = request.get_host()
 
-    # Check if positions are the same
+    # Get existing image paths
     existing_image_paths = [f"{scheme}://{host}{MEDIA_URL}{img.image_path.name}" for img in existing_images]
 
-    if existing_image_paths == image_data_list:
-        print("Image positions are the same. No update required.")
-        return redirect(f"/{product_id}")
+    # Find images that were removed
+    removed_images = set(existing_image_paths) - set(image_data_list)
+    
+    # Delete removed images from database and storage
+    for removed_path in removed_images:
+        relative_path = removed_path.replace(f"{scheme}://{host}{MEDIA_URL}", "")
+        try:
+            # Delete from database
+            ProductImage.objects.filter(product=product, image_path=relative_path).delete()
+            # Delete from storage
+            default_storage.delete(relative_path)
+        except Exception as e:
+            print(f"Error deleting image {relative_path}: {str(e)}")
 
     # Update image order in the database
     for index, image_path in enumerate(image_data_list):
         if "base64" not in image_path:  # Skip new images
-            print("index:", index, "image_path:", image_path)
-            relative_image_path = image_path.replace("http://127.0.0.1:8000/media/", "")
+            relative_image_path = image_path.replace(f"{scheme}://{host}{MEDIA_URL}", "")
             ProductImage.objects.filter(product=product, image_path=relative_image_path).update(order=index)
 
     # Handle new images
