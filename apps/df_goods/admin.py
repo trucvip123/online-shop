@@ -21,6 +21,7 @@ class GoodsInfoAdmin(admin.ModelAdmin):
         "gprice",
         "gkucun",
         "gjianjie",
+        "gbrand"
     ]
     list_editable = [
         "gkucun",

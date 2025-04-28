@@ -583,7 +583,7 @@ def add_product_handle(request):
             gparam=param,
             gtype=category,
             gkucun=stock,
-            gbrand=brand,
+            gbrand=brand.strip(),
             gvideo_url=video_url,  # Save video URL
         )
 

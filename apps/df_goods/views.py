@@ -42,7 +42,6 @@ def index(request):
     }
     return render(request, "df_goods/index.html", context)
 
-
 def good_list(request, category, pindex, sort, brand=None):
     # Get product category info
     typeinfo = TypeInfo.objects.get(ttitle=category)
@@ -120,7 +119,6 @@ def good_list(request, category, pindex, sort, brand=None):
         "image_type": image_type,
     }
     return render(request, "df_goods/list.html", context)
-
 
 def convert_urls_to_images(text):
     url_pattern = re.compile(r"(https?://\S+\.(?:jpg|jpeg|png|gif))")
