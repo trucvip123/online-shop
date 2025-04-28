@@ -7,3 +7,6 @@ whitenoise
 python-dotenv
 mysqlclient
 social-auth-app-django
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib

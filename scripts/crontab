@@ -1,0 +1,2 @@
+# Chạy script đồng bộ mỗi ngày lúc 2 giờ sáng
+0 2 * * * cd /root/trucnv/online-shop && /root/trucnv/online-shop/env/bin/python scripts/sync_to_gdrive.py >> /root/trucnv/online-shop/gdrive_sync.log 2>&1 
