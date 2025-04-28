@@ -114,6 +114,7 @@ function addNewImageInput() {
     const customButton = document.createElement('button');
     customButton.type = 'button';
     customButton.className = 'custom-file-button';
+    customButton.textContent = 'Add Image';
     customButton.onclick = function () {
         fileInput.click(); // Trigger the hidden file input
     };
@@ -149,7 +150,9 @@ function enableDragAndDrop() {
     let offsetY = 0;
 
     container.addEventListener('pointerdown', function (e) {
-        if (e.target.closest('.image-wrapper') &&
+        // Check if the click is on an image wrapper and not on the Add Image button
+        if (e.target.closest('.image-wrapper') && 
+            !e.target.closest('.custom-file-button') &&
             !e.target.classList.contains('remove-image-button')) {
             draggedItem = e.target.closest('.image-wrapper');
             const rect = draggedItem.getBoundingClientRect();
