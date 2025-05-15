@@ -16,18 +16,19 @@ class GoodsInfoAdmin(admin.ModelAdmin):
     list_display = [
         "id",
         "gtitle",
+        "gtype",
         "gunit",
         "gclick",
         "gprice",
         "gkucun",
-        "gjianjie",
         "gbrand"
     ]
     list_editable = [
         "gkucun",
+        "gtype"
     ]
     readonly_fields = ["gclick"]
-    search_fields = ["gtitle", "gcontent", "gjianjie"]
+    search_fields = ["gtitle"]
     list_display_links = ["gtitle"]
 
 

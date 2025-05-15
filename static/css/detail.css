@@ -463,7 +463,7 @@
 }
 
 /* Responsive */
-@media (max-width: 400px) {
+@media (max-width: 431px) {
     .goods_detail_con {
         display: block;
         padding: 5px;
@@ -522,3 +522,9 @@
         float: none;
     }
 }
+
+@media (max-width: 400px) {
+    .goods_detail_con {
+        display: block;
+        padding: 5px;
+    }

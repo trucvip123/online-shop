@@ -100,6 +100,20 @@
                     <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/89/ba/89baf2121494abea518fca0c710475c6.png"
                         width="30" alt="icon" class="no-text" lazyloaded="">
                 </a>
+                <a href="/may-lanh_1_1/midea" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if selected_brand == 'midea' %}active{% endif %}"
+                    style="display: flex;">
+                    <i class="quick-link-icon"></i>
+                    <img src="https://cdnv2.tgdd.vn/mwg-static/dmx/Category/2002/af/42/af424e96741fa78c5d91dec5c05236c3.png"
+                        width="30" alt="icon" class="no-text" lazyloaded="">
+                </a>
+                <a href="/may-lanh_1_1/sk" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if selected_brand == 'sk' %}active{% endif %}"
+                    style="display: flex;">
+                    <i class="quick-link-icon"></i>
+                    <img src="https://sumikuravietnam.net/wp-content/uploads/2021/12/sumikuravietnam-1.png"
+                        width="30" alt="icon" class="no-text" lazyloaded="">
+                </a>
             </div>
         </div>
         {% elif typeinfo.ttitle == 'camera-giam-sat' %}
@@ -155,6 +169,27 @@
                     <img src="https://karofi.karofi.com/karofi-com/2023/09/logo-karofi-2023-1.png"
                         width="30" alt="icon" class="no-text" lazyloaded="">
                 </a>
+                <a href="/may-loc-nuoc_1_1/sunhouse" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if selected_brand == 'sunhouse' %}active{% endif %}"
+                    style="display: flex;">
+                    <i class="quick-link-icon"></i>
+                    <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/56/fe/56fed58ef47dcb473e672533c85a5cdf.png"
+                        width="30" alt="icon" class="no-text" lazyloaded="">
+                </a>
+                <a href="/may-loc-nuoc_1_1/kangaroo" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if selected_brand == 'kangaroo' %}active{% endif %}"
+                    style="display: flex;">
+                    <i class="quick-link-icon"></i>
+                    <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/3e/da/3eda967b0da8b9db2691c4d689339897.png"
+                        width="30" alt="icon" class="no-text" lazyloaded="">
+                </a>
+                <a href="/may-loc-nuoc_1_1/mutosi" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if selected_brand == 'mutosimutosi' %}active{% endif %}"
+                    style="display: flex;">
+                    <i class="quick-link-icon"></i>
+                    <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/f3/ec/f3ec9f0d9c1522f99fc2f0127693aaaa.png"
+                        width="30" alt="icon" class="no-text" lazyloaded="">
+                </a>
             </div>
         </div>
         {% elif typeinfo.ttitle == 'quat-dieu-hoa' %}
@@ -177,6 +212,20 @@
                     style="display: flex;">
                     <i class="quick-link-icon"></i>
                     <img src="https://lh6.googleusercontent.com/proxy/b0HSkJkkCU4Tbqnvtkmpx3XrM1-CV9Ruk71bHdZZfLo8yqh3G0vsdjGrpZf6DhGDkhDjBNFhgBD1_9drF740OkEXRpUoBlgXkXFES0ymaRyzVS2wUNV6B7IOlsv7VOeQgOksEQ"
+                        width="30" alt="icon" class="no-text" lazyloaded="">
+                </a>
+                <a href="/quat-dieu-hoa_1_1/sunhouse" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if selected_brand == 'sunhouse' %}active{% endif %}"
+                    style="display: flex;">
+                    <i class="quick-link-icon"></i>
+                    <img src="https://cdnv2.tgdd.vn/mwg-static/common/Category/56/fe/56fed58ef47dcb473e672533c85a5cdf.png"
+                        width="30" alt="icon" class="no-text" lazyloaded="">
+                </a>
+                <a href="/quat-dieu-hoa_1_1/bamboo" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if selected_brand == 'bamboo' %}active{% endif %}"
+                    style="display: flex;">
+                    <i class="quick-link-icon"></i>
+                    <img src="/static/images/brand/bamboo-brand.PNG"
                         width="30" alt="icon" class="no-text" lazyloaded="">
                 </a>
             </div>
@@ -235,7 +284,7 @@
                 </div>
             </div>
         </div>
-        {% else %}
+        {% endif %}
         <div class="sort_bar">
             <a> Sắp xếp theo: </a>
             <a href="/{{ typeinfo.ttitle }}_1_1" class="{% if sort == '1' %} active {% endif %}">
@@ -257,7 +306,7 @@
                 </div>
             </div>
         </div>
-        {% endif %}
+        
 
         <ul class="goods_type_list clearfix">
             {% for g in page %}
@@ -286,7 +335,7 @@
 
         <div class="pagenation">
             {% if page.has_previous %}
-            <a href="/{{ typeinfo.ttitle }}_{{ page.previous_page_number }}_{{ sort }}">Previous page</a>
+            <a href="/{{ typeinfo.ttitle }}_{{ page.previous_page_number }}_{{ sort }}">Trước</a>
             {% endif %}
 
             {% for pindex in paginator.page_range %}
@@ -298,7 +347,7 @@
             {% endfor %}
 
             {% if page.has_next %}
-            <a href="/{{ typeinfo.ttitle }}_{{ page.next_page_number }}_{{ sort }}">Next Page</a>
+            <a href="/{{ typeinfo.ttitle }}_{{ page.next_page_number }}_{{ sort }}">Tiếp</a>
             {% endif %}
         </div>
     </div>

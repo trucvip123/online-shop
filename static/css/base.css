@@ -192,8 +192,8 @@
 
 .navbar {
   width: 100%;
-  margin: 10px 0 !important;
-  min-height: 100px !important;
+  margin: 20px 0 5px !important;
+  min-height: 200px !important;
   white-space: nowrap; /* Prevent items from wrapping */
 }
 
@@ -293,6 +293,10 @@
 
 .navbar .subnav_con:hover .subnav {
   display: block;
+}
+
+.navbar .mb-3 {
+  margin-bottom: 3rem !important;
 }
 
 /* small_cart */
@@ -650,7 +654,6 @@
 
   .navbar {
     width: 100%;
-    margin-bottom: 10px !important;
   }
 
   .navbar-collapse {
@@ -666,6 +669,10 @@
   .navbar .nav-link {
     width: 75px; /* Adjust width for smaller screens */
     white-space: normal; /* Allow text wrapping inside links */
+  }
+
+  .navbar .mb-3 {
+    margin-bottom: 1rem !important;
   }
 
   .dropdown-content {
