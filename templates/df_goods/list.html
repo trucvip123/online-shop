@@ -371,6 +371,30 @@
                 </a>
             </div>
         </div>
+        {% elif typeinfo.ttitle == 'noi-chien-khong-dau' %}
+        <div class="box-quicklink  block-scroll-main ">
+            <div class="lst-quicklink">
+                <a href="/noi-chien-khong-dau_1_1" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if not selected_brand %}active{% endif %}"
+                    style="display: flex;">
+                    <img src="/static/images/all_icon.png" width="30" alt="icon" class="no-text" lazyloaded="">
+                </a>
+                <a href="/noi-chien-khong-dau_1_1/philip" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if selected_brand == 'philip' %}active{% endif %}"
+                    style="display: flex;">
+                    <i class="quick-link-icon"></i>
+                    <img src="https://cdn.tgdd.vn/Brand//2/Philips3385-b_58.png"
+                        width="30" alt="icon" class="no-text" lazyloaded="">
+                </a>
+                <a href="/noi-chien-khong-dau_1_1/sunhouse" data-index="1"
+                    class="box-quicklink__item bd-radius quicklink-logo {% if selected_brand == 'sunhouse' %}active{% endif %}"
+                    style="display: flex;">
+                    <i class="quick-link-icon"></i>
+                    <img src="https://cdn.tgdd.vn/Category/Quicklink/1985/2\080923-100421.png"
+                        width="30" alt="icon" class="no-text" lazyloaded="">
+                </a>
+            </div>
+        </div>
         {% endif %}
         <div class="sort_bar">
             <a> Sắp xếp theo: </a>
