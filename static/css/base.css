@@ -224,6 +224,10 @@
   text-decoration: none;
 }
 
+.navbar .nav-link .lazy-menu {
+  border-radius: 5px;
+}
+
 .navbar .collapse {
   justify-content: space-evenly;
 }

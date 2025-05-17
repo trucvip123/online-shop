@@ -1,89 +1,72 @@
-{% extends 'base.html' %}
-
-{% load static %}
+{% extends 'df_goods/base.html' %}
 
 {% block head %}
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/ordinary_search.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="Kết quả tìm kiếm cho '{{ query }}' - Cửa hàng Điện Thanh Liêm">
+<meta name="keywords" content="{{ query }}, tìm kiếm, điện máy, thiết bị gia dụng">
 
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/static/js/slide.js"></script>
-    <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function () {
-            const prizeElements = document.querySelectorAll(".prize");
-            const prizeOldElements = document.querySelectorAll(".prize_old");
-            const discountElements = document.querySelectorAll(".discount");
-
-            prizeElements.forEach(function (element, index) {
-                const rawPrice = parseFloat(element.textContent.trim());
-                element.textContent = rawPrice.toLocaleString('vi-VN') + 'đ';
-
-                const rawPriceOld = parseFloat(prizeOldElements[index].textContent.trim());
-                prizeOldElements[index].textContent = rawPriceOld.toLocaleString('vi-VN') + 'đ';
-
-                if (rawPriceOld > rawPrice) {
-                    const discount = Math.round(((rawPriceOld - rawPrice) / rawPriceOld) * 100);
-                    discountElements[index].textContent = `-${discount}%`;
-                }
-            });
-        });
-    </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/categories.css">
+<link rel="stylesheet" type="text/css" href="/static/css/ordinary_search.css">
 {% endblock head %}
 
-{% block center_body %}
-    <script type="text/javascript">
-        if ({{ search_status }}== 0) {
-            alert("Your query result is empty, recommend the following products for you");
-        }
-    </script>
-    <div class="breadcrumb">
-        <a href="{% url 'df_goods:index' %}">Trang chủ</a> > 
-        <span>Kết quả tìm kiếm</span>
-    </div>
+{% block center_content %}
+<div class="main_wrap clearfix">
+    <div class="r_wrap fr clearfix">
+        {% if search_status == 0 %}
+        <div class="no-results">
+            <h3>Không tìm thấy kết quả cho "{{ query }}"</h3>
+            <p>Dưới đây là một số sản phẩm gợi ý cho bạn:</p>
+        </div>
+        {% else %}
+        <div class="search-results">
+            <h3>Kết quả tìm kiếm cho "{{ query }}"</h3>
+        </div>
+        {% endif %}
 
-    <div class="main_wrap clearfix">
         <ul class="goods_type_list clearfix">
-            {% for item in page %}
+            {% for g in page %}
             <li>
-                <a href="/{{ item.id }}/"><img src="{{ MEDIA_URL }}{{ item.images.all.0.image_path }}"></a>
-                <h4><a href="/{{ item.id }}/">{{ item.gtitle }}</a></h4>
-                <div class="operate">
-                    <div class="price_row">
-                        <span class="prize">{{ item.gprice }}</span>
-                        <a href="/cart/add{{ item.id }}_1/" class="add_goods" title="Add to the cart">
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
+                <a href="/{{ g.id }}/">
+                    <div class="item-img">
+                        <img src="{{ MEDIA_URL }}{{ g.images.all.0.image_path }}" class="img-fluid rounded"
+                            onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/2066398587/vector/default-paper-word-sign-with-colorful-spectrum-paint-brush-strokes-over-white.jpg?s=612x612&w=0&k=20&c=kvuJdgEka1-NLy_3IwklnChLmtPQM70oJK81g8SEmjo=';">
                     </div>
-                    <div class="price_row">
-                        <span class="prize_old">{{ item.gprice_old }}</span>
-                        <span class="discount"></span>
+                </a>
+                <h4><a href="/{{ g.id }}/">{{ g.gtitle }}</a></h4>
+                <div class="operate">
+                    <span class="prize" data-price="{{ g.gprice }}">{{ g.gprice }}</span>
+                    <div class="price-and-discount">
+                        {% if g.gprice_old %}
+                        <label class="old-price" data-old-price="{{ g.gprice_old }}">{{ g.gprice_old }}₫</label>
+                        <small class="discount" data-old-price="{{ g.gprice_old }}" data-new-price="{{ g.gprice }}"></small>
+                        {% endif %}
                     </div>
                 </div>
             </li>
             {% endfor %}
         </ul>
+
         <div class="pagenation">
-            {#check if it is the first page#}
             {% if page.has_previous %}
                 <a href="{% url "df_goods:ordinary_search" %}?q={{ query }}&amp;page={{ page.previous_page_number }}">< Previous page</a>
             {% endif %}
 
             {% for pindex in paginator.page_range %}
-                {% if pindex == page.number %}
+            {% if pindex == page.number %}
                     <a href="{% url "df_goods:ordinary_search" %}?q={{ query }}&amp;page={{pindex}}" class="active">{{pindex}}</a>
-                {% else %}
+            {% else %}
                     <a href="{% url "df_goods:ordinary_search" %}?q={{ query }}&amp;page={{pindex}}">{{pindex}}</a>
-                {% endif %}
+            {% endif %}
             {% endfor %}
 
-{#        check if there's next page#}
             {% if page.has_next %}
                 <a href="{% url "df_goods:ordinary_search" %}?q={{ query }}&amp;page={{ page.next_page_number }}">Next Page></a>
             {% endif %}
         </div>
     </div>
-{% endblock center_body %}
+</div>
+{% endblock center_content %}

@@ -74,12 +74,11 @@
 .goods_type_list li h4 {
   font-family: 'Times New Roman', serif;
   text-align: left;
-  height: 45px;
   padding: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   white-space: normal;
   font-size: 14px;

@@ -70,7 +70,7 @@ def good_list(request, category, pindex, sort, brand=None):
     
     # Apply brand filter if provided
     if brand:
-        query = query.filter(gbrand__iexact=brand)  # Case-insensitive match for brand
+        query = query.filter(gbrand__icontains=brand)  # Case-insensitive contains match for brand
 
     # Apply sorting
     if sort == "1":  # default(from the newest)
