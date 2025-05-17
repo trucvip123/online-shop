@@ -90,61 +90,92 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 15px;
-  gap: 5px;
-  border-top: 1px solid #ddd;
+  padding: 15px;
+  gap: 8px;
+  border-top: 1px solid #eee;
   margin-top: 10px;
+  background: linear-gradient(to bottom, #fff, #f8f9fa);
+  border-radius: 0 0 10px 10px;
 }
 
 .goods_type_list li .operate .price_row {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  width: 100%;
+  padding: 0 10px;
 }
 
 .goods_type_list li .operate .prize {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
-  color: #ff8800;
+  color: #ff6b6b;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
 }
 
 .goods_type_list li .operate .prize_old {
   font-size: 14px;
   color: #999;
   text-decoration: line-through;
+  margin-right: 10px;
 }
 
 .goods_type_list li .operate .unit {
   font-size: 14px;
   color: #666;
+  margin-left: 5px;
 }
 
 .goods_type_list li .operate .add_goods {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  font-size: 18px;
+  width: 45px;
+  height: 45px;
+  font-size: 20px;
   color: #fff;
-  background-color: #007bff;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
   border: none;
   border-radius: 50%;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
 }
 
 .goods_type_list li .operate .add_goods:hover {
-  background-color: #0056b3;
-  transform: scale(1.1);
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
 }
 
 .goods_type_list li .operate .discount {
   font-size: 14px;
-  color: #ff0000;
+  color: #ff6b6b;
   font-weight: bold;
+  background: rgba(255, 107, 107, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.goods_type_list li .operate .price-and-discount {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.goods_type_list li .operate .price-and-discount .old-price {
+  color: #999;
+  text-decoration: line-through;
+  font-size: 14px;
+}
+
+.goods_type_list li .operate .price-and-discount .discount {
+  color: #ff6b6b;
+  font-weight: bold;
+  background: rgba(255, 107, 107, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
 }
 
 .goods_type_list a {

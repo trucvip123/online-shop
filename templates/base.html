@@ -657,12 +657,17 @@
 		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;{{ title }}</div>
 		{% endif %}{% endcomment %}
 		<div class="search_con fl">
+			<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 			<script>
 				$(function () {
 					$('.input_text').on('keypress', function (e) {
 						if (e.which === 13) { // Check if "Enter" key is pressed
 							executeSearch();
 						}
+					});
+
+					$('.fa-search').on('click', function() {
+						executeSearch();
 					});
 
 					function executeSearch() {
@@ -675,7 +680,7 @@
 					}
 				});
 			</script>
-			<i class="fa fa-search" style="margin-right: 10px; color: #aaa;"></i>
+			<i class="fa fa-search" style="margin-right: 10px; color: #aaa; cursor: pointer;"></i>
 			<input type="text" class="input_text fl" name="q" placeholder="Bạn tìm gì...">
 		</div>
 
